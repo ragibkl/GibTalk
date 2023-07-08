@@ -1,5 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, Text, View, Image } from 'react-native';
+
+import WordItem from './components/WordItem';
+
+export type Word = {
+  label: string,
+  uri: string,
+};
+
+const words: Word[] = [
+  { label: 'Yes', uri: 'https://www.senteacher.org/fullsymbol/arasaac/5584/' },
+  { label: 'No', uri: 'https://www.senteacher.org/fullsymbol/arasaac/5526/' },
+  { label: 'Up', uri: 'https://www.senteacher.org/fullsymbol/mulberry/up.png/' },
+  { label: 'Down', uri: 'https://www.senteacher.org/fullsymbol/mulberry/down.png/' },
+  { label: 'Good Job', uri: 'https://www.senteacher.org/fullsymbol/mulberry/good.png/' },
+  { label: 'Stop', uri: 'https://www.senteacher.org/fullsymbol/arasaac/8289/' },
+  { label: 'Go', uri: 'https://www.senteacher.org/fullsymbol/arasaac/21395/' },
+  { label: 'Wait', uri: 'https://www.senteacher.org/fullsymbol/arasaac/16697/' },
+  { label: 'Run', uri: 'https://www.senteacher.org/fullsymbol/mulberry/run_,_to.png/' },
+  { label: 'Walk', uri: 'https://www.senteacher.org/fullsymbol/arasaac/3251/' },
+  { label: 'Jump', uri: 'https://www.senteacher.org/fullsymbol/arasaac/28443/' },
+  { label: 'Turn around', uri: 'https://www.senteacher.org/fullsymbol/mulberry/around.png/' },
+  { label: 'Go Up', uri: 'https://www.senteacher.org/fullsymbol/arasaac/6617/' },
+];
+
+function renderItem({ item }: { item: Word }) {
+  return (
+    <WordItem label={item.label} uri={item.uri} />
+  )
+}
 
 export default function App() {
   return (
@@ -22,7 +51,7 @@ export default function App() {
         </View>
 
         <View style={styles.bodyBottom}>
-          <Text>Body</Text>
+          <FlatList data={words} renderItem={renderItem} numColumns={6} key={1} />
         </View>
       </View>
 
