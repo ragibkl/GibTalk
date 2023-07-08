@@ -1,11 +1,18 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import * as Speech from 'expo-speech';
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 
 export default function HistoryItem({ label, uri }) {
+  const onPress = () => {
+    Speech.speak(label);
+  }
+
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={{ uri }}  />
-      <Text style={styles.text}>{label}</Text>
-    </View>
+    <Pressable onPress={onPress}>
+      <View style={styles.container}>
+        <Image style={styles.image} source={{ uri }} />
+        <Text style={styles.text}>{label}</Text>
+      </View>
+    </Pressable>
   )
 }
 
