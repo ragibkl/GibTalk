@@ -1,11 +1,13 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 
-export default function WordItem({ label, uri }) {
+export default function WordItem({ label, uri, onPress }) {
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={{ uri }}  />
-      <Text style={styles.text}>{label}</Text>
-    </View>
+    <Pressable onPress={onPress}>
+      <View style={styles.container}>
+        <Image style={styles.image} source={{ uri }}  />
+        <Text style={styles.text}>{label}</Text>
+      </View>
+    </Pressable>
   )
 }
 

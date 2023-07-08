@@ -1,6 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View, ScrollView } from 'react-native';
 
+import HistoryItem from './components/HistoryItem';
 import WordItem from './components/WordItem';
 
 export type Word = {
@@ -24,13 +26,25 @@ const words: Word[] = [
   { label: 'Go Up', uri: 'https://www.senteacher.org/fullsymbol/arasaac/6617/' },
 ];
 
-function renderItem(item: Word) {
+function renderHistoryItem(item: Word, i: number) {
   return (
-    <WordItem key={item.label} label={item.label} uri={item.uri} />
+    <HistoryItem key={i} label={item.label} uri={item.uri} />
+  )
+}
+
+function renderWordItem(item: Word, onPress: (item: Word) => void) {
+  return (
+    <WordItem key={item.label} label={item.label} uri={item.uri} onPress={() => onPress(item)} />
   )
 }
 
 export default function App() {
+  const [historyItems, setHistoryItems] = useState([]);
+
+  const onPressWord = (item: Word) => {
+    setHistoryItems([...historyItems, item]);
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -41,6 +55,9 @@ export default function App() {
         <View style={styles.bodyTop}>
           <View style={styles.current}>
             <Text style={styles.currentText}>Drag downward to remove</Text>
+            <ScrollView horizontal contentContainerStyle={styles.historyContent}>
+              {historyItems.map(renderHistoryItem)}
+            </ScrollView>
           </View>
 
           <View style={styles.controls}>
@@ -51,10 +68,8 @@ export default function App() {
         </View>
 
         <View style={styles.bodyBottom}>
-          <ScrollView>
-            <View style={styles.scrollFlexWrap}>
-              {words.map(renderItem)}
-            </View>
+          <ScrollView contentContainerStyle={styles.scrollFlexWrap}>
+            {words.map(item => renderWordItem(item, onPressWord))}
           </ScrollView>
         </View>
       </View>
@@ -90,6 +105,9 @@ const styles = StyleSheet.create({
   bodyTop: {
     flexDirection: 'row',
     height: '15%',
+  },
+  historyContent: {
+    alignItems: 'center',
   },
   current: {
     backgroundColor: 'rgba(100, 100, 100, 0.5)',
