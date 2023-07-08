@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { FlatList, SafeAreaView, StyleSheet, Text, View, Image } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import WordItem from './components/WordItem';
 
@@ -24,9 +24,9 @@ const words: Word[] = [
   { label: 'Go Up', uri: 'https://www.senteacher.org/fullsymbol/arasaac/6617/' },
 ];
 
-function renderItem({ item }: { item: Word }) {
+function renderItem(item: Word) {
   return (
-    <WordItem label={item.label} uri={item.uri} />
+    <WordItem key={item.label} label={item.label} uri={item.uri} />
   )
 }
 
@@ -51,7 +51,11 @@ export default function App() {
         </View>
 
         <View style={styles.bodyBottom}>
-          <FlatList data={words} renderItem={renderItem} numColumns={6} key={1} />
+          <ScrollView>
+            <View style={styles.scrollFlexWrap}>
+              {words.map(renderItem)}
+            </View>
+          </ScrollView>
         </View>
       </View>
 
@@ -105,5 +109,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(100, 100, 100, 0.5)',
     flex: 1,
     marginTop: 5,
+    alignItems: 'stretch'
+  },
+  scrollFlexWrap: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
 });
