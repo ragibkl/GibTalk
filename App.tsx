@@ -4,6 +4,7 @@ import { SafeAreaView, StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import HistoryItem from './components/HistoryItem';
 import WordItem from './components/WordItem';
+import IconButton from './components/IconButton';
 
 export type Word = {
   label: string,
@@ -41,6 +42,10 @@ function renderWordItem(item: Word, onPress: (item: Word) => void) {
 export default function App() {
   const [historyItems, setHistoryItems] = useState([]);
 
+  const onPressClear = () => {
+    setHistoryItems([]);
+  }
+
   const onPressWord = (item: Word) => {
     setHistoryItems([...historyItems, item]);
   }
@@ -61,8 +66,8 @@ export default function App() {
           </View>
 
           <View style={styles.controls}>
-            <Text>Play</Text>
-            <Text>Clear</Text>
+            <IconButton label="Play" icon="play" />
+            <IconButton style={{ marginLeft: 3 }} label="Clear All" icon="trash" onPress={onPressClear} />
           </View>
 
         </View>
@@ -119,6 +124,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   controls: {
+    alignItems: 'center',
     backgroundColor: 'rgba(100, 100, 100, 0.5)',
     flexDirection: 'row',
     marginLeft: 5,
