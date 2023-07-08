@@ -1,3 +1,4 @@
+import * as Speech from 'expo-speech';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View, ScrollView } from 'react-native';
@@ -46,6 +47,12 @@ export default function App() {
     setHistoryItems([]);
   }
 
+  const onPressPlay = () => {
+    historyItems.forEach(item => {
+      Speech.speak(item.label);
+    })
+  }
+
   const onPressWord = (item: Word) => {
     setHistoryItems([...historyItems, item]);
   }
@@ -66,10 +73,9 @@ export default function App() {
           </View>
 
           <View style={styles.controls}>
-            <IconButton label="Play" icon="play" />
-            <IconButton style={{ marginLeft: 3 }} label="Clear All" icon="trash" onPress={onPressClear} />
+            <IconButton label="Play" icon="play" onPress={onPressPlay}/>
+            <IconButton style={{ marginLeft: 5 }} label="Clear All" icon="trash" onPress={onPressClear} />
           </View>
-
         </View>
 
         <View style={styles.bodyBottom}>
