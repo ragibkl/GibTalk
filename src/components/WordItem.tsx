@@ -1,12 +1,14 @@
-import * as Speech from 'expo-speech';
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { speakWord } from '../service/speech';
+import { Word } from '../types';
 
-export default function WordItem({ label, uri, onPress }) {
+export default function WordItem({ word, onPress }: { word: Word, onPress: () => void}) {
   const handleOnPress = () => {
-    Speech.speak(label);
+    speakWord(word);
     onPress();
   }
 
+  const { uri, label } = word;
   return (
     <Pressable onPress={handleOnPress}>
       <View style={styles.container}>

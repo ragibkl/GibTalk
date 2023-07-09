@@ -1,10 +1,14 @@
-import * as Speech from 'expo-speech';
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { speakWord } from '../service/speech';
 
-export default function HistoryItem({ label, uri }) {
+import { Word } from '../types';
+
+export default function HistoryItem({ word }: { word: Word }) {
   const onPress = () => {
-    Speech.speak(label);
+    speakWord(word);
   }
+
+  const { label, uri } = word;
 
   return (
     <Pressable onPress={onPress}>
