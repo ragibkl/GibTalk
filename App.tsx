@@ -62,9 +62,9 @@ export default function App() {
 
       <View style={styles.body}>
         <View style={styles.bodyTop}>
-          <View style={styles.current}>
+          <View style={styles.historyContainer}>
             <Text style={styles.currentText}>Drag downward to remove</Text>
-            <ScrollView horizontal contentContainerStyle={styles.historyContent}>
+            <ScrollView horizontal contentContainerStyle={styles.historyContentContainer}>
               {historyItems.map(renderHistoryItem)}
             </ScrollView>
           </View>
@@ -76,9 +76,15 @@ export default function App() {
         </View>
 
         <View style={styles.bodyBottom}>
-          <ScrollView contentContainerStyle={styles.scrollFlexWrap}>
-            {words.map(item => renderWordItem(item, onPressWord))}
-          </ScrollView>
+          <View style={styles.gridContainer}>
+            <ScrollView contentContainerStyle={styles.scrollFlexWrap}>
+              {words.map(item => renderWordItem(item, onPressWord))}
+            </ScrollView>
+          </View>
+
+          <View style={styles.sideControls}>
+
+          </View>
         </View>
       </View>
 
@@ -99,7 +105,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     backgroundColor: 'black',
     flexDirection: 'row',
-    height: '6%',
+    height: 25,
     paddingHorizontal: 5,
   },
   headerText: {
@@ -114,16 +120,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 75,
   },
-  historyContent: {
-    alignItems: 'center',
-  },
-  current: {
+  historyContainer: {
     backgroundColor: 'rgba(100, 100, 100, 0.5)',
     flex: 1,
   },
+  historyContentContainer: {
+    alignItems: 'center',
+  },
   currentText: {
     alignSelf: 'center',
-    marginTop: '2%',
+    marginTop: 25,
     position: 'absolute',
   },
   controls: {
@@ -133,10 +139,19 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   bodyBottom: {
+    alignItems: 'stretch',
+    flex: 1,
+    flexDirection: 'row',
+    marginTop: 5,
+  },
+  gridContainer: {
     backgroundColor: 'rgba(100, 100, 100, 0.5)',
     flex: 1,
-    marginTop: 5,
-    alignItems: 'stretch'
+  },
+  sideControls: {
+    backgroundColor: 'rgba(100, 100, 100, 0.5)',
+    marginLeft: 5,
+    width: 75,
   },
   scrollFlexWrap: {
     flexDirection: 'row',
