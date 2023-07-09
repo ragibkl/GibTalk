@@ -4,7 +4,7 @@ import { SafeAreaView, StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import HistoryItem from './src/components/HistoryItem';
 import WordItem from './src/components/WordItem';
-import IconButton from './src/components/IconButton';
+import IconButton, { EditButton } from './src/components/IconButton';
 import { Word } from './src/types';
 import { speakWord } from './src/service/speech';
 
@@ -41,6 +41,7 @@ function renderWordItem(word: Word, onPress: (item: Word) => void) {
 
 export default function App() {
   const [historyItems, setHistoryItems] = useState([]);
+  const [showEditor, setShowEditor] = useState(false);
 
   const onPressClear = () => {
     setHistoryItems([]);
@@ -72,6 +73,7 @@ export default function App() {
           <View style={styles.controls}>
             <IconButton label="Play" icon="play" onPress={onPressPlay} />
             <IconButton style={{ marginLeft: 5 }} label="Clear All" icon="trash" onPress={onPressClear} />
+            <EditButton style={{ marginLeft: 5 }} isActive={showEditor} onPress={() => setShowEditor(!showEditor)}/>
           </View>
         </View>
 

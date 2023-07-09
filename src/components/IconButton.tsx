@@ -1,5 +1,6 @@
 import { StyleSheet, View, Pressable, Text } from 'react-native';
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 export default function IconButton({ label, icon, style = {}, onPress = () => {} }) {
   return (
@@ -12,6 +13,25 @@ export default function IconButton({ label, icon, style = {}, onPress = () => {}
   );
 }
 
+export function MaterialIconButton({ label, icon, style = {}, onPress = () => {} }) {
+  return (
+    <Pressable onPress={onPress}>
+      <View style={[style, styles.container]}>
+        <MaterialIcons name={icon} size={18} color="#25292e"/>
+        <Text style={styles.buttonLabel}>{label}</Text>
+      </View>
+    </Pressable>
+  );
+}
+
+export function EditButton({ isActive, style = {}, onPress = () => {} }) {
+  const icon = isActive ? 'edit-off' : 'edit';
+  const label = isActive ? 'Stop Editing' : 'Edit';
+
+  return (
+    <MaterialIconButton style={style} label={label} icon={icon} onPress={onPress}/>
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
