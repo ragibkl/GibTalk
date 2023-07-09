@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   },
   bodyTop: {
     flexDirection: 'row',
-    height: '15%',
+    height: 75,
   },
   historyContent: {
     alignItems: 'center',
