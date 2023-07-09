@@ -3,7 +3,11 @@ import { speakWord } from '../service/speech';
 
 import { Word } from '../types';
 
-export default function HistoryItem({ word }: { word: Word }) {
+type Props = {
+  word: Word,
+}
+
+export default function HistoryItem({ word }: Props) {
   const onPress = () => {
     speakWord(word);
   }

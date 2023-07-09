@@ -4,7 +4,7 @@ import { SafeAreaView, StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import HistoryItem from './src/components/HistoryItem';
 import WordItem from './src/components/WordItem';
-import IconButton, { EditButton } from './src/components/IconButton';
+import IconButton from './src/components/IconButton';
 import { Word } from './src/types';
 import { speakWord } from './src/service/speech';
 
@@ -27,18 +27,6 @@ const words: Word[] = [
   { label: 'Panjat', uri: 'https://www.senteacher.org/fullsymbol/arasaac/28255/', language: 'ms' }
 ];
 
-function renderHistoryItem(word: Word, i: number) {
-  return (
-    <HistoryItem key={i} word={word} />
-  )
-}
-
-function renderWordItem(word: Word, onPress: (item: Word) => void) {
-  return (
-    <WordItem key={word.label} word={word} onPress={() => onPress(word)} />
-  )
-}
-
 export default function App() {
   const [historyItems, setHistoryItems] = useState([]);
   const [showEditor, setShowEditor] = useState(false);
@@ -53,6 +41,32 @@ export default function App() {
 
   const onPressWord = (item: Word) => {
     setHistoryItems([...historyItems, item]);
+  }
+
+  const onLongPressWord = () => {
+    setShowEditor(true);
+    setHistoryItems([]);
+  }
+
+  const onPressSave = () => {
+    setShowEditor(false);
+  }
+
+  const renderHistoryItem = (word: Word, i: number) => {
+    return (
+      <HistoryItem key={i} word={word} />
+    )
+  }
+
+  const renderWordItem = (word: Word) => {
+    return (
+      <WordItem
+        key={word.label}
+        word={word}
+        onPress={() => onPressWord(word)}
+        onLongPress={onLongPressWord}
+      />
+    )
   }
 
   return (
@@ -73,19 +87,18 @@ export default function App() {
           <View style={styles.controls}>
             <IconButton label="Play" icon="play" onPress={onPressPlay} />
             <IconButton style={{ marginLeft: 5 }} label="Clear All" icon="trash" onPress={onPressClear} />
-            <EditButton style={{ marginLeft: 5 }} isActive={showEditor} onPress={() => setShowEditor(!showEditor)}/>
           </View>
         </View>
 
         <View style={styles.bodyBottom}>
           <View style={styles.gridContainer}>
             <ScrollView contentContainerStyle={styles.scrollFlexWrap}>
-              {words.map(item => renderWordItem(item, onPressWord))}
+              {words.map(renderWordItem)}
             </ScrollView>
           </View>
 
           <View style={styles.sideControls}>
-
+            {showEditor && <IconButton label="Save" icon="save" onPress={onPressSave} />}
           </View>
         </View>
       </View>
@@ -151,9 +164,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   sideControls: {
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
     backgroundColor: 'rgba(100, 100, 100, 0.5)',
     marginLeft: 5,
-    width: 75,
+    width: 60,
   },
   scrollFlexWrap: {
     flexDirection: 'row',

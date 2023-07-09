@@ -2,7 +2,13 @@ import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import { speakWord } from '../service/speech';
 import { Word } from '../types';
 
-export default function WordItem({ word, onPress }: { word: Word, onPress: () => void}) {
+type Props = {
+  word: Word,
+  onPress?: () => void,
+  onLongPress?: () => void,
+}
+
+export default function WordItem({ word, onPress, onLongPress }: Props) {
   const handleOnPress = () => {
     speakWord(word);
     onPress();
@@ -10,7 +16,7 @@ export default function WordItem({ word, onPress }: { word: Word, onPress: () =>
 
   const { uri, label } = word;
   return (
-    <Pressable onPress={handleOnPress}>
+    <Pressable onPress={handleOnPress} onLongPress={onLongPress}>
       <View style={styles.container}>
         <Image style={styles.image} source={{ uri }}  />
         <Text style={styles.text}>{label}</Text>

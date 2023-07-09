@@ -24,15 +24,6 @@ export function MaterialIconButton({ label, icon, style = {}, onPress = () => {}
   );
 }
 
-export function EditButton({ isActive, style = {}, onPress = () => {} }) {
-  const icon = isActive ? 'edit-off' : 'edit';
-  const label = isActive ? 'Stop Editing' : 'Edit';
-
-  return (
-    <MaterialIconButton style={style} label={label} icon={icon} onPress={onPress}/>
-  )
-}
-
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
