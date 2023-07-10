@@ -1,5 +1,5 @@
 export type Word = {
   label: string,
   uri: string,
-  language?: 'en' | 'ms',
+  language?: 'en' | 'ms' | 'zh',
 };

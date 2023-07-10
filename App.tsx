@@ -24,7 +24,9 @@ const words: Word[] = [
   { label: 'Jump', uri: 'https://www.senteacher.org/fullsymbol/arasaac/28443/' },
   { label: 'Turn around', uri: 'https://www.senteacher.org/fullsymbol/mulberry/around.png/' },
   { label: 'Go Up', uri: 'https://www.senteacher.org/fullsymbol/arasaac/6617/' },
-  { label: 'Panjat', uri: 'https://www.senteacher.org/fullsymbol/arasaac/28255/', language: 'ms' }
+  { label: 'Panjat', uri: 'https://www.senteacher.org/fullsymbol/arasaac/28255/', language: 'ms' },
+  { label: '喝水', uri: 'https://www.senteacher.org/fullsymbol/mulberry/drink_,_to.png/', language: 'zh' },
+  { label: '吃米饭', uri: 'https://www.senteacher.org/fullsymbol/arasaac/4609/', language: 'zh' }
 ];
 
 export default function App() {
