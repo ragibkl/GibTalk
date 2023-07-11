@@ -75,6 +75,9 @@ export default function MainScreen() {
 
   const moveWordRight = (word: Word) => {
     let i = words.findIndex(w => w.id === word.id)
+    if (i === words.length - 1) {
+      return;
+    }
 
     let start = words.slice(0, i);
     let right = words[i + 1];
