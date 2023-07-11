@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { speakWord } from '../service/speech';
 import { Word } from '../types';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -8,11 +8,13 @@ type Props = {
   word: Word,
   isEditing: boolean,
   onPress?: () => void,
-  onPressRemove: () => void,
+  onPressRemove?: () => void,
   onLongPress?: () => void,
+  onPressLeft?: () => void,
+  onPressRight?: () => void,
 }
 
-export default function WordItem({ word, onPress, onLongPress, isEditing, onPressRemove }: Props) {
+export default function WordItem({ word, onPress, onLongPress, isEditing, onPressRemove, onPressLeft, onPressRight }: Props) {
   const handleOnPress = () => {
     speakWord(word);
 
@@ -29,11 +31,25 @@ export default function WordItem({ word, onPress, onLongPress, isEditing, onPres
         <Text style={styles.text}>{label}</Text>
       </View>
       {isEditing && (
-        <View style={styles.deleteContainer}>
-          <PressableOpacity onPress={onPressRemove}>
-            <MaterialIcons style={styles.deleteIcon} size={30} name="remove-circle" color="red" />
-          </PressableOpacity>
-        </View>
+        <>
+          <View style={styles.deleteContainer}>
+            <PressableOpacity onPress={onPressRemove}>
+              <MaterialIcons style={styles.deleteIcon} size={30} name="remove-circle" color="red" />
+            </PressableOpacity>
+          </View>
+
+          <View style={styles.leftContainer}>
+            <PressableOpacity onPress={onPressLeft}>
+              <MaterialIcons style={styles.moveIcon} size={25} name="arrow-left" color="black" />
+            </PressableOpacity>
+          </View>
+
+          <View style={styles.rightContainer}>
+            <PressableOpacity onPress={onPressRight}>
+              <MaterialIcons style={styles.moveIcon} size={25} name="arrow-right" color="black" />
+            </PressableOpacity>
+          </View>
+        </>
       )}
     </PressableOpacity>
   )
@@ -73,6 +89,24 @@ const styles = StyleSheet.create({
     height: 30,
     alignItems: 'center',
     justifyContent: 'center'
-
+  },
+  leftContainer: {
+    position: 'absolute',
+    top: '40%',
+    left: 10,
+  },
+  rightContainer: {
+    position: 'absolute',
+    top: '40%',
+    right: 10,
+  },
+  moveIcon: {
+    borderColor: 'black',
+    borderWidth: 2,
+    backgroundColor: 'white',
+    width: 25,
+    height: 25,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 });
