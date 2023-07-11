@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import { speakWord } from '../service/speech';
 
 import { Word } from '../types';
+import PressableOpacity from './PressableOpacity';
 
 type Props = {
   word: Word,
@@ -15,12 +16,12 @@ export default function HistoryItem({ word }: Props) {
   const { label, uri } = word;
 
   return (
-    <Pressable onPress={onPress}>
+    <PressableOpacity onPress={onPress}>
       <View style={styles.container}>
         <Image style={styles.image} source={{ uri }} />
         <Text style={styles.text}>{label}</Text>
       </View>
-    </Pressable>
+    </PressableOpacity>
   )
 }
 

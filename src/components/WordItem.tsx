@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import { speakWord } from '../service/speech';
 import { Word } from '../types';
 import { MaterialIcons } from '@expo/vector-icons';
+import PressableOpacity from './PressableOpacity';
 
 type Props = {
   word: Word,
@@ -22,19 +23,19 @@ export default function WordItem({ word, onPress, onLongPress, isEditing, onPres
 
   const { uri, label } = word;
   return (
-    <Pressable onPress={handleOnPress} onLongPress={onLongPress}>
+    <PressableOpacity onPress={handleOnPress} onLongPress={onLongPress}>
       <View style={styles.container}>
         <Image style={styles.image} source={{ uri }} />
         <Text style={styles.text}>{label}</Text>
       </View>
       {isEditing && (
         <View style={styles.deleteContainer}>
-          <Pressable onPress={onPressRemove}>
+          <PressableOpacity onPress={onPressRemove}>
             <MaterialIcons style={styles.deleteIcon} size={30} name="remove-circle" color="red" />
-          </Pressable>
+          </PressableOpacity>
         </View>
       )}
-    </Pressable>
+    </PressableOpacity>
   )
 }
 
