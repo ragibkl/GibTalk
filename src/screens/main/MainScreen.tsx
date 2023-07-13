@@ -1,3 +1,4 @@
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -6,6 +7,7 @@ import { Word } from '../../types';
 import { speakWord, stopSpeech } from '../../service/speech';
 import WordsGrid from './WordsGrid';
 import WordsHistoryList from './WordsHistoryList';
+import { RootStackParamList } from '../../../App';
 
 const SAMPLE_WORDS: Word[] = [
   { id: '1', label: 'Yes', uri: 'https://www.senteacher.org/fullsymbol/arasaac/5584/' },
@@ -28,10 +30,14 @@ const SAMPLE_WORDS: Word[] = [
   { id: '18', label: '吃米饭', uri: 'https://www.senteacher.org/fullsymbol/arasaac/4609/', language: 'zh' }
 ];
 
+type HomeScreenProps = NavigationProp<RootStackParamList, 'Home'>
+
 export default function MainScreen() {
   const [words, setWords] = useState(SAMPLE_WORDS);
   const [wordsHistory, setHistoryItems] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
+
+  const navigation = useNavigation<HomeScreenProps>();
 
   const onPressClear = () => {
     setHistoryItems([]);
@@ -54,6 +60,10 @@ export default function MainScreen() {
   const removeWord = (word: Word) => {
     const newWords = words.filter(w => w.id !== word.id);
     setWords(newWords);
+  }
+
+  const onPressAdd = () => {
+    navigation.navigate('createWord')
   }
 
   const onPressSave = () => {
@@ -116,7 +126,10 @@ export default function MainScreen() {
 
         <View style={styles.sideControls}>
           {isEditing ? (
-            <IconButton label="Save" icon="save" onPress={onPressSave} />
+            <>
+              <IconButton label="Add" icon="plus" onPress={onPressAdd} />
+              <IconButton label="Save" icon="save" onPress={onPressSave} />
+            </>
           ) : (
             <IconButton label="Edit" icon="edit" onPress={onPressEdit} />
           )}
