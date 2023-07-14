@@ -1,22 +1,31 @@
 import { Picker } from '@react-native-picker/picker';
 import * as ImagePicker from 'expo-image-picker';
-import { useState } from 'react';
 import { Image, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import { Language, Word } from '../../types';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { Language } from '../../types';
 
-import { RootStackParamList } from '../../../App';
+type Props = {
+  label: string,
+  language: string,
+  uri: string,
+  onUpdateLabel: (label: string) => void,
+  onUpdateLanguage: (language: Language) => void,
+  onUpdateUri: (uri: string) => void,
+  onPressSave: () => void,
+}
 
-type CreateWordScreenProps = NavigationProp<RootStackParamList, 'createWord'>
-
-export default function CreateWordScreen() {
-  const [label, setLabel] = useState('');
-  const [language, setLanguage] = useState<Language>('en');
-  const [uri, setUri] = useState(null);
-  const navigation = useNavigation<CreateWordScreenProps>();
+export default function CommonWordDetailScreen(props: Props) {
+  const {
+    label,
+    language,
+    uri,
+    onUpdateLabel,
+    onUpdateLanguage,
+    onUpdateUri,
+    onPressSave,
+  } = props;
 
   const onLanguageValueChange = (value: Language, _index: number) => {
-    setLanguage(value);
+    onUpdateLanguage(value);
   }
 
   const onPressSelectImage = async () => {
@@ -26,30 +35,16 @@ export default function CreateWordScreen() {
     });
 
     if (result.assets[0]) {
-      setUri(result.assets[0].uri);
+      onUpdateUri(result.assets[0].uri);
     }
   };
-
-  const onPressSave = () => {
-    const word: Word = {
-      id: 'abc123',
-      label,
-      language,
-      uri
-    };
-
-    // TODO: Add to words list
-    console.log(word);
-
-    navigation.navigate('Home');
-  }
 
   return (
     <View style={styles.container}>
       <View style={styles.left}>
         <View style={styles.rowInput}>
           <Text style={styles.inputTitle}>Label</Text>
-          <TextInput style={styles.labelInput} onChangeText={setLabel}/>
+          <TextInput style={styles.labelInput} onChangeText={onUpdateLabel} value={label} />
         </View>
 
         <View style={styles.rowInput}>
@@ -87,7 +82,7 @@ export default function CreateWordScreen() {
       </View>
 
       <View style={styles.right}>
-        <Image style={styles.image} source={{ uri: uri }} />
+        <Image style={styles.image} source={{ uri }} />
       </View>
     </View>
   )

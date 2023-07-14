@@ -3,26 +3,24 @@ import { ScrollView, StyleSheet } from "react-native"
 import WordItem from "../../components/WordItem"
 
 import { Word } from "../../types"
+import { useWords } from "../../service/words";
 
 type Props = {
   addWordToHistory(word: Word): void,
-  removeWord(word: Word): void,
-  moveWordLeft(word: Word): void,
-  moveWordRight(word: Word): void,
-  words: Word[],
+  editWord: (word: Word) => void,
   isEditing: boolean,
 }
 
 export default function WordsGrid(props: Props) {
+  const { words } = useWords();
+
   const renderWordItem = (word: Word) => {
     return (
       <WordItem
         key={word.label}
         word={word}
         onPress={() => props.addWordToHistory(word)}
-        onPressRemove={() => props.removeWord(word)}
-        onPressLeft={() => props.moveWordLeft(word)}
-        onPressRight={() => props.moveWordRight(word)}
+        onPressEdit={() => props.editWord(word)}
         isEditing={props.isEditing}
       />
     )
@@ -30,10 +28,9 @@ export default function WordsGrid(props: Props) {
 
   return (
     <ScrollView contentContainerStyle={styles.content}>
-      {props.words.map(renderWordItem)}
+      {words.map(renderWordItem)}
     </ScrollView>
   )
-
 }
 
 const styles = StyleSheet.create({

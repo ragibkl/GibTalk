@@ -4,13 +4,17 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet } from 'react-native';
 
 import MainScreen from './src/screens/main/MainScreen';
-import CreateWordScreen from './src/screens/addWord/CreateWordScreen';
+import CreateWordScreen from './src/screens/editWord/CreateWordScreen';
+import { WordsProvider } from './src/service/words';
+import { Word } from './src/types';
+import EditWordScreen from './src/screens/editWord/EditWordScreen';
 
 const Stack = createStackNavigator();
 
 export type RootStackParamList = {
   Home: undefined;
   createWord: undefined,
+  editWord: { word: Word }
 };
 
 export default function App() {
@@ -28,24 +32,31 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={screenOptions}>
-          <Stack.Screen
-            name="Home"
-            component={MainScreen}
-            options={{ title: 'GibTalk - Development' }}
-          />
-          <Stack.Screen
-            name="createWord"
-            component={CreateWordScreen}
-            options={{ title: 'Add New Word' }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+    <WordsProvider>
+      <SafeAreaView style={styles.container}>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={screenOptions}>
+            <Stack.Screen
+              name="Home"
+              component={MainScreen}
+              options={{ title: 'GibTalk - Development' }}
+            />
+            <Stack.Screen
+              name="createWord"
+              component={CreateWordScreen}
+              options={{ title: 'Add New Word' }}
+            />
+            <Stack.Screen
+              name="editWord"
+              component={EditWordScreen}
+              options={{ title: 'Edit Word' }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
 
-      <StatusBar style="auto" />
-    </SafeAreaView>
+        <StatusBar style="auto" />
+      </SafeAreaView>
+    </WordsProvider>
   );
 }
 
