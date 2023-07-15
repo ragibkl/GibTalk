@@ -11,3 +11,9 @@ export function speakWord(word: Word) {
 export function stopSpeech() {
   Speech.stop();
 }
+
+export function speakInit() {
+  Speech.speak('', { language: 'en' });
+  Speech.speak('', { language: 'ms' });
+  Speech.speak('', { language: 'zh' });
+}
