@@ -1,13 +1,15 @@
+import 'react-native-gesture-handler';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet } from 'react-native';
 
-import MainScreen from './src/screens/main/MainScreen';
 import CreateWordScreen from './src/screens/editWord/CreateWordScreen';
+import EditWordScreen from './src/screens/editWord/EditWordScreen';
+import MainScreen from './src/screens/main/MainScreen';
 import { WordsProvider } from './src/service/words';
 import { Word } from './src/types';
-import EditWordScreen from './src/screens/editWord/EditWordScreen';
 
 const Stack = createStackNavigator();
 
