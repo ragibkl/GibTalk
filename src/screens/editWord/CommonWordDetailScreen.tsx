@@ -32,9 +32,10 @@ export default function CommonWordDetailScreen(props: Props) {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       quality: 1,
+      aspect: [1, 1],
     });
 
-    if (result.assets[0]) {
+    if (!result.canceled && result.assets && result.assets[0]) {
       onUpdateUri(result.assets[0].uri);
     }
   };
