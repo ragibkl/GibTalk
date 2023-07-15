@@ -1,4 +1,5 @@
-import { createContext, useContext, useReducer } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createContext, useContext, useEffect, useReducer, useState } from 'react';
 import uuid from 'react-native-uuid';
 
 import { Word } from '../types';
@@ -25,11 +26,28 @@ export const SAMPLE_WORDS: Word[] = [
   { id: '18', label: '吃米饭', uri: 'https://www.senteacher.org/fullsymbol/arasaac/4609/', language: 'zh' }
 ];
 
+async function storeWords(words: Word[]): Promise<void> {
+  const jsonValue = JSON.stringify(words);
+  await AsyncStorage.setItem('words-key', jsonValue);
+}
+
+async function readWords(): Promise<Word[] | null> {
+  const jsonValue = await AsyncStorage.getItem('words-key');
+  if (!jsonValue) {
+    return null
+  }
+
+  return JSON.parse(jsonValue) as Word[];
+}
+
 export const WordsContext = createContext([]);
 export const WordsDispatchContext = createContext(null);
 
 export function wordsReducer(words: Word[], action) {
   switch (action.type) {
+    case 'set-words': {
+      return action.words;
+    }
     case 'add-word': {
       return [...words, action.word];
     }
@@ -72,12 +90,33 @@ export function wordsReducer(words: Word[], action) {
 }
 
 export function WordsProvider({ children }) {
-  const [words, dispatch] = useReducer(wordsReducer, SAMPLE_WORDS);
+  const [isLoading, setIsLoading] = useState(true);
+  const [words, dispatch] = useReducer(wordsReducer, []);
+
+  const loadWords = async () => {
+    const loadedWords = await readWords();
+
+    if (loadedWords && loadedWords.length) {
+      dispatch({ type: 'set-words', words: loadedWords });
+    } else {
+      dispatch({ type: 'set-words', words: SAMPLE_WORDS });
+    }
+
+    setIsLoading(false)
+  }
+
+  useEffect(() => {
+    loadWords();
+  }, [])
+
+  useEffect(() => {
+    storeWords(words);
+  }, [words])
 
   return (
     <WordsContext.Provider value={words}>
       <WordsDispatchContext.Provider value={dispatch}>
-        {children}
+        {!isLoading && children}
       </WordsDispatchContext.Provider>
     </WordsContext.Provider>
   );
