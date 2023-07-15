@@ -1,22 +1,22 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
-import { speakWord } from '../service/speech';
-import { Word } from '../types';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import { StyleSheet, Text, View, Image } from 'react-native';
+
 import PressableOpacity from './PressableOpacity';
+import { speakWord } from '../service/speech';
 import { useWords } from '../service/words';
+import { Word } from '../types';
 
 type Props = {
   word: Word,
   isEditing: boolean,
   onPress?: () => void,
   onPressEdit?: () => void,
-  onLongPress?: () => void,
 }
 
-export default function WordItem({ word, onPress, onPressEdit, onLongPress, isEditing }: Props) {
+export default function WordItem({ word, onPress, onPressEdit, isEditing }: Props) {
   const { removeWord, moveWordLeft, moveWordRight } = useWords();
 
-  const handleOnPress = () => {
+  const onPressWord = () => {
     speakWord(word);
 
     if (!isEditing) {
@@ -24,36 +24,48 @@ export default function WordItem({ word, onPress, onPressEdit, onLongPress, isEd
     }
   }
 
-  const { uri, label } = word;
+  const onPressRemove = () => {
+    removeWord(word.id)
+  }
+
+  const onPressMoveLeft = () => {
+    moveWordLeft(word.id)
+  }
+
+  const onPressMoveRight = () => {
+    moveWordRight(word.id)
+  }
+
   return (
-    <PressableOpacity onPress={handleOnPress} onLongPress={onLongPress}>
+    <PressableOpacity onPress={onPressWord}>
       <View style={styles.container}>
-        <Image style={styles.image} source={{ uri }} />
-        <Text style={styles.text}>{label}</Text>
+        <Image style={styles.image} source={{ uri: word.uri }} />
+        <Text style={styles.labelText}>{word.label}</Text>
       </View>
+
       {isEditing && (
         <>
           <View style={styles.editContainer}>
             <PressableOpacity onPress={onPressEdit}>
-              <FontAwesome style={styles.editIcon} size={30} name="edit" color="black" />
+              <FontAwesome style={styles.editIcon} size={20} name="edit" />
             </PressableOpacity>
           </View>
 
           <View style={styles.deleteContainer}>
-            <PressableOpacity onPress={() => removeWord(word.id)}>
-              <MaterialIcons style={styles.deleteIcon} size={30} name="remove-circle" color="red" />
+            <PressableOpacity onPress={onPressRemove}>
+              <FontAwesome style={styles.deleteIcon} size={25} name="remove" />
             </PressableOpacity>
           </View>
 
-          <View style={styles.leftContainer}>
-            <PressableOpacity onPress={() => moveWordLeft(word.id)}>
-              <MaterialIcons style={styles.moveIcon} size={25} name="arrow-left" color="black" />
+          <View style={[styles.moveLeftContainer, styles.moveContainer]}>
+            <PressableOpacity onPress={onPressMoveLeft}>
+              <MaterialIcons style={styles.moveIcon} size={20} name="arrow-left" />
             </PressableOpacity>
           </View>
 
-          <View style={styles.rightContainer}>
-            <PressableOpacity onPress={() => moveWordRight(word.id)}>
-              <MaterialIcons style={styles.moveIcon} size={25} name="arrow-right" color="black" />
+          <View style={[styles.moveRightContainer, styles.moveContainer]}>
+            <PressableOpacity onPress={onPressMoveRight}>
+              <MaterialIcons style={styles.moveIcon} size={20} name="arrow-right" />
             </PressableOpacity>
           </View>
         </>
@@ -77,58 +89,61 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
   },
-  text: {
+  labelText: {
     margin: 5,
     color: 'white',
     fontWeight: 'bold',
   },
   editContainer: {
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderColor: 'black',
+    borderRadius: 15,
+    borderWidth: 2,
+    height: 30,
+    justifyContent: 'center',
+    left: 5,
     position: 'absolute',
-    top: 0,
-    left: 20,
+    top: 5,
+    width: 30,
   },
   editIcon: {
-    // borderColor: 'white',
-    // borderWidth: 2,
-    // borderRadius: 15,
-    // backgroundColor: 'white',
-    width: 30,
-    height: 30,
-    alignItems: 'center',
-    justifyContent: 'center'
+    color: 'black',
   },
   deleteContainer: {
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderColor: 'black',
+    borderRadius: 15,
+    borderWidth: 2,
+    height: 30,
+    justifyContent: 'center',
     position: 'absolute',
-    top: 0,
-    right: 20,
+    right: 5,
+    top: 5,
+    width: 30,
   },
   deleteIcon: {
-    borderColor: 'white',
-    borderWidth: 2,
-    borderRadius: 15,
-    backgroundColor: 'white',
-    width: 30,
-    height: 30,
-    alignItems: 'center',
-    justifyContent: 'center'
+    color: 'black',
   },
-  leftContainer: {
+  moveContainer: {
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderColor: 'black',
+    borderWidth: 2,
+    height: 25,
+    justifyContent: 'center',
     position: 'absolute',
-    top: '40%',
+    top: 60,
+    width: 25,
+  },
+  moveLeftContainer: {
     left: 10,
   },
-  rightContainer: {
-    position: 'absolute',
-    top: '40%',
+  moveRightContainer: {
     right: 10,
   },
   moveIcon: {
-    borderColor: 'black',
-    borderWidth: 2,
-    backgroundColor: 'white',
-    width: 25,
-    height: 25,
-    alignItems: 'center',
-    justifyContent: 'center'
+    color: 'black',
   },
 });
