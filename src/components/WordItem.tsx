@@ -85,9 +85,12 @@ const styles = StyleSheet.create({
     width: 120,
   },
   image: {
+    borderColor: 'white',
+    borderRadius: 5,
+    borderWidth: 2,
+    height: 80,
     marginTop: 15,
     width: 80,
-    height: 80,
   },
   labelText: {
     margin: 5,

@@ -36,9 +36,12 @@ const styles = StyleSheet.create({
     width: 60,
   },
   image: {
+    borderColor: 'white',
+    borderRadius: 3,
+    borderWidth: 1,
+    height: 40,
     marginTop: 2,
     width: 40,
-    height: 40,
   },
   text: {
     margin: 2,

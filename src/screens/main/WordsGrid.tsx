@@ -17,7 +17,7 @@ export default function WordsGrid(props: Props) {
   const renderWordItem = (word: Word) => {
     return (
       <WordItem
-        key={word.label}
+        key={word.id}
         word={word}
         onPress={() => props.addWordToHistory(word)}
         onPressEdit={() => props.editWord(word)}
