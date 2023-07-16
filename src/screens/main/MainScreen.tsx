@@ -35,7 +35,7 @@ export default function MainScreen() {
     setHistoryItems([]);
   };
 
-  const editItem = (word: Word) => {
+  const editWord = (word: Word) => {
     navigation.navigate("editWord", { word });
   };
 
@@ -71,7 +71,7 @@ export default function MainScreen() {
       <View style={styles.bodyBottom}>
         <View style={styles.gridContainer}>
           <WordsGrid
-            editWord={editItem}
+            editWord={editWord}
             addWordToHistory={addWordToHistory}
             isEditing={isEditing}
           />
