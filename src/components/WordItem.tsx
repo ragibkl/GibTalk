@@ -9,14 +9,14 @@ import { Word } from "../types";
 type Props = {
   word: Word;
   isEditing: boolean;
-  onPress?: () => void;
-  onPressEdit?: () => void;
+  addWordToHistory(word: Word): void;
+  editWord: (word: Word) => void;
 };
 
 export default function WordItem({
   word,
-  onPress,
-  onPressEdit,
+  addWordToHistory,
+  editWord,
   isEditing,
 }: Props) {
   const { removeWord, moveWordLeft, moveWordRight } = useWords();
@@ -25,8 +25,12 @@ export default function WordItem({
     speakWord(word);
 
     if (!isEditing) {
-      onPress();
+      addWordToHistory(word);
     }
+  };
+
+  const onPressEdit = () => {
+    editWord(word);
   };
 
   const onPressRemove = () => {

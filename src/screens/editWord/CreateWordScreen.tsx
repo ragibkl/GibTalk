@@ -1,20 +1,11 @@
-import { Picker } from "@react-native-picker/picker";
-import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
-import {
-  Image,
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
-import { Language } from "../../types";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 import { RootStackParamList } from "../../../App";
 import { useWords } from "../../service/words";
 import CommonWordDetailScreen from "./CommonWordDetailScreen";
+
+import { Language } from "../../types";
 
 type CreateWordScreenProps = NavigationProp<RootStackParamList, "createWord">;
 
