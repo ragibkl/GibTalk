@@ -7,8 +7,8 @@ type Props = {
 };
 
 export default function WordsHistoryList(props: Props) {
-  const renderHistoryItem = (word: Word, _i: number) => {
-    return <HistoryItem key={word.id} word={word} />;
+  const renderHistoryItem = (word: Word, i: number) => {
+    return <HistoryItem key={i} word={word} />;
   };
 
   return (
