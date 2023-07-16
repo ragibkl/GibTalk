@@ -1,19 +1,24 @@
-import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import { StyleSheet, Text, View, Image } from "react-native";
 
-import PressableOpacity from './PressableOpacity';
-import { speakWord } from '../service/speech';
-import { useWords } from '../service/words';
-import { Word } from '../types';
+import PressableOpacity from "./PressableOpacity";
+import { speakWord } from "../service/speech";
+import { useWords } from "../service/words";
+import { Word } from "../types";
 
 type Props = {
-  word: Word,
-  isEditing: boolean,
-  onPress?: () => void,
-  onPressEdit?: () => void,
-}
+  word: Word;
+  isEditing: boolean;
+  onPress?: () => void;
+  onPressEdit?: () => void;
+};
 
-export default function WordItem({ word, onPress, onPressEdit, isEditing }: Props) {
+export default function WordItem({
+  word,
+  onPress,
+  onPressEdit,
+  isEditing,
+}: Props) {
   const { removeWord, moveWordLeft, moveWordRight } = useWords();
 
   const onPressWord = () => {
@@ -22,19 +27,19 @@ export default function WordItem({ word, onPress, onPressEdit, isEditing }: Prop
     if (!isEditing) {
       onPress();
     }
-  }
+  };
 
   const onPressRemove = () => {
-    removeWord(word.id)
-  }
+    removeWord(word.id);
+  };
 
   const onPressMoveLeft = () => {
-    moveWordLeft(word.id)
-  }
+    moveWordLeft(word.id);
+  };
 
   const onPressMoveRight = () => {
-    moveWordRight(word.id)
-  }
+    moveWordRight(word.id);
+  };
 
   return (
     <PressableOpacity onPress={onPressWord}>
@@ -59,33 +64,41 @@ export default function WordItem({ word, onPress, onPressEdit, isEditing }: Prop
 
           <View style={[styles.moveLeftContainer, styles.moveContainer]}>
             <PressableOpacity onPress={onPressMoveLeft}>
-              <MaterialIcons style={styles.moveIcon} size={20} name="arrow-left" />
+              <MaterialIcons
+                style={styles.moveIcon}
+                size={20}
+                name="arrow-left"
+              />
             </PressableOpacity>
           </View>
 
           <View style={[styles.moveRightContainer, styles.moveContainer]}>
             <PressableOpacity onPress={onPressMoveRight}>
-              <MaterialIcons style={styles.moveIcon} size={20} name="arrow-right" />
+              <MaterialIcons
+                style={styles.moveIcon}
+                size={20}
+                name="arrow-right"
+              />
             </PressableOpacity>
           </View>
         </>
       )}
     </PressableOpacity>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    backgroundColor: 'green',
-    borderColor: 'white',
+    alignItems: "center",
+    backgroundColor: "green",
+    borderColor: "white",
     borderRadius: 10,
     borderWidth: 2,
     margin: 5,
     width: 120,
   },
   image: {
-    borderColor: 'white',
+    borderColor: "white",
     borderRadius: 5,
     borderWidth: 2,
     height: 80,
@@ -94,49 +107,49 @@ const styles = StyleSheet.create({
   },
   labelText: {
     margin: 5,
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
   editContainer: {
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderColor: 'black',
+    alignItems: "center",
+    backgroundColor: "white",
+    borderColor: "black",
     borderRadius: 15,
     borderWidth: 2,
     height: 30,
-    justifyContent: 'center',
+    justifyContent: "center",
     left: 5,
-    position: 'absolute',
+    position: "absolute",
     top: 5,
     width: 30,
   },
   editIcon: {
-    color: 'black',
+    color: "black",
   },
   deleteContainer: {
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderColor: 'black',
+    alignItems: "center",
+    backgroundColor: "white",
+    borderColor: "black",
     borderRadius: 15,
     borderWidth: 2,
     height: 30,
-    justifyContent: 'center',
-    position: 'absolute',
+    justifyContent: "center",
+    position: "absolute",
     right: 5,
     top: 5,
     width: 30,
   },
   deleteIcon: {
-    color: 'black',
+    color: "black",
   },
   moveContainer: {
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderColor: 'black',
+    alignItems: "center",
+    backgroundColor: "white",
+    borderColor: "black",
     borderWidth: 2,
     height: 25,
-    justifyContent: 'center',
-    position: 'absolute',
+    justifyContent: "center",
+    position: "absolute",
     top: 60,
     width: 25,
   },
@@ -147,6 +160,6 @@ const styles = StyleSheet.create({
     right: 10,
   },
   moveIcon: {
-    color: 'black',
+    color: "black",
   },
 });

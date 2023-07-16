@@ -1,23 +1,39 @@
-import { ReactNode } from 'react';
-import { Pressable, StyleProp, ViewStyle, PressableStateCallbackType, GestureResponderEvent, StyleSheet } from 'react-native';
+import { ReactNode } from "react";
+import {
+  Pressable,
+  StyleProp,
+  ViewStyle,
+  PressableStateCallbackType,
+  GestureResponderEvent,
+  StyleSheet,
+} from "react-native";
 
 type Props = {
-  children: ReactNode | ReactNode[],
-  style?: StyleProp<ViewStyle>,
-  onPress?: (event: GestureResponderEvent) => void,
-  onLongPress?: (event: GestureResponderEvent) => void,
-}
+  children: ReactNode | ReactNode[];
+  style?: StyleProp<ViewStyle>;
+  onPress?: (event: GestureResponderEvent) => void;
+  onLongPress?: (event: GestureResponderEvent) => void;
+};
 
-export default function PressableOpacity({ children, style, onPress, onLongPress }: Props) {
+export default function PressableOpacity({
+  children,
+  style,
+  onPress,
+  onLongPress,
+}: Props) {
   const styleCallback = (state: PressableStateCallbackType) => {
-    return [state.pressed ? styles.isPressed : styles.default, style]
-  }
+    return [state.pressed ? styles.isPressed : styles.default, style];
+  };
 
   return (
-    <Pressable style={styleCallback} onPress={onPress} onLongPress={onLongPress}>
+    <Pressable
+      style={styleCallback}
+      onPress={onPress}
+      onLongPress={onLongPress}
+    >
       {children}
     </Pressable>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

@@ -1,8 +1,8 @@
-import * as Speech from 'expo-speech';
+import * as Speech from "expo-speech";
 
 import { Word } from "../types";
 
-const DEFAULT_LANG = 'en';
+const DEFAULT_LANG = "en";
 
 export function speakWord(word: Word) {
   Speech.speak(word.label, { language: word.language || DEFAULT_LANG });
@@ -13,7 +13,7 @@ export function stopSpeech() {
 }
 
 export function speakInit() {
-  Speech.speak('', { language: 'en' });
-  Speech.speak('', { language: 'ms' });
-  Speech.speak('', { language: 'zh' });
+  Speech.speak("", { language: "en" });
+  Speech.speak("", { language: "ms" });
+  Speech.speak("", { language: "zh" });
 }

@@ -1,17 +1,24 @@
-import { Picker } from '@react-native-picker/picker';
-import * as ImagePicker from 'expo-image-picker';
-import { Image, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import { Language } from '../../types';
+import { Picker } from "@react-native-picker/picker";
+import * as ImagePicker from "expo-image-picker";
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
+import { Language } from "../../types";
 
 type Props = {
-  label: string,
-  language: string,
-  uri: string,
-  onUpdateLabel: (label: string) => void,
-  onUpdateLanguage: (language: Language) => void,
-  onUpdateUri: (uri: string) => void,
-  onPressSave: () => void,
-}
+  label: string;
+  language: string;
+  uri: string;
+  onUpdateLabel: (label: string) => void;
+  onUpdateLanguage: (language: Language) => void;
+  onUpdateUri: (uri: string) => void;
+  onPressSave: () => void;
+};
 
 export default function CommonWordDetailScreen(props: Props) {
   const {
@@ -26,7 +33,7 @@ export default function CommonWordDetailScreen(props: Props) {
 
   const onLanguageValueChange = (value: Language, _index: number) => {
     onUpdateLanguage(value);
-  }
+  };
 
   const onPressSelectImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -45,7 +52,11 @@ export default function CommonWordDetailScreen(props: Props) {
       <View style={styles.left}>
         <View style={styles.rowInput}>
           <Text style={styles.inputTitle}>Label</Text>
-          <TextInput style={styles.labelInput} onChangeText={onUpdateLabel} value={label} />
+          <TextInput
+            style={styles.labelInput}
+            onChangeText={onUpdateLabel}
+            value={label}
+          />
         </View>
 
         <View style={styles.rowInput}>
@@ -64,19 +75,13 @@ export default function CommonWordDetailScreen(props: Props) {
 
         <View style={styles.rowInput}>
           <Text style={styles.inputTitle}>Image</Text>
-          <Pressable
-            style={styles.button}
-            onPress={onPressSelectImage}
-          >
+          <Pressable style={styles.button} onPress={onPressSelectImage}>
             <Text>Select an Image</Text>
           </Pressable>
         </View>
 
         <View style={styles.rowInput}>
-          <Pressable
-            style={styles.saveButton}
-            onPress={onPressSave}
-          >
+          <Pressable style={styles.saveButton} onPress={onPressSave}>
             <Text>Save</Text>
           </Pressable>
         </View>
@@ -86,14 +91,14 @@ export default function CommonWordDetailScreen(props: Props) {
         <Image style={styles.image} source={{ uri }} />
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
-    alignSelf: 'stretch',
+    flexDirection: "row",
+    alignSelf: "stretch",
     padding: 10,
   },
   left: {
@@ -107,8 +112,8 @@ const styles = StyleSheet.create({
     height: 200,
   },
   rowInput: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 10,
   },
   inputTitle: {
@@ -118,7 +123,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 200,
     padding: 5,
-    borderColor: 'black',
+    borderColor: "black",
     borderWidth: 2,
     borderRadius: 5,
   },
@@ -126,20 +131,20 @@ const styles = StyleSheet.create({
     height: 40,
     width: 200,
     padding: 5,
-    borderColor: 'black',
+    borderColor: "black",
     borderWidth: 2,
     borderRadius: 5,
-    backgroundColor: 'yellow',
-    alignItems: 'center',
+    backgroundColor: "yellow",
+    alignItems: "center",
   },
   saveButton: {
     height: 40,
     width: 90,
     padding: 5,
-    borderColor: 'black',
+    borderColor: "black",
     borderWidth: 2,
     borderRadius: 5,
-    backgroundColor: 'lightgreen',
-    alignItems: 'center',
+    backgroundColor: "lightgreen",
+    alignItems: "center",
   },
-})
+});

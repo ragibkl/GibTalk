@@ -1,15 +1,15 @@
-import { ScrollView, StyleSheet } from "react-native"
+import { ScrollView, StyleSheet } from "react-native";
 
-import WordItem from "../../components/WordItem"
+import WordItem from "../../components/WordItem";
 
-import { Word } from "../../types"
+import { Word } from "../../types";
 import { useWords } from "../../service/words";
 
 type Props = {
-  addWordToHistory(word: Word): void,
-  editWord: (word: Word) => void,
-  isEditing: boolean,
-}
+  addWordToHistory(word: Word): void;
+  editWord: (word: Word) => void;
+  isEditing: boolean;
+};
 
 export default function WordsGrid(props: Props) {
   const { words } = useWords();
@@ -23,19 +23,19 @@ export default function WordsGrid(props: Props) {
         onPressEdit={() => props.editWord(word)}
         isEditing={props.isEditing}
       />
-    )
-  }
+    );
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.content}>
       {words.map(renderWordItem)}
     </ScrollView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   content: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
 });
