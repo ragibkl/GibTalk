@@ -26,8 +26,12 @@ export default function MainScreen() {
     wordsHistory.forEach(speakWord);
   };
 
-  const addWordToHistory = (item: Word) => {
-    setHistoryItems([...wordsHistory, item]);
+  const addWordToHistory = (word: Word) => {
+    const lastItem = wordsHistory[wordsHistory.length - 1];
+
+    if (word.id !== lastItem.id) {
+      setHistoryItems([...wordsHistory, word]);
+    }
   };
 
   const onPressEdit = () => {
