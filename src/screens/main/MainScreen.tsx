@@ -27,9 +27,13 @@ export default function MainScreen() {
   };
 
   const addWordToHistory = (word: Word) => {
-    const lastItem = wordsHistory[wordsHistory.length - 1];
+    if (wordsHistory.length) {
+      const lastItem = wordsHistory[wordsHistory.length - 1];
 
-    if (word.id !== lastItem.id) {
+      if (lastItem.id !== word.id) {
+        setHistoryItems([...wordsHistory, word]);
+      }
+    } else {
       setHistoryItems([...wordsHistory, word]);
     }
   };
