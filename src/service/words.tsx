@@ -9,105 +9,99 @@ import {
 import uuid from "react-native-uuid";
 
 import { Word } from "../types";
+import { base64Image } from "./image";
+
 type CreateWord = Omit<Word, "id">;
 
-export const SAMPLE_WORDS: Word[] = [
+export const SAMPLE_WORDS: CreateWord[] = [
   {
-    id: "1",
     label: "Yes",
     uri: "https://www.senteacher.org/fullsymbol/arasaac/5584/",
   },
   {
-    id: "2",
     label: "No",
     uri: "https://www.senteacher.org/fullsymbol/arasaac/5526/",
   },
   {
-    id: "3",
     label: "Up",
     uri: "https://www.senteacher.org/fullsymbol/mulberry/up.png/",
   },
   {
-    id: "4",
     label: "Down",
     uri: "https://www.senteacher.org/fullsymbol/mulberry/down.png/",
   },
   {
-    id: "5",
     label: "Good Job",
     uri: "https://www.senteacher.org/fullsymbol/mulberry/good.png/",
   },
   {
-    id: "6",
     label: "Makan",
     uri: "https://www.senteacher.org/fullsymbol/arasaac/6456/",
     language: "ms",
   },
   {
-    id: "7",
     label: "Stop",
     uri: "https://www.senteacher.org/fullsymbol/arasaac/8289/",
   },
   {
-    id: "8",
     label: "Go",
     uri: "https://www.senteacher.org/fullsymbol/arasaac/21395/",
   },
   {
-    id: "9",
     label: "Wait",
     uri: "https://www.senteacher.org/fullsymbol/arasaac/16697/",
   },
   {
-    id: "10",
     label: "Tunggu",
     uri: "https://www.senteacher.org/fullsymbol/arasaac/16697/",
     language: "ms",
   },
   {
-    id: "11",
     label: "Run",
     uri: "https://www.senteacher.org/fullsymbol/mulberry/run_,_to.png/",
   },
   {
-    id: "12",
     label: "Walk",
     uri: "https://www.senteacher.org/fullsymbol/arasaac/3251/",
   },
   {
-    id: "13",
     label: "Jump",
     uri: "https://www.senteacher.org/fullsymbol/arasaac/28443/",
   },
   {
-    id: "14",
     label: "Turn around",
     uri: "https://www.senteacher.org/fullsymbol/mulberry/around.png/",
   },
   {
-    id: "15",
     label: "Go Up",
     uri: "https://www.senteacher.org/fullsymbol/arasaac/6617/",
   },
   {
-    id: "16",
     label: "Panjat",
     uri: "https://www.senteacher.org/fullsymbol/arasaac/28255/",
     language: "ms",
   },
   {
-    id: "17",
     label: "喝水",
     uri: "https://www.senteacher.org/fullsymbol/mulberry/drink_,_to.png/",
     language: "zh",
   },
   {
-    id: "18",
     label: "吃米饭",
     uri: "https://www.senteacher.org/fullsymbol/arasaac/4609/",
     language: "zh",
   },
 ];
+
+async function loadSampleWords(): Promise<Word[]> {
+  return Promise.all(
+    SAMPLE_WORDS.map(async (word) => ({
+      ...word,
+      id: uuid.v4() as string,
+      uri: await base64Image(word.uri),
+    })),
+  );
+}
 
 async function storeWords(words: Word[]): Promise<void> {
   const jsonValue = JSON.stringify(words);
@@ -182,7 +176,9 @@ export function WordsProvider({ children }) {
     if (loadedWords && loadedWords.length) {
       dispatch({ type: "set-words", words: loadedWords });
     } else {
-      dispatch({ type: "set-words", words: SAMPLE_WORDS });
+      loadSampleWords().then((sampleWords) => {
+        dispatch({ type: "set-words", words: sampleWords });
+      });
     }
 
     setIsLoading(false);
@@ -209,15 +205,20 @@ export function useWords() {
   const words = useContext(WordsContext);
   const dispatch = useContext(WordsDispatchContext);
 
-  const addWord = (createWordData: CreateWord) => {
-    const word = {
-      id: uuid.v4(),
+  const addWord = async (createWordData: CreateWord) => {
+    const word: Word = {
       ...createWordData,
+      id: uuid.v4() as string,
+      uri: await base64Image(createWordData.uri),
     };
     dispatch({ type: "add-word", word });
   };
 
-  const updateWord = (word: Word) => {
+  const updateWord = async (updateWordData: Word) => {
+    const word: Word = {
+      ...updateWordData,
+      uri: await base64Image(updateWordData.uri),
+    };
     dispatch({ type: "update-word", word });
   };
 
