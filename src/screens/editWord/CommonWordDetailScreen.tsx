@@ -4,6 +4,7 @@ import {
   Image,
   Pressable,
   StyleSheet,
+  Switch,
   Text,
   TextInput,
   View,
@@ -13,9 +14,11 @@ import { Language } from "../../types";
 type Props = {
   label: string;
   language: string;
+  isCategory: boolean;
   uri: string;
   onUpdateLabel: (label: string) => void;
   onUpdateLanguage: (language: Language) => void;
+  onUpdateIsCategory: (isCategory: boolean) => void;
   onUpdateUri: (uri: string) => void;
   onPressSave: () => void;
 };
@@ -24,9 +27,11 @@ export default function CommonWordDetailScreen(props: Props) {
   const {
     label,
     language,
+    isCategory,
     uri,
     onUpdateLabel,
     onUpdateLanguage,
+    onUpdateIsCategory,
     onUpdateUri,
     onPressSave,
   } = props;
@@ -71,6 +76,11 @@ export default function CommonWordDetailScreen(props: Props) {
             <Picker.Item label="Bahasa" value="ms" />
             <Picker.Item label="Chinese" value="zh" />
           </Picker>
+        </View>
+
+        <View style={styles.rowInput}>
+          <Text style={styles.inputTitle}>Category?</Text>
+          <Switch value={isCategory} onValueChange={onUpdateIsCategory} />
         </View>
 
         <View style={styles.rowInput}>

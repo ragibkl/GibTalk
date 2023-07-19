@@ -13,7 +13,7 @@ import { base64Image } from "./image";
 import { loadSampleWords } from "./sampleWords";
 import { useWordPath } from "./wordPath";
 
-type CreateWord = Omit<Word, "id">;
+export type CreateWord = Omit<Word, "id">;
 
 async function storeWords(words: Word[]): Promise<void> {
   const jsonValue = JSON.stringify(words);

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 import { RootStackParamList } from "../../../App";
-import { useWords } from "../../service/words";
+import { CreateWord, useWords } from "../../service/words";
 import CommonWordDetailScreen from "./CommonWordDetailScreen";
 
 import { Language } from "../../types";
@@ -16,13 +16,18 @@ export default function CreateWordScreen() {
   const [label, setLabel] = useState("");
   const [language, setLanguage] = useState<Language>("en");
   const [uri, setUri] = useState(null);
+  const [isCategory, setIsCategory] = useState(false);
 
   const onPressSave = () => {
-    const word = {
+    const word: CreateWord = {
       label,
       language,
       uri,
     };
+
+    if (isCategory) {
+      word.children = [];
+    }
 
     addWord(word);
 
@@ -33,9 +38,11 @@ export default function CreateWordScreen() {
     <CommonWordDetailScreen
       label={label}
       language={language}
+      isCategory={isCategory}
       uri={uri}
       onUpdateLabel={setLabel}
       onUpdateLanguage={setLanguage}
+      onUpdateIsCategory={setIsCategory}
       onUpdateUri={setUri}
       onPressSave={onPressSave}
     />
