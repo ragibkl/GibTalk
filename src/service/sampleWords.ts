@@ -7,9 +7,24 @@ type SampleWord = {
   label: string;
   uri: string;
   language?: Language;
+  children?: SampleWord[];
 };
 
 export const SAMPLE_WORDS: SampleWord[] = [
+  {
+    label: "Greetings",
+    uri: "https://www.senteacher.org/fullsymbol/arasaac/6522/",
+    children: [
+      {
+        label: "Hello",
+        uri: "https://www.senteacher.org/fullsymbol/arasaac/6522/",
+      },
+      {
+        label: "Goodbye",
+        uri: "https://www.senteacher.org/fullsymbol/arasaac/6028/",
+      },
+    ],
+  },
   {
     label: "Yes",
     uri: "https://www.senteacher.org/fullsymbol/arasaac/5584/",
@@ -89,13 +104,20 @@ export const SAMPLE_WORDS: SampleWord[] = [
   },
 ];
 
-export async function loadSampleWords(): Promise<Word[]> {
+async function wordsFromSample(sampleWords: SampleWord[]): Promise<Word[]> {
   return Promise.all(
-    SAMPLE_WORDS.map(async (word) => ({
-      ...word,
-      language: word.language || "en",
+    sampleWords.map(async (word) => ({
       id: uuid.v4() as string,
+      label: word.label,
       uri: await base64Image(word.uri),
+      language: word.language || "en",
+      children: word.children
+        ? await wordsFromSample(word.children)
+        : undefined,
     })),
   );
+}
+
+export async function loadSampleWords(): Promise<Word[]> {
+  return wordsFromSample(SAMPLE_WORDS);
 }
