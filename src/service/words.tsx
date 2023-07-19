@@ -38,45 +38,110 @@ export function wordsReducer(words: Word[], action) {
       return action.words;
     }
     case "add-word": {
-      return [...words, action.word];
+      if (!action.wordPath.length) {
+        return [...words, action.word];
+      } else {
+        const [p, ...wordPath] = action.wordPath;
+        const i = words.findIndex((w) => w.id === p);
+
+        const newWords = words.slice();
+        newWords[i].children = wordsReducer(words[i].children, {
+          ...action,
+          wordPath,
+        });
+
+        return newWords;
+      }
     }
     case "update-word": {
-      const i = words.findIndex((w) => w.id === action.word.id);
-      const newWords = words.slice();
-      newWords[i] = action.word;
-      return newWords;
+      if (!action.wordPath.length) {
+        const i = words.findIndex((w) => w.id === action.word.id);
+        const newWords = words.slice();
+        newWords[i] = action.word;
+        return newWords;
+      } else {
+        const [p, ...wordPath] = action.wordPath;
+        const i = words.findIndex((w) => w.id === p);
+
+        const newWords = words.slice();
+        newWords[i].children = wordsReducer(words[i].children, {
+          ...action,
+          wordPath,
+        });
+
+        return newWords;
+      }
     }
     case "remove-word": {
-      return words.filter((w) => w.id !== action.wordId);
+      if (!action.wordPath.length) {
+        return words.filter((w) => w.id !== action.wordId);
+      } else {
+        const [p, ...wordPath] = action.wordPath;
+        const i = words.findIndex((w) => w.id === p);
+
+        const newWords = words.slice();
+        newWords[i].children = wordsReducer(words[i].children, {
+          ...action,
+          wordPath,
+        });
+
+        return newWords;
+      }
     }
     case "move-word-left": {
-      const i = words.findIndex((w) => w.id === action.wordId);
-      if (i === 0 || i === -1) {
-        return words;
+      if (!action.wordPath.length) {
+        const i = words.findIndex((w) => w.id === action.wordId);
+        if (i === 0 || i === -1) {
+          return words;
+        }
+
+        const target = words[i];
+        const left = words[i - 1];
+
+        const newWords = words.slice();
+        newWords[i - 1] = target;
+        newWords[i] = left;
+        return newWords;
+      } else {
+        const [p, ...wordPath] = action.wordPath;
+        const i = words.findIndex((w) => w.id === p);
+
+        const newWords = words.slice();
+        newWords[i].children = wordsReducer(words[i].children, {
+          ...action,
+          wordPath,
+        });
+
+        return newWords;
       }
-
-      const target = words[i];
-      const left = words[i - 1];
-
-      const newWords = words.slice();
-      newWords[i - 1] = target;
-      newWords[i] = left;
-      return newWords;
     }
     case "move-word-right": {
-      const i = words.findIndex((w) => w.id === action.wordId);
-      if (i === words.length - 1) {
-        return words;
+      if (!action.wordPath.length) {
+        const i = words.findIndex((w) => w.id === action.wordId);
+        if (i === words.length - 1) {
+          return words;
+        }
+
+        const target = words[i];
+        const right = words[i + 1];
+
+        const newWords = words.slice();
+        newWords[i + 1] = target;
+        newWords[i] = right;
+
+        return newWords;
+      } else {
+        const [p, ...wordPath] = action.wordPath;
+        const i = words.findIndex((w) => w.id === p);
+
+        const newWords = words.slice();
+        newWords[i].children = wordsReducer(words[i].children, {
+          ...action,
+          wordPath,
+        });
+
+        return newWords;
       }
-
-      const target = words[i];
-      const right = words[i + 1];
-
-      const newWords = words.slice();
-      words[i + 1] = target;
-      words[i] = right;
-
-      return newWords;
     }
     default: {
       throw Error("Unknown action: " + action.type);
@@ -145,7 +210,7 @@ export function useWords() {
       id: uuid.v4() as string,
       uri: await base64Image(createWordData.uri),
     };
-    dispatch({ type: "add-word", word });
+    dispatch({ type: "add-word", word, wordPath });
   };
 
   const updateWord = async (updateWordData: Word) => {
@@ -153,19 +218,19 @@ export function useWords() {
       ...updateWordData,
       uri: await base64Image(updateWordData.uri),
     };
-    dispatch({ type: "update-word", word });
+    dispatch({ type: "update-word", word, wordPath });
   };
 
   const removeWord = (wordId: string) => {
-    dispatch({ type: "remove-word", wordId });
+    dispatch({ type: "remove-word", wordId, wordPath });
   };
 
   const moveWordLeft = (wordId: string) => {
-    dispatch({ type: "move-word-left", wordId });
+    dispatch({ type: "move-word-left", wordId, wordPath });
   };
 
   const moveWordRight = (wordId: string) => {
-    dispatch({ type: "move-word-right", wordId });
+    dispatch({ type: "move-word-right", wordId, wordPath });
   };
 
   return {
