@@ -205,6 +205,10 @@ export function useWords() {
   const words = useContext(WordsContext);
   const dispatch = useContext(WordsDispatchContext);
 
+  const setWords = (words: Word[]) => {
+    dispatch({ type: "set-words", words });
+  };
+
   const addWord = async (createWordData: CreateWord) => {
     const word: Word = {
       ...createWordData,
@@ -236,6 +240,7 @@ export function useWords() {
 
   return {
     words,
+    setWords,
     addWord,
     updateWord,
     removeWord,

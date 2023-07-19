@@ -8,12 +8,14 @@ import { speakWord, stopSpeech } from "../../service/speech";
 import WordsGrid from "./WordsGrid";
 import WordsHistoryList from "./WordsHistoryList";
 import { RootStackParamList } from "../../../App";
+import { useBackup } from "../../service/backup";
 
 type HomeScreenProps = NavigationProp<RootStackParamList, "Home">;
 
 export default function MainScreen() {
   const [wordsHistory, setHistoryItems] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
+  const { createBackup, restoreBackup } = useBackup();
 
   const navigation = useNavigation<HomeScreenProps>();
 
@@ -45,6 +47,14 @@ export default function MainScreen() {
 
   const editWord = (word: Word) => {
     navigation.navigate("editWord", { word });
+  };
+
+  const onPressBackup = () => {
+    createBackup();
+  };
+
+  const onPressRestore = () => {
+    restoreBackup();
   };
 
   const onPressAdd = () => {
@@ -88,8 +98,19 @@ export default function MainScreen() {
         <View style={styles.sideControls}>
           {isEditing ? (
             <>
+              <IconButton
+                label="Backup"
+                icon="download"
+                onPress={onPressBackup}
+              />
+              <IconButton
+                label="Restore"
+                icon="upload"
+                onPress={onPressRestore}
+              />
+              <View style={{ flex: 1 }} />
               <IconButton label="Add" icon="plus" onPress={onPressAdd} />
-              <IconButton label="Save" icon="save" onPress={onPressSave} />
+              <IconButton label="Done" icon="check" onPress={onPressSave} />
             </>
           ) : (
             <IconButton label="Edit" icon="edit" onPress={onPressEdit} />
