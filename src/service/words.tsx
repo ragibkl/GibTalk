@@ -40,36 +40,42 @@ export function wordsReducer(words: Word[], action) {
       return [...words, action.word];
     }
     case "update-word": {
-      let i = words.findIndex((w) => w.id === action.word.id);
-      let left = words.slice(0, i);
-      let right = words.slice(i + 1);
-      return [...left, action.word, ...right];
+      const i = words.findIndex((w) => w.id === action.word.id);
+      const newWords = words.slice();
+      newWords[i] = action.word;
+      return newWords;
     }
     case "remove-word": {
       return words.filter((w) => w.id !== action.wordId);
     }
     case "move-word-left": {
-      let i = words.findIndex((w) => w.id === action.wordId);
-      if (i === 0) {
-        return;
+      const i = words.findIndex((w) => w.id === action.wordId);
+      if (i === 0 || i === -1) {
+        return words;
       }
 
-      let start = words.slice(0, i - 1);
-      let left = words[i - 1];
-      let end = words.slice(i + 1);
-      return [...start, words[i], left, ...end];
+      const target = words[i];
+      const left = words[i - 1];
+
+      const newWords = words.slice();
+      newWords[i - 1] = target;
+      newWords[i] = left;
+      return newWords;
     }
     case "move-word-right": {
-      let i = words.findIndex((w) => w.id === action.wordId);
+      const i = words.findIndex((w) => w.id === action.wordId);
       if (i === words.length - 1) {
-        return;
+        return words;
       }
 
-      let start = words.slice(0, i);
-      let right = words[i + 1];
-      let end = words.slice(i + 2);
+      const target = words[i];
+      const right = words[i + 1];
 
-      return [...start, right, words[i], ...end];
+      const newWords = words.slice();
+      words[i + 1] = target;
+      words[i] = right;
+
+      return newWords;
     }
     default: {
       throw Error("Unknown action: " + action.type);
@@ -149,8 +155,18 @@ export function useWords() {
     dispatch({ type: "move-word-right", wordId });
   };
 
+  const wordsInPath = (wordIds: string[]): Word[] => {
+    let result = words;
+    for (let i = 0; i < wordIds.length; i++) {
+      result = result.find((w) => w.id === wordIds[i]).children;
+    }
+
+    return result;
+  };
+
   return {
     words,
+    wordsInPath,
     setWords,
     addWord,
     updateWord,
