@@ -46,7 +46,7 @@ export default function WordItem({ word, editWord, isEditing }: Props) {
 
   return (
     <PressableOpacity onPress={onPressWord}>
-      <View style={styles.container}>
+      <View style={[styles.container, !!word.children && styles.category]}>
         <Image style={styles.image} source={{ uri: word.uri }} />
         <Text style={styles.labelText}>{word.label}</Text>
       </View>
@@ -99,6 +99,9 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     margin: 5,
     width: 120,
+  },
+  category: {
+    backgroundColor: "darkblue",
   },
   image: {
     borderColor: "white",
