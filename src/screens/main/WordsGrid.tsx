@@ -6,20 +6,18 @@ import { Word } from "../../types";
 import { useWords } from "../../service/words";
 
 type Props = {
-  addWordToHistory(word: Word): void;
   editWord: (word: Word) => void;
   isEditing: boolean;
 };
 
 export default function WordsGrid(props: Props) {
-  const { words } = useWords();
+  const { wordsInPath } = useWords();
 
   const renderWordItem = (word: Word) => {
     return (
       <WordItem
         key={word.id}
         word={word}
-        addWordToHistory={props.addWordToHistory}
         editWord={props.editWord}
         isEditing={props.isEditing}
       />
@@ -28,7 +26,7 @@ export default function WordsGrid(props: Props) {
 
   return (
     <ScrollView contentContainerStyle={styles.content}>
-      {words.map(renderWordItem)}
+      {wordsInPath.map(renderWordItem)}
     </ScrollView>
   );
 }

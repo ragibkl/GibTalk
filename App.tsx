@@ -10,6 +10,8 @@ import CreateWordScreen from "./src/screens/editWord/CreateWordScreen";
 import EditWordScreen from "./src/screens/editWord/EditWordScreen";
 import MainScreen from "./src/screens/main/MainScreen";
 import { speakInit } from "./src/service/speech";
+import { HistoryProvider } from "./src/service/history";
+import { WordPathProvider } from "./src/service/wordPath";
 import { WordsProvider } from "./src/service/words";
 
 import { Word } from "./src/types";
@@ -28,31 +30,35 @@ export default function App() {
   }, []);
 
   return (
-    <WordsProvider>
-      <SafeAreaView style={styles.container}>
-        <NavigationContainer>
-          <Stack.Navigator screenOptions={screenOptions}>
-            <Stack.Screen
-              name="Home"
-              component={MainScreen}
-              options={{ title: "GibTalk - Development" }}
-            />
-            <Stack.Screen
-              name="createWord"
-              component={CreateWordScreen}
-              options={{ title: "Add New Word" }}
-            />
-            <Stack.Screen
-              name="editWord"
-              component={EditWordScreen}
-              options={{ title: "Edit Word" }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
+    <WordPathProvider>
+      <HistoryProvider>
+        <WordsProvider>
+          <SafeAreaView style={styles.container}>
+            <NavigationContainer>
+              <Stack.Navigator screenOptions={screenOptions}>
+                <Stack.Screen
+                  name="Home"
+                  component={MainScreen}
+                  options={{ title: "GibTalk - Development" }}
+                />
+                <Stack.Screen
+                  name="createWord"
+                  component={CreateWordScreen}
+                  options={{ title: "Add New Word" }}
+                />
+                <Stack.Screen
+                  name="editWord"
+                  component={EditWordScreen}
+                  options={{ title: "Edit Word" }}
+                />
+              </Stack.Navigator>
+            </NavigationContainer>
 
-        <StatusBar style="auto" />
-      </SafeAreaView>
-    </WordsProvider>
+            <StatusBar style="auto" />
+          </SafeAreaView>
+        </WordsProvider>
+      </HistoryProvider>
+    </WordPathProvider>
   );
 }
 

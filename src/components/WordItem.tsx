@@ -5,24 +5,23 @@ import PressableOpacity from "./PressableOpacity";
 import { speakWord } from "../service/speech";
 import { useWords } from "../service/words";
 import { Word } from "../types";
+import { useHistory } from "../service/history";
+import { useWordPath } from "../service/wordPath";
 
 type Props = {
   word: Word;
   isEditing: boolean;
-  addWordToHistory(word: Word): void;
   editWord: (word: Word) => void;
 };
 
-export default function WordItem({
-  word,
-  addWordToHistory,
-  editWord,
-  isEditing,
-}: Props) {
+export default function WordItem({ word, editWord, isEditing }: Props) {
   const { removeWord, moveWordLeft, moveWordRight } = useWords();
+  const { addWordToPath } = useWordPath();
+  const { addWordToHistory } = useHistory();
 
   const onPressWord = () => {
     speakWord(word);
+    addWordToPath(word);
 
     if (!isEditing) {
       addWordToHistory(word);

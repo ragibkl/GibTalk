@@ -2,47 +2,41 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import IconButton from "../../components/IconButton";
-import { Word } from "../../types";
+import { useBackup } from "../../service/backup";
+import { useHistory } from "../../service/history";
 import { speakWord, stopSpeech } from "../../service/speech";
+import { useWordPath } from "../../service/wordPath";
+
+import { RootStackParamList } from "../../../App";
+import IconButton from "../../components/IconButton";
+
 import WordsGrid from "./WordsGrid";
 import WordsHistoryList from "./WordsHistoryList";
-import { RootStackParamList } from "../../../App";
-import { useBackup } from "../../service/backup";
+
+import { Word } from "../../types";
 
 type HomeScreenProps = NavigationProp<RootStackParamList, "Home">;
 
 export default function MainScreen() {
-  const [wordsHistory, setHistoryItems] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
-  const { createBackup, restoreBackup } = useBackup();
 
   const navigation = useNavigation<HomeScreenProps>();
+  const { createBackup, restoreBackup } = useBackup();
+  const { popToTop, pop } = useWordPath();
+  const { history, clearHistory } = useHistory();
 
   const onPressClear = () => {
-    setHistoryItems([]);
+    clearHistory();
     stopSpeech();
   };
 
   const onPressPlay = () => {
-    wordsHistory.forEach(speakWord);
-  };
-
-  const addWordToHistory = (word: Word) => {
-    if (wordsHistory.length) {
-      const lastItem = wordsHistory[wordsHistory.length - 1];
-
-      if (lastItem.id !== word.id) {
-        setHistoryItems([...wordsHistory, word]);
-      }
-    } else {
-      setHistoryItems([...wordsHistory, word]);
-    }
+    history.forEach(speakWord);
   };
 
   const onPressEdit = () => {
     setIsEditing(true);
-    setHistoryItems([]);
+    clearHistory();
   };
 
   const editWord = (word: Word) => {
@@ -70,32 +64,43 @@ export default function MainScreen() {
       <View style={styles.bodyTop}>
         <View style={styles.historyContainer}>
           <Text style={styles.currentText}>Drag downward to remove</Text>
-          <WordsHistoryList words={wordsHistory} />
+          <WordsHistoryList words={history} />
         </View>
 
-        {!isEditing && (
-          <View style={styles.controls}>
-            <IconButton label="Play" icon="play" onPress={onPressPlay} />
-            <IconButton
-              style={{ marginLeft: 5 }}
-              label="Clear All"
-              icon="trash"
-              onPress={onPressClear}
-            />
-          </View>
-        )}
+        <View style={styles.controls}>
+          {!isEditing && (
+            <>
+              <IconButton label="Play" icon="play" onPress={onPressPlay} />
+              <IconButton
+                style={{ marginLeft: 5 }}
+                label="Clear All"
+                icon="trash"
+                onPress={onPressClear}
+              />
+            </>
+          )}
+          <IconButton
+            style={{ marginLeft: 5 }}
+            label="Home"
+            icon="home"
+            onPress={popToTop}
+          />
+          <IconButton
+            style={{ marginLeft: 5 }}
+            label="Back"
+            icon="arrow-left"
+            onPress={pop}
+          />
+        </View>
       </View>
 
       <View style={styles.bodyBottom}>
         <View style={styles.gridContainer}>
-          <WordsGrid
-            editWord={editWord}
-            addWordToHistory={addWordToHistory}
-            isEditing={isEditing}
-          />
+          <WordsGrid editWord={editWord} isEditing={isEditing} />
         </View>
 
         <View style={styles.sideControls}>
+          <View style={{ flex: 1 }} />
           {isEditing ? (
             <>
               <IconButton
@@ -108,7 +113,6 @@ export default function MainScreen() {
                 icon="upload"
                 onPress={onPressRestore}
               />
-              <View style={{ flex: 1 }} />
               <IconButton label="Add" icon="plus" onPress={onPressAdd} />
               <IconButton label="Done" icon="check" onPress={onPressSave} />
             </>
@@ -158,9 +162,9 @@ const styles = StyleSheet.create({
   },
   sideControls: {
     alignItems: "flex-end",
-    justifyContent: "flex-end",
     backgroundColor: "rgba(100, 100, 100, 0.5)",
+    flexWrap: "wrap",
+    justifyContent: "flex-end",
     marginLeft: 5,
-    width: 60,
   },
 });

@@ -11,6 +11,7 @@ import uuid from "react-native-uuid";
 import { Word } from "../types";
 import { base64Image } from "./image";
 import { loadSampleWords } from "./sampleWords";
+import { useWordPath } from "./wordPath";
 
 type CreateWord = Omit<Word, "id">;
 
@@ -119,8 +120,20 @@ export function WordsProvider({ children }) {
 }
 
 export function useWords() {
+  const { wordPath } = useWordPath();
   const words = useContext(WordsContext);
   const dispatch = useContext(WordsDispatchContext);
+
+  const getWordsInPath = (wordIds: string[]): Word[] => {
+    let result = words;
+    for (let i = 0; i < wordIds.length; i++) {
+      result = result.find((w) => w.id === wordIds[i]).children;
+    }
+
+    return result;
+  };
+
+  const wordsInPath = getWordsInPath(wordPath);
 
   const setWords = (words: Word[]) => {
     dispatch({ type: "set-words", words });
@@ -153,15 +166,6 @@ export function useWords() {
 
   const moveWordRight = (wordId: string) => {
     dispatch({ type: "move-word-right", wordId });
-  };
-
-  const wordsInPath = (wordIds: string[]): Word[] => {
-    let result = words;
-    for (let i = 0; i < wordIds.length; i++) {
-      result = result.find((w) => w.id === wordIds[i]).children;
-    }
-
-    return result;
   };
 
   return {
