@@ -21,7 +21,12 @@ export type Word = {
   children?: Word[];
 };
 
-export type CreateWord = Omit<Word, "id">;
+export type CreateWord = {
+  label: string;
+  uri: string;
+  language: Language;
+  children?: [];
+};
 
 async function storeWords(words: Word[]): Promise<void> {
   const jsonValue = JSON.stringify(words);
@@ -169,7 +174,7 @@ export function useWords() {
   const wordsInPath = getWordsInPath(wordPath);
 
   const setWords = async (words: Word[]) => {
-    const normalizedWords = await wordImagesBase64(words)
+    const normalizedWords = await wordImagesBase64(words);
     dispatch({ type: "set-words", words: normalizedWords });
   };
 

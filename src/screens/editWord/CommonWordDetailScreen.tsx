@@ -15,7 +15,7 @@ type Props = {
   label: string;
   language: string;
   isCategory: boolean;
-  uri: string;
+  uri: string | null;
   onUpdateLabel: (label: string) => void;
   onUpdateLanguage: (language: Language) => void;
   onUpdateIsCategory: (isCategory: boolean) => void;
@@ -51,6 +51,8 @@ export default function CommonWordDetailScreen(props: Props) {
       onUpdateUri(result.assets[0].uri);
     }
   };
+
+  const saveDisabled = !label.trim() || !language || !uri;
 
   return (
     <View style={styles.container}>
@@ -91,7 +93,14 @@ export default function CommonWordDetailScreen(props: Props) {
         </View>
 
         <View style={styles.rowInput}>
-          <Pressable style={styles.saveButton} onPress={onPressSave}>
+          <Pressable
+            style={[
+              styles.saveButton,
+              saveDisabled && styles.saveButtonDisabled,
+            ]}
+            onPress={onPressSave}
+            disabled={saveDisabled}
+          >
             <Text>Save</Text>
           </Pressable>
         </View>
@@ -156,5 +165,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: "lightgreen",
     alignItems: "center",
+  },
+  saveButtonDisabled: {
+    opacity: 0.5,
   },
 });

@@ -24,7 +24,7 @@ export default function EditWordScreen(props: EditWordScreenProps) {
   const onPressSave = () => {
     const word: Word = {
       id: prevWord.id,
-      label,
+      label: label.trim(),
       language,
       uri,
     };

@@ -3,7 +3,7 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 import { RootStackParamList } from "../../../App";
 import { CreateWord, useWords } from "../../service/words";
-import { Language } from "../../service/speech";
+import { DEFAULT_LANG, Language } from "../../service/speech";
 
 import CommonWordDetailScreen from "./CommonWordDetailScreen";
 
@@ -14,13 +14,13 @@ export default function CreateWordScreen() {
   const navigation = useNavigation<CreateWordScreenProps>();
 
   const [label, setLabel] = useState("");
-  const [language, setLanguage] = useState<Language>("en");
-  const [uri, setUri] = useState(null);
+  const [language, setLanguage] = useState<Language>(DEFAULT_LANG);
+  const [uri, setUri] = useState<string | null>(null);
   const [isCategory, setIsCategory] = useState(false);
 
   const onPressSave = () => {
     const word: CreateWord = {
-      label,
+      label: label.trim(),
       language,
       uri,
     };
@@ -30,7 +30,6 @@ export default function CreateWordScreen() {
     }
 
     addWord(word);
-
     navigation.navigate("Home");
   };
 
