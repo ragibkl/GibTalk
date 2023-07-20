@@ -9,7 +9,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { Language } from "../../types";
+import { Language } from "../../service/speech";
 
 type Props = {
   label: string;

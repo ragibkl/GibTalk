@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
-import { Word } from "../types";
+import { Word } from "./words";
 
 export const WordPathContext = createContext<string[]>([]);
 export const WordPathDispatchContext = createContext(null);

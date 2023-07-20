@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
-import { Word } from "../types";
+import { Word } from "./words";
 
 export const HistoryContext = createContext<Word[]>([]);
 export const HistoryDispatchContext = createContext(null);

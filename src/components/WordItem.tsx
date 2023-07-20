@@ -3,8 +3,7 @@ import { StyleSheet, Text, View, Image } from "react-native";
 
 import PressableOpacity from "./PressableOpacity";
 import { speakWord } from "../service/speech";
-import { useWords } from "../service/words";
-import { Word } from "../types";
+import { useWords, Word } from "../service/words";
 import { useHistory } from "../service/history";
 import { useWordPath } from "../service/wordPath";
 

@@ -1,7 +1,8 @@
 import uuid from "react-native-uuid";
 
-import { Language, Word } from "../types";
 import { base64Image } from "./image";
+import { Language } from "./speech";
+import { Word } from "./words";
 
 type SampleWord = {
   label: string;

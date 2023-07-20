@@ -2,10 +2,10 @@ import { useState } from "react";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { StackScreenProps } from "@react-navigation/stack";
 
-import { Language, Word } from "../../types";
-
 import { RootStackParamList } from "../../../App";
-import { useWords } from "../../service/words";
+import { Language } from "../../service/speech";
+import { useWords, Word } from "../../service/words";
+
 import CommonWordDetailScreen from "./CommonWordDetailScreen";
 
 type EditWordNavigationProps = NavigationProp<RootStackParamList, "editWord">;

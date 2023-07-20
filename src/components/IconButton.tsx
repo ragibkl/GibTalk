@@ -1,6 +1,7 @@
-import { StyleSheet, View, Text } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { StyleSheet, View, Text } from "react-native";
+
 import PressableOpacity from "./PressableOpacity";
 
 export default function IconButton({

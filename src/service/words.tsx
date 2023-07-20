@@ -8,10 +8,18 @@ import {
 } from "react";
 import uuid from "react-native-uuid";
 
-import { Word } from "../types";
 import { base64Image } from "./image";
 import { loadSampleWords } from "./sampleWords";
 import { useWordPath } from "./wordPath";
+import { Language } from "./speech";
+
+export type Word = {
+  id: string;
+  label: string;
+  uri: string;
+  language: Language;
+  children?: Word[];
+};
 
 export type CreateWord = Omit<Word, "id">;
 

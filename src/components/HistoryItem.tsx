@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, Image } from "react-native";
-import { speakWord } from "../service/speech";
 
-import { Word } from "../types";
+import { speakWord } from "../service/speech";
+import { Word } from "../service/words";
+
 import PressableOpacity from "./PressableOpacity";
 
 type Props = {

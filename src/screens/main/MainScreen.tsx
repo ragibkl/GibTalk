@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { useBackup } from "../../service/backup";
 import { useHistory } from "../../service/history";
 import { speakWord, stopSpeech } from "../../service/speech";
+import { Word } from "../../service/words";
 import { useWordPath } from "../../service/wordPath";
 
 import { RootStackParamList } from "../../../App";
@@ -12,8 +13,6 @@ import IconButton from "../../components/IconButton";
 
 import WordsGrid from "./WordsGrid";
 import WordsHistoryList from "./WordsHistoryList";
-
-import { Word } from "../../types";
 
 type HomeScreenProps = NavigationProp<RootStackParamList, "Home">;
 

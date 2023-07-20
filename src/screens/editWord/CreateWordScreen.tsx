@@ -3,9 +3,9 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 import { RootStackParamList } from "../../../App";
 import { CreateWord, useWords } from "../../service/words";
-import CommonWordDetailScreen from "./CommonWordDetailScreen";
+import { Language } from "../../service/speech";
 
-import { Language } from "../../types";
+import CommonWordDetailScreen from "./CommonWordDetailScreen";
 
 type CreateWordScreenProps = NavigationProp<RootStackParamList, "createWord">;
 
