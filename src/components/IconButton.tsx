@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     width: 60,
     height: 60,
-    backgroundColor: "rgb(200,200,200)",
+    // backgroundColor: "rgb(200,200,200)",
+    backgroundColor: "white",
   },
   buttonLabel: {
     color: "black",
