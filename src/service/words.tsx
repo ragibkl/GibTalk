@@ -105,6 +105,18 @@ export function wordsReducer(words: Word[], action) {
   }
 }
 
+export async function wordImagesBase64(words: Word[]): Promise<Word[]> {
+  return Promise.all(
+    words.map(async (word) => ({
+      ...word,
+      uri: await base64Image(word.uri),
+      children: word.children
+        ? await wordImagesBase64(word.children)
+        : undefined,
+    })),
+  );
+}
+
 export function WordsProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const [words, dispatch] = useReducer(wordsReducer, []);
@@ -115,9 +127,9 @@ export function WordsProvider({ children }) {
     if (loadedWords && loadedWords.length) {
       dispatch({ type: "set-words", words: loadedWords });
     } else {
-      loadSampleWords().then((sampleWords) => {
-        dispatch({ type: "set-words", words: sampleWords });
-      });
+      const sampleWords = loadSampleWords();
+      const normalizedWords = await wordImagesBase64(sampleWords);
+      dispatch({ type: "set-words", words: normalizedWords });
     }
 
     setIsLoading(false);
@@ -156,8 +168,9 @@ export function useWords() {
 
   const wordsInPath = getWordsInPath(wordPath);
 
-  const setWords = (words: Word[]) => {
-    dispatch({ type: "set-words", words });
+  const setWords = async (words: Word[]) => {
+    const normalizedWords = await wordImagesBase64(words)
+    dispatch({ type: "set-words", words: normalizedWords });
   };
 
   const addWord = async (createWordData: CreateWord) => {

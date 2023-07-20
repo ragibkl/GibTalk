@@ -1,7 +1,6 @@
 import uuid from "react-native-uuid";
 
-import { base64Image } from "./image";
-import { Language } from "./speech";
+import { DEFAULT_LANG, Language } from "./speech";
 import { Word } from "./words";
 
 type SampleWord = {
@@ -11,7 +10,7 @@ type SampleWord = {
   children?: SampleWord[];
 };
 
-export const SAMPLE_WORDS: SampleWord[] = [
+const SAMPLE_WORDS: SampleWord[] = [
   {
     label: "Greetings",
     uri: "https://www.senteacher.org/fullsymbol/arasaac/6522/",
@@ -105,20 +104,16 @@ export const SAMPLE_WORDS: SampleWord[] = [
   },
 ];
 
-async function wordsFromSample(sampleWords: SampleWord[]): Promise<Word[]> {
-  return Promise.all(
-    sampleWords.map(async (word) => ({
-      id: uuid.v4() as string,
-      label: word.label,
-      uri: await base64Image(word.uri),
-      language: word.language || "en",
-      children: word.children
-        ? await wordsFromSample(word.children)
-        : undefined,
-    })),
-  );
+function sampleWordsToWords(sampleWords: SampleWord[]): Word[] {
+  return sampleWords.map((word) => ({
+    id: uuid.v4() as string,
+    label: word.label,
+    uri: word.uri,
+    language: word.language || DEFAULT_LANG,
+    children: word.children ? sampleWordsToWords(word.children) : undefined,
+  }));
 }
 
-export async function loadSampleWords(): Promise<Word[]> {
-  return wordsFromSample(SAMPLE_WORDS);
+export function loadSampleWords(): Word[] {
+  return sampleWordsToWords(SAMPLE_WORDS);
 }
