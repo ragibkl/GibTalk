@@ -5,12 +5,13 @@ import { StyleSheet, Text, View } from "react-native";
 import { useBackup } from "../../service/backup";
 import { useHistory } from "../../service/history";
 import { speakWord, stopSpeech } from "../../service/speech";
-import { Word } from "../../service/words";
+import { Word, useWords } from "../../service/words";
 import { useWordPath } from "../../service/wordPath";
 
 import { RootStackParamList } from "../../../App";
 import IconButton from "../../components/IconButton";
 
+import WordsEmptyGrid from "./WordsEmptyGrid";
 import WordsGrid from "./WordsGrid";
 import WordsHistoryList from "./WordsHistoryList";
 
@@ -22,6 +23,7 @@ export default function MainScreen() {
   const navigation = useNavigation<HomeScreenProps>();
   const { createBackup, restoreBackup } = useBackup();
   const { popToTop, pop } = useWordPath();
+  const { words } = useWords();
   const { history, clearHistory } = useHistory();
 
   const onPressClear = () => {
@@ -62,7 +64,7 @@ export default function MainScreen() {
     <View style={styles.body}>
       <View style={styles.bodyTop}>
         <View style={styles.historyContainer}>
-          <Text style={styles.currentText}>Drag downward to remove</Text>
+          <Text style={styles.currentText}>Words history</Text>
           <WordsHistoryList words={history} />
         </View>
 
@@ -95,7 +97,11 @@ export default function MainScreen() {
 
       <View style={styles.bodyBottom}>
         <View style={styles.gridContainer}>
-          <WordsGrid editWord={editWord} isEditing={isEditing} />
+          {!!words.length ? (
+            <WordsGrid editWord={editWord} isEditing={isEditing} />
+          ) : (
+            <WordsEmptyGrid />
+          )}
         </View>
 
         <View style={styles.sideControls}>

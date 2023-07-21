@@ -9,7 +9,6 @@ import {
 import uuid from "react-native-uuid";
 
 import { base64Image } from "./image";
-import { loadSampleWords } from "./sampleWords";
 import { useWordPath } from "./wordPath";
 import { Language } from "./speech";
 
@@ -131,10 +130,6 @@ export function WordsProvider({ children }) {
 
     if (loadedWords && loadedWords.length) {
       dispatch({ type: "set-words", words: loadedWords });
-    } else {
-      const sampleWords = loadSampleWords();
-      const normalizedWords = await wordImagesBase64(sampleWords);
-      dispatch({ type: "set-words", words: normalizedWords });
     }
 
     setIsLoading(false);
