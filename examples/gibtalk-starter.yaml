@@ -1,0 +1,44 @@
+- label: Greetings
+  language: en
+  uri: https://www.senteacher.org/fullsymbol/arasaac/6009/
+  children:
+    - label: Hello
+      language: en
+      uri: https://www.senteacher.org/fullsymbol/arasaac/6522/
+    - label: Goodbye
+      language: en
+      uri: https://www.senteacher.org/fullsymbol/tawasol/To%20say%20goodbye_2.png/
+    - label: Shake Hands
+      language: en
+      uri: https://www.senteacher.org/fullsymbol/arasaac/6610/
+- label: Exercise
+  language: en
+  uri: https://www.senteacher.org/fullsymbol/mulberry/exercise_,_to.png/
+  children:
+    - label: Walk
+      language: en
+      uri: https://www.senteacher.org/fullsymbol/arasaac/3251/
+    - label: Run
+      language: en
+      uri: https://www.senteacher.org/fullsymbol/mulberry/run_,_to.png/
+    - label: Stop
+      language: en
+      uri: https://www.senteacher.org/fullsymbol/arasaac/8289/
+    - label: Go
+      language: en
+      uri: https://www.senteacher.org/fullsymbol/arasaac/8142/
+    - label: Jump
+      language: en
+      uri: https://www.senteacher.org/fullsymbol/arasaac/28443/
+- label: "Yes"
+  language: en
+  uri: https://www.senteacher.org/fullsymbol/arasaac/5584/
+- label: "No"
+  language: en
+  uri: https://www.senteacher.org/fullsymbol/arasaac/5526/
+- label: Up
+  language: en
+  uri: https://www.senteacher.org/fullsymbol/mulberry/up.png/
+- label: Down
+  language: en
+  uri: https://www.senteacher.org/fullsymbol/mulberry/down.png/
