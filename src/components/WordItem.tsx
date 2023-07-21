@@ -93,7 +93,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     backgroundColor: "lightgreen",
-    // borderColor: "white",
     borderRadius: 10,
     borderWidth: 2,
     margin: 5,
@@ -112,7 +111,6 @@ const styles = StyleSheet.create({
   },
   labelText: {
     margin: 5,
-    // color: "white",
     fontWeight: "bold",
   },
   editContainer: {

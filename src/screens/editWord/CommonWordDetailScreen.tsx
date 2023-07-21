@@ -11,6 +11,8 @@ import {
 } from "react-native";
 import { Language } from "../../service/speech";
 
+const placeholderImage = require("../../../assets/placeholder.png");
+
 type Props = {
   label: string;
   language: string;
@@ -53,6 +55,8 @@ export default function CommonWordDetailScreen(props: Props) {
   };
 
   const saveDisabled = !label.trim() || !language || !uri;
+
+  const source = !!uri ? { uri } : placeholderImage;
 
   return (
     <View style={styles.container}>
@@ -107,7 +111,7 @@ export default function CommonWordDetailScreen(props: Props) {
       </View>
 
       <View style={styles.right}>
-        <Image style={styles.image} source={{ uri }} />
+        <Image style={styles.image} source={source} />
       </View>
     </View>
   );
@@ -125,15 +129,19 @@ const styles = StyleSheet.create({
   },
   right: {
     flex: 1,
+    alignItems: "center",
   },
   image: {
     width: 200,
     height: 200,
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: "black",
   },
   rowInput: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 10,
+    marginBottom: 5,
   },
   inputTitle: {
     width: 100,

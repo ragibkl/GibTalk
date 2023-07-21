@@ -141,7 +141,6 @@ const styles = StyleSheet.create({
     height: 75,
   },
   historyContainer: {
-    // backgroundColor: "white",
     flex: 1,
   },
   currentText: {
@@ -151,7 +150,6 @@ const styles = StyleSheet.create({
   },
   controls: {
     alignItems: "center",
-    // backgroundColor: "white",
     flexDirection: "row",
     marginLeft: 5,
   },
@@ -162,12 +160,10 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   gridContainer: {
-    // backgroundColor: "white",
     flex: 1,
   },
   sideControls: {
     alignItems: "flex-end",
-    // backgroundColor: "white",
     flexWrap: "wrap",
     justifyContent: "flex-end",
     marginLeft: 5,
