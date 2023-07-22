@@ -1,6 +1,7 @@
 import * as DocumentPicker from "expo-document-picker";
 import * as FileSystem from "expo-file-system";
 import * as Sharing from "expo-sharing";
+import { Platform } from "react-native";
 import uuid from "react-native-uuid";
 import YAML from "yaml";
 
@@ -37,11 +38,19 @@ export function useBackup() {
   const { words, setWords } = useWords();
 
   const createBackup = async () => {
-    const fileUri = `${FileSystem.documentDirectory}/gibtalk-bak.yaml`;
     const contents = YAML.stringify(wordsToWordsBak(words));
-    await FileSystem.writeAsStringAsync(fileUri, contents);
 
-    Sharing.shareAsync(fileUri);
+    if (Platform.OS === 'ios') {
+      const fileUri = `${FileSystem.documentDirectory}/gibtalk-bak.yaml`;
+      await FileSystem.writeAsStringAsync(fileUri, contents);
+  
+      Sharing.shareAsync(fileUri, { UTI: 'public.item' });
+    } else if (Platform.OS === 'android') {
+      const fileUri = `${FileSystem.documentDirectory}/gibtalk-bak.yaml`;
+      await FileSystem.writeAsStringAsync(fileUri, contents);
+  
+      Sharing.shareAsync(fileUri);
+    }
   };
 
   const restoreBackup = async () => {
