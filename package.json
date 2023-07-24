@@ -9,7 +9,8 @@
     "web": "expo start --web",
     "fmt": "prettier --write .",
     "build": "eas build",
-    "build:preview": "eas build --profile preview"
+    "build:preview": "eas build --profile preview",
+    "submit:android": "eas submit -p android"
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
