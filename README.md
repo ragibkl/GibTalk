@@ -10,6 +10,7 @@ GibTalk is a free Augmentative and Alternative Communication (AAC) app that enab
 Free to use and no-ads.
 
 Basic features include:
+
 - add and edit words
 - backup and restore
 - load wordset from pre-made configs

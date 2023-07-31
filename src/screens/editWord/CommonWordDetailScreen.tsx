@@ -9,7 +9,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { Language } from "../../service/speech";
+import { LANGUAGE_OPTIONS, Language } from "../../service/speech";
 
 const placeholderImage = require("../../../assets/placeholder.png");
 
@@ -78,9 +78,9 @@ export default function CommonWordDetailScreen(props: Props) {
             onValueChange={onLanguageValueChange}
             style={styles.labelInput}
           >
-            <Picker.Item label="English" value="en" />
-            <Picker.Item label="Bahasa" value="ms" />
-            <Picker.Item label="Chinese" value="zh" />
+            {LANGUAGE_OPTIONS.map(({ label, language }) => (
+              <Picker.Item key={label} label={label} value={language} />
+            ))}
           </Picker>
         </View>
 
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
   },
   labelInput: {
     height: 40,
-    width: 200,
+    width: 230,
     padding: 5,
     borderColor: "black",
     borderWidth: 2,

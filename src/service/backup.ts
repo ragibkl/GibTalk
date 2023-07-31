@@ -40,15 +40,15 @@ export function useBackup() {
   const createBackup = async () => {
     const contents = YAML.stringify(wordsToWordsBak(words));
 
-    if (Platform.OS === 'ios') {
+    if (Platform.OS === "ios") {
       const fileUri = `${FileSystem.documentDirectory}/gibtalk-bak.yaml`;
       await FileSystem.writeAsStringAsync(fileUri, contents);
-  
-      Sharing.shareAsync(fileUri, { UTI: 'public.item' });
-    } else if (Platform.OS === 'android') {
+
+      Sharing.shareAsync(fileUri, { UTI: "public.item" });
+    } else if (Platform.OS === "android") {
       const fileUri = `${FileSystem.documentDirectory}/gibtalk-bak.yaml`;
       await FileSystem.writeAsStringAsync(fileUri, contents);
-  
+
       Sharing.shareAsync(fileUri);
     }
   };
