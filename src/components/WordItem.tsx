@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 2,
     margin: 5,
-    width: 120,
+    width: 150,
   },
   category: {
     backgroundColor: "yellow",
@@ -105,9 +105,9 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderRadius: 5,
     borderWidth: 2,
-    height: 80,
+    height: 100,
     marginTop: 15,
-    width: 80,
+    width: 100,
   },
   labelText: {
     margin: 5,
