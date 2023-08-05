@@ -1,3 +1,4 @@
+import { FontAwesome } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
 import * as ImagePicker from "expo-image-picker";
 import {
@@ -54,6 +55,18 @@ export default function CommonWordDetailScreen(props: Props) {
     }
   };
 
+  const onPressCamera = async () => {
+    let result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      quality: 1,
+      aspect: [1, 1],
+    });
+
+    if (!result.canceled && result.assets && result.assets[0]) {
+      onUpdateUri(result.assets[0].uri);
+    }
+  };
+
   const saveDisabled = !label.trim() || !language || !uri;
 
   const source = !!uri ? { uri } : placeholderImage;
@@ -90,13 +103,6 @@ export default function CommonWordDetailScreen(props: Props) {
         </View>
 
         <View style={styles.rowInput}>
-          <Text style={styles.inputTitle}>Image</Text>
-          <Pressable style={styles.button} onPress={onPressSelectImage}>
-            <Text>Select an Image</Text>
-          </Pressable>
-        </View>
-
-        <View style={styles.rowInput}>
           <Pressable
             style={[
               styles.saveButton,
@@ -111,7 +117,21 @@ export default function CommonWordDetailScreen(props: Props) {
       </View>
 
       <View style={styles.right}>
-        <Image style={styles.image} source={source} />
+        <View style={styles.imageInput}>
+          <View style={styles.imageButtonRow}>
+            <Text>Select Image: </Text>
+
+            <Pressable style={styles.imageButton} onPress={onPressSelectImage}>
+              <FontAwesome name="picture-o" size={20} />
+            </Pressable>
+
+            <Pressable style={styles.imageButton} onPress={onPressCamera}>
+              <FontAwesome name="camera" size={20} />
+            </Pressable>
+          </View>
+
+          <Image style={styles.image} source={source} />
+        </View>
       </View>
     </View>
   );
@@ -131,13 +151,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
-  image: {
-    width: 200,
-    height: 200,
-    borderRadius: 20,
-    borderWidth: 2,
-    borderColor: "black",
-  },
   rowInput: {
     flexDirection: "row",
     alignItems: "center",
@@ -154,16 +167,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 5,
   },
-  button: {
-    height: 40,
-    width: 200,
-    padding: 5,
-    borderColor: "black",
-    borderWidth: 2,
-    borderRadius: 5,
-    backgroundColor: "yellow",
-    alignItems: "center",
-  },
   saveButton: {
     height: 40,
     width: 90,
@@ -176,5 +179,29 @@ const styles = StyleSheet.create({
   },
   saveButtonDisabled: {
     opacity: 0.5,
+  },
+  imageInput: {
+    flexDirection: "column",
+  },
+  imageButtonRow: {
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  imageButton: {
+    padding: 5,
+    marginLeft: 10,
+    borderColor: "black",
+    borderWidth: 2,
+    borderRadius: 5,
+    backgroundColor: "white",
+    alignItems: "center",
+  },
+  image: {
+    marginTop: 10,
+    width: 220,
+    height: 220,
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: "black",
   },
 });
