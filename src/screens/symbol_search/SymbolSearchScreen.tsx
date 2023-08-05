@@ -1,11 +1,9 @@
 import { useDebouncedCallback } from "use-debounce";
 import { useState } from "react";
 import {
-  Image,
   Pressable,
   ScrollView,
   StyleSheet,
-  Switch,
   Text,
   TextInput,
   View,
@@ -15,8 +13,6 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { StackScreenProps } from "@react-navigation/stack";
 
 import { RootStackParamList } from "../../../App";
-
-const placeholderImage = require("../../../assets/placeholder.png");
 
 type SymbolSearchNavigationProps = NavigationProp<
   RootStackParamList,
