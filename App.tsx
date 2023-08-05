@@ -14,7 +14,7 @@ import { HistoryProvider } from "./src/service/history";
 import { WordPathProvider } from "./src/service/wordPath";
 import { WordsProvider } from "./src/service/words";
 
-import { Word } from "./src/types";
+import { Word } from "./src/service/words";
 
 const Stack = createStackNavigator();
 

@@ -6,6 +6,7 @@ import {
   useReducer,
   useState,
 } from "react";
+import { ActivityIndicator } from "react-native";
 import uuid from "react-native-uuid";
 
 import { base64Image } from "./image";
@@ -28,7 +29,7 @@ export type CreateWord = {
 };
 
 async function storeWords(words: Word[]): Promise<void> {
-  const jsonValue = JSON.stringify(words);
+  const jsonValue = JSON.stringify(words || []);
   await AsyncStorage.setItem("words-key", jsonValue);
 }
 
@@ -41,6 +42,8 @@ async function readWords(): Promise<Word[] | null> {
   return JSON.parse(jsonValue) as Word[];
 }
 
+export const IsFetchingContext = createContext<boolean>(false);
+export const SetIsFetchingContext = createContext(null);
 export const WordsContext = createContext([]);
 export const WordsDispatchContext = createContext(null);
 
@@ -123,6 +126,7 @@ export async function wordImagesBase64(words: Word[]): Promise<Word[]> {
 
 export function WordsProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
+  const [isFetching, setIsFetching] = useState(false);
   const [words, dispatch] = useReducer(wordsReducer, []);
 
   const loadWords = async () => {
@@ -144,15 +148,21 @@ export function WordsProvider({ children }) {
   }, [words]);
 
   return (
-    <WordsContext.Provider value={words}>
-      <WordsDispatchContext.Provider value={dispatch}>
-        {!isLoading && children}
-      </WordsDispatchContext.Provider>
-    </WordsContext.Provider>
+    <IsFetchingContext.Provider value={isFetching}>
+      <SetIsFetchingContext.Provider value={setIsFetching}>
+        <WordsContext.Provider value={words}>
+          <WordsDispatchContext.Provider value={dispatch}>
+            {isLoading ? <ActivityIndicator /> : children}
+          </WordsDispatchContext.Provider>
+        </WordsContext.Provider>
+      </SetIsFetchingContext.Provider>
+    </IsFetchingContext.Provider>
   );
 }
 
 export function useWords() {
+  const isFetching = useContext(IsFetchingContext);
+  const setIsFetching = useContext(SetIsFetchingContext);
   const { wordPath } = useWordPath();
   const words = useContext(WordsContext);
   const dispatch = useContext(WordsDispatchContext);
@@ -169,7 +179,9 @@ export function useWords() {
   const wordsInPath = getWordsInPath(wordPath);
 
   const setWords = async (words: Word[]) => {
+    setIsFetching(true);
     const normalizedWords = await wordImagesBase64(words);
+    setIsFetching(false);
     dispatch({ type: "set-words", words: normalizedWords });
   };
 
@@ -203,6 +215,7 @@ export function useWords() {
   };
 
   return {
+    isFetching,
     words,
     wordsInPath,
     setWords,

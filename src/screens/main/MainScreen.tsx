@@ -1,6 +1,6 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 
 import { useBackup } from "../../service/backup";
 import { useHistory } from "../../service/history";
@@ -25,7 +25,7 @@ export default function MainScreen() {
   const navigation = useNavigation<HomeScreenProps>();
   const { createBackup, restoreBackup } = useBackup();
   const { popToTop, pop } = useWordPath();
-  const { words } = useWords();
+  const { words, isFetching } = useWords();
   const { history, clearHistory } = useHistory();
 
   const onPressClear = () => {
@@ -104,7 +104,9 @@ export default function MainScreen() {
 
       <View style={styles.bodyBottom}>
         <View style={styles.gridContainer}>
-          {!!words.length ? (
+          {!!isFetching ? (
+            <ActivityIndicator />
+          ) : !!words.length ? (
             <WordsGrid editWord={editWord} isEditing={isEditing} />
           ) : (
             <WordsEmptyGrid />
