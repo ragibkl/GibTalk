@@ -11,6 +11,7 @@ import { useWordPath } from "../../service/wordPath";
 import { RootStackParamList } from "../../../App";
 import IconButton from "../../components/IconButton";
 
+import PasscodeModal from "./PasscodeModal";
 import WordsEmptyGrid from "./WordsEmptyGrid";
 import WordsGrid from "./WordsGrid";
 import WordsHistoryList from "./WordsHistoryList";
@@ -19,6 +20,7 @@ type HomeScreenProps = NavigationProp<RootStackParamList, "Home">;
 
 export default function MainScreen() {
   const [isEditing, setIsEditing] = useState(false);
+  const [showPasscodeModal, setPasscodeModal] = useState(false);
 
   const navigation = useNavigation<HomeScreenProps>();
   const { createBackup, restoreBackup } = useBackup();
@@ -36,6 +38,11 @@ export default function MainScreen() {
   };
 
   const onPressEdit = () => {
+    setPasscodeModal(true);
+  };
+
+  const onPasscodeModalOk = () => {
+    setPasscodeModal(false);
     setIsEditing(true);
     clearHistory();
   };
@@ -126,6 +133,12 @@ export default function MainScreen() {
           )}
         </View>
       </View>
+
+      <PasscodeModal
+        visible={showPasscodeModal}
+        setVisible={setPasscodeModal}
+        onOk={onPasscodeModalOk}
+      />
     </View>
   );
 }
