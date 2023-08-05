@@ -11,8 +11,12 @@ import {
   View,
 } from "react-native";
 import { LANGUAGE_OPTIONS, Language } from "../../service/speech";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "../../../App";
 
 const placeholderImage = require("../../../assets/placeholder.png");
+
+type EditWordNavigationProps = NavigationProp<RootStackParamList, "editWord">;
 
 type Props = {
   label: string;
@@ -38,6 +42,8 @@ export default function CommonWordDetailScreen(props: Props) {
     onUpdateUri,
     onPressSave,
   } = props;
+
+  const navigation = useNavigation<EditWordNavigationProps>();
 
   const onLanguageValueChange = (value: Language, _index: number) => {
     onUpdateLanguage(value);
@@ -65,6 +71,10 @@ export default function CommonWordDetailScreen(props: Props) {
     if (!result.canceled && result.assets && result.assets[0]) {
       onUpdateUri(result.assets[0].uri);
     }
+  };
+
+  const onPressSearch = () => {
+    navigation.navigate("searchSymbol", { onUpdateUri });
   };
 
   const saveDisabled = !label.trim() || !language || !uri;
@@ -127,6 +137,10 @@ export default function CommonWordDetailScreen(props: Props) {
 
             <Pressable style={styles.imageButton} onPress={onPressCamera}>
               <FontAwesome name="camera" size={20} />
+            </Pressable>
+
+            <Pressable style={styles.imageButton} onPress={onPressSearch}>
+              <FontAwesome name="search" size={20} />
             </Pressable>
           </View>
 
