@@ -10,10 +10,13 @@ import {
   TextInput,
   View,
 } from "react-native";
+import ImageLoad from "react-native-image-placeholder";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { StackScreenProps } from "@react-navigation/stack";
 
 import { RootStackParamList } from "../../../App";
+
+const placeholderImage = require("../../../assets/placeholder.png");
 
 type SymbolSearchNavigationProps = NavigationProp<
   RootStackParamList,
@@ -90,7 +93,12 @@ export default function SymbolSearchScreen(props: SymbolSearchScreenProps) {
         style={styles.symbolContainer}
         onPress={() => onPressSymbol(symbol)}
       >
-        <Image style={styles.symbolImage} source={source} />
+        <ImageLoad
+          style={styles.symbolImage}
+          source={source}
+          loadingStyle={{ size: "large", color: "blue" }}
+          borderRadius={5}
+        />
       </Pressable>
     );
   };
@@ -141,13 +149,13 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
   },
   symbolContainer: {
-    marginTop: 15,
-    marginLeft: 15,
-  },
-  symbolImage: {
     borderColor: "black",
     borderRadius: 5,
     borderWidth: 2,
+    marginLeft: 15,
+    marginTop: 15,
+  },
+  symbolImage: {
     height: 100,
     width: 100,
   },
