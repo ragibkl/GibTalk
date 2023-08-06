@@ -10,7 +10,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { LANGUAGE_OPTIONS, Language } from "../../service/speech";
+import { LANGUAGE_OPTIONS, Language, speak } from "../../service/speech";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../../App";
 
@@ -20,7 +20,7 @@ type EditWordNavigationProps = NavigationProp<RootStackParamList, "editWord">;
 
 type Props = {
   label: string;
-  language: string;
+  language: Language;
   isCategory: boolean;
   uri: string | null;
   onUpdateLabel: (label: string) => void;
@@ -75,6 +75,10 @@ export default function CommonWordDetailScreen(props: Props) {
 
   const onPressSearch = () => {
     navigation.navigate("searchImage", { onUpdateUri });
+  };
+
+  const onPressImage = () => {
+    speak(label, language);
   };
 
   const saveDisabled = !label.trim() || !language || !uri;
@@ -144,7 +148,9 @@ export default function CommonWordDetailScreen(props: Props) {
             </Pressable>
           </View>
 
-          <Image style={styles.image} source={source} />
+          <Pressable onPress={onPressImage}>
+            <Image style={styles.image} source={source} />
+          </Pressable>
         </View>
       </View>
     </View>

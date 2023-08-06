@@ -19,6 +19,10 @@ export const LANGUAGE_OPTIONS: LanguageOption[] = [
   { label: "Telugu", language: "tu" },
 ];
 
+export function speak(label: string, language: Language) {
+  Speech.speak(label, { language });
+}
+
 export function speakWord(word: Word) {
   Speech.speak(word.label, { language: word.language });
 }
