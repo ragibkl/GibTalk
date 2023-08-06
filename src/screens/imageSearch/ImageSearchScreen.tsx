@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   ActivityIndicator,
+  Image,
   LogBox,
   Pressable,
   ScrollView,
@@ -9,8 +10,6 @@ import {
   TextInput,
   View,
 } from "react-native";
-import Image from "react-native-image-progress";
-import * as Progress from "react-native-progress";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { StackScreenProps } from "@react-navigation/stack";
 
@@ -64,11 +63,7 @@ export default function ImageSearchScreen(props: ImageSearchScreenProps) {
         style={styles.symbolContainer}
         onPress={() => onPressSymbol(symbol)}
       >
-        <Image
-          source={source}
-          indicator={Progress.Circle}
-          style={styles.symbolImage}
-        />
+        <Image source={source} style={styles.symbolImage} />
       </Pressable>
     );
   };
