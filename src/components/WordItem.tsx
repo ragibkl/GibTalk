@@ -1,5 +1,7 @@
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import Image from "react-native-image-progress";
+import * as Progress from "react-native-progress";
 
 import PressableOpacity from "./PressableOpacity";
 import { speakWord } from "../service/speech";
@@ -46,7 +48,11 @@ export default function WordItem({ word, editWord, isEditing }: Props) {
   return (
     <PressableOpacity onPress={onPressWord}>
       <View style={[styles.container, !!word.children && styles.category]}>
-        <Image style={styles.image} source={{ uri: word.uri }} />
+        <Image
+          style={styles.image}
+          source={{ uri: word.uri }}
+          indicator={Progress.Circle}
+        />
         <Text style={styles.labelText}>{word.label}</Text>
       </View>
 
