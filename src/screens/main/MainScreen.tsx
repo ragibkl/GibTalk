@@ -1,6 +1,7 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useState } from "react";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import * as Progress from "react-native-progress";
 
 import { useBackup } from "../../service/backup";
 import { useHistory } from "../../service/history";
@@ -104,8 +105,10 @@ export default function MainScreen() {
 
       <View style={styles.bodyBottom}>
         <View style={styles.gridContainer}>
-          {!!isFetching ? (
-            <ActivityIndicator />
+          {!isFetching ? (
+            <View style={styles.progressCircle}>
+              <Progress.Circle size={100} indeterminate />
+            </View>
           ) : !!words.length ? (
             <WordsGrid editWord={editWord} isEditing={isEditing} />
           ) : (
@@ -176,6 +179,11 @@ const styles = StyleSheet.create({
   },
   gridContainer: {
     flex: 1,
+  },
+  progressCircle: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   sideControls: {
     alignItems: "flex-end",
