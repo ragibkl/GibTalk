@@ -6,8 +6,9 @@ import {
   useReducer,
   useState,
 } from "react";
-import { ActivityIndicator } from "react-native";
 import uuid from "react-native-uuid";
+
+import { ProgressIcon } from "../components/ProgressIcon";
 
 import { base64Image } from "./image";
 import { useWordPath } from "./wordPath";
@@ -152,7 +153,7 @@ export function WordsProvider({ children }) {
       <SetIsFetchingContext.Provider value={setIsFetching}>
         <WordsContext.Provider value={words}>
           <WordsDispatchContext.Provider value={dispatch}>
-            {isLoading ? <ActivityIndicator /> : children}
+            {isLoading ? <ProgressIcon /> : children}
           </WordsDispatchContext.Provider>
         </WordsContext.Provider>
       </SetIsFetchingContext.Provider>

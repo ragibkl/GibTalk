@@ -1,7 +1,6 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import * as Progress from "react-native-progress";
 
 import { useBackup } from "../../service/backup";
 import { useHistory } from "../../service/history";
@@ -11,6 +10,7 @@ import { useWordPath } from "../../service/wordPath";
 
 import { RootStackParamList } from "../../../App";
 import IconButton from "../../components/IconButton";
+import { ProgressIcon } from "../../components/ProgressIcon";
 
 import PasscodeModal from "./PasscodeModal";
 import WordsEmptyGrid from "./WordsEmptyGrid";
@@ -106,9 +106,7 @@ export default function MainScreen() {
       <View style={styles.bodyBottom}>
         <View style={styles.gridContainer}>
           {!!isFetching ? (
-            <View style={styles.progressCircle}>
-              <Progress.Circle size={100} indeterminate />
-            </View>
+            <ProgressIcon />
           ) : !!words.length ? (
             <WordsGrid editWord={editWord} isEditing={isEditing} />
           ) : (
