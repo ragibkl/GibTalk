@@ -60,7 +60,7 @@ export default function ImageSearchScreen(props: ImageSearchScreenProps) {
       >
         <Image
           source={source}
-          indicator={Progress.CircleSnail}
+          indicator={Progress.Circle}
           style={styles.symbolImage}
         />
       </Pressable>
