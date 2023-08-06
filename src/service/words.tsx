@@ -189,9 +189,14 @@ export function useWords() {
     const word: Word = {
       ...createWordData,
       id: uuid.v4() as string,
-      uri: await base64Image(createWordData.uri),
     };
     dispatch({ type: "add-word", word, wordPath });
+
+    const updatedWord: Word = {
+      ...word,
+      uri: await base64Image(word.uri),
+    };
+    dispatch({ type: "update-word", word: updatedWord, wordPath });
   };
 
   const updateWord = async (updateWordData: Word) => {
