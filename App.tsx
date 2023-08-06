@@ -15,6 +15,7 @@ import { WordPathProvider } from "./src/service/wordPath";
 import { WordsProvider } from "./src/service/words";
 
 import { Word } from "./src/service/words";
+import ImageSearchScreen from "./src/screens/imageSearch/ImageSearchScreen";
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,7 @@ export type RootStackParamList = {
   Home: undefined;
   createWord: undefined;
   editWord: { word: Word };
+  searchImage: { onUpdateUri: (uri: string) => void };
 };
 
 export default function App() {
@@ -50,6 +52,11 @@ export default function App() {
                   name="editWord"
                   component={EditWordScreen}
                   options={{ title: "Edit Word" }}
+                />
+                <Stack.Screen
+                  name="searchImage"
+                  component={ImageSearchScreen}
+                  options={{ title: "Search Symbol" }}
                 />
               </Stack.Navigator>
             </NavigationContainer>
