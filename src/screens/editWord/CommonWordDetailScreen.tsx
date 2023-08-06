@@ -74,7 +74,7 @@ export default function CommonWordDetailScreen(props: Props) {
   };
 
   const onPressSearch = () => {
-    navigation.navigate("searchSymbol", { onUpdateUri });
+    navigation.navigate("searchImage", { onUpdateUri });
   };
 
   const saveDisabled = !label.trim() || !language || !uri;

@@ -1,6 +1,6 @@
-import { useDebouncedCallback } from "use-debounce";
 import { useState } from "react";
 import {
+  ActivityIndicator,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -8,80 +8,49 @@ import {
   TextInput,
   View,
 } from "react-native";
-import ImageLoad from "react-native-image-placeholder";
+import Image from "react-native-image-progress";
+import * as Progress from "react-native-progress";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { StackScreenProps } from "@react-navigation/stack";
 
 import { RootStackParamList } from "../../../App";
+import { ImageResult, postSearchSymbols } from "../../service/imageSearch";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
-type SymbolSearchNavigationProps = NavigationProp<
+type ImageSearchNavigationProps = NavigationProp<
   RootStackParamList,
-  "searchSymbol"
+  "searchImage"
 >;
-type SymbolSearchScreenProps = StackScreenProps<
+type ImageSearchScreenProps = StackScreenProps<
   RootStackParamList,
-  "searchSymbol"
+  "searchImage"
 >;
 
-type Symbol = {
-  uri: string;
-  terms: string;
-};
-
-export default function SymbolSearchScreen(props: SymbolSearchScreenProps) {
+export default function ImageSearchScreen(props: ImageSearchScreenProps) {
   const onUpdateUri = props.route.params.onUpdateUri;
-  const navigation = useNavigation<SymbolSearchNavigationProps>();
+  const navigation = useNavigation<ImageSearchNavigationProps>();
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [symbols, setSymbols] = useState<Symbol[]>([]);
+  const [imageResults, setImageResults] = useState<ImageResult[]>([]);
+  const [isFetching, setIsFetching] = useState(false);
 
-  const searchSymbol = async (text: string) => {
-    const keywords = text.trim();
-    if (!keywords) {
-      return;
-    }
-
-    const body = new URLSearchParams({
-      keywords,
-      aramode: "1",
-      tawmode: "1",
-      mulmode: "1",
-    }).toString();
-
-    const res = await fetch("https://www.senteacher.org/getsymbols/", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "X-Requested-With": "XMLHttpRequest",
-      },
-      body,
-    });
-    const data = await res.json();
-
-    const result: Symbol[] = [];
-    for (let i = 0; i < data.resultcount; i++) {
-      const uri = `https://www.senteacher.org/${data.results[i]}`;
-      const terms = data.resultwords[i];
-      result.push({ uri, terms });
-    }
-
-    // console.log(symbols);
-    setSymbols(result);
+  const onPressSearch = async () => {
+    setIsFetching(true);
+    const results = await postSearchSymbols(searchTerm);
+    setIsFetching(false);
+    setImageResults(results || []);
   };
 
-  const searchSymbolDebounced = useDebouncedCallback(searchSymbol, 500);
-
-  const onChangeText = (text: string) => {
+  const onChangeSearchTerm = (text: string) => {
     setSearchTerm(text);
-    searchSymbolDebounced(text.trim());
   };
 
-  const onPressSymbol = (symbol: Symbol) => {
+  const onPressSymbol = (symbol: ImageResult) => {
     onUpdateUri(symbol.uri);
     navigation.goBack();
   };
 
-  const renderSymbol = (symbol: Symbol, i: number) => {
+  const renderSymbol = (symbol: ImageResult, i: number) => {
     const source = { uri: symbol.uri };
     return (
       <Pressable
@@ -89,11 +58,10 @@ export default function SymbolSearchScreen(props: SymbolSearchScreenProps) {
         style={styles.symbolContainer}
         onPress={() => onPressSymbol(symbol)}
       >
-        <ImageLoad
-          style={styles.symbolImage}
+        <Image
           source={source}
-          loadingStyle={{ size: "large", color: "blue" }}
-          borderRadius={5}
+          indicator={Progress.CircleSnail}
+          style={styles.symbolImage}
         />
       </Pressable>
     );
@@ -105,13 +73,24 @@ export default function SymbolSearchScreen(props: SymbolSearchScreenProps) {
         <Text style={styles.inputTitle}>Search</Text>
         <TextInput
           style={styles.textInput}
-          onChangeText={onChangeText}
+          onChangeText={onChangeSearchTerm}
           value={searchTerm}
         />
+        <Pressable
+          style={styles.imageButton}
+          onPress={onPressSearch}
+          disabled={isFetching}
+        >
+          {isFetching ? (
+            <ActivityIndicator size="small" />
+          ) : (
+            <FontAwesome name="search" size={20} />
+          )}
+        </Pressable>
       </View>
 
       <ScrollView contentContainerStyle={styles.symbolGrid}>
-        {symbols.map(renderSymbol)}
+        {imageResults.map(renderSymbol)}
       </ScrollView>
     </View>
   );
@@ -127,6 +106,7 @@ const styles = StyleSheet.create({
   rowInput: {
     flexDirection: "row",
     alignItems: "center",
+    marginLeft: 15,
     marginBottom: 5,
   },
   inputTitle: {
@@ -134,11 +114,24 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 40,
-    width: 230,
+    width: 300,
     padding: 5,
+    paddingLeft: 15,
     borderColor: "black",
     borderWidth: 2,
     borderRadius: 5,
+  },
+  imageButton: {
+    height: 40,
+    width: 40,
+    padding: 5,
+    marginLeft: 10,
+    borderColor: "black",
+    borderWidth: 2,
+    borderRadius: 5,
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
   },
   symbolGrid: {
     flexDirection: "row",
