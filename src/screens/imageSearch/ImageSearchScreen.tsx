@@ -41,9 +41,14 @@ export default function ImageSearchScreen(props: ImageSearchScreenProps) {
 
   const onPressSearch = async () => {
     setIsFetching(true);
-    const results = await postSearchSymbols(searchTerm);
-    setIsFetching(false);
-    setImageResults(results || []);
+    try {
+      const results = await postSearchSymbols(searchTerm);
+      setIsFetching(false);
+      setImageResults(results || []);
+    } catch (error) {
+      setIsFetching(false);
+      setImageResults([]);
+    }
   };
 
   const onChangeSearchTerm = (text: string) => {
