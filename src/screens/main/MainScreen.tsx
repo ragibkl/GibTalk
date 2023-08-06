@@ -105,7 +105,7 @@ export default function MainScreen() {
 
       <View style={styles.bodyBottom}>
         <View style={styles.gridContainer}>
-          {!isFetching ? (
+          {!!isFetching ? (
             <View style={styles.progressCircle}>
               <Progress.Circle size={100} indeterminate />
             </View>
