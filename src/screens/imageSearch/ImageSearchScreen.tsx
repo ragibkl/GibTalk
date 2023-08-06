@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   ActivityIndicator,
+  LogBox,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -16,6 +17,11 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../App";
 import { ImageResult, postSearchSymbols } from "../../service/imageSearch";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+
+// https://reactnavigation.org/docs/troubleshooting/#i-get-the-warning-non-serializable-values-were-found-in-the-navigation-state
+LogBox.ignoreLogs([
+  "Non-serializable values were found in the navigation state",
+]);
 
 type ImageSearchNavigationProps = NavigationProp<
   RootStackParamList,
