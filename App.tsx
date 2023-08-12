@@ -17,14 +17,14 @@ import { WordsProvider } from "./src/service/words";
 import { Word } from "./src/service/words";
 import ImageSearchScreen from "./src/screens/imageSearch/ImageSearchScreen";
 
-const Stack = createStackNavigator();
-
 export type RootStackParamList = {
   Home: undefined;
   createWord: undefined;
   editWord: { word: Word };
   searchImage: { onUpdateUri: (uri: string) => void };
 };
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
   useEffect(() => {

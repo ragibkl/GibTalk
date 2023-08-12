@@ -17,13 +17,13 @@ import WordsEmptyGrid from "./WordsEmptyGrid";
 import WordsGrid from "./WordsGrid";
 import WordsHistoryList from "./WordsHistoryList";
 
-type HomeScreenProps = NavigationProp<RootStackParamList, "Home">;
+type HomeScreenNavigationProps = NavigationProp<RootStackParamList, "Home">;
 
 export default function MainScreen() {
   const [isEditing, setIsEditing] = useState(false);
   const [showPasscodeModal, setPasscodeModal] = useState(false);
 
-  const navigation = useNavigation<HomeScreenProps>();
+  const navigation = useNavigation<HomeScreenNavigationProps>();
   const { createBackup, restoreBackup } = useBackup();
   const { popToTop, pop } = useWordPath();
   const { words, isFetching } = useWords();

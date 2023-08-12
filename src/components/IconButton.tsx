@@ -1,15 +1,22 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, StyleProp, ViewStyle } from "react-native";
 
 import PressableOpacity from "./PressableOpacity";
+
+type IconButtonProps = {
+  label: string;
+  icon: keyof typeof FontAwesome.glyphMap;
+  style?: StyleProp<ViewStyle>;
+  onPress: () => void;
+};
 
 export default function IconButton({
   label,
   icon,
   style = {},
   onPress = () => {},
-}) {
+}: IconButtonProps) {
   return (
     <PressableOpacity onPress={onPress}>
       <View style={[style, styles.container]}>
@@ -20,12 +27,19 @@ export default function IconButton({
   );
 }
 
+type MaterialIconButtonProps = {
+  label: string;
+  icon: keyof typeof MaterialIcons.glyphMap;
+  style?: StyleProp<ViewStyle>;
+  onPress: () => void;
+};
+
 export function MaterialIconButton({
   label,
   icon,
   style = {},
   onPress = () => {},
-}) {
+}: MaterialIconButtonProps) {
   return (
     <PressableOpacity onPress={onPress}>
       <View style={[style, styles.container]}>
