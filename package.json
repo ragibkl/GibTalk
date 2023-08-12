@@ -10,7 +10,8 @@
     "fmt": "prettier --write .",
     "build": "eas build",
     "build:preview": "eas build --profile preview",
-    "submit:android": "eas submit -p android"
+    "submit:android": "eas submit -p android",
+    "ts:check": "tsc"
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
