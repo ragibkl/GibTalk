@@ -1,10 +1,19 @@
-import { createContext, useContext, useReducer } from "react";
+import { ReactNode, createContext, useContext, useReducer } from "react";
 import { Word } from "./words";
 
-export const WordPathContext = createContext<string[]>([]);
-export const WordPathDispatchContext = createContext(null);
+type WordPathAction =
+  | {
+      type: "add-path";
+      wordId: string;
+    }
+  | {
+      type: "pop";
+    }
+  | {
+      type: "clear";
+    };
 
-function wordPathReducer(wordPath: string[], action): string[] {
+function wordPathReducer(wordPath: string[], action: WordPathAction): string[] {
   switch (action.type) {
     case "add-path": {
       return [...wordPath, action.wordId];
@@ -16,12 +25,21 @@ function wordPathReducer(wordPath: string[], action): string[] {
       return [];
     }
     default: {
-      throw Error("Unknown action: " + action.type);
+      throw Error("Unknown action");
     }
   }
 }
 
-export function WordPathProvider({ children }) {
+export const WordPathContext = createContext<string[]>([]);
+export const WordPathDispatchContext = createContext<
+  React.Dispatch<WordPathAction>
+>((_action) => {});
+
+type Props = {
+  children: ReactNode | ReactNode[];
+};
+
+export function WordPathProvider({ children }: Props) {
   const [wordPath, dispatch] = useReducer(wordPathReducer, []);
 
   return (

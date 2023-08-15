@@ -1,10 +1,16 @@
 import { createContext, useContext, useReducer } from "react";
 import { Word } from "./words";
 
-export const HistoryContext = createContext<Word[]>([]);
-export const HistoryDispatchContext = createContext(null);
+type HistoryAction =
+  | {
+      type: "add-word";
+      word: Word;
+    }
+  | {
+      type: "clear";
+    };
 
-function historyReducer(history: Word[], action): Word[] {
+function historyReducer(history: Word[], action: HistoryAction): Word[] {
   switch (action.type) {
     case "add-word": {
       return [...history, action.word];
@@ -13,12 +19,17 @@ function historyReducer(history: Word[], action): Word[] {
       return [];
     }
     default: {
-      throw Error("Unknown action: " + action.type);
+      throw Error("Unknown action");
     }
   }
 }
 
-export function HistoryProvider({ children }) {
+export const HistoryContext = createContext<Word[]>([]);
+export const HistoryDispatchContext = createContext<
+  React.Dispatch<HistoryAction>
+>(() => {});
+
+export function HistoryProvider({ children }: React.PropsWithChildren) {
   const [history, dispatch] = useReducer(historyReducer, []);
 
   return (

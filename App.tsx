@@ -12,7 +12,7 @@ import MainScreen from "./src/screens/main/MainScreen";
 import { speakInit } from "./src/service/speech";
 import { HistoryProvider } from "./src/service/history";
 import { WordPathProvider } from "./src/service/wordPath";
-import { WordsProvider } from "./src/service/words";
+import { WordsProvider } from "./src/service/words/WordsContext";
 
 import { Word } from "./src/service/words";
 import ImageSearchScreen from "./src/screens/imageSearch/ImageSearchScreen";
