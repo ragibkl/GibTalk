@@ -15,7 +15,7 @@ export default function CreateWordScreen() {
 
   const [label, setLabel] = useState("");
   const [language, setLanguage] = useState<Language>(DEFAULT_LANG);
-  const [uri, setUri] = useState<string | null>(null);
+  const [uri, setUri] = useState<string>('');
   const [isCategory, setIsCategory] = useState(false);
 
   const onPressSave = () => {
