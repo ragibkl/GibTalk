@@ -2,6 +2,7 @@ import "react-native-gesture-handler";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
@@ -16,6 +17,8 @@ import { WordsProvider } from "./src/service/words/WordsContext";
 
 import { Word } from "./src/service/words";
 import ImageSearchScreen from "./src/screens/imageSearch/ImageSearchScreen";
+import KeyboardScreen from "./src/screens/keyboard/KeyboardScreen";
+import MaterialCommunityIcons from "@expo/vector-icons/build/MaterialCommunityIcons";
 
 export type RootStackParamList = {
   Home: undefined;
@@ -25,6 +28,47 @@ export type RootStackParamList = {
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
+
+export type HomeTabsParamList = {
+  TabHome: undefined;
+  TabKeyboard: undefined;
+};
+const Tab = createBottomTabNavigator<HomeTabsParamList>();
+
+function HomeTabs() {
+  const screenOptions = {
+    headerShown: false,
+  };
+
+  const homeTabOptions = {
+    title: "Home",
+    tabBarIcon: ({ color, size }: { color: string; size: number }) => (
+      <MaterialCommunityIcons name="home" color={color} size={size} />
+    ),
+  };
+
+  const keyboardTabOptions = {
+    title: "Keyboard",
+    tabBarIcon: ({ color, size }: { color: string; size: number }) => (
+      <MaterialCommunityIcons name="keyboard" color={color} size={size} />
+    ),
+  };
+
+  return (
+    <Tab.Navigator screenOptions={screenOptions}>
+      <Tab.Screen
+        name="TabHome"
+        component={MainScreen}
+        options={homeTabOptions}
+      />
+      <Tab.Screen
+        name="TabKeyboard"
+        component={KeyboardScreen}
+        options={keyboardTabOptions}
+      />
+    </Tab.Navigator>
+  );
+}
 
 export default function App() {
   useEffect(() => {
@@ -38,9 +82,13 @@ export default function App() {
           <SafeAreaView style={styles.container}>
             <NavigationContainer>
               <Stack.Navigator screenOptions={screenOptions}>
+                {/* <Tab.Navigator>
+                  <Tab.Screen name="Home" component={MainScreen} options={{ title: "Home" }} />
+                  <Tab.Screen name="Keyboard" component={KeyboardScreen} options={{ title: "Keyboard" }} />
+                </Tab.Navigator> */}
                 <Stack.Screen
                   name="Home"
-                  component={MainScreen}
+                  component={HomeTabs}
                   options={{ title: "GibTalk - Development" }}
                 />
                 <Stack.Screen
