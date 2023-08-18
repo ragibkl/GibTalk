@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
+import { MenuProvider } from "react-native-popup-menu";
 
 import CreateWordScreen from "./src/screens/editWord/CreateWordScreen";
 import EditWordScreen from "./src/screens/editWord/EditWordScreen";
@@ -76,44 +77,46 @@ export default function App() {
   }, []);
 
   return (
-    <WordPathProvider>
-      <HistoryProvider>
-        <WordsProvider>
-          <SafeAreaView style={styles.container}>
-            <NavigationContainer>
-              <Stack.Navigator screenOptions={screenOptions}>
-                {/* <Tab.Navigator>
+    <MenuProvider>
+      <WordPathProvider>
+        <HistoryProvider>
+          <WordsProvider>
+            <SafeAreaView style={styles.container}>
+              <NavigationContainer>
+                <Stack.Navigator screenOptions={screenOptions}>
+                  {/* <Tab.Navigator>
                   <Tab.Screen name="Home" component={MainScreen} options={{ title: "Home" }} />
                   <Tab.Screen name="Keyboard" component={KeyboardScreen} options={{ title: "Keyboard" }} />
                 </Tab.Navigator> */}
-                <Stack.Screen
-                  name="Home"
-                  component={HomeTabs}
-                  options={{ title: "GibTalk - Development" }}
-                />
-                <Stack.Screen
-                  name="createWord"
-                  component={CreateWordScreen}
-                  options={{ title: "Add New Word" }}
-                />
-                <Stack.Screen
-                  name="editWord"
-                  component={EditWordScreen}
-                  options={{ title: "Edit Word" }}
-                />
-                <Stack.Screen
-                  name="searchImage"
-                  component={ImageSearchScreen}
-                  options={{ title: "Search Symbol" }}
-                />
-              </Stack.Navigator>
-            </NavigationContainer>
+                  <Stack.Screen
+                    name="Home"
+                    component={HomeTabs}
+                    options={{ title: "GibTalk - Development" }}
+                  />
+                  <Stack.Screen
+                    name="createWord"
+                    component={CreateWordScreen}
+                    options={{ title: "Add New Word" }}
+                  />
+                  <Stack.Screen
+                    name="editWord"
+                    component={EditWordScreen}
+                    options={{ title: "Edit Word" }}
+                  />
+                  <Stack.Screen
+                    name="searchImage"
+                    component={ImageSearchScreen}
+                    options={{ title: "Search Symbol" }}
+                  />
+                </Stack.Navigator>
+              </NavigationContainer>
 
-            <StatusBar style="auto" />
-          </SafeAreaView>
-        </WordsProvider>
-      </HistoryProvider>
-    </WordPathProvider>
+              <StatusBar style="auto" />
+            </SafeAreaView>
+          </WordsProvider>
+        </HistoryProvider>
+      </WordPathProvider>
+    </MenuProvider>
   );
 }
 

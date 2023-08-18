@@ -1,7 +1,12 @@
-import { Picker } from "@react-native-picker/picker";
 import { StackScreenProps } from "@react-navigation/stack";
 import { useState } from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Menu,
+  MenuTrigger,
+  MenuOptions,
+  MenuOption,
+} from "react-native-popup-menu";
 
 import { HomeTabsParamList } from "../../../App";
 import { LANGUAGE_OPTIONS, Language, speak } from "../../service/speech";
@@ -25,21 +30,30 @@ export default function KeyboardScreen(props: KeyboardScreenProps) {
   return (
     <View style={styles.container}>
       <View style={styles.bodyRow}>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={setTextInput}
-          value={textInput}
-        />
+        <View style={styles.textInputContainer}>
+          <TextInput
+            style={styles.textInput}
+            onChangeText={setTextInput}
+            value={textInput}
+          />
 
-        <Picker
-          selectedValue={language}
-          onValueChange={setLanguage}
-          style={styles.languageInput}
-        >
-          {LANGUAGE_OPTIONS.map(({ language }) => (
-            <Picker.Item key={language} label={language} value={language} />
-          ))}
-        </Picker>
+          <Menu onSelect={setLanguage}>
+            <MenuTrigger>
+              <View style={styles.languageInputContainer}>
+                <Text style={styles.languageInput}>{language}</Text>
+              </View>
+            </MenuTrigger>
+            <MenuOptions>
+              {LANGUAGE_OPTIONS.map(({ language, label }) => (
+                <MenuOption key={language} value={language}>
+                  <Text
+                    style={styles.languageInputOption}
+                  >{`${language} - ${label}`}</Text>
+                </MenuOption>
+              ))}
+            </MenuOptions>
+          </Menu>
+        </View>
 
         <View style={styles.controls}>
           <IconButton label="Play" icon="play" onPress={onPressPlay} />
@@ -67,19 +81,38 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 75,
   },
+  textInputContainer: {
+    alignItems: "center",
+    borderColor: "black",
+    borderRadius: 5,
+    borderWidth: 2,
+    flex: 1,
+    flexDirection: "row",
+    height: 60,
+    padding: 10,
+    paddingLeft: 15,
+  },
   textInput: {
+    alignSelf: "stretch",
     flex: 1,
     fontSize: 30,
-    height: 60,
-    padding: 5,
-    paddingLeft: 15,
+  },
+  languageInputContainer: {
+    alignItems: "center",
+    backgroundColor: "lightgrey",
     borderColor: "black",
-    borderWidth: 2,
     borderRadius: 5,
+    borderWidth: 1,
+    height: 40,
+    justifyContent: "center",
+    marginLeft: 5,
+    width: 40,
   },
   languageInput: {
-    height: 75,
-    width: 120,
+    fontSize: 12,
+  },
+  languageInputOption: {
+    fontSize: 18,
   },
   controls: {
     alignItems: "center",
