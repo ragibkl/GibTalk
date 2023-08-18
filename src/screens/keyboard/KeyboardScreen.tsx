@@ -46,9 +46,9 @@ export default function KeyboardScreen(props: KeyboardScreenProps) {
             <MenuOptions>
               {LANGUAGE_OPTIONS.map(({ language, label }) => (
                 <MenuOption key={language} value={language}>
-                  <Text
-                    style={styles.languageInputOption}
-                  >{`${language} - ${label}`}</Text>
+                  <Text style={styles.languageOption}>
+                    {`${language} - ${label}`}
+                  </Text>
                 </MenuOption>
               ))}
             </MenuOptions>
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   languageInput: {
     fontSize: 12,
   },
-  languageInputOption: {
+  languageOption: {
     fontSize: 18,
   },
   controls: {
