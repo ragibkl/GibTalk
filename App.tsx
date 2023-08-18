@@ -20,12 +20,14 @@ import { Word } from "./src/service/words";
 import ImageSearchScreen from "./src/screens/imageSearch/ImageSearchScreen";
 import KeyboardScreen from "./src/screens/keyboard/KeyboardScreen";
 import MaterialCommunityIcons from "@expo/vector-icons/build/MaterialCommunityIcons";
+import TemplateSearchScreen from "./src/screens/templates/TemplateSearchScreen";
 
 export type RootStackParamList = {
   Home: undefined;
   createWord: undefined;
   editWord: { word: Word };
   searchImage: { onUpdateUri: (uri: string) => void };
+  searchTemplate: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -84,10 +86,6 @@ export default function App() {
             <SafeAreaView style={styles.container}>
               <NavigationContainer>
                 <Stack.Navigator screenOptions={screenOptions}>
-                  {/* <Tab.Navigator>
-                  <Tab.Screen name="Home" component={MainScreen} options={{ title: "Home" }} />
-                  <Tab.Screen name="Keyboard" component={KeyboardScreen} options={{ title: "Keyboard" }} />
-                </Tab.Navigator> */}
                   <Stack.Screen
                     name="Home"
                     component={HomeTabs}
@@ -107,6 +105,11 @@ export default function App() {
                     name="searchImage"
                     component={ImageSearchScreen}
                     options={{ title: "Search Symbol" }}
+                  />
+                  <Stack.Screen
+                    name="searchTemplate"
+                    component={TemplateSearchScreen}
+                    options={{ title: "Load a Template" }}
                   />
                 </Stack.Navigator>
               </NavigationContainer>
