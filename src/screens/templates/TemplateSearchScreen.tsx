@@ -32,6 +32,7 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
 
   const [templates, setTemplates] = useState<TemplateItem[]>([]);
   const [isFetching, setIsFetching] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const doFetchTemplates = async () => {
     setIsFetching(true);
@@ -49,8 +50,10 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
   };
 
   const restoreTemplate = async (item: TemplateItem) => {
+    setIsLoading(true);
     const content = await fetchTemplate(item);
     await restoreBackupContents(content);
+    setIsLoading(false);
     navigation.pop();
   };
 
@@ -90,7 +93,9 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
       </View>
 
       <ScrollView style={styles.templateSection}>
-        {templates.length ? (
+        {isLoading || isFetching ? (
+          <ActivityIndicator size="large" />
+        ) : templates.length ? (
           templates.map(renderTemplateItem)
         ) : (
           <Text>No templates found!</Text>
