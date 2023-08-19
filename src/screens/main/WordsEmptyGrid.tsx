@@ -14,9 +14,7 @@ export default function WordsEmptyGrid() {
       <Text></Text>
       <Text>
         Alternatively, you can also download a pre-configured word config set
-        from our examples at
-        https://github.com/ragibkl/GibTalk/tree/master/examples. They can then
-        be loaded into the app via Edit - Restore feature.
+        via Edit - Templates feature.
       </Text>
       <View style={{ flex: 1 }} />
     </View>
