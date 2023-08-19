@@ -7,10 +7,7 @@ export type TemplateItem = {
   uri: string;
 };
 
-const BASE_URL =
-  "https://github.com/ragibkl/GibTalk/raw/feat/templates/templates";
-
-// const BASE_URL = "https://github.com/ragibkl/GibTalk/raw/master/templates";
+const BASE_URL = "https://github.com/ragibkl/GibTalk/raw/master/templates";
 
 export async function getTemplates(): Promise<TemplateItem[]> {
   const doFetch = async () => {
