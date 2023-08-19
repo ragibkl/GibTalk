@@ -1,3 +1,4 @@
 - name: GibTalk Starter Template
+  description: Basic Starter Template to use as an example
   author: Ragib
   uri: ./gibtalk-starter.yaml
