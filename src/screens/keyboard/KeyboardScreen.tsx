@@ -12,6 +12,7 @@ import { HomeTabsParamList } from "../../../App";
 import { LANGUAGE_OPTIONS, Language, speak } from "../../service/speech";
 
 import IconButton from "../../components/IconButton";
+import SafeAreaView from "../../components/SafeAreaView";
 
 type KeyboardScreenProps = StackScreenProps<HomeTabsParamList, "TabKeyboard">;
 
@@ -28,44 +29,46 @@ export default function KeyboardScreen(props: KeyboardScreenProps) {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.bodyRow}>
-        <View style={styles.textInputContainer}>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={setTextInput}
-            value={textInput}
-          />
+    <SafeAreaView>
+      <View style={styles.container}>
+        <View style={styles.bodyRow}>
+          <View style={styles.textInputContainer}>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={setTextInput}
+              value={textInput}
+            />
 
-          <Menu onSelect={setLanguage}>
-            <MenuTrigger>
-              <View style={styles.languageInputContainer}>
-                <Text style={styles.languageInput}>{language}</Text>
-              </View>
-            </MenuTrigger>
-            <MenuOptions>
-              {LANGUAGE_OPTIONS.map(({ language, label }) => (
-                <MenuOption key={language} value={language}>
-                  <Text style={styles.languageOption}>
-                    {`${language} - ${label}`}
-                  </Text>
-                </MenuOption>
-              ))}
-            </MenuOptions>
-          </Menu>
-        </View>
+            <Menu onSelect={setLanguage}>
+              <MenuTrigger>
+                <View style={styles.languageInputContainer}>
+                  <Text style={styles.languageInput}>{language}</Text>
+                </View>
+              </MenuTrigger>
+              <MenuOptions>
+                {LANGUAGE_OPTIONS.map(({ language, label }) => (
+                  <MenuOption key={language} value={language}>
+                    <Text style={styles.languageOption}>
+                      {`${language} - ${label}`}
+                    </Text>
+                  </MenuOption>
+                ))}
+              </MenuOptions>
+            </Menu>
+          </View>
 
-        <View style={styles.controls}>
-          <IconButton label="Play" icon="play" onPress={onPressPlay} />
-          <IconButton
-            style={{ marginLeft: 5 }}
-            label="Clear All"
-            icon="trash"
-            onPress={onPressClear}
-          />
+          <View style={styles.controls}>
+            <IconButton label="Play" icon="play" onPress={onPressPlay} />
+            <IconButton
+              style={{ marginLeft: 5 }}
+              label="Clear All"
+              icon="trash"
+              onPress={onPressClear}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

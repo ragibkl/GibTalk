@@ -5,8 +5,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
-import { LogBox, SafeAreaView, StyleSheet } from "react-native";
+import { LogBox, StyleSheet } from "react-native";
 import { MenuProvider } from "react-native-popup-menu";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import CreateWordScreen from "./src/screens/editWord/CreateWordScreen";
 import EditWordScreen from "./src/screens/editWord/EditWordScreen";
@@ -88,13 +89,16 @@ export default function App() {
       <WordPathProvider>
         <HistoryProvider>
           <WordsProvider>
-            <SafeAreaView style={styles.container}>
+            <SafeAreaProvider>
               <NavigationContainer>
                 <Stack.Navigator screenOptions={screenOptions}>
                   <Stack.Screen
                     name="Home"
                     component={HomeTabs}
-                    options={{ title: "GibTalk - Development" }}
+                    options={{
+                      title: "GibTalk - Development",
+                      headerShown: false,
+                    }}
                   />
                   <Stack.Screen
                     name="createWord"
@@ -120,7 +124,7 @@ export default function App() {
               </NavigationContainer>
 
               <StatusBar style="auto" />
-            </SafeAreaView>
+            </SafeAreaProvider>
           </WordsProvider>
         </HistoryProvider>
       </WordPathProvider>

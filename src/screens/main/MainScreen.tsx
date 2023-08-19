@@ -11,6 +11,7 @@ import { useWordPath } from "../../service/wordPath";
 import { RootStackParamList } from "../../../App";
 import IconButton from "../../components/IconButton";
 import { ProgressIcon } from "../../components/ProgressIcon";
+import SafeAreaView from "../../components/SafeAreaView";
 
 import PasscodeModal from "./PasscodeModal";
 import WordsEmptyGrid from "./WordsEmptyGrid";
@@ -73,91 +74,96 @@ export default function MainScreen() {
   };
 
   return (
-    <View style={styles.body}>
-      <View style={styles.bodyTop}>
-        <View style={styles.historyContainer}>
-          <Text style={styles.currentText}>Words history</Text>
-          <WordsHistoryList words={history} />
+    <SafeAreaView style={styles.container}>
+      <View style={styles.body}>
+        <View style={styles.bodyTop}>
+          <View style={styles.historyContainer}>
+            <Text style={styles.currentText}>Words history</Text>
+            <WordsHistoryList words={history} />
+          </View>
+
+          <View style={styles.controls}>
+            {!isEditing && (
+              <>
+                <IconButton label="Play" icon="play" onPress={onPressPlay} />
+                <IconButton
+                  style={{ marginLeft: 5 }}
+                  label="Clear All"
+                  icon="trash"
+                  onPress={onPressClear}
+                />
+              </>
+            )}
+            <IconButton
+              style={{ marginLeft: 5 }}
+              label="Home"
+              icon="home"
+              onPress={popToTop}
+            />
+            <IconButton
+              style={{ marginLeft: 5 }}
+              label="Back"
+              icon="arrow-left"
+              onPress={pop}
+            />
+          </View>
         </View>
 
-        <View style={styles.controls}>
-          {!isEditing && (
-            <>
-              <IconButton label="Play" icon="play" onPress={onPressPlay} />
-              <IconButton
-                style={{ marginLeft: 5 }}
-                label="Clear All"
-                icon="trash"
-                onPress={onPressClear}
-              />
-            </>
-          )}
-          <IconButton
-            style={{ marginLeft: 5 }}
-            label="Home"
-            icon="home"
-            onPress={popToTop}
-          />
-          <IconButton
-            style={{ marginLeft: 5 }}
-            label="Back"
-            icon="arrow-left"
-            onPress={pop}
-          />
+        <View style={styles.bodyBottom}>
+          <View style={styles.gridContainer}>
+            {!!isFetching ? (
+              <ProgressIcon />
+            ) : !!words.length ? (
+              <WordsGrid editWord={editWord} isEditing={isEditing} />
+            ) : (
+              <WordsEmptyGrid />
+            )}
+          </View>
+
+          <View style={styles.sideControls}>
+            <View style={{ flex: 1 }} />
+            {isEditing ? (
+              <>
+                <IconButton
+                  label="Backup"
+                  icon="download"
+                  onPress={onPressBackup}
+                />
+                <IconButton
+                  label="Restore"
+                  icon="upload"
+                  onPress={onPressRestore}
+                />
+                <IconButton
+                  label="Templates"
+                  icon="book"
+                  onPress={onPressTemplates}
+                />
+                <IconButton label="Add" icon="plus" onPress={onPressAdd} />
+                <IconButton label="Done" icon="check" onPress={onPressSave} />
+              </>
+            ) : (
+              <IconButton label="Edit" icon="edit" onPress={onPressEdit} />
+            )}
+          </View>
         </View>
+
+        <PasscodeModal
+          visible={showPasscodeModal}
+          setVisible={setPasscodeModal}
+          onOk={onPasscodeModalOk}
+        />
       </View>
-
-      <View style={styles.bodyBottom}>
-        <View style={styles.gridContainer}>
-          {!!isFetching ? (
-            <ProgressIcon />
-          ) : !!words.length ? (
-            <WordsGrid editWord={editWord} isEditing={isEditing} />
-          ) : (
-            <WordsEmptyGrid />
-          )}
-        </View>
-
-        <View style={styles.sideControls}>
-          <View style={{ flex: 1 }} />
-          {isEditing ? (
-            <>
-              <IconButton
-                label="Backup"
-                icon="download"
-                onPress={onPressBackup}
-              />
-              <IconButton
-                label="Restore"
-                icon="upload"
-                onPress={onPressRestore}
-              />
-              <IconButton
-                label="Templates"
-                icon="book"
-                onPress={onPressTemplates}
-              />
-              <IconButton label="Add" icon="plus" onPress={onPressAdd} />
-              <IconButton label="Done" icon="check" onPress={onPressSave} />
-            </>
-          ) : (
-            <IconButton label="Edit" icon="edit" onPress={onPressEdit} />
-          )}
-        </View>
-      </View>
-
-      <PasscodeModal
-        visible={showPasscodeModal}
-        setVisible={setPasscodeModal}
-        onOk={onPasscodeModalOk}
-      />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  body: {
+  container: {
     backgroundColor: "white",
+    flex: 1,
+  },
+  body: {
     flex: 1,
     padding: 5,
   },
