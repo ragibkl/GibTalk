@@ -60,6 +60,10 @@ export default function MainScreen() {
     restoreBackup();
   };
 
+  const onPressTemplates = () => {
+    navigation.navigate("searchTemplate");
+  };
+
   const onPressAdd = () => {
     navigation.navigate("createWord");
   };
@@ -127,6 +131,11 @@ export default function MainScreen() {
                 label="Restore"
                 icon="upload"
                 onPress={onPressRestore}
+              />
+              <IconButton
+                label="Templates"
+                icon="book"
+                onPress={onPressTemplates}
               />
               <IconButton label="Add" icon="plus" onPress={onPressAdd} />
               <IconButton label="Done" icon="check" onPress={onPressSave} />
