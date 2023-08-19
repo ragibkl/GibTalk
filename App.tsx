@@ -5,7 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
+import { LogBox, SafeAreaView, StyleSheet } from "react-native";
 import { MenuProvider } from "react-native-popup-menu";
 
 import CreateWordScreen from "./src/screens/editWord/CreateWordScreen";
@@ -21,6 +21,11 @@ import ImageSearchScreen from "./src/screens/imageSearch/ImageSearchScreen";
 import KeyboardScreen from "./src/screens/keyboard/KeyboardScreen";
 import MaterialCommunityIcons from "@expo/vector-icons/build/MaterialCommunityIcons";
 import TemplateSearchScreen from "./src/screens/templates/TemplateSearchScreen";
+
+// https://reactnavigation.org/docs/troubleshooting/#i-get-the-warning-non-serializable-values-were-found-in-the-navigation-state
+LogBox.ignoreLogs([
+  "Non-serializable values were found in the navigation state",
+]);
 
 export type RootStackParamList = {
   Home: undefined;
