@@ -20,6 +20,7 @@ import {
 import { useBackup } from "../../service/backup";
 
 import PressableOpacity from "../../components/PressableOpacity";
+import ModalOpacity from "../../components/ModalOpacity";
 
 type TemplatesScreenProps = StackScreenProps<
   RootStackParamList,
@@ -31,6 +32,10 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
   const { restoreBackupContents } = useBackup();
 
   const [templates, setTemplates] = useState<TemplateItem[]>([]);
+  const [selectedTemplate, setSelectedTemplate] = useState<TemplateItem | null>(
+    null,
+  );
+
   const [isFetching, setIsFetching] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -49,17 +54,34 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
     doFetchTemplates();
   };
 
-  const restoreTemplate = async (item: TemplateItem) => {
+  const modalSetVisible = (visible: boolean) => {
+    if (!visible && !isLoading) {
+      setSelectedTemplate(null);
+    }
+  };
+
+  const onModalPressCancel = () => {
+    if (!isLoading) {
+      setSelectedTemplate(null);
+    }
+  };
+
+  const onModalPressOk = async () => {
+    if (!selectedTemplate) {
+      return;
+    }
+
     setIsLoading(true);
-    const content = await fetchTemplate(item);
+    const content = await fetchTemplate(selectedTemplate);
     await restoreBackupContents(content);
+    setSelectedTemplate(null);
     setIsLoading(false);
     navigation.pop();
   };
 
   const renderTemplateItem = (item: TemplateItem, i: number) => {
     const onPressTemplate = () => {
-      restoreTemplate(item);
+      setSelectedTemplate(item);
     };
 
     return (
@@ -93,7 +115,7 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
       </View>
 
       <ScrollView style={styles.templateSection}>
-        {isLoading || isFetching ? (
+        {isFetching ? (
           <ActivityIndicator size="large" />
         ) : templates.length ? (
           templates.map(renderTemplateItem)
@@ -101,6 +123,31 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
           <Text>No templates found!</Text>
         )}
       </ScrollView>
+
+      <ModalOpacity
+        style={styles.modalContainer}
+        visible={!!selectedTemplate}
+        setVisible={modalSetVisible}
+      >
+        <Text style={styles.modalTextTitle}>{selectedTemplate?.name}</Text>
+        <Text style={styles.modalText}>Load template?</Text>
+
+        <View style={styles.modalButtonRow}>
+          <PressableOpacity
+            style={styles.modalButton}
+            onPress={onModalPressCancel}
+          >
+            <Text>Cancel</Text>
+          </PressableOpacity>
+
+          <PressableOpacity
+            style={[styles.modalButton, styles.okButton]}
+            onPress={onModalPressOk}
+          >
+            {isLoading ? <ActivityIndicator size="small" /> : <Text>Ok</Text>}
+          </PressableOpacity>
+        </View>
+      </ModalOpacity>
     </View>
   );
 }
@@ -150,5 +197,36 @@ const styles = StyleSheet.create({
   },
   templateAuthor: {
     fontStyle: "italic",
+  },
+  modalContainer: {
+    backgroundColor: "white",
+    padding: 10,
+  },
+  modalTextTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  modalText: {
+    fontSize: 16,
+  },
+  modalButtonRow: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    marginTop: 20,
+  },
+  modalButton: {
+    marginLeft: 5,
+    alignItems: "center",
+    alignSelf: "flex-end",
+    borderColor: "black",
+    borderRadius: 5,
+    borderWidth: 2,
+    height: 40,
+    marginTop: 10,
+    padding: 5,
+    width: 60,
+  },
+  okButton: {
+    backgroundColor: "lightgreen",
   },
 });
