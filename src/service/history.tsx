@@ -1,5 +1,6 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useReducer } from "react";
 import { Word } from "./words";
+import { useAppState } from "../db";
 
 type HistoryAction =
   | {
@@ -42,21 +43,26 @@ export function HistoryProvider({ children }: React.PropsWithChildren) {
 }
 
 export function useHistory() {
-  const history = useContext(HistoryContext);
-  const dispatch = useContext(HistoryDispatchContext);
+  const {
+    appState: { wordHistory },
+    dispatch,
+  } = useAppState();
 
   const addWordToHistory = (word: Word) => {
-    if (!history.length || history[history.length - 1].id !== word.id) {
-      dispatch({ type: "add-word", word });
+    if (
+      !wordHistory.length ||
+      wordHistory[wordHistory.length - 1].id !== word.id
+    ) {
+      dispatch({ type: "add-word-history", word });
     }
   };
 
   const clearHistory = () => {
-    dispatch({ type: "clear" });
+    dispatch({ type: "clear-word-history" });
   };
 
   return {
-    history,
+    history: wordHistory,
     addWordToHistory,
     clearHistory,
   };

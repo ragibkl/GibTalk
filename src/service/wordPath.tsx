@@ -1,5 +1,6 @@
-import { ReactNode, createContext, useContext, useReducer } from "react";
+import { ReactNode, createContext, useReducer } from "react";
 import { Word } from "./words";
+import { useAppState } from "../db";
 
 type WordPathAction =
   | {
@@ -52,21 +53,23 @@ export function WordPathProvider({ children }: Props) {
 }
 
 export function useWordPath() {
-  const wordPath = useContext(WordPathContext);
-  const dispatch = useContext(WordPathDispatchContext);
+  const {
+    appState: { wordPath },
+    dispatch,
+  } = useAppState();
 
   const addWordToPath = (word: Word) => {
     if (word.children) {
-      dispatch({ type: "add-path", wordId: word.id });
+      dispatch({ type: "add-word-path", wordId: word.id });
     }
   };
 
   const pop = () => {
-    dispatch({ type: "pop" });
+    dispatch({ type: "pop-word-path" });
   };
 
   const popToTop = () => {
-    dispatch({ type: "clear" });
+    dispatch({ type: "clear-word-path" });
   };
 
   return {
