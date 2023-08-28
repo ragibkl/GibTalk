@@ -1,8 +1,8 @@
 import uuid from "react-native-uuid";
 
-import { base64Image } from "../image";
-import { Language } from "../speech";
-import { useAppState } from "../../db";
+import { base64Image } from "./image";
+import { Language } from "./speech";
+import { useAppState } from "../db";
 
 export type Word = {
   id: string;
@@ -31,12 +31,26 @@ export async function wordImagesBase64(words: Word[]): Promise<Word[]> {
   );
 }
 
-export function useWords() {
-  const { appState, dispatch } = useAppState();
+function getWordsInPath(words: Word[], wordIds: string[]): Word[] {
+  let result = words;
+  for (let i = 0; i < wordIds.length; i++) {
+    const parentWord = result.find((w) => w.id === wordIds[i]);
+    if (!parentWord) {
+      return [];
+    }
 
-  const words = appState.words;
-  const isFetching = appState.isFetchingWords;
-  const wordPath = appState.wordPath;
+    result = parentWord.children || [];
+  }
+
+  return result;
+};
+
+export function useWords() {
+  const { appState: {
+    words,
+    isFetchingWords: isFetching,
+    wordPath
+  }, dispatch } = useAppState();
 
   const setIsFetching = (value: boolean) => {
     dispatch({
@@ -45,21 +59,7 @@ export function useWords() {
     });
   };
 
-  const getWordsInPath = (wordIds: string[]): Word[] => {
-    let result = words;
-    for (let i = 0; i < wordIds.length; i++) {
-      const parentWord = result.find((w) => w.id === wordIds[i]);
-      if (!parentWord) {
-        return [];
-      }
-
-      result = parentWord.children || [];
-    }
-
-    return result;
-  };
-
-  const wordsInPath = getWordsInPath(wordPath);
+  const wordsInPath = getWordsInPath(words, wordPath);
 
   const setWords = async (words: Word[]) => {
     setIsFetching(true);
