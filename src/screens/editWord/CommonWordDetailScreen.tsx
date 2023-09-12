@@ -1,5 +1,6 @@
 import { FontAwesome } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
 import {
   Image,
@@ -10,8 +11,8 @@ import {
   TextInput,
   View,
 } from "react-native";
+
 import { LANGUAGE_OPTIONS, Language, speak } from "../../service/speech";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../../App";
 
 const placeholderImage = require("../../../assets/placeholder.png");
