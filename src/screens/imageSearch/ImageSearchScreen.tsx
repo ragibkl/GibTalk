@@ -1,4 +1,5 @@
-import { useState } from "react";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { useRef, useState } from "react";
 import {
   ActivityIndicator,
   Image,
@@ -9,12 +10,50 @@ import {
   TextInput,
   View,
 } from "react-native";
+import { SvgUri } from "react-native-svg";
+import { captureRef } from "react-native-view-shot";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { StackScreenProps } from "@react-navigation/stack";
 
 import { RootStackParamList } from "../../../App";
-import { ImageResult, postSearchSymbols } from "../../service/imageSearch";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { ImageResult, getSearchSymbols } from "../../service/imageSearch";
+
+const IMAGE_SIZE = 100;
+
+type CustomImageProps = {
+  uri: string;
+  onSelectImage: (uri: string) => void;
+};
+
+function CustomImage(props: CustomImageProps) {
+  const { uri, onSelectImage } = props;
+  const imageRef = useRef(null);
+
+  const onPress = async () => {
+    if (uri.endsWith("svg")) {
+      const localUri = await captureRef(imageRef, { height: 220, quality: 1 });
+      onSelectImage(localUri);
+    } else {
+      onSelectImage(uri);
+    }
+  };
+
+  return (
+    <Pressable style={styles.symbolContainer} onPress={onPress}>
+      <View
+        ref={imageRef}
+        collapsable={false}
+        style={{ backgroundColor: "white" }}
+      >
+        {uri.endsWith("svg") ? (
+          <SvgUri uri={uri} width={IMAGE_SIZE} height={IMAGE_SIZE} />
+        ) : (
+          <Image source={{ uri }} style={styles.symbolImage} />
+        )}
+      </View>
+    </Pressable>
+  );
+}
 
 type ImageSearchNavigationProps = NavigationProp<
   RootStackParamList,
@@ -36,7 +75,7 @@ export default function ImageSearchScreen(props: ImageSearchScreenProps) {
   const onPressSearch = async () => {
     setIsFetching(true);
     try {
-      const results = await postSearchSymbols(searchTerm);
+      const results = await getSearchSymbols(searchTerm);
       setIsFetching(false);
       setImageResults(results || []);
     } catch (error) {
@@ -49,21 +88,14 @@ export default function ImageSearchScreen(props: ImageSearchScreenProps) {
     setSearchTerm(text);
   };
 
-  const onPressSymbol = (symbol: ImageResult) => {
-    onUpdateUri(symbol.uri);
-    navigation.goBack();
-  };
-
   const renderSymbol = (symbol: ImageResult, i: number) => {
-    const source = { uri: symbol.uri };
+    const onSelectImage = (uri: string) => {
+      onUpdateUri(uri);
+      navigation.goBack();
+    };
+
     return (
-      <Pressable
-        key={i}
-        style={styles.symbolContainer}
-        onPress={() => onPressSymbol(symbol)}
-      >
-        <Image source={source} style={styles.symbolImage} />
-      </Pressable>
+      <CustomImage key={i} uri={symbol.uri} onSelectImage={onSelectImage} />
     );
   };
 
@@ -145,7 +177,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   symbolImage: {
-    height: 100,
-    width: 100,
+    height: IMAGE_SIZE,
+    width: IMAGE_SIZE,
   },
 });
