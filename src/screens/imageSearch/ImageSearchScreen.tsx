@@ -40,11 +40,7 @@ function CustomImage(props: CustomImageProps) {
 
   return (
     <Pressable style={styles.symbolContainer} onPress={onPress}>
-      <View
-        ref={imageRef}
-        collapsable={false}
-        style={{ backgroundColor: "white" }}
-      >
+      <View ref={imageRef} collapsable={false} style={styles.symbolImageBox}>
         {uri.endsWith("svg") ? (
           <SvgUri uri={uri} width={IMAGE_SIZE} height={IMAGE_SIZE} />
         ) : (
@@ -175,6 +171,9 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     marginLeft: 15,
     marginTop: 15,
+  },
+  symbolImageBox: {
+    backgroundColor: "white",
   },
   symbolImage: {
     height: IMAGE_SIZE,

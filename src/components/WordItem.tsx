@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
     backgroundColor: "yellow",
   },
   image: {
+    backgroundColor: "white",
     borderColor: "black",
     borderRadius: 5,
     borderWidth: 2,

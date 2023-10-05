@@ -218,11 +218,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    marginTop: 10,
-    width: 220,
-    height: 220,
+    backgroundColor: 'white',
+    borderColor: "black",
     borderRadius: 20,
     borderWidth: 2,
-    borderColor: "black",
+    height: 220,
+    marginTop: 10,
+    width: 220,
   },
 });
