@@ -72,9 +72,10 @@ export function computeWordsState(
   }
 }
 
-export function wordsReducer(state: AppState, action: Action): AppState {
-  return {
-    ...state,
-    words: computeWordsState(state.words, action, state.wordPath),
-  };
+export function wordsReducer(
+  words: AppState["words"],
+  action: Action,
+  prevState: AppState,
+): AppState["words"] {
+  return computeWordsState(words, action, prevState.wordPath);
 }

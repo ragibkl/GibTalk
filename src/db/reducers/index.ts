@@ -6,9 +6,10 @@ import { wordPathReducer } from "./wordPathReducer";
 import { wordsReducer } from "./wordsReducer";
 
 export function appStateReducer(state: AppState, action: Action): AppState {
-  let newState = wordsReducer(state, action);
-  newState = wordPathReducer(newState, action);
-  newState = isFetchingReducer(newState, action);
-  newState = wordHistoryReducer(newState, action);
-  return newState;
+  return {
+    isFetchingWords: isFetchingReducer(state.isFetchingWords, action, state),
+    words: wordsReducer(state.words, action, state),
+    wordHistory: wordHistoryReducer(state.wordHistory, action, state),
+    wordPath: wordPathReducer(state.wordPath, action, state),
+  };
 }

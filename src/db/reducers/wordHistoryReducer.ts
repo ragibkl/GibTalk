@@ -1,22 +1,20 @@
 import { Action } from "../actions";
 import { AppState } from "../appSchema";
 
-export function wordHistoryReducer(state: AppState, action: Action): AppState {
+export function wordHistoryReducer(
+  wordHistory: AppState["wordHistory"],
+  action: Action,
+  _prevState: AppState,
+): AppState["wordHistory"] {
   switch (action.type) {
     case "add-word-history": {
-      return {
-        ...state,
-        wordHistory: [...state.wordHistory, action.word],
-      };
+      return [...wordHistory, action.word];
     }
     case "clear-word-history": {
-      return {
-        ...state,
-        wordHistory: [],
-      };
+      return [];
     }
     default: {
-      return state;
+      return wordHistory;
     }
   }
 }

@@ -1,16 +1,17 @@
 import { Action } from "../actions";
 import { AppState } from "../appSchema";
 
-export function isFetchingReducer(state: AppState, action: Action): AppState {
+export function isFetchingReducer(
+  isFetchingWords: AppState["isFetchingWords"],
+  action: Action,
+  _prevState: AppState,
+): AppState["isFetchingWords"] {
   switch (action.type) {
     case "set-isfetching-words": {
-      return {
-        ...state,
-        isFetchingWords: action.value,
-      };
+      return action.value;
     }
     default: {
-      return state;
+      return isFetchingWords;
     }
   }
 }
