@@ -1,5 +1,5 @@
 import { Action } from "../actions";
-import { AppState } from "../appSchema";
+import { AppState } from "../schema";
 import { isFetchingReducer } from "./isFetchingReducer";
 import { wordHistoryReducer } from "./wordHistoryReducer";
 import { wordPathReducer } from "./wordPathReducer";

@@ -1,5 +1,5 @@
 import { Word } from "./words";
-import { useAppState } from "../db";
+import { useAppState } from "../appState";
 
 export function useWordPath() {
   const {

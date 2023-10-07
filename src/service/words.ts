@@ -2,7 +2,7 @@ import uuid from "react-native-uuid";
 
 import { base64Image } from "./image";
 import { Language } from "./speech";
-import { useAppState } from "../db";
+import { useAppState } from "../appState";
 
 export type Word = {
   id: string;
@@ -43,14 +43,13 @@ function getWordsInPath(words: Word[], wordIds: string[]): Word[] {
   }
 
   return result;
-};
+}
 
 export function useWords() {
-  const { appState: {
-    words,
-    isFetchingWords: isFetching,
-    wordPath
-  }, dispatch } = useAppState();
+  const {
+    appState: { words, isFetchingWords: isFetching, wordPath },
+    dispatch,
+  } = useAppState();
 
   const setIsFetching = (value: boolean) => {
     dispatch({

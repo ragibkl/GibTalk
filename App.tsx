@@ -1,5 +1,6 @@
 import "react-native-gesture-handler";
 
+import MaterialCommunityIcons from "@expo/vector-icons/build/MaterialCommunityIcons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -9,17 +10,16 @@ import { LogBox, StyleSheet } from "react-native";
 import { MenuProvider } from "react-native-popup-menu";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
+import { AppStateProvider } from "./src/appState";
+import { speakInit } from "./src/service/speech";
+import { Word } from "./src/service/words";
+
 import CreateWordScreen from "./src/screens/editWord/CreateWordScreen";
 import EditWordScreen from "./src/screens/editWord/EditWordScreen";
 import MainScreen from "./src/screens/main/MainScreen";
-import { speakInit } from "./src/service/speech";
-
-import { Word } from "./src/service/words";
 import ImageSearchScreen from "./src/screens/imageSearch/ImageSearchScreen";
 import KeyboardScreen from "./src/screens/keyboard/KeyboardScreen";
-import MaterialCommunityIcons from "@expo/vector-icons/build/MaterialCommunityIcons";
 import TemplateSearchScreen from "./src/screens/templates/TemplateSearchScreen";
-import { AppStateProvider } from "./src/db";
 
 // https://reactnavigation.org/docs/troubleshooting/#i-get-the-warning-non-serializable-values-were-found-in-the-navigation-state
 LogBox.ignoreLogs([

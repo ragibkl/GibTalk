@@ -1,6 +1,6 @@
 import { Word } from "../../service/words";
 import { Action } from "../actions";
-import { AppState } from "../appSchema";
+import { AppState } from "../schema";
 
 export function computeWordsState(
   words: Word[],

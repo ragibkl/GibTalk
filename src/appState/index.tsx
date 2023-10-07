@@ -9,14 +9,12 @@ import {
 import { Word } from "../service/words";
 
 import { Action } from "./actions";
-import { DEFAULT_APP_STATE, AppState } from "./appSchema";
+import { DEFAULT_APP_STATE, AppState } from "./schema";
 import { appStateReducer } from "./reducers";
 import { useStorage } from "./storage";
 
 export const AppStateContext = createContext<AppState>(DEFAULT_APP_STATE);
-export const AppDispatchContext = createContext<Dispatch<Action>>(
-  (_action) => {},
-);
+export const DispatchContext = createContext<Dispatch<Action>>((_action) => {});
 
 type AppStateProps = {
   children: ReactNode | ReactNode[];
@@ -33,16 +31,16 @@ export function AppStateProvider(props: AppStateProps) {
 
   return (
     <AppStateContext.Provider value={appState}>
-      <AppDispatchContext.Provider value={dispatch}>
+      <DispatchContext.Provider value={dispatch}>
         {isLoadingWords ? <></> : props.children}
-      </AppDispatchContext.Provider>
+      </DispatchContext.Provider>
     </AppStateContext.Provider>
   );
 }
 
 export function useAppState() {
   const appState = useContext(AppStateContext);
-  const dispatch = useContext(AppDispatchContext);
+  const dispatch = useContext(DispatchContext);
 
   return {
     appState,
