@@ -1,9 +1,8 @@
 import uuid from "react-native-uuid";
 
-import { base64Image } from "../image";
-import { useWordPath } from "../wordPath";
-import { Language } from "../speech";
-import { useWordsContext } from "./WordsContext";
+import { base64Image } from "./image";
+import { Language } from "./speech";
+import { useAppState } from "../appState";
 
 export type Word = {
   id: string;
@@ -32,25 +31,34 @@ export async function wordImagesBase64(words: Word[]): Promise<Word[]> {
   );
 }
 
-export function useWords() {
-  const { wordPath } = useWordPath();
-  const { isFetching, setIsFetching, words, dispatch } = useWordsContext();
-
-  const getWordsInPath = (wordIds: string[]): Word[] => {
-    let result = words;
-    for (let i = 0; i < wordIds.length; i++) {
-      const parentWord = result.find((w) => w.id === wordIds[i]);
-      if (!parentWord) {
-        return [];
-      }
-
-      result = parentWord.children || [];
+function getWordsInPath(words: Word[], wordIds: string[]): Word[] {
+  let result = words;
+  for (let i = 0; i < wordIds.length; i++) {
+    const parentWord = result.find((w) => w.id === wordIds[i]);
+    if (!parentWord) {
+      return [];
     }
 
-    return result;
+    result = parentWord.children || [];
+  }
+
+  return result;
+}
+
+export function useWords() {
+  const {
+    appState: { words, isFetchingWords: isFetching, wordPath },
+    dispatch,
+  } = useAppState();
+
+  const setIsFetching = (value: boolean) => {
+    dispatch({
+      type: "set-isfetching-words",
+      value,
+    });
   };
 
-  const wordsInPath = getWordsInPath(wordPath);
+  const wordsInPath = getWordsInPath(words, wordPath);
 
   const setWords = async (words: Word[]) => {
     setIsFetching(true);
@@ -64,13 +72,13 @@ export function useWords() {
       ...createWordData,
       id: uuid.v4() as string,
     };
-    dispatch({ type: "add-word", word, wordPath });
+    dispatch({ type: "add-word", word });
 
     const updatedWord: Word = {
       ...word,
       uri: await base64Image(word.uri),
     };
-    dispatch({ type: "update-word", word: updatedWord, wordPath });
+    dispatch({ type: "update-word", word: updatedWord });
   };
 
   const updateWord = async (updateWordData: Word) => {
@@ -78,19 +86,19 @@ export function useWords() {
       ...updateWordData,
       uri: await base64Image(updateWordData.uri),
     };
-    dispatch({ type: "update-word", word, wordPath });
+    dispatch({ type: "update-word", word });
   };
 
   const removeWord = (wordId: string) => {
-    dispatch({ type: "remove-word", wordId, wordPath });
+    dispatch({ type: "remove-word", wordId });
   };
 
   const moveWordLeft = (wordId: string) => {
-    dispatch({ type: "move-word-left", wordId, wordPath });
+    dispatch({ type: "move-word-left", wordId });
   };
 
   const moveWordRight = (wordId: string) => {
-    dispatch({ type: "move-word-right", wordId, wordPath });
+    dispatch({ type: "move-word-right", wordId });
   };
 
   return {

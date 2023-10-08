@@ -1,56 +1,22 @@
-import { Word } from ".";
+import { Word } from "../../service/words";
+import { Action } from "../actions";
+import { AppState } from "../schema";
 
-type SetWordsAction = {
-  type: "set-words";
-  words: Word[];
-};
-
-type AddWordAction = {
-  type: "add-word";
-  word: Word;
-};
-
-type UpdateWordAction = {
-  type: "update-word";
-  word: Word;
-};
-
-type RemoveWordAction = {
-  type: "remove-word";
-  wordId: string;
-};
-
-type MoveWordLeft = {
-  type: "move-word-left";
-  wordId: string;
-};
-
-type MoveWordRight = {
-  type: "move-word-right";
-  wordId: string;
-};
-
-export type WordAction = (
-  | SetWordsAction
-  | AddWordAction
-  | UpdateWordAction
-  | RemoveWordAction
-  | MoveWordLeft
-  | MoveWordRight
-) & {
-  wordPath?: string[];
-};
-
-export function wordsReducer(words: Word[], action: WordAction) {
-  if (action.wordPath && action.wordPath.length) {
-    const [p, ...wordPath] = action.wordPath;
+export function computeWordsState(
+  words: Word[],
+  action: Action,
+  wordPath: string[],
+): Word[] {
+  if (wordPath && wordPath.length) {
+    const [p, ...wp] = wordPath;
     const i = words.findIndex((w) => w.id === p);
 
     const newWords = words.slice();
-    newWords[i].children = wordsReducer(words[i].children || [], {
-      ...action,
-      wordPath,
-    });
+    newWords[i].children = computeWordsState(
+      words[i].children || [],
+      action,
+      wp,
+    );
 
     return newWords;
   }
@@ -101,7 +67,15 @@ export function wordsReducer(words: Word[], action: WordAction) {
       return newWords;
     }
     default: {
-      throw Error("Unknown action");
+      return words;
     }
   }
+}
+
+export function wordsReducer(
+  words: AppState["words"],
+  action: Action,
+  prevState: AppState,
+): AppState["words"] {
+  return computeWordsState(words, action, prevState.wordPath);
 }

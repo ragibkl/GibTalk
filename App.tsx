@@ -1,5 +1,6 @@
 import "react-native-gesture-handler";
 
+import MaterialCommunityIcons from "@expo/vector-icons/build/MaterialCommunityIcons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -9,18 +10,15 @@ import { LogBox, StyleSheet } from "react-native";
 import { MenuProvider } from "react-native-popup-menu";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
+import { AppStateProvider } from "./src/appState";
+import { speakInit } from "./src/service/speech";
+import { Word } from "./src/service/words";
+
 import CreateWordScreen from "./src/screens/editWord/CreateWordScreen";
 import EditWordScreen from "./src/screens/editWord/EditWordScreen";
 import MainScreen from "./src/screens/main/MainScreen";
-import { speakInit } from "./src/service/speech";
-import { HistoryProvider } from "./src/service/history";
-import { WordPathProvider } from "./src/service/wordPath";
-import { WordsProvider } from "./src/service/words/WordsContext";
-
-import { Word } from "./src/service/words";
 import ImageSearchScreen from "./src/screens/imageSearch/ImageSearchScreen";
 import KeyboardScreen from "./src/screens/keyboard/KeyboardScreen";
-import MaterialCommunityIcons from "@expo/vector-icons/build/MaterialCommunityIcons";
 import TemplateSearchScreen from "./src/screens/templates/TemplateSearchScreen";
 
 // https://reactnavigation.org/docs/troubleshooting/#i-get-the-warning-non-serializable-values-were-found-in-the-navigation-state
@@ -86,48 +84,44 @@ export default function App() {
 
   return (
     <MenuProvider>
-      <WordPathProvider>
-        <HistoryProvider>
-          <WordsProvider>
-            <SafeAreaProvider>
-              <NavigationContainer>
-                <Stack.Navigator screenOptions={screenOptions}>
-                  <Stack.Screen
-                    name="Home"
-                    component={HomeTabs}
-                    options={{
-                      title: "GibTalk - Development",
-                      headerShown: false,
-                    }}
-                  />
-                  <Stack.Screen
-                    name="createWord"
-                    component={CreateWordScreen}
-                    options={{ title: "Add New Word" }}
-                  />
-                  <Stack.Screen
-                    name="editWord"
-                    component={EditWordScreen}
-                    options={{ title: "Edit Word" }}
-                  />
-                  <Stack.Screen
-                    name="searchImage"
-                    component={ImageSearchScreen}
-                    options={{ title: "Search Symbol" }}
-                  />
-                  <Stack.Screen
-                    name="searchTemplate"
-                    component={TemplateSearchScreen}
-                    options={{ title: "Load a Template" }}
-                  />
-                </Stack.Navigator>
-              </NavigationContainer>
+      <AppStateProvider>
+        <SafeAreaProvider>
+          <NavigationContainer>
+            <Stack.Navigator screenOptions={screenOptions}>
+              <Stack.Screen
+                name="Home"
+                component={HomeTabs}
+                options={{
+                  title: "GibTalk - Development",
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="createWord"
+                component={CreateWordScreen}
+                options={{ title: "Add New Word" }}
+              />
+              <Stack.Screen
+                name="editWord"
+                component={EditWordScreen}
+                options={{ title: "Edit Word" }}
+              />
+              <Stack.Screen
+                name="searchImage"
+                component={ImageSearchScreen}
+                options={{ title: "Search Symbol" }}
+              />
+              <Stack.Screen
+                name="searchTemplate"
+                component={TemplateSearchScreen}
+                options={{ title: "Load a Template" }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
 
-              <StatusBar style="auto" />
-            </SafeAreaProvider>
-          </WordsProvider>
-        </HistoryProvider>
-      </WordPathProvider>
+          <StatusBar style="auto" />
+        </SafeAreaProvider>
+      </AppStateProvider>
     </MenuProvider>
   );
 }
