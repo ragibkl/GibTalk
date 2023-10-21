@@ -91,7 +91,7 @@ export default function ImageSearchScreen(props: ImageSearchScreenProps) {
     };
 
     return (
-      <CustomImage key={i} uri={symbol.uri} onSelectImage={onSelectImage} />
+      <CustomImage key={i} uri={symbol.url} onSelectImage={onSelectImage} />
     );
   };
 
