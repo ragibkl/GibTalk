@@ -16,7 +16,7 @@ import {
   TemplateItem,
   fetchTemplate,
   getTemplates,
-} from "../../service/templateSearch";
+} from "../../api/templateSearch";
 import { useBackup } from "../../service/backup";
 
 import PressableOpacity from "../../components/PressableOpacity";

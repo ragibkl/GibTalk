@@ -16,7 +16,7 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { StackScreenProps } from "@react-navigation/stack";
 
 import { RootStackParamList } from "../../../App";
-import { ImageResult, getSearchSymbols } from "../../service/imageSearch";
+import { ImageResult, getSearchSymbols } from "../../api/imageSearch";
 
 const IMAGE_SIZE = 100;
 
@@ -91,7 +91,7 @@ export default function ImageSearchScreen(props: ImageSearchScreenProps) {
     };
 
     return (
-      <CustomImage key={i} uri={symbol.uri} onSelectImage={onSelectImage} />
+      <CustomImage key={i} uri={symbol.url} onSelectImage={onSelectImage} />
     );
   };
 
