@@ -1,5 +1,5 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import {
   ActivityIndicator,
   Image,
@@ -10,8 +10,6 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { SvgUri } from "react-native-svg";
-import { captureRef } from "react-native-view-shot";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { StackScreenProps } from "@react-navigation/stack";
 
@@ -19,37 +17,6 @@ import { RootStackParamList } from "../../../App";
 import { ImageResult, getSearchSymbols } from "../../api/imageSearch";
 
 const IMAGE_SIZE = 100;
-
-type CustomImageProps = {
-  uri: string;
-  onSelectImage: (uri: string) => void;
-};
-
-function CustomImage(props: CustomImageProps) {
-  const { uri, onSelectImage } = props;
-  const imageRef = useRef(null);
-
-  const onPress = async () => {
-    if (uri.endsWith("svg")) {
-      const localUri = await captureRef(imageRef, { height: 220, quality: 1 });
-      onSelectImage(localUri);
-    } else {
-      onSelectImage(uri);
-    }
-  };
-
-  return (
-    <Pressable style={styles.symbolContainer} onPress={onPress}>
-      <View ref={imageRef} collapsable={false} style={styles.symbolImageBox}>
-        {uri.endsWith("svg") ? (
-          <SvgUri uri={uri} width={IMAGE_SIZE} height={IMAGE_SIZE} />
-        ) : (
-          <Image source={{ uri }} style={styles.symbolImage} />
-        )}
-      </View>
-    </Pressable>
-  );
-}
 
 type ImageSearchNavigationProps = NavigationProp<
   RootStackParamList,
@@ -85,13 +52,17 @@ export default function ImageSearchScreen(props: ImageSearchScreenProps) {
   };
 
   const renderSymbol = (symbol: ImageResult, i: number) => {
-    const onSelectImage = (uri: string) => {
-      onUpdateUri(uri);
+    const onPress = () => {
+      onUpdateUri(symbol.url);
       navigation.goBack();
     };
 
     return (
-      <CustomImage key={i} uri={symbol.url} onSelectImage={onSelectImage} />
+      <Pressable key={i} style={styles.symbolContainer} onPress={onPress}>
+        <View style={styles.symbolImageBox}>
+          <Image source={{ uri: symbol.url }} style={styles.symbolImage} />
+        </View>
+      </Pressable>
     );
   };
 
