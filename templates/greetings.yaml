@@ -1,0 +1,64 @@
+- label: Greetings
+  language: en
+  uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/hello_1.png
+  children:
+    - label: I
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/I%20am/I%20am-05.png
+    - label: Hi
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/hello_1.png
+    - label: Good Morning
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/morning.png
+    - label: Good Afternoon
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/Sun_1.png
+    - label: How are you
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/how%20are%20you%20doing.png
+    - label: Want
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/want.png
+    - label: Wave
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/hello.png
+    - label: Shake Hand
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/shake%20hands.png
+    - label: High Five
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/high%20five.png
+    - label: Good
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/good.png
+    - label: Don't Want
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20do%20not%20want.png
+    - label: Fist bump
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/fist%20bump.png
+    - label: Hug
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/hug_to.png
+    - label: Bye
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/goodbye_1.png
+    - label: Not Good
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/bad.png
+    - label: Teacher
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/schoolteacher.png
+    - label: Mommy
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/mother.png
+    - label: Daddy
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/father.png
+    - label: Friend
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/friends/friends-04.png
+    - label: Thank You
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/thanks.png

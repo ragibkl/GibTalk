@@ -2,3 +2,7 @@
   description: Basic Starter Template to use as an example
   author: Ragib
   uri: ./gibtalk-starter.yaml
+- name: Greetings
+  description: Basic Greetings in English
+  author: GK
+  uri: ./greetings.yaml
