@@ -8,4 +8,5 @@ type AddWordHistoryAction = {
 type ClearWordHistoryAction = {
   type: "clear-word-history";
 };
+
 export type WordHistoryAction = AddWordHistoryAction | ClearWordHistoryAction;
