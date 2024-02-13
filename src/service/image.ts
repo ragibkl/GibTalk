@@ -14,9 +14,20 @@ export async function base64ImageFromFile(fileUri: string): Promise<string> {
 
 export async function base64ImageFromHttp(uri: string): Promise<string> {
   const fileUri = `${FileSystem.cacheDirectory}/${uuid.v4()}.temp`;
-  await FileSystem.downloadAsync(uri, fileUri);
 
-  return base64ImageFromFile(fileUri);
+  let last_error = null;
+  for (let i = 0; i < 5; i++) {
+    try {
+      await FileSystem.downloadAsync(uri, fileUri);
+      return base64ImageFromFile(fileUri);
+    } catch (error) {
+      last_error = error;
+      console.log("error fetching image from uri");
+    }
+  }
+
+  console.log("error fetching image from uri, max retries exceeded");
+  throw last_error;
 }
 
 export async function base64Image(uri: string): Promise<string> {
