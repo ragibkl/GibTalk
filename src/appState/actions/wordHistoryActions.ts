@@ -1,10 +1,12 @@
 import { Word } from "../../service/words";
 
-export type WordHistoryAction =
-  | {
-      type: "add-word-history";
-      word: Word;
-    }
-  | {
-      type: "clear-word-history";
-    };
+type AddWordHistoryAction = {
+  type: "add-word-history";
+  word: Word;
+};
+
+type ClearWordHistoryAction = {
+  type: "clear-word-history";
+};
+
+export type WordHistoryAction = AddWordHistoryAction | ClearWordHistoryAction;

@@ -3,6 +3,7 @@ import { AppState } from "../schema";
 import { isFetchingReducer } from "./isFetchingReducer";
 import { wordHistoryReducer } from "./wordHistoryReducer";
 import { wordPathReducer } from "./wordPathReducer";
+import { wordClipboardReducer } from "./wordClipboardReducer";
 import { wordsReducer } from "./wordsReducer";
 
 export function appStateReducer(state: AppState, action: Action): AppState {
@@ -11,5 +12,6 @@ export function appStateReducer(state: AppState, action: Action): AppState {
     words: wordsReducer(state.words, action, state),
     wordHistory: wordHistoryReducer(state.wordHistory, action, state),
     wordPath: wordPathReducer(state.wordPath, action, state),
+    wordClipboard: wordClipboardReducer(state.wordClipboard, action, state),
   };
 }

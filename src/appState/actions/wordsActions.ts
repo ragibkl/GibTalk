@@ -10,6 +10,11 @@ type AddWordAction = {
   word: Word;
 };
 
+type AddWordsAction = {
+  type: "add-words";
+  words: Word[];
+};
+
 type UpdateWordAction = {
   type: "update-word";
   word: Word;
@@ -30,9 +35,10 @@ type MoveWordRight = {
   wordId: string;
 };
 
-export type WordAction =
+export type WordsAction =
   | SetWordsAction
   | AddWordAction
+  | AddWordsAction
   | UpdateWordAction
   | RemoveWordAction
   | MoveWordLeft

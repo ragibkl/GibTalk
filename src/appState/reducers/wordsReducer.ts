@@ -28,6 +28,9 @@ export function computeWordsState(
     case "add-word": {
       return [...words, action.word];
     }
+    case "add-words": {
+      return [...words, ...action.words];
+    }
     case "update-word": {
       const i = words.findIndex((w) => w.id === action.word.id);
       const newWords = words.slice();

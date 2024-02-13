@@ -17,6 +17,7 @@ import PasscodeModal from "./PasscodeModal";
 import WordsEmptyGrid from "./WordsEmptyGrid";
 import WordsGrid from "./WordsGrid";
 import WordsHistoryList from "./WordsHistoryList";
+import { useClipboard } from "../../service/clipboard";
 
 type HomeScreenNavigationProps = NavigationProp<RootStackParamList, "Home">;
 
@@ -29,6 +30,7 @@ export default function MainScreen() {
   const { popToTop, pop } = useWordPath();
   const { words, isFetching } = useWords();
   const { history, clearHistory } = useHistory();
+  const { clipboard, clearClipboard, pasteWords } = useClipboard();
 
   const onPressClear = () => {
     clearHistory();
@@ -71,6 +73,15 @@ export default function MainScreen() {
 
   const onPressSave = () => {
     setIsEditing(false);
+    clearClipboard();
+  };
+
+  const onPressClearClipboard = () => {
+    clearClipboard();
+  };
+
+  const onPressPaste = () => {
+    pasteWords();
   };
 
   return (
@@ -78,12 +89,47 @@ export default function MainScreen() {
       <View style={styles.body}>
         <View style={styles.bodyTop}>
           <View style={styles.historyContainer}>
-            <Text style={styles.currentText}>Words history</Text>
-            <WordsHistoryList words={history} />
+            {isEditing ? (
+              <>
+                <Text style={styles.currentText}>Clipboard</Text>
+                <WordsHistoryList words={clipboard} />
+              </>
+            ) : (
+              <>
+                <Text style={styles.currentText}>Words history</Text>
+                <WordsHistoryList words={history} />
+              </>
+            )}
           </View>
 
           <View style={styles.controls}>
-            {!isEditing && (
+            {isEditing ? (
+              <>
+                <IconButton
+                  label="Clear All"
+                  icon="trash"
+                  onPress={onPressClearClipboard}
+                />
+                <IconButton
+                  style={{ marginLeft: 5 }}
+                  label="Paste"
+                  icon="paste"
+                  onPress={onPressPaste}
+                />
+                <IconButton
+                  style={{ marginLeft: 5 }}
+                  label="Home"
+                  icon="home"
+                  onPress={popToTop}
+                />
+                <IconButton
+                  style={{ marginLeft: 5 }}
+                  label="Back"
+                  icon="arrow-left"
+                  onPress={pop}
+                />
+              </>
+            ) : (
               <>
                 <IconButton label="Play" icon="play" onPress={onPressPlay} />
                 <IconButton
@@ -92,20 +138,20 @@ export default function MainScreen() {
                   icon="trash"
                   onPress={onPressClear}
                 />
+                <IconButton
+                  style={{ marginLeft: 5 }}
+                  label="Home"
+                  icon="home"
+                  onPress={popToTop}
+                />
+                <IconButton
+                  style={{ marginLeft: 5 }}
+                  label="Back"
+                  icon="arrow-left"
+                  onPress={pop}
+                />
               </>
             )}
-            <IconButton
-              style={{ marginLeft: 5 }}
-              label="Home"
-              icon="home"
-              onPress={popToTop}
-            />
-            <IconButton
-              style={{ marginLeft: 5 }}
-              label="Back"
-              icon="arrow-left"
-              onPress={pop}
-            />
           </View>
         </View>
 
