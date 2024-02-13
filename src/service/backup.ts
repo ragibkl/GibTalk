@@ -58,13 +58,14 @@ export function useBackup() {
       copyToCacheDirectory: false,
     });
 
-    if (pickerResult.type !== "success") {
+    if (pickerResult.canceled || !pickerResult.assets[0]) {
       return;
     }
 
-    const fileUri = `${FileSystem.cacheDirectory}/${pickerResult.name}`;
+    const asset = pickerResult.assets[0];
+    const fileUri = `${FileSystem.cacheDirectory}/${asset.name}`;
     await FileSystem.copyAsync({
-      from: pickerResult.uri,
+      from: asset.uri,
       to: fileUri,
     });
 
