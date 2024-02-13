@@ -4,6 +4,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/build/MaterialCommunityIc
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useKeepAwake } from "expo-keep-awake";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import { LogBox, StyleSheet } from "react-native";
@@ -78,6 +79,8 @@ function HomeTabs() {
 }
 
 export default function App() {
+  useKeepAwake();
+
   useEffect(() => {
     speakInit();
   }, []);
