@@ -114,7 +114,7 @@ export default function App() {
               <Stack.Screen
                 name="searchTemplate"
                 component={TemplateSearchScreen}
-                options={{ title: "Load a Template" }}
+                options={{ title: "Import a Template" }}
               />
             </Stack.Navigator>
           </NavigationContainer>
