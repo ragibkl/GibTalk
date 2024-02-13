@@ -20,10 +20,6 @@ export default function ImageRetry({ onError, ...restProps }: ImageProps) {
   };
 
   return (
-    <Image
-      key={`image-${retries}`}
-      onError={onImageError}
-      {...restProps}
-    />
+    <Image key={`image-${retries}`} onError={onImageError} {...restProps} />
   );
 }
