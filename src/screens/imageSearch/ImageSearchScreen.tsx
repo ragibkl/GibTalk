@@ -2,7 +2,6 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useState } from "react";
 import {
   ActivityIndicator,
-  Image,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -15,6 +14,8 @@ import { StackScreenProps } from "@react-navigation/stack";
 
 import { RootStackParamList } from "../../../App";
 import { ImageResult, getSearchSymbols } from "../../api/imageSearch";
+
+import ImageRetry from "../../components/ImageRetry";
 
 const IMAGE_SIZE = 100;
 
@@ -60,7 +61,7 @@ export default function ImageSearchScreen(props: ImageSearchScreenProps) {
     return (
       <Pressable key={i} style={styles.symbolContainer} onPress={onPress}>
         <View style={styles.symbolImageBox}>
-          <Image source={{ uri: symbol.url }} style={styles.symbolImage} />
+          <ImageRetry source={{ uri: symbol.url }} style={styles.symbolImage} />
         </View>
       </Pressable>
     );
