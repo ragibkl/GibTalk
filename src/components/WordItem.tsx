@@ -6,6 +6,7 @@ import { speakWord } from "../service/speech";
 import { useWords, Word } from "../service/words";
 import { useHistory } from "../service/history";
 import { useWordPath } from "../service/wordPath";
+import { useClipboard } from "../service/clipboard";
 
 type Props = {
   word: Word;
@@ -17,6 +18,7 @@ export default function WordItem({ word, editWord, isEditing }: Props) {
   const { removeWord, moveWordLeft, moveWordRight } = useWords();
   const { addWordToPath } = useWordPath();
   const { addWordToHistory } = useHistory();
+  const { copyWord } = useClipboard();
 
   const onPressWord = () => {
     speakWord(word);
@@ -29,6 +31,10 @@ export default function WordItem({ word, editWord, isEditing }: Props) {
 
   const onPressEdit = () => {
     editWord(word);
+  };
+
+  const onPressCopy = () => {
+    copyWord(word);
   };
 
   const onPressRemove = () => {
@@ -55,6 +61,12 @@ export default function WordItem({ word, editWord, isEditing }: Props) {
           <View style={styles.editContainer}>
             <PressableOpacity onPress={onPressEdit}>
               <FontAwesome style={styles.editIcon} size={20} name="edit" />
+            </PressableOpacity>
+          </View>
+
+          <View style={styles.copyContainer}>
+            <PressableOpacity onPress={onPressCopy}>
+              <FontAwesome style={styles.copyIcon} size={25} name="copy" />
             </PressableOpacity>
           </View>
 
@@ -128,6 +140,22 @@ const styles = StyleSheet.create({
     width: 30,
   },
   editIcon: {
+    color: "black",
+  },
+  copyContainer: {
+    alignItems: "center",
+    backgroundColor: "white",
+    borderColor: "black",
+    borderRadius: 15,
+    borderWidth: 2,
+    height: 30,
+    justifyContent: "center",
+    left: 40,
+    position: "absolute",
+    top: 5,
+    width: 30,
+  },
+  copyIcon: {
     color: "black",
   },
   deleteContainer: {

@@ -1,10 +1,12 @@
 import { IsFetchingAction } from "./isFetchingActions";
 import { WordHistoryAction } from "./wordHistoryActions";
 import { WordPathAction } from "./wordPathActions";
-import { WordAction } from "./wordsActions";
+import { WordsAction } from "./wordsActions";
+import { WordClipboardAction } from "./wordClipboardActions";
 
 export type Action =
   | IsFetchingAction
-  | WordAction
+  | WordsAction
+  | WordHistoryAction
   | WordPathAction
-  | WordHistoryAction;
+  | WordClipboardAction;
