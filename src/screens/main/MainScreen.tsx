@@ -193,11 +193,6 @@ const styles = StyleSheet.create({
   gridContainer: {
     flex: 1,
   },
-  progressCircle: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
   sideControls: {
     alignItems: "flex-end",
     flexWrap: "wrap",

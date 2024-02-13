@@ -29,7 +29,7 @@ type TemplatesScreenProps = StackScreenProps<
 
 export default function TemplateSearchScreen(props: TemplatesScreenProps) {
   const navigation = useNavigation<TemplatesScreenProps["navigation"]>();
-  const { restoreBackupContents } = useBackup();
+  const { mergeTemplateContents } = useBackup();
 
   const [templates, setTemplates] = useState<TemplateItem[]>([]);
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateItem | null>(
@@ -73,7 +73,7 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
 
     setIsLoading(true);
     const content = await fetchTemplate(selectedTemplate);
-    await restoreBackupContents(content);
+    await mergeTemplateContents(content);
     setSelectedTemplate(null);
     setIsLoading(false);
     navigation.pop();
@@ -130,7 +130,12 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
         setVisible={modalSetVisible}
       >
         <Text style={styles.modalTextTitle}>{selectedTemplate?.name}</Text>
-        <Text style={styles.modalText}>Load template?</Text>
+        <Text style={styles.modalText}>
+          Import template into current board?
+        </Text>
+        <Text style={styles.modalText}>
+          Words in this template will be combined with your current board.
+        </Text>
 
         <View style={styles.modalButtonRow}>
           <PressableOpacity

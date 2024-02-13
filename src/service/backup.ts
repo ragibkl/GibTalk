@@ -74,10 +74,11 @@ export function useBackup() {
     await setWords(wordsBakToWords(wordsBak));
   };
 
-  const restoreBackupContents = async (contents: string) => {
+  const mergeTemplateContents = async (contents: string) => {
     const wordsBak = YAML.parse(contents) as WordBak[];
-    await setWords(wordsBakToWords(wordsBak));
+    let template = wordsBakToWords(wordsBak);
+    await setWords([...words, ...template]);
   };
 
-  return { createBackup, restoreBackup, restoreBackupContents };
+  return { createBackup, restoreBackup, mergeTemplateContents };
 }
