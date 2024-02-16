@@ -3,10 +3,11 @@ import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import { useBackup } from "../../service/backup";
+import { useClipboard } from "../../service/clipboard";
 import { useHistory } from "../../service/history";
 import { speakWord, stopSpeech } from "../../service/speech";
-import { Word, useWords } from "../../service/words";
 import { useWordPath } from "../../service/wordPath";
+import { Word, useWords } from "../../service/words";
 
 import { RootStackParamList } from "../../../App";
 import IconButton from "../../components/IconButton";
@@ -17,7 +18,6 @@ import PasscodeModal from "./PasscodeModal";
 import WordsEmptyGrid from "./WordsEmptyGrid";
 import WordsGrid from "./WordsGrid";
 import WordsHistoryList from "./WordsHistoryList";
-import { useClipboard } from "../../service/clipboard";
 
 type HomeScreenNavigationProps = NavigationProp<RootStackParamList, "Home">;
 
@@ -55,14 +55,6 @@ export default function MainScreen() {
     navigation.navigate("editWord", { word });
   };
 
-  const onPressBackup = () => {
-    createBackup();
-  };
-
-  const onPressRestore = () => {
-    restoreBackup();
-  };
-
   const onPressTemplates = () => {
     navigation.navigate("searchTemplate");
   };
@@ -71,17 +63,9 @@ export default function MainScreen() {
     navigation.navigate("createWord");
   };
 
-  const onPressSave = () => {
+  const onPressDone = () => {
     setIsEditing(false);
     clearClipboard();
-  };
-
-  const onPressClearClipboard = () => {
-    clearClipboard();
-  };
-
-  const onPressPaste = () => {
-    pasteWords();
   };
 
   return (
@@ -105,28 +89,12 @@ export default function MainScreen() {
           <View style={styles.controls}>
             {isEditing ? (
               <>
+                <IconButton label="Paste" icon="paste" onPress={pasteWords} />
                 <IconButton
+                  style={{ marginLeft: 5 }}
                   label="Clear All"
                   icon="trash"
-                  onPress={onPressClearClipboard}
-                />
-                <IconButton
-                  style={{ marginLeft: 5 }}
-                  label="Paste"
-                  icon="paste"
-                  onPress={onPressPaste}
-                />
-                <IconButton
-                  style={{ marginLeft: 5 }}
-                  label="Home"
-                  icon="home"
-                  onPress={popToTop}
-                />
-                <IconButton
-                  style={{ marginLeft: 5 }}
-                  label="Back"
-                  icon="arrow-left"
-                  onPress={pop}
+                  onPress={clearClipboard}
                 />
               </>
             ) : (
@@ -138,20 +106,20 @@ export default function MainScreen() {
                   icon="trash"
                   onPress={onPressClear}
                 />
-                <IconButton
-                  style={{ marginLeft: 5 }}
-                  label="Home"
-                  icon="home"
-                  onPress={popToTop}
-                />
-                <IconButton
-                  style={{ marginLeft: 5 }}
-                  label="Back"
-                  icon="arrow-left"
-                  onPress={pop}
-                />
               </>
             )}
+            <IconButton
+              style={{ marginLeft: 5 }}
+              label="Home"
+              icon="home"
+              onPress={popToTop}
+            />
+            <IconButton
+              style={{ marginLeft: 5 }}
+              label="Back"
+              icon="arrow-left"
+              onPress={pop}
+            />
           </View>
         </View>
 
@@ -173,12 +141,12 @@ export default function MainScreen() {
                 <IconButton
                   label="Backup"
                   icon="download"
-                  onPress={onPressBackup}
+                  onPress={createBackup}
                 />
                 <IconButton
                   label="Restore"
                   icon="upload"
-                  onPress={onPressRestore}
+                  onPress={restoreBackup}
                 />
                 <IconButton
                   label="Templates"
@@ -186,7 +154,7 @@ export default function MainScreen() {
                   onPress={onPressTemplates}
                 />
                 <IconButton label="Add" icon="plus" onPress={onPressAdd} />
-                <IconButton label="Done" icon="check" onPress={onPressSave} />
+                <IconButton label="Done" icon="check" onPress={onPressDone} />
               </>
             ) : (
               <IconButton label="Edit" icon="edit" onPress={onPressEdit} />
