@@ -29,21 +29,19 @@ export default function HistoryItem({ word }: Props) {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    backgroundColor: "lightgreen",
-    borderColor: "black",
+    backgroundColor: "white",
+    borderColor: "lightgreen",
     borderRadius: 5,
-    borderWidth: 1,
+    borderWidth: 2,
     margin: 2,
-    width: 60,
+    width: 65,
   },
   image: {
     backgroundColor: "white",
-    borderColor: "black",
-    borderRadius: 3,
+    borderColor: 'black',
     borderWidth: 1,
-    height: 40,
-    marginTop: 2,
-    width: 40,
+    height: 45,
+    width: 45,
   },
   text: {
     margin: 2,

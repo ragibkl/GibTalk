@@ -104,23 +104,20 @@ export default function WordItem({ word, editWord, isEditing }: Props) {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    backgroundColor: "lightgreen",
+    borderColor: "lightgreen",
+    backgroundColor: "white",
     borderRadius: 10,
-    borderWidth: 2,
+    borderWidth: 4,
     margin: 5,
     width: 150,
   },
   category: {
-    backgroundColor: "yellow",
+    borderColor: "yellow",
   },
   image: {
     backgroundColor: "white",
-    borderColor: "black",
-    borderRadius: 5,
-    borderWidth: 2,
-    height: 100,
-    marginTop: 15,
-    width: 100,
+    height: 125,
+    width: 125,
   },
   labelText: {
     margin: 5,
