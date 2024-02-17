@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { useBackup } from "../../service/backup";
 import { useClipboard } from "../../service/clipboard";
 import { useHistory } from "../../service/history";
-import { speakWord, stopSpeech } from "../../service/speech";
+import { speakWords, stopSpeech } from "../../service/speech";
 import { useWordPath } from "../../service/wordPath";
 import { Word, useWords } from "../../service/words";
 
@@ -38,7 +38,7 @@ export default function MainScreen() {
   };
 
   const onPressPlay = () => {
-    history.forEach(speakWord);
+    speakWords(history);
   };
 
   const onPressEdit = () => {
