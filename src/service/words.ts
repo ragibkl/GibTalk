@@ -31,7 +31,8 @@ export async function wordImagesBase64(words: Word[]): Promise<Word[]> {
   );
 }
 
-function getWordsInPath(words: Word[], wordIds: string[]): Word[] {
+function getWordsInPath(words: Word[], wordPath: Word[]): Word[] {
+  const wordIds = wordPath.map((w) => w.id);
   let result = words;
   for (let i = 0; i < wordIds.length; i++) {
     const parentWord = result.find((w) => w.id === wordIds[i]);

@@ -5,7 +5,7 @@ export type AppState = {
   words: Word[];
   wordClipboard: Word[];
   wordHistory: Word[];
-  wordPath: string[];
+  wordPath: Word[];
 };
 
 export const DEFAULT_APP_STATE: AppState = {

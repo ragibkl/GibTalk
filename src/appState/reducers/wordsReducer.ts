@@ -5,10 +5,10 @@ import { AppState } from "../schema";
 export function computeWordsState(
   words: Word[],
   action: Action,
-  wordPath: string[],
+  wordPathIds: string[],
 ): Word[] {
-  if (wordPath && wordPath.length) {
-    const [p, ...wp] = wordPath;
+  if (wordPathIds && wordPathIds.length) {
+    const [p, ...wp] = wordPathIds;
     const i = words.findIndex((w) => w.id === p);
 
     const newWords = words.slice();
@@ -80,5 +80,6 @@ export function wordsReducer(
   action: Action,
   prevState: AppState,
 ): AppState["words"] {
-  return computeWordsState(words, action, prevState.wordPath);
+  const wordPathIds = prevState.wordPath.map((w) => w.id);
+  return computeWordsState(words, action, wordPathIds);
 }

@@ -9,7 +9,7 @@ export function useWordPath() {
 
   const addWordToPath = (word: Word) => {
     if (word.children) {
-      dispatch({ type: "add-word-path", wordId: word.id });
+      dispatch({ type: "add-word-path", word });
     }
   };
 
@@ -21,10 +21,15 @@ export function useWordPath() {
     dispatch({ type: "clear-word-path" });
   };
 
+  const popToWord = (word: Word) => {
+    dispatch({ type: "pop-word-path-to-word", word });
+  };
+
   return {
     wordPath,
     addWordToPath,
     pop,
     popToTop,
+    popToWord,
   };
 }

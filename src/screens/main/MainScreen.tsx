@@ -14,6 +14,7 @@ import IconButton from "../../components/IconButton";
 import { ProgressIcon } from "../../components/ProgressIcon";
 import SafeAreaView from "../../components/SafeAreaView";
 
+import BreadCrumbs from "./BreadCrumbs";
 import PasscodeModal from "./PasscodeModal";
 import WordsEmptyGrid from "./WordsEmptyGrid";
 import WordsGrid from "./WordsGrid";
@@ -123,6 +124,10 @@ export default function MainScreen() {
           </View>
         </View>
 
+        <View style={styles.bodyBreadcrumbs}>
+          <BreadCrumbs />
+        </View>
+
         <View style={styles.bodyBottom}>
           <View style={styles.gridContainer}>
             {!!isFetching ? (
@@ -197,6 +202,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     marginLeft: 5,
+  },
+  bodyBreadcrumbs: {
+    paddingHorizontal: 10,
   },
   bodyBottom: {
     alignItems: "stretch",
