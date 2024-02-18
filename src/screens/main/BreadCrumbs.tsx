@@ -14,12 +14,12 @@ export default function BreadCrumbs() {
     };
 
     return (
-      <>
+      <View style={styles.textContainer} key={word.id}>
         <Text style={styles.separator}>/</Text>
         <PressableOpacity onPress={onPress}>
           <Text style={styles.text}>{word.label}</Text>
         </PressableOpacity>
-      </>
+      </View>
     );
   };
 
@@ -28,6 +28,7 @@ export default function BreadCrumbs() {
       <PressableOpacity onPress={popToTop}>
         <Text style={styles.text}>Home</Text>
       </PressableOpacity>
+
       {wordPath.map(renderWord)}
     </View>
   );
@@ -39,6 +40,9 @@ const styles = StyleSheet.create({
   },
   separator: {
     marginHorizontal: 5,
+  },
+  textContainer: {
+    flexDirection: "row",
   },
   text: {
     color: "blue",
