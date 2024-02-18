@@ -8,7 +8,7 @@ export function wordPathReducer(
 ): AppState["wordPath"] {
   switch (action.type) {
     case "add-word-path": {
-      return [...wordPath, action.wordId];
+      return [...wordPath, action.word];
     }
     case "pop-word-path": {
       return wordPath.slice(0, wordPath.length - 1);

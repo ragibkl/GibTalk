@@ -1,10 +1,12 @@
+import { Word } from "../../service/words";
+
 type ClearWordPathAction = {
   type: "clear-word-path";
 };
 
 type AddWordPathAction = {
   type: "add-word-path";
-  wordId: string;
+  word: Word;
 };
 
 type PopWordPathAction = {

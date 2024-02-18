@@ -9,7 +9,7 @@ export function useWordPath() {
 
   const addWordToPath = (word: Word) => {
     if (word.children) {
-      dispatch({ type: "add-word-path", wordId: word.id });
+      dispatch({ type: "add-word-path", word });
     }
   };
 
