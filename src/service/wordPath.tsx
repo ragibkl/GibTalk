@@ -21,10 +21,15 @@ export function useWordPath() {
     dispatch({ type: "clear-word-path" });
   };
 
+  const popToWord = (word: Word) => {
+    dispatch({ type: "pop-word-path-to-word", word });
+  };
+
   return {
     wordPath,
     addWordToPath,
     pop,
     popToTop,
+    popToWord,
   };
 }

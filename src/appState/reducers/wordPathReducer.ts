@@ -13,6 +13,10 @@ export function wordPathReducer(
     case "pop-word-path": {
       return wordPath.slice(0, wordPath.length - 1);
     }
+    case "pop-word-path-to-word": {
+      const i = wordPath.findIndex((w) => w.id === action.word.id);
+      return wordPath.slice(0, i + 1);
+    }
     case "clear-word-path": {
       return [];
     }

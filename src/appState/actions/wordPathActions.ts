@@ -13,7 +13,13 @@ type PopWordPathAction = {
   type: "pop-word-path";
 };
 
+type PopWordPathToWordAction = {
+  type: "pop-word-path-to-word";
+  word: Word;
+};
+
 export type WordPathAction =
   | ClearWordPathAction
   | AddWordPathAction
-  | PopWordPathAction;
+  | PopWordPathAction
+  | PopWordPathToWordAction;
