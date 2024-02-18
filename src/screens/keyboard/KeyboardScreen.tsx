@@ -29,8 +29,8 @@ export default function KeyboardScreen(props: KeyboardScreenProps) {
   };
 
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.body}>
         <View style={styles.bodyRow}>
           <View style={styles.textInputContainer}>
             <TextInput
@@ -74,10 +74,13 @@ export default function KeyboardScreen(props: KeyboardScreenProps) {
 
 const styles = StyleSheet.create({
   container: {
+    alignSelf: "stretch",
+    backgroundColor: "white",
     flex: 1,
     flexDirection: "column",
-    alignSelf: "stretch",
-    padding: 10,
+  },
+  body: {
+    padding: 5,
   },
   bodyRow: {
     flexDirection: "row",
