@@ -4,76 +4,76 @@
   children:
     - label: I
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/I%20am/I%20am-05.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/I%20am/I%20am-05.png
     - label: want
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/want.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/want.png
     - label: do not want
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20do%20not%20want.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20do%20not%20want.png
     - label: fasting
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/No%20eating.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/No%20eating.png
     - label: wait
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/wait_4.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/wait_4.png
     - label: eat
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/eat_1.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/eat_1.png
     - label: drink
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/drink_2.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/drink_2.png
     - label: selamat berpuasa
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/hello_1.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/hello_1.png
     - label: "yes"
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/yes_1.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/yes_1.png
     - label: "no"
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/No/No-01.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/No/No-01.png
     - label: hungry
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/hungry_3.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/hungry_3.png
     - label: thirsty
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/thirsty_1.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/thirsty_1.png
     - label: when
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/when.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/when.png
     - label: sahur
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/morning.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/morning.png
     - label: break fast
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/afternoon.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/afternoon.png
     - label: tired
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/tired_3.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/tired_3.png
     - label: rest
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/rest_1.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/rest_1.png
     - label: dates
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/dates.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/dates.png
     - label: azan
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/hear.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/hear.png
     - label: pray
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/prayer/prayer-02.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/prayer/prayer-02.png
     - label: all done
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/finish_2.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/finish_2.png
     - label: thank you
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Thank%20you/Thank%20you-01.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Thank%20you/Thank%20you-01.png
     - label: together
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/family.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/family.png
     - label: teraweh
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/pray_1.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/pray_1.png
     - label: mosque
       language: en
-      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/mosque.png
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/mosque.png
