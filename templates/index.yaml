@@ -6,3 +6,11 @@
   description: Basic Greetings in Bahasa Malaysia
   author: GK
   uri: ./greetings-ms.yaml
+- name: Fasting
+  description: Ramadan Fasting in English
+  author: GK
+  uri: ./fasting-en.yaml
+- name: Puasa
+  description: Ramadan Fasting in Bahasa Malaysia
+  author: GK
+  uri: ./fasting-ms.yaml

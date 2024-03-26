@@ -1,0 +1,79 @@
+- label: Puasa
+  language: en
+  uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/fast.png
+  children:
+    - label: saya
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/I%20am/I%20am-05.png
+    - label: nak
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/want.png
+    - label: tak nak
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20do%20not%20want.png
+    - label: puasa
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/No%20eating.png
+    - label: tunggu
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/wait_4.png
+    - label: makan
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/eat_1.png
+    - label: minum
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/drink_2.png
+    - label: selamat berpuasa
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/hello_1.png
+    - label: ya
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/yes_1.png
+    - label: tidak
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/No/No-01.png
+    - label: lapar
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/hungry_3.png
+    - label: haus
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/thirsty_1.png
+    - label: bila
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/when.png
+    - label: sahur
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/morning.png
+    - label: berbuka
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/afternoon.png
+    - label: penat
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/tired_3.png
+    - label: rehat
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/rest_1.png
+    - label: kurma
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/dates.png
+    - label: azan
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/hear.png
+    - label: doa
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/prayer/prayer-02.png
+    - label: habis
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/finish_2.png
+    - label: terima kasih
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Thank%20you/Thank%20you-01.png
+    - label: bersama
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/family.png
+    - label: teraweh
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/pray_1.png
+    - label: masjid/ surau
+      language: ms
+      url: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/mosque.png
