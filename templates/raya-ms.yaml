@@ -1,5 +1,5 @@
 - label: Raya
-  language: en
+  language: ms
   uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/eid/eid-01.png
   children:
     - label: saya
