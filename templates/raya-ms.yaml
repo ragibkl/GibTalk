@@ -1,0 +1,76 @@
+- label: Raya
+  language: en
+  uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/eid/eid-01.png
+  children:
+    - label: saya
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/I%20am/I%20am-05.png
+    - label: nak
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/want.png
+    - label: tak nak
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20do%20not%20want.png
+    - label: suka
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Like/Like-01.png
+    - label: minum
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/drink_2.png
+    - label: makan
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/eat_1.png
+    - label: gambar
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/take%20pictures%20of.png
+    - label: peluk
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/hug.png
+    - label: salam
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/shake%20hands.png
+    - label: baju raya
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/custom/hari-raya/baju-raya.png
+    - label: gembira
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/happy_3.png
+    - label: marah
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/angry_5.png
+    - label: duit raya
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/money.png
+    - label: Selamat Hari Raya
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/eid/eid-01.png
+    - label: ketupat
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/custom/hari-raya/ketupat.png
+    - label: kuih raya
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/custom/hari-raya/kuih-raya.png
+    - label: bising
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/noisy.png
+    - label: senyap
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/quiet.png
+    - label: masjid
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/mosque.png
+    - label: solat
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/pray_1.png
+    - label: balik rumah
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Home/Home-02.png
+    - label: lawat
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/visit_to.png
+    - label: mercun
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/fireworks_2.png
+    - label: tempat bertenang
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/calm%20area.png

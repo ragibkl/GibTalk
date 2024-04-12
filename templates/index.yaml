@@ -14,3 +14,11 @@
   description: Ramadan Fasting in Bahasa Malaysia
   author: GK
   uri: ./fasting-ms.yaml
+- name: Raya
+  description: Raya Fesitival in English
+  author: GK
+  uri: ./raya-en.yaml
+- name: Raya
+  description: Raya Festival in Bahasa Malaysia
+  author: GK
+  uri: ./raya-ms.yaml

@@ -1,0 +1,76 @@
+- label: Raya
+  language: en
+  uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/eid/eid-01.png
+  children:
+    - label: I
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/I%20am/I%20am-05.png
+    - label: want
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/want.png
+    - label: do not want
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20do%20not%20want.png
+    - label: like
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Like/Like-01.png
+    - label: drink
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/drink_2.png
+    - label: eat
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/eat_1.png
+    - label: picture
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/take%20pictures%20of.png
+    - label: hug
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/hug.png
+    - label: shake hand
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/shake%20hands.png
+    - label: baju raya
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/custom/hari-raya/baju-raya.png
+    - label: happy
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/happy_3.png
+    - label: angry
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/angry_5.png
+    - label: duit raya
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/money.png
+    - label: Selamat Hari Raya
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/eid/eid-01.png
+    - label: ketupat
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/custom/hari-raya/ketupat.png
+    - label: kuih raya
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/custom/hari-raya/kuih-raya.png
+    - label: noisy
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/noisy.png
+    - label: quiet
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/quiet.png
+    - label: mosque
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/mosque.png
+    - label: pray
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/pray_1.png
+    - label: go home
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Home/Home-02.png
+    - label: visit
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/visit_to.png
+    - label: fireworks
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/fireworks_2.png
+    - label: I need quiet space
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/calm%20area.png
