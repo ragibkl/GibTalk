@@ -1,0 +1,76 @@
+- label: Gim Luar
+  language: ms
+  uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/playground.png
+  children:
+    - label: saya
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/I%20am/I%20am-05.png 
+    - label: sedia
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/ready_1.png 
+    - label: mula
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/go_to.png 
+    - label: lari
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/run_1.png 
+    - label: jalan
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/walk_1.png 
+    - label: nak
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/want.png 
+    - label: berhenti
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/stop_3.png 
+    - label: lompat
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/jump_1.png 
+    - label: kejar
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/chase_1.png 
+    - label: tangkap
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/run%20holding%20hands_1.png 
+    - label: tak nak
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20do%20not%20want.png 
+    - label: seronok
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/fun.png 
+    - label: penat
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/tired_3.png 
+    - label: rehat
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/rest_1.png 
+    - label: tunggu
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/wait_2.png 
+    - label: cikgu
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/schoolteacher.png 
+    - label: ibu
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/mother.png 
+    - label: ayah
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/father.png 
+    - label: kawan
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/friends_1.png 
+    - label: satu
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/One/One-01.png 
+    - label: dua
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Two/Two-03.png 
+    - label: tiga
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/alphabet-and-numbers-english/Tawasol%20symbols_3.png 
+    - label: laju
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/quick.png 
+    - label: lambat
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/slow.png 

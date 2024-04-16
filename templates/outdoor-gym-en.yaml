@@ -1,0 +1,76 @@
+- label: Outdoor Gym
+  language: en
+  uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/playground.png
+  children:
+    - label: I
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/I%20am/I%20am-05.png 
+    - label: ready
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/ready_1.png 
+    - label: go
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/go_to.png 
+    - label: run
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/run_1.png 
+    - label: walk
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/walk_1.png 
+    - label: want
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/want.png 
+    - label: stop
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/stop_3.png 
+    - label: jump
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/jump_1.png 
+    - label: chase
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/chase_1.png 
+    - label: catch
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/run%20holding%20hands_1.png 
+    - label: do not want
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20do%20not%20want.png 
+    - label: fun
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/fun.png 
+    - label: tired
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/tired_3.png 
+    - label: rest
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/rest_1.png 
+    - label: wait
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/wait_2.png 
+    - label: teacher
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/schoolteacher.png 
+    - label: mother
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/mother.png 
+    - label: father
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/father.png 
+    - label: friend
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/friends_1.png 
+    - label: one
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/One/One-01.png 
+    - label: two
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Two/Two-03.png 
+    - label: three
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/alphabet-and-numbers-english/Tawasol%20symbols_3.png 
+    - label: fast
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/quick.png 
+    - label: slow
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/slow.png 

@@ -10,10 +10,18 @@
   description: Basic Play words in English
   author: GK
   uri: ./play-en.yaml
-- name: Ucapan
+- name: Main
   description: Basic Play words in Bahasa Malaysia
   author: GK
   uri: ./play-ms.yaml
+- name: Outdoor Gym
+  description: Basic Outdoor Gym words in English
+  author: GK
+  uri: ./outdoor-gym-en.yaml
+- name: Gim Luar
+  description: Basic Outdoor Gym words in Bahasa Malaysia
+  author: GK
+  uri: ./outdoor-gym-ms.yaml
 - name: Fasting
   description: Ramadan Fasting in English
   author: GK
