@@ -22,6 +22,14 @@
   description: Interactive Play words in Bahasa Malaysia
   author: GK
   uri: ./interactive-play-ms.yaml
+- name: Mealtime
+  description: Mealtime words in English
+  author: GK
+  uri: ./mealtime-en.yaml
+- name: Waktu makan
+  description: Mealtime words in Bahasa Malaysia
+  author: GK
+  uri: ./mealtime-ms.yaml
 - name: Outdoor Gym
   description: Basic Outdoor Gym words in English
   author: GK

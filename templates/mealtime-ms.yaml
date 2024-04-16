@@ -1,0 +1,79 @@
+- label: Waktu makan
+  language: ms
+  uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/eat_1.png
+  children:
+    - label: saya
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/I%20am/I%20am-05.png 
+    - label: nak
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/want.png 
+    - label: tak nak
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20do%20not%20want.png
+    - label: ya
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Right/Right-03.png 
+    - label: tidak
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/wrong/wrong-02.png 
+    - label: makan
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/eat_1.png 
+    - label: minum
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/drink_2.png 
+    - label: suka
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Like/Like-01.png 
+    - label: lagi
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20want%20more.png 
+    - label: buka
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/open.png 
+    - label: sejuk
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/drink_cold_2.png 
+    - label: panas
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/hot_1.png 
+    - label: tolong
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/help.png 
+    - label: habis
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/finish_2.png 
+    - label: sedap
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/nice_2.png 
+    - label: laju
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/quick.png 
+    - label: lambat
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/slow.png 
+    - label: lapar
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/hungry_3.png 
+    - label: haus
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/thirsty_1.png 
+    - label: pedas
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/spicy.png 
+    - label: sikit
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/few_1.png 
+    - label: banyak
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/many.png 
+    - label: manis
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/sweet_1.png 
+    - label: rangup
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/crunchy.png 
+    - label: lembut
+      language: ms
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/mash_potato_2.png 
