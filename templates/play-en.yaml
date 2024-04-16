@@ -1,0 +1,148 @@
+- label: Play
+  language: en
+  uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/play_1.png
+  children:
+    - label: I
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/I%20am/I%20am-05.png
+    - label: want
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/want.png
+    - label: do not want
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20do%20not%20want.png
+    - label: play
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/play_1.png
+    - label: up
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/up.png
+    - label: down
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/down.png
+    - label: friend
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/friends_1.png
+    - label: teacher
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/schoolteacher.png
+    - label: stop
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/stop_3.png
+    - label: clean up
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/tidy%20up.png
+    - label: fast
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/quick.png
+    - label: slow
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/slow.png
+    - label: fun
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/fun_1.png
+    - label: wait
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/wait_4.png
+    - label: your turn
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/custom/play/your-turn.png
+    - label: my turn
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/custom/play/my-turn.png
+    - label: small
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/small/small-01.png
+    - label: big
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/big/big-01.png
+    - label: one
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/one.png
+    - label: two
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/two.png
+    - label: three
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/three.png
+    - label: go
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/go_to.png
+    - label: pull
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/pull_2_to.png
+    - label: push
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/push_3.png
+    - label: open
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/open.png
+    - label: close
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/close.png
+    - label: bounce
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/bounce.png
+    - label: throw
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/throw.png
+    - label: catch
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/catch_2_to.png
+    - label: fall
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/put%20down.png
+    - label: blow
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/blow_2.png
+    - label: pop
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/bubbles.png
+    - label: scoop
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/scoop_to.png
+    - label: pour
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/pour_to.png
+    - label: pass
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/give_1.png
+    - label: kick
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/kick_ball_to.png
+    - label: cut
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/cut%20up.png
+    - label: roll
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/roll_pastry_to.png
+    - label: stir
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/stir_1.png
+    - label: stack
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/stackable%20cubes_1.png
+    - label: crash
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/accident.png
+    - label: fix
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/auto%20body%20paint%20and%20collision%20repair%20workshop.png
+    - label: squeeze
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/squeeze_to.png
+    - label: stuck
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/block.png
+    - label: spin
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/turn.png
+    - label: press
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/press.png
+    - label: knock
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/knock_to.png
+    - label: splash
+      language: en
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/splash_1.png

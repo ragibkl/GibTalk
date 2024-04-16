@@ -6,6 +6,14 @@
   description: Basic Greetings in Bahasa Malaysia
   author: GK
   uri: ./greetings-ms.yaml
+- name: Play
+  description: Basic Play words in English
+  author: GK
+  uri: ./play-en.yaml
+- name: Ucapan
+  description: Basic Play words in Bahasa Malaysia
+  author: GK
+  uri: ./play-ms.yaml
 - name: Fasting
   description: Ramadan Fasting in English
   author: GK
