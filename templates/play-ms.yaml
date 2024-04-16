@@ -1,5 +1,5 @@
 - label: Main
-  language: ms
+  language: id
   uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/play_1.png
   children:
     - label: saya
@@ -12,7 +12,7 @@
       language: ms
       uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20do%20not%20want.png
     - label: main
-      language: ms
+      language: id
       uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/play_1.png
     - label: atas
       language: ms
