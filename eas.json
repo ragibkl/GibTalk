@@ -16,6 +16,12 @@
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "appleId": "ragib.badaruddin@gmail.com",
+        "ascAppId": "6504814985",
+        "appleTeamId": "48472MD9XW"
+      }
+    }
   }
 }
