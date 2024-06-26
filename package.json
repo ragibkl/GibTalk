@@ -8,8 +8,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "fmt": "prettier --write .",
-    "build": "eas build -p android --auto-submit",
-    "build:preview": "eas build -p android --profile preview",
+    "build": "eas build -p all --auto-submit",
+    "build:preview": "eas build -p all --profile preview",
     "submit:android": "eas submit -p android",
     "ts:check": "tsc"
   },
