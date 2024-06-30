@@ -16,11 +16,10 @@
     ],
     "plugins": [
       [
-        "expo-camera",
+        "expo-image-picker",
         {
-          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
-          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
-          "recordAudioAndroid": false
+          "photosPermission": "The app accesses your photos to let you pick an image when editing a word.",
+          "cameraPermission": "The app accesses your camera to let you take a photo when editing a word."
         }
       ]
     ],
