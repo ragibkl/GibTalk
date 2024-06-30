@@ -41,10 +41,10 @@
     - label: go
       language: en
       uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/go_to.png 
-    - label: your turn
+    - label: my turn
       language: en
       uri: https://api.gibtalk.ragib.my/media/custom/play/my-turn.png 
-    - label: my turn
+    - label: your turn
       language: en
       uri: https://api.gibtalk.ragib.my/media/custom/play/your-turn.png 
     - label: up
