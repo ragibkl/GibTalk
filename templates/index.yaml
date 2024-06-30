@@ -38,6 +38,14 @@
   description: Basic Outdoor Gym words in Bahasa Malaysia
   author: GK
   uri: ./outdoor-gym-ms.yaml
+- name: Playground
+  description: Basic Playground words in English
+  author: GK
+  uri: ./playground-en.yaml
+- name: Taman Permainan
+  description: Basic Playground words in Bahasa Malaysia
+  author: GK
+  uri: ./playground-ms.yaml
 - name: Fasting
   description: Ramadan Fasting in English
   author: GK
