@@ -94,10 +94,7 @@ export default function App() {
               <Stack.Screen
                 name="Home"
                 component={HomeTabs}
-                options={{
-                  title: "GibTalk - Development",
-                  headerShown: false,
-                }}
+                options={{ headerShown: false }}
               />
               <Stack.Screen
                 name="createWord"
