@@ -20,7 +20,12 @@ export default function ModalOpacity(props: Props) {
   };
 
   return (
-    <Modal visible={props.visible} onDismiss={onDismiss} transparent>
+    <Modal
+      visible={props.visible}
+      onDismiss={onDismiss}
+      transparent
+      supportedOrientations={["landscape", "portrait"]}
+    >
       <Pressable style={styles.pressable} onPress={onDismiss}>
         <Pressable style={props.style}>{props.children}</Pressable>
       </Pressable>
