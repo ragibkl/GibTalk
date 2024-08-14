@@ -1,5 +1,4 @@
 import { FontAwesome } from "@expo/vector-icons";
-import { Picker } from "@react-native-picker/picker";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
 import {
@@ -11,13 +10,45 @@ import {
   TextInput,
   View,
 } from "react-native";
+import DropDownPicker from "react-native-dropdown-picker";
 
 import { LANGUAGE_OPTIONS, Language, speak } from "../../service/speech";
 import { RootStackParamList } from "../../../App";
+import { useState } from "react";
 
 const placeholderImage = require("../../../assets/placeholder.png");
 
+const LANGUAGE_ITEMS = LANGUAGE_OPTIONS.map(({ label, language }) => ({
+  label,
+  value: language,
+}));
+
 type EditWordNavigationProps = NavigationProp<RootStackParamList, "editWord">;
+
+type LanguagePickerProps = {
+  language: Language;
+  onChangeLanguage(language: Language): void;
+};
+
+function LanguagePicker(props: LanguagePickerProps) {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState<Language>(props.language);
+
+  const onChangeValue = (value: Language | null) => {
+    props.onChangeLanguage(value || props.language);
+  };
+
+  return (
+    <DropDownPicker
+      items={LANGUAGE_ITEMS}
+      open={open}
+      value={value}
+      setOpen={setOpen}
+      setValue={setValue}
+      onChangeValue={onChangeValue}
+    />
+  );
+}
 
 type Props = {
   label: string;
@@ -46,7 +77,7 @@ export default function CommonWordDetailScreen(props: Props) {
 
   const navigation = useNavigation<EditWordNavigationProps>();
 
-  const onLanguageValueChange = (value: Language, _index: number) => {
+  const onLanguageValueChange = (value: Language) => {
     onUpdateLanguage(value);
   };
 
@@ -100,17 +131,11 @@ export default function CommonWordDetailScreen(props: Props) {
 
         <View style={styles.rowInput}>
           <Text style={styles.inputTitle}>Language</Text>
-
-          <Picker
-            selectedValue={language}
-            onValueChange={onLanguageValueChange}
-            style={styles.labelInput}
-          >
-            {LANGUAGE_OPTIONS.map(({ label, language }) => (
-              <Picker.Item key={label} label={label} value={language} />
-            ))}
-          </Picker>
         </View>
+        <LanguagePicker
+          language={language}
+          onChangeLanguage={onLanguageValueChange}
+        />
 
         <View style={styles.rowInput}>
           <Text style={styles.inputTitle}>Category?</Text>
