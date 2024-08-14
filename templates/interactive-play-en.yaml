@@ -4,70 +4,70 @@
   children:
     - label: I
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/I%20am/I%20am-05.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/I%20am/I%20am-05.png
     - label: ready
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/ready_1.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/ready_1.png
     - label: play
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/play_1.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/play_1.png
     - label: go
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/go_to.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/go_to.png
     - label: stop
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/stop_3.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/stop_3.png
     - label: want
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/want.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/want.png
     - label: help
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/help.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/help.png
     - label: again
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/again.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/again.png
     - label: fun
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/fun.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/fun.png
     - label: wait
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/wait_2.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/wait_2.png
     - label: do not want
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20do%20not%20want.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20do%20not%20want.png
     - label: fast
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/quick.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/quick.png
     - label: slow
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/slow.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/slow.png
     - label: up
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/up.png  
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/up.png
     - label: down
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/down.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/down.png
     - label: like
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Like/Like-01.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Like/Like-01.png
     - label: teacher
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/schoolteacher.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/schoolteacher.png
     - label: mommy
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/mother.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/mother.png
     - label: daddy
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/father.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/father.png
     - label: friend
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/friends_1.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/friends_1.png
     - label: one
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/One/One-01.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/One/One-01.png
     - label: two
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Two/Two-03.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Two/Two-03.png
     - label: three
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/alphabet-and-numbers-english/Tawasol%20symbols_3.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/alphabet-and-numbers-english/Tawasol%20symbols_3.png

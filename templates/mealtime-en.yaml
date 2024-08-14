@@ -4,76 +4,76 @@
   children:
     - label: I
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/I%20am/I%20am-05.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/I%20am/I%20am-05.png
     - label: want
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/want.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/want.png
     - label: do not want
       language: en
       uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20do%20not%20want.png
     - label: "yes"
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Right/Right-03.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Right/Right-03.png
     - label: "no"
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/wrong/wrong-02.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/wrong/wrong-02.png
     - label: eat
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/eat_1.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/eat_1.png
     - label: drink
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/drink_2.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/drink_2.png
     - label: like
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Like/Like-01.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Like/Like-01.png
     - label: more
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20want%20more.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20want%20more.png
     - label: open
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/open.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/open.png
     - label: cold
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/drink_cold_2.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/drink_cold_2.png
     - label: hot
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/hot_1.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/hot_1.png
     - label: help
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/help.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/help.png
     - label: all done
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/finish_2.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/finish_2.png
     - label: delicious
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/nice_2.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/nice_2.png
     - label: fast
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/quick.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/quick.png
     - label: slow
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/slow.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/slow.png
     - label: hungry
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/hungry_3.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/hungry_3.png
     - label: thirsty
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/thirsty_1.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/thirsty_1.png
     - label: spicy
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/spicy.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/spicy.png
     - label: a little
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/few_1.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/few_1.png
     - label: a lot
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/many.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/many.png
     - label: sweet
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/sweet_1.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/sweet_1.png
     - label: crunchy
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/crunchy.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/crunchy.png
     - label: soft
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/mash_potato_2.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/mash_potato_2.png

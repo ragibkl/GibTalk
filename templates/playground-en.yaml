@@ -4,148 +4,148 @@
   children:
     - label: I
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/I%20am/I%20am-05.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/I%20am/I%20am-05.png
     - label: want
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/want.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/want.png
     - label: do not want
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20do%20not%20want.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20do%20not%20want.png
     - label: "Yes"
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/yes_1.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/yes_1.png
     - label: "No"
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/No/No-01.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/No/No-01.png
     - label: stop
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/stop_3.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/stop_3.png
     - label: Swing
       language: en
-      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/swing_to.png 
+      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/swing_to.png
     - label: Slide
       language: en
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/go%20down%20the%20slide_1.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/go%20down%20the%20slide_1.png
     - label: balance beam
       language: en
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/balance.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/balance.png
     - label: playground
       language: en
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/playground.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/playground.png
     - label: climb
       language: en
-      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/climb_up_to.png 
+      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/climb_up_to.png
     - label: again
       language: en
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/again.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/again.png
     - label: go
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/go_to.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/go_to.png
     - label: my turn
       language: en
-      uri: https://api.gibtalk.ragib.my/media/custom/play/my-turn.png 
+      uri: https://api.gibtalk.ragib.my/media/custom/play/my-turn.png
     - label: your turn
       language: en
-      uri: https://api.gibtalk.ragib.my/media/custom/play/your-turn.png 
+      uri: https://api.gibtalk.ragib.my/media/custom/play/your-turn.png
     - label: up
       language: en
-      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/up.png 
+      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/up.png
     - label: down
       language: en
-      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/down.png 
+      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/down.png
     - label: fast
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/quick.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/quick.png
     - label: slow
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/slow.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/slow.png
     - label: push
       language: en
-      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/push_to.png 
+      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/push_to.png
     - label: help
       language: en
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/help.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/help.png
     - label: wait
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/wait_2.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/wait_2.png
     - label: fun
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/fun.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/fun.png
     - label: scared
       language: en
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/scared_2.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/scared_2.png
     - label: tired
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/tired_3.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/tired_3.png
     - label: hot
       language: en
-      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/feeling-hot/feeling-hot-01.png 
+      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/feeling-hot/feeling-hot-01.png
     - label: raining
       language: en
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/rain_1.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/rain_1.png
     - label: sunny
       language: en
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/Sun_1.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/Sun_1.png
     - label: thirsty
       language: en
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/thirsty_1.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/thirsty_1.png
     - label: hurt
       language: en
-      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/hurt/hurt-01.png 
+      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/hurt/hurt-01.png
     - label: come
       language: en
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/come%20closer_1.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/come%20closer_1.png
     - label: sit
       language: en
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/sit%20down%20on%20bench_1.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/sit%20down%20on%20bench_1.png
     - label: play
       language: en
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/play_1.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/play_1.png
     - label: class
       language: en
-      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/class_room.png 
+      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/class_room.png
     - label: toilet
       language: en
-      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/toilet.png 
+      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/toilet.png
     - label: friend
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/friends_1.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/friends_1.png
     - label: bicycle
       language: en
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/bicycle.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/bicycle.png
     - label: line up
       language: en
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/line_2.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/line_2.png
     - label: finish
       language: en
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/finish_2.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/finish_2.png
     - label: one
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/One/One-01.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/One/One-01.png
     - label: two
       language: en
-      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Two/Two-03.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Two/Two-03.png
     - label: three
       language: en
-      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/three.png 
+      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/three.png
     - label: four
       language: en
-      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Four/Four-03.png 
+      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Four/Four-03.png
     - label: five
       language: en
-      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Five/Five-03.png 
+      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Five/Five-03.png
     - label: six
       language: en
-      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Six/Six-01.png 
+      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Six/Six-01.png
     - label: seven
       language: en
-      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Seven/Seven-03.png 
+      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Seven/Seven-03.png
     - label: Eight
       language: en
-      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Eight/Eight-01.png 
+      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Eight/Eight-01.png
     - label: nine
       language: en
-      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Nine/Nine-02.png 
+      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Nine/Nine-02.png
     - label: ten
       language: en
-      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Ten/Ten-01.png 
+      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Ten/Ten-01.png

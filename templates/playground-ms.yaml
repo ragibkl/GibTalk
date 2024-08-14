@@ -4,148 +4,148 @@
   children:
     - label: saya
       language: ms
-      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/I%20am/I%20am-05.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/I%20am/I%20am-05.png
     - label: nak
       language: ms
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/want.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/want.png
     - label: tak nak
       language: ms
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20do%20not%20want.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/I%20do%20not%20want.png
     - label: Ya
       language: ms
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/yes_1.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/yes_1.png
     - label: Tidak
       language: ms
-      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/No/No-01.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/No/No-01.png
     - label: berhenti
       language: ms
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/stop_3.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/stop_3.png
     - label: buaian
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/swing_to.png 
+      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/swing_to.png
     - label: gelongsor
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/go%20down%20the%20slide_1.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/go%20down%20the%20slide_1.png
     - label: balance beam
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/balance.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/balance.png
     - label: taman permainan
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/playground.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/playground.png
     - label: panjat
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/climb_up_to.png 
+      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/climb_up_to.png
     - label: lagi
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/again.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/again.png
     - label: mula
       language: ms
-      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/go_to.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/mulberry-symbols/go_to.png
     - label: giliran saya
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/custom/play/my-turn.png 
+      uri: https://api.gibtalk.ragib.my/media/custom/play/my-turn.png
     - label: giliran awak
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/custom/play/your-turn.png 
+      uri: https://api.gibtalk.ragib.my/media/custom/play/your-turn.png
     - label: atas
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/up.png 
+      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/up.png
     - label: bawah
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/down.png 
+      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/down.png
     - label: laju
       language: ms
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/quick.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/quick.png
     - label: lambat
       language: ms
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/slow.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/slow.png
     - label: tolak
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/push_to.png 
+      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/push_to.png
     - label: tolong
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/help.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/help.png
     - label: tunggu
       language: ms
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/wait_2.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/wait_2.png
     - label: seronok
       language: ms
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/fun.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/fun.png
     - label: takut
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/scared_2.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/scared_2.png
     - label: penat
       language: ms
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/tired_3.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/tired_3.png
     - label: panas
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/feeling-hot/feeling-hot-01.png 
+      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/feeling-hot/feeling-hot-01.png
     - label: hujan
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/rain_1.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/rain_1.png
     - label: cerah
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/Sun_1.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/Sun_1.png
     - label: dahaga
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/thirsty_1.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/thirsty_1.png
     - label: sakit
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/hurt/hurt-01.png 
+      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/hurt/hurt-01.png
     - label: mari
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/come%20closer_1.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/come%20closer_1.png
     - label: duduk
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/sit%20down%20on%20bench_1.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/sit%20down%20on%20bench_1.png
     - label: main
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/play_1.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/play_1.png
     - label: kelas
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/class_room.png 
+      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/class_room.png
     - label: tandas
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/toilet.png 
+      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/toilet.png
     - label: kawan
       language: ms
-      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/friends_1.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/arasaac-symbols/friends_1.png
     - label: basikal
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/bicycle.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/bicycle.png
     - label: barisan
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/line_2.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/line_2.png
     - label: siap
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/finish_2.png 
+      uri: https://api.gibtalk.ragib.my/media/arasaac-symbols/finish_2.png
     - label: satu
       language: ms
-      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/One/One-01.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/One/One-01.png
     - label: dua
       language: ms
-      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Two/Two-03.png 
+      uri: https://api-gibtalk.apps.bancuh.net/media/tawasol-symbols/Two/Two-03.png
     - label: tiga
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/three.png 
+      uri: https://api.gibtalk.ragib.my/media/mulberry-symbols/three.png
     - label: empat
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Four/Four-03.png 
+      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Four/Four-03.png
     - label: lima
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Five/Five-03.png 
+      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Five/Five-03.png
     - label: enam
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Six/Six-01.png 
+      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Six/Six-01.png
     - label: tujuh
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Seven/Seven-03.png 
+      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Seven/Seven-03.png
     - label: lapan
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Eight/Eight-01.png 
+      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Eight/Eight-01.png
     - label: sembilan
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Nine/Nine-02.png 
+      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Nine/Nine-02.png
     - label: sepuluh
       language: ms
-      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Ten/Ten-01.png 
+      uri: https://api.gibtalk.ragib.my/media/tawasol-symbols/Ten/Ten-01.png
