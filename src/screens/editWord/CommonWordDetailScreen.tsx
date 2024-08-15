@@ -76,6 +76,8 @@ export default function CommonWordDetailScreen(props: Props) {
   } = props;
 
   const navigation = useNavigation<EditWordNavigationProps>();
+  const [cameraPermission, requestCameraPermission] =
+    ImagePicker.useCameraPermissions();
 
   const onLanguageValueChange = (value: Language) => {
     onUpdateLanguage(value);
@@ -94,6 +96,11 @@ export default function CommonWordDetailScreen(props: Props) {
   };
 
   const onPressCamera = async () => {
+    const response = await requestCameraPermission();
+    if (!response.granted) {
+      return;
+    }
+
     let result = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
       quality: 1,
