@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import {
+  KeyboardAvoidingView,
   Modal,
   Pressable,
   StyleProp,
@@ -26,18 +27,26 @@ export default function ModalOpacity(props: Props) {
       transparent
       supportedOrientations={["landscape", "portrait"]}
     >
-      <Pressable style={styles.pressable} onPress={onDismiss}>
-        <Pressable style={props.style}>{props.children}</Pressable>
-      </Pressable>
+      <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+        <Pressable style={styles.pressable} onPress={onDismiss}>
+          <Pressable style={props.style}>{props.children}</Pressable>
+        </Pressable>
+      </KeyboardAvoidingView>
     </Modal>
   );
 }
 
 const styles = StyleSheet.create({
-  pressable: {
+  container: {
     alignItems: "center",
     alignSelf: "stretch",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
+    flex: 1,
+    justifyContent: "center",
+  },
+  pressable: {
+    alignItems: "center",
+    alignSelf: "stretch",
     flex: 1,
     justifyContent: "center",
   },
