@@ -13,6 +13,7 @@
     "build": "eas build -p all --auto-submit",
     "build:preview": "eas build -p all --profile preview",
     "submit:android": "eas submit -p android",
+    "expo:check": "npx expo install --check",
     "ts:check": "tsc"
   },
   "dependencies": {
@@ -22,7 +23,7 @@
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
     "@react-navigation/stack": "^6.3.17",
-    "expo": "~51.0.26",
+    "expo": "~51.0.28",
     "expo-document-picker": "~12.0.2",
     "expo-file-system": "~17.0.1",
     "expo-image-manipulator": "~12.0.5",
