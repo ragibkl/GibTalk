@@ -21,6 +21,7 @@ import { useBackup } from "../../service/backup";
 
 import PressableOpacity from "../../components/PressableOpacity";
 import ModalOpacity from "../../components/ModalOpacity";
+import SafeAreaView from "../../components/SafeAreaView";
 
 type TemplatesScreenProps = StackScreenProps<
   RootStackParamList,
@@ -98,7 +99,7 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.titleSection}>
         <Text style={styles.title}>Available Templates:</Text>
         <Pressable
@@ -153,7 +154,7 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
           </PressableOpacity>
         </View>
       </ModalOpacity>
-    </View>
+    </SafeAreaView>
   );
 }
 
