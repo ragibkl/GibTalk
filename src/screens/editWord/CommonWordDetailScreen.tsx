@@ -132,65 +132,72 @@ export default function CommonWordDetailScreen(props: Props) {
   const source = !!uri ? { uri } : placeholderImage;
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.left}>
-        <View style={styles.rowInput}>
-          <Text style={styles.inputTitle}>Label</Text>
-          <TextInput
-            style={styles.labelInput}
-            onChangeText={onUpdateLabel}
-            value={label}
-          />
-        </View>
-
-        <View style={styles.rowInput}>
-          <Text style={styles.inputTitle}>Language</Text>
-        </View>
-        <LanguagePicker
-          language={language}
-          onChangeLanguage={onLanguageValueChange}
-        />
-
-        <View style={styles.rowInput}>
-          <Text style={styles.inputTitle}>Category?</Text>
-          <Switch value={isCategory} onValueChange={onUpdateIsCategory} />
-        </View>
-
-        <View style={styles.rowInput}>
-          <Pressable
-            style={[
-              styles.saveButton,
-              saveDisabled && styles.saveButtonDisabled,
-            ]}
-            onPress={onPressSave}
-            disabled={saveDisabled}
-          >
-            <Text>Save</Text>
-          </Pressable>
-        </View>
-      </View>
-
-      <View style={styles.right}>
-        <View style={styles.imageInput}>
-          <View style={styles.imageButtonRow}>
-            <Text>Select Image: </Text>
-
-            <Pressable style={styles.imageButton} onPress={onPressSelectImage}>
-              <FontAwesome name="picture-o" size={20} />
-            </Pressable>
-
-            <Pressable style={styles.imageButton} onPress={onPressCamera}>
-              <FontAwesome name="camera" size={20} />
-            </Pressable>
-
-            <Pressable style={styles.imageButton} onPress={onPressSearch}>
-              <FontAwesome name="search" size={20} />
-            </Pressable>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <View style={styles.left}>
+          <View style={styles.rowInput}>
+            <Text style={styles.inputTitle}>Label</Text>
+            <TextInput
+              style={styles.labelInput}
+              onChangeText={onUpdateLabel}
+              value={label}
+            />
           </View>
 
-          <Pressable onPress={onPressImage}>
-            <Image style={styles.image} source={source} />
-          </Pressable>
+          <View style={styles.rowInput}>
+            <Text style={styles.inputTitle}>Language</Text>
+          </View>
+
+          <LanguagePicker
+            language={language}
+            onChangeLanguage={onLanguageValueChange}
+          />
+          <View style={styles.rowInput} />
+
+          <View style={styles.rowInput}>
+            <Text style={styles.inputTitle}>Category?</Text>
+            <Switch value={isCategory} onValueChange={onUpdateIsCategory} />
+          </View>
+
+          <View style={styles.rowInput}>
+            <Pressable
+              style={[
+                styles.saveButton,
+                saveDisabled && styles.saveButtonDisabled,
+              ]}
+              onPress={onPressSave}
+              disabled={saveDisabled}
+            >
+              <Text>Save</Text>
+            </Pressable>
+          </View>
+        </View>
+
+        <View style={styles.right}>
+          <View style={styles.imageInput}>
+            <View style={styles.imageButtonRow}>
+              <Text>Select Image: </Text>
+
+              <Pressable
+                style={styles.imageButton}
+                onPress={onPressSelectImage}
+              >
+                <FontAwesome name="picture-o" size={20} />
+              </Pressable>
+
+              <Pressable style={styles.imageButton} onPress={onPressCamera}>
+                <FontAwesome name="camera" size={20} />
+              </Pressable>
+
+              <Pressable style={styles.imageButton} onPress={onPressSearch}>
+                <FontAwesome name="search" size={20} />
+              </Pressable>
+            </View>
+
+            <Pressable onPress={onPressImage}>
+              <Image style={styles.image} source={source} />
+            </Pressable>
+          </View>
         </View>
       </View>
     </SafeAreaView>
@@ -198,10 +205,15 @@ export default function CommonWordDetailScreen(props: Props) {
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    alignItems: "stretch",
+    alignSelf: "stretch",
+    backgroundColor: "white",
+    flex: 1,
+  },
   container: {
     flex: 1,
     flexDirection: "row",
-    alignSelf: "stretch",
     padding: 10,
   },
   left: {

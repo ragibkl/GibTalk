@@ -99,70 +99,76 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.titleSection}>
-        <Text style={styles.title}>Available Templates:</Text>
-        <Pressable
-          style={styles.refreshButton}
-          onPress={onPressRefresh}
-          disabled={isFetching}
-        >
-          {isFetching ? (
-            <ActivityIndicator size="small" />
-          ) : (
-            <FontAwesome name="refresh" size={20} />
-          )}
-        </Pressable>
-      </View>
-
-      <ScrollView style={styles.templateSection}>
-        {isFetching ? (
-          <ActivityIndicator size="large" />
-        ) : templates.length ? (
-          templates.map(renderTemplateItem)
-        ) : (
-          <Text>No templates found!</Text>
-        )}
-      </ScrollView>
-
-      <ModalOpacity
-        style={styles.modalContainer}
-        visible={!!selectedTemplate}
-        setVisible={modalSetVisible}
-      >
-        <Text style={styles.modalTextTitle}>{selectedTemplate?.name}</Text>
-        <Text style={styles.modalText}>
-          Import template into current board?
-        </Text>
-        <Text style={styles.modalText}>
-          Words in this template will be combined with your current board.
-        </Text>
-
-        <View style={styles.modalButtonRow}>
-          <PressableOpacity
-            style={styles.modalButton}
-            onPress={onModalPressCancel}
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <View style={styles.titleSection}>
+          <Text style={styles.title}>Available Templates:</Text>
+          <Pressable
+            style={styles.refreshButton}
+            onPress={onPressRefresh}
+            disabled={isFetching}
           >
-            <Text>Cancel</Text>
-          </PressableOpacity>
-
-          <PressableOpacity
-            style={[styles.modalButton, styles.okButton]}
-            onPress={onModalPressOk}
-          >
-            {isLoading ? <ActivityIndicator size="small" /> : <Text>Ok</Text>}
-          </PressableOpacity>
+            {isFetching ? (
+              <ActivityIndicator size="small" />
+            ) : (
+              <FontAwesome name="refresh" size={20} />
+            )}
+          </Pressable>
         </View>
-      </ModalOpacity>
+
+        <ScrollView style={styles.templateSection}>
+          {isFetching ? (
+            <ActivityIndicator size="large" />
+          ) : templates.length ? (
+            templates.map(renderTemplateItem)
+          ) : (
+            <Text>No templates found!</Text>
+          )}
+        </ScrollView>
+
+        <ModalOpacity
+          style={styles.modalContainer}
+          visible={!!selectedTemplate}
+          setVisible={modalSetVisible}
+        >
+          <Text style={styles.modalTextTitle}>{selectedTemplate?.name}</Text>
+          <Text style={styles.modalText}>
+            Import template into current board?
+          </Text>
+          <Text style={styles.modalText}>
+            Words in this template will be combined with your current board.
+          </Text>
+
+          <View style={styles.modalButtonRow}>
+            <PressableOpacity
+              style={styles.modalButton}
+              onPress={onModalPressCancel}
+            >
+              <Text>Cancel</Text>
+            </PressableOpacity>
+
+            <PressableOpacity
+              style={[styles.modalButton, styles.okButton]}
+              onPress={onModalPressOk}
+            >
+              {isLoading ? <ActivityIndicator size="small" /> : <Text>Ok</Text>}
+            </PressableOpacity>
+          </View>
+        </ModalOpacity>
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    alignItems: "stretch",
+    alignSelf: "stretch",
+    backgroundColor: "white",
+    flex: 1,
+  },
   container: {
     flex: 1,
-    flexDirection: "column",
-    alignSelf: "stretch",
     padding: 10,
   },
   titleSection: {

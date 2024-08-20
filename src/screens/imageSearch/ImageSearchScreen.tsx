@@ -69,39 +69,45 @@ export default function ImageSearchScreen(props: ImageSearchScreenProps) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.rowInput}>
-        <Text style={styles.inputTitle}>Search</Text>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={onChangeSearchTerm}
-          value={searchTerm}
-        />
-        <Pressable
-          style={styles.searchButton}
-          onPress={onPressSearch}
-          disabled={isFetching}
-        >
-          {isFetching ? (
-            <ActivityIndicator size="small" />
-          ) : (
-            <FontAwesome name="search" size={20} />
-          )}
-        </Pressable>
-      </View>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <View style={styles.rowInput}>
+          <Text style={styles.inputTitle}>Search</Text>
+          <TextInput
+            style={styles.textInput}
+            onChangeText={onChangeSearchTerm}
+            value={searchTerm}
+          />
+          <Pressable
+            style={styles.searchButton}
+            onPress={onPressSearch}
+            disabled={isFetching}
+          >
+            {isFetching ? (
+              <ActivityIndicator size="small" />
+            ) : (
+              <FontAwesome name="search" size={20} />
+            )}
+          </Pressable>
+        </View>
 
-      <ScrollView contentContainerStyle={styles.symbolGrid}>
-        {imageResults.map(renderSymbol)}
-      </ScrollView>
+        <ScrollView contentContainerStyle={styles.symbolGrid}>
+          {imageResults.map(renderSymbol)}
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    alignItems: "stretch",
+    alignSelf: "stretch",
+    backgroundColor: "white",
+    flex: 1,
+  },
   container: {
     flex: 1,
-    flexDirection: "column",
-    alignSelf: "stretch",
     padding: 10,
   },
   rowInput: {

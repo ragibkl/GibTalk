@@ -70,8 +70,8 @@ export default function MainScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.body}>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
         <View style={styles.bodyTop}>
           <View style={styles.historyContainer}>
             {isEditing ? (
@@ -178,11 +178,13 @@ export default function MainScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
+    alignItems: "stretch",
+    alignSelf: "stretch",
     backgroundColor: "white",
     flex: 1,
   },
-  body: {
+  container: {
     flex: 1,
     padding: 5,
   },
