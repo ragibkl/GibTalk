@@ -16,6 +16,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { LANGUAGE_OPTIONS, Language, speak } from "../../service/speech";
 import { RootStackParamList } from "../../../App";
 import { useState } from "react";
+import SafeAreaView from "../../components/SafeAreaView";
 
 const placeholderImage = require("../../../assets/placeholder.png");
 
@@ -131,7 +132,7 @@ export default function CommonWordDetailScreen(props: Props) {
   const source = !!uri ? { uri } : placeholderImage;
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.left}>
         <View style={styles.rowInput}>
           <Text style={styles.inputTitle}>Label</Text>
@@ -192,7 +193,7 @@ export default function CommonWordDetailScreen(props: Props) {
           </Pressable>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

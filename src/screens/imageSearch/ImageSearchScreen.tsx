@@ -16,6 +16,7 @@ import { RootStackParamList } from "../../../App";
 import { ImageResult, getSearchSymbols } from "../../api/imageSearch";
 
 import ImageRetry from "../../components/ImageRetry";
+import SafeAreaView from "../../components/SafeAreaView";
 
 const IMAGE_SIZE = 100;
 
@@ -68,7 +69,7 @@ export default function ImageSearchScreen(props: ImageSearchScreenProps) {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.rowInput}>
         <Text style={styles.inputTitle}>Search</Text>
         <TextInput
@@ -92,7 +93,7 @@ export default function ImageSearchScreen(props: ImageSearchScreenProps) {
       <ScrollView contentContainerStyle={styles.symbolGrid}>
         {imageResults.map(renderSymbol)}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
