@@ -2,6 +2,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
 import {
+  Alert,
   Image,
   Pressable,
   StyleSheet,
@@ -76,7 +77,7 @@ export default function CommonWordDetailScreen(props: Props) {
   } = props;
 
   const navigation = useNavigation<EditWordNavigationProps>();
-  const [cameraPermission, requestCameraPermission] =
+  const [_cameraPermission, requestCameraPermission] =
     ImagePicker.useCameraPermissions();
 
   const onLanguageValueChange = (value: Language) => {
@@ -97,7 +98,12 @@ export default function CommonWordDetailScreen(props: Props) {
 
   const onPressCamera = async () => {
     const response = await requestCameraPermission();
+
     if (!response.granted) {
+      Alert.alert(
+        "Camera Permission Error",
+        "Please allow the app to access the camera",
+      );
       return;
     }
 
