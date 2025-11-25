@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "plugins": [
       [
         "expo-image-picker",
@@ -19,7 +21,8 @@
           "photosPermission": "The app accesses your photos to let you pick an image when editing a word.",
           "cameraPermission": "The app accesses your camera to let you take a photo when editing a word."
         }
-      ]
+      ],
+      "expo-font"
     ],
     "ios": {
       "supportsTablet": true,
