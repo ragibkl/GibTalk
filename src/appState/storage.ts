@@ -1,12 +1,13 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as FileSystem from "expo-file-system/legacy";
+import * as FileSystem from "expo-file-system";
 import { Alert } from "react-native";
 import { useState, useEffect } from "react";
 
 async function readFromFile<T>(key: string): Promise<T | null> {
   try {
-    const fileUri = `${FileSystem.documentDirectory}/${key}-data.json`;
-    const jsonValue = await FileSystem.readAsStringAsync(fileUri);
+    const file = new FileSystem.File(FileSystem.Paths.document, `${key}-data.json`);
+    const jsonValue = await file.text()
+
     if (!jsonValue) {
       return null;
     }
@@ -44,10 +45,10 @@ async function readFromAsyncStore<T>(key: string): Promise<T | null> {
 
 async function writeToFile<T>(key: string, updatedData: T): Promise<void> {
   try {
-    const fileUri = `${FileSystem.documentDirectory}/${key}-data.json`;
     const jsonValue = JSON.stringify(updatedData);
 
-    await FileSystem.writeAsStringAsync(fileUri, jsonValue);
+    const file = new FileSystem.File(FileSystem.Paths.document, `${key}-data.json`);
+    file.write(jsonValue);
   } catch (error) {
     console.log(error);
     const message =
