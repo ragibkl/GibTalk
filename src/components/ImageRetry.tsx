@@ -1,15 +1,14 @@
 import { useState } from "react";
 import {
   Image,
-  ImageErrorEventData,
+  ImageErrorEvent,
   ImageProps,
-  NativeSyntheticEvent,
 } from "react-native";
 
 export default function ImageRetry({ onError, ...restProps }: ImageProps) {
   const [retries, setRetries] = useState(0);
 
-  const onImageError = (error: NativeSyntheticEvent<ImageErrorEventData>) => {
+  const onImageError = (error: ImageErrorEvent) => {
     if (retries < 5) {
       setRetries((prev) => prev + 1);
     } else {
