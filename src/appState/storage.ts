@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 async function readFromFile<T>(key: string): Promise<T | null> {
   try {
     const file = new FileSystem.File(FileSystem.Paths.document, `${key}-data.json`);
-    const jsonValue = await file.text()
+    const jsonValue = file.textSync()
 
     if (!jsonValue) {
       return null;

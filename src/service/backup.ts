@@ -64,7 +64,7 @@ export function useBackup() {
 
     const asset = pickerResult.assets[0];
     const file = new FileSystem.File(asset.uri);
-    const contents = await file.text();
+    const contents = file.textSync();
 
     const wordsBak = YAML.parse(contents) as WordBak[];
     await setWords(wordsBakToWords(wordsBak));
