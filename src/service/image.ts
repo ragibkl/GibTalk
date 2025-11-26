@@ -3,11 +3,14 @@ import * as ImageManipulator from "expo-image-manipulator";
 import uuid from "react-native-uuid";
 
 export async function base64ImageFromFile(fileUri: string): Promise<string> {
-  const imageRes = await ImageManipulator.manipulateAsync(
-    fileUri,
-    [{ resize: { width: 200, height: 200 } }],
-    { base64: true, format: ImageManipulator.SaveFormat.PNG },
-  );
+  const context = ImageManipulator.ImageManipulator.manipulate(fileUri);
+  context.resize({ width: 200, height: 200 });
+
+  const imageRef = await context.renderAsync();
+  const imageRes = await imageRef.saveAsync({
+    base64: true,
+    format: ImageManipulator.SaveFormat.PNG,
+  });
 
   return `data:image/xxx;base64,${imageRes.base64}`;
 }
