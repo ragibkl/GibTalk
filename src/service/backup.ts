@@ -1,5 +1,5 @@
 import * as DocumentPicker from "expo-document-picker";
-import * as FileSystem from "expo-file-system/legacy";
+import * as FileSystem from "expo-file-system";
 import * as Sharing from "expo-sharing";
 import { Platform } from "react-native";
 import uuid from "react-native-uuid";
@@ -41,21 +41,21 @@ export function useBackup() {
     const contents = YAML.stringify(wordsToWordsBak(words));
 
     if (Platform.OS === "ios") {
-      const fileUri = `${FileSystem.documentDirectory}/gibtalk-bak.yaml`;
-      await FileSystem.writeAsStringAsync(fileUri, contents);
+      const file = new FileSystem.File(FileSystem.Paths.document, 'gibtalk-bak.yaml');
+      file.write(contents)
 
-      Sharing.shareAsync(fileUri, { UTI: "public.item" });
+      Sharing.shareAsync(file.uri, { UTI: "public.item" });
     } else if (Platform.OS === "android") {
-      const fileUri = `${FileSystem.documentDirectory}/gibtalk-bak.yaml`;
-      await FileSystem.writeAsStringAsync(fileUri, contents);
+      const file = new FileSystem.File(FileSystem.Paths.document, 'gibtalk-bak.yaml');
+      file.write(contents)
 
-      Sharing.shareAsync(fileUri);
+      Sharing.shareAsync(file.uri);
     }
   };
 
   const restoreBackup = async () => {
     const pickerResult = await DocumentPicker.getDocumentAsync({
-      copyToCacheDirectory: false,
+      copyToCacheDirectory: true,
     });
 
     if (pickerResult.canceled || !pickerResult.assets[0]) {
@@ -63,13 +63,9 @@ export function useBackup() {
     }
 
     const asset = pickerResult.assets[0];
-    const fileUri = `${FileSystem.cacheDirectory}/${asset.name}`;
-    await FileSystem.copyAsync({
-      from: asset.uri,
-      to: fileUri,
-    });
+    const file = new FileSystem.File(asset.uri);
+    const contents = await file.text();
 
-    const contents = await FileSystem.readAsStringAsync(fileUri);
     const wordsBak = YAML.parse(contents) as WordBak[];
     await setWords(wordsBakToWords(wordsBak));
   };
