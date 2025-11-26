@@ -1,4 +1,4 @@
-import * as FileSystem from "expo-file-system/legacy";
+import * as FileSystem from "expo-file-system";
 import * as ImageManipulator from "expo-image-manipulator";
 import uuid from "react-native-uuid";
 
@@ -16,13 +16,13 @@ export async function base64ImageFromFile(fileUri: string): Promise<string> {
 }
 
 export async function base64ImageFromHttp(uri: string): Promise<string> {
-  const fileUri = `${FileSystem.cacheDirectory}/${uuid.v4()}.temp`;
+  const file = new FileSystem.File(FileSystem.Paths.cache, `${uuid.v4()}.temp`);
 
   let last_error = null;
   for (let i = 0; i < 5; i++) {
     try {
-      await FileSystem.downloadAsync(uri, fileUri);
-      return base64ImageFromFile(fileUri);
+      const downloaded = await FileSystem.File.downloadFileAsync(uri, file);
+      return await base64Image(downloaded.uri);
     } catch (error) {
       last_error = error;
       console.log("error fetching image from uri");
