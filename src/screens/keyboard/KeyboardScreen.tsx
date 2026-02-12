@@ -28,6 +28,10 @@ export default function KeyboardScreen(props: KeyboardScreenProps) {
     setTextInput("");
   };
 
+  const onLanguageSelect = (value: Language) => {
+    setLanguage(value);
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -39,7 +43,7 @@ export default function KeyboardScreen(props: KeyboardScreenProps) {
               value={textInput}
             />
 
-            <Menu onSelect={setLanguage}>
+            <Menu onSelect={onLanguageSelect}>
               <MenuTrigger>
                 <View style={styles.languageInputContainer}>
                   <Text style={styles.languageInput}>{language}</Text>
