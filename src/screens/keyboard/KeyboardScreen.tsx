@@ -43,17 +43,21 @@ export default function KeyboardScreen(props: KeyboardScreenProps) {
               value={textInput}
             />
 
-            <Menu onSelect={onLanguageSelect}>
+            <Menu>
               <MenuTrigger>
                 <View style={styles.languageInputContainer}>
                   <Text style={styles.languageInput}>{language}</Text>
                 </View>
               </MenuTrigger>
               <MenuOptions>
-                {LANGUAGE_OPTIONS.map(({ language, label }) => (
-                  <MenuOption key={language} value={language}>
+                {LANGUAGE_OPTIONS.map(({ language: lang, label }) => (
+                  <MenuOption
+                    key={lang}
+                    value={lang}
+                    onSelect={() => onLanguageSelect(lang)}
+                  >
                     <Text style={styles.languageOption}>
-                      {`${language} - ${label}`}
+                      {`${lang} - ${label}`}
                     </Text>
                   </MenuOption>
                 ))}
