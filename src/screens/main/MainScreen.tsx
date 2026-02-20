@@ -1,4 +1,4 @@
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
@@ -9,7 +9,6 @@ import { speakWords, stopSpeech } from "../../service/speech";
 import { useWordPath } from "../../service/wordPath";
 import { Word, useWords } from "../../service/words";
 
-import { RootStackParamList } from "../../../App";
 import IconButton from "../../components/IconButton";
 import { ProgressIcon } from "../../components/ProgressIcon";
 import SafeAreaView from "../../components/SafeAreaView";
@@ -20,13 +19,11 @@ import WordsEmptyGrid from "./WordsEmptyGrid";
 import WordsGrid from "./WordsGrid";
 import WordsHistoryList from "./WordsHistoryList";
 
-type HomeScreenNavigationProps = NavigationProp<RootStackParamList, "Home">;
-
 export default function MainScreen() {
   const [isEditing, setIsEditing] = useState(false);
   const [showPasscodeModal, setPasscodeModal] = useState(false);
 
-  const navigation = useNavigation<HomeScreenNavigationProps>();
+  const router = useRouter();
   const { createBackup, restoreBackup } = useBackup();
   const { popToTop, pop } = useWordPath();
   const { words, isFetching } = useWords();
@@ -53,15 +50,15 @@ export default function MainScreen() {
   };
 
   const editWord = (word: Word) => {
-    navigation.navigate("editWord", { word });
+    router.push(`/editWord?id=${word.id}`);
   };
 
   const onPressTemplates = () => {
-    navigation.navigate("searchTemplate");
+    router.push("/searchTemplate");
   };
 
   const onPressAdd = () => {
-    navigation.navigate("createWord");
+    router.push("/createWord");
   };
 
   const onPressDone = () => {

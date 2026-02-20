@@ -9,10 +9,8 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { StackScreenProps } from "@react-navigation/stack";
+import { useRouter } from "expo-router";
 
-import { RootStackParamList } from "../../../App";
 import { ImageResult, getSearchSymbols } from "../../api/imageSearch";
 
 import ImageRetry from "../../components/ImageRetry";
@@ -20,18 +18,12 @@ import SafeAreaView from "../../components/SafeAreaView";
 
 const IMAGE_SIZE = 100;
 
-type ImageSearchNavigationProps = NavigationProp<
-  RootStackParamList,
-  "searchImage"
->;
-type ImageSearchScreenProps = StackScreenProps<
-  RootStackParamList,
-  "searchImage"
->;
+type Props = {
+  onUpdateUri: (uri: string) => void;
+};
 
-export default function ImageSearchScreen(props: ImageSearchScreenProps) {
-  const onUpdateUri = props.route.params.onUpdateUri;
-  const navigation = useNavigation<ImageSearchNavigationProps>();
+export default function ImageSearchScreen({ onUpdateUri }: Props) {
+  const router = useRouter();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [imageResults, setImageResults] = useState<ImageResult[]>([]);
@@ -56,7 +48,7 @@ export default function ImageSearchScreen(props: ImageSearchScreenProps) {
   const renderSymbol = (symbol: ImageResult, i: number) => {
     const onPress = () => {
       onUpdateUri(symbol.url);
-      navigation.goBack();
+      router.back();
     };
 
     return (

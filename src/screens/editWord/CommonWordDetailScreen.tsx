@@ -1,6 +1,6 @@
 import { FontAwesome } from "@expo/vector-icons";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
+import { useRouter } from "expo-router";
 import {
   Alert,
   Image,
@@ -13,8 +13,8 @@ import {
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 
+import { useImagePickerContext } from "../../context/imagePicker";
 import { LANGUAGE_OPTIONS, Language, speak } from "../../service/speech";
-import { RootStackParamList } from "../../../App";
 import { useState } from "react";
 import SafeAreaView from "../../components/SafeAreaView";
 
@@ -24,8 +24,6 @@ const LANGUAGE_ITEMS = LANGUAGE_OPTIONS.map(({ label, language }) => ({
   label,
   value: language,
 }));
-
-type EditWordNavigationProps = NavigationProp<RootStackParamList, "editWord">;
 
 type LanguagePickerProps = {
   language: Language;
@@ -77,7 +75,8 @@ export default function CommonWordDetailScreen(props: Props) {
     onPressSave,
   } = props;
 
-  const navigation = useNavigation<EditWordNavigationProps>();
+  const router = useRouter();
+  const { setPendingCallback } = useImagePickerContext();
   const [_cameraPermission, requestCameraPermission] =
     ImagePicker.useCameraPermissions();
 
@@ -120,7 +119,8 @@ export default function CommonWordDetailScreen(props: Props) {
   };
 
   const onPressSearch = () => {
-    navigation.navigate("searchImage", { onUpdateUri });
+    setPendingCallback(onUpdateUri);
+    router.push("/searchImage");
   };
 
   const onPressImage = () => {

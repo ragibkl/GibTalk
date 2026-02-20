@@ -1,4 +1,3 @@
-import { StackScreenProps } from "@react-navigation/stack";
 import { useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import {
@@ -8,15 +7,12 @@ import {
   MenuOption,
 } from "react-native-popup-menu";
 
-import { HomeTabsParamList } from "../../../App";
 import { LANGUAGE_OPTIONS, Language, speak } from "../../service/speech";
 
 import IconButton from "../../components/IconButton";
 import SafeAreaView from "../../components/SafeAreaView";
 
-type KeyboardScreenProps = StackScreenProps<HomeTabsParamList, "TabKeyboard">;
-
-export default function KeyboardScreen(props: KeyboardScreenProps) {
+export default function KeyboardScreen() {
   const [textInput, setTextInput] = useState("");
   const [language, setLanguage] = useState<Language>("en");
 

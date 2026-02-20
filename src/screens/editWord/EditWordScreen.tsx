@@ -1,20 +1,16 @@
 import { useState } from "react";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { StackScreenProps } from "@react-navigation/stack";
+import { useRouter } from "expo-router";
 
-import { RootStackParamList } from "../../../App";
 import { Language } from "../../service/speech";
 import { useWords, Word } from "../../service/words";
 
 import CommonWordDetailScreen from "./CommonWordDetailScreen";
 
-type EditWordNavigationProps = NavigationProp<RootStackParamList, "editWord">;
-type EditWordScreenProps = StackScreenProps<RootStackParamList, "editWord">;
+type Props = { word: Word };
 
-export default function EditWordScreen(props: EditWordScreenProps) {
-  const prevWord = props.route.params.word;
+export default function EditWordScreen({ word: prevWord }: Props) {
   const { updateWord } = useWords();
-  const navigation = useNavigation<EditWordNavigationProps>();
+  const router = useRouter();
 
   const [label, setLabel] = useState(prevWord.label);
   const [language, setLanguage] = useState<Language>(prevWord.language);
@@ -35,7 +31,7 @@ export default function EditWordScreen(props: EditWordScreenProps) {
 
     updateWord(word);
 
-    navigation.navigate("Home");
+    router.back();
   };
 
   return (

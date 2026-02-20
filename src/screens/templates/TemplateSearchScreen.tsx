@@ -1,6 +1,5 @@
 import { FontAwesome } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import { StackScreenProps } from "@react-navigation/stack";
+import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -11,7 +10,6 @@ import {
   View,
 } from "react-native";
 
-import { RootStackParamList } from "../../../App";
 import {
   TemplateItem,
   fetchTemplate,
@@ -23,13 +21,8 @@ import PressableOpacity from "../../components/PressableOpacity";
 import ModalOpacity from "../../components/ModalOpacity";
 import SafeAreaView from "../../components/SafeAreaView";
 
-type TemplatesScreenProps = StackScreenProps<
-  RootStackParamList,
-  "searchTemplate"
->;
-
-export default function TemplateSearchScreen(props: TemplatesScreenProps) {
-  const navigation = useNavigation<TemplatesScreenProps["navigation"]>();
+export default function TemplateSearchScreen() {
+  const router = useRouter();
   const { mergeTemplateContents } = useBackup();
 
   const [templates, setTemplates] = useState<TemplateItem[]>([]);
@@ -77,7 +70,7 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
     await mergeTemplateContents(content);
     setSelectedTemplate(null);
     setIsLoading(false);
-    navigation.pop();
+    router.back();
   };
 
   const renderTemplateItem = (item: TemplateItem, i: number) => {

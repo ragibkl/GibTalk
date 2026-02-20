@@ -1,17 +1,14 @@
 import { useState } from "react";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 
-import { RootStackParamList } from "../../../App";
 import { CreateWord, useWords } from "../../service/words";
 import { DEFAULT_LANG, Language } from "../../service/speech";
 
 import CommonWordDetailScreen from "./CommonWordDetailScreen";
 
-type CreateWordScreenProps = NavigationProp<RootStackParamList, "createWord">;
-
 export default function CreateWordScreen() {
   const { addWord } = useWords();
-  const navigation = useNavigation<CreateWordScreenProps>();
+  const router = useRouter();
 
   const [label, setLabel] = useState("");
   const [language, setLanguage] = useState<Language>(DEFAULT_LANG);
@@ -30,7 +27,7 @@ export default function CreateWordScreen() {
     }
 
     addWord(word);
-    navigation.navigate("Home");
+    router.back();
   };
 
   return (

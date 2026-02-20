@@ -3,6 +3,7 @@
     "name": "GibTalk",
     "slug": "GibTalk",
     "version": "1.0.17",
+    "scheme": "gibtalk",
     "orientation": "landscape",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -22,7 +23,8 @@
           "cameraPermission": "The app accesses your camera to let you take a photo when editing a word."
         }
       ],
-      "expo-font"
+      "expo-font",
+      "expo-router"
     ],
     "ios": {
       "supportsTablet": true,
