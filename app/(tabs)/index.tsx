@@ -1,3 +1,223 @@
-import MainScreen from "../../src/screens/main/MainScreen";
+import { useRouter } from "expo-router";
+import { useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
 
-export default MainScreen;
+import { useBackup } from "../../src/service/backup";
+import { useClipboard } from "../../src/service/clipboard";
+import { useHistory } from "../../src/service/history";
+import { speakWords, stopSpeech } from "../../src/service/speech";
+import { useWordPath } from "../../src/service/wordPath";
+import { Word, useWords } from "../../src/service/words";
+
+import IconButton from "../../src/components/IconButton";
+import { ProgressIcon } from "../../src/components/ProgressIcon";
+import SafeAreaView from "../../src/components/SafeAreaView";
+
+import BreadCrumbs from "../../src/screens/main/BreadCrumbs";
+import PasscodeModal from "../../src/screens/main/PasscodeModal";
+import WordsEmptyGrid from "../../src/screens/main/WordsEmptyGrid";
+import WordsGrid from "../../src/screens/main/WordsGrid";
+import WordsHistoryList from "../../src/screens/main/WordsHistoryList";
+
+export default function MainScreen() {
+  const [isEditing, setIsEditing] = useState(false);
+  const [showPasscodeModal, setPasscodeModal] = useState(false);
+
+  const router = useRouter();
+  const { createBackup, restoreBackup } = useBackup();
+  const { popToTop, pop } = useWordPath();
+  const { words, isFetching } = useWords();
+  const { history, clearHistory } = useHistory();
+  const { clipboard, clearClipboard, pasteWords } = useClipboard();
+
+  const onPressClear = () => {
+    clearHistory();
+    stopSpeech();
+  };
+
+  const onPressPlay = () => {
+    speakWords(history);
+  };
+
+  const onPressEdit = () => {
+    setPasscodeModal(true);
+  };
+
+  const onPasscodeModalOk = () => {
+    setPasscodeModal(false);
+    setIsEditing(true);
+    clearHistory();
+  };
+
+  const editWord = (word: Word) => {
+    router.push(`/editWord?id=${word.id}`);
+  };
+
+  const onPressTemplates = () => {
+    router.push("/searchTemplate");
+  };
+
+  const onPressAdd = () => {
+    router.push("/createWord");
+  };
+
+  const onPressDone = () => {
+    setIsEditing(false);
+    clearClipboard();
+  };
+
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <View style={styles.bodyTop}>
+          <View style={styles.historyContainer}>
+            {isEditing ? (
+              <>
+                <Text style={styles.currentText}>Clipboard</Text>
+                <WordsHistoryList words={clipboard} />
+              </>
+            ) : (
+              <>
+                <Text style={styles.currentText}>Words history</Text>
+                <WordsHistoryList words={history} />
+              </>
+            )}
+          </View>
+
+          <View style={styles.controls}>
+            {isEditing ? (
+              <>
+                <IconButton label="Paste" icon="paste" onPress={pasteWords} />
+                <IconButton
+                  style={{ marginLeft: 5 }}
+                  label="Clear All"
+                  icon="trash"
+                  onPress={clearClipboard}
+                />
+              </>
+            ) : (
+              <>
+                <IconButton label="Play" icon="play" onPress={onPressPlay} />
+                <IconButton
+                  style={{ marginLeft: 5 }}
+                  label="Clear All"
+                  icon="trash"
+                  onPress={onPressClear}
+                />
+              </>
+            )}
+            <IconButton
+              style={{ marginLeft: 5 }}
+              label="Home"
+              icon="home"
+              onPress={popToTop}
+            />
+            <IconButton
+              style={{ marginLeft: 5 }}
+              label="Back"
+              icon="arrow-left"
+              onPress={pop}
+            />
+          </View>
+        </View>
+
+        <View style={styles.bodyBreadcrumbs}>
+          <BreadCrumbs />
+        </View>
+
+        <View style={styles.bodyBottom}>
+          <View style={styles.gridContainer}>
+            {!!isFetching ? (
+              <ProgressIcon />
+            ) : !!words.length ? (
+              <WordsGrid editWord={editWord} isEditing={isEditing} />
+            ) : (
+              <WordsEmptyGrid />
+            )}
+          </View>
+
+          <View style={styles.sideControls}>
+            <View style={{ flex: 1 }} />
+            {isEditing ? (
+              <>
+                <IconButton
+                  label="Backup"
+                  icon="download"
+                  onPress={createBackup}
+                />
+                <IconButton
+                  label="Restore"
+                  icon="upload"
+                  onPress={restoreBackup}
+                />
+                <IconButton
+                  label="Templates"
+                  icon="book"
+                  onPress={onPressTemplates}
+                />
+                <IconButton label="Add" icon="plus" onPress={onPressAdd} />
+                <IconButton label="Done" icon="check" onPress={onPressDone} />
+              </>
+            ) : (
+              <IconButton label="Edit" icon="edit" onPress={onPressEdit} />
+            )}
+          </View>
+        </View>
+
+        <PasscodeModal
+          visible={showPasscodeModal}
+          setVisible={setPasscodeModal}
+          onOk={onPasscodeModalOk}
+        />
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  safeArea: {
+    alignItems: "stretch",
+    alignSelf: "stretch",
+    backgroundColor: "white",
+    flex: 1,
+  },
+  container: {
+    flex: 1,
+    padding: 5,
+  },
+  bodyTop: {
+    flexDirection: "row",
+    height: 75,
+  },
+  historyContainer: {
+    flex: 1,
+  },
+  currentText: {
+    alignSelf: "center",
+    marginTop: 25,
+    position: "absolute",
+  },
+  controls: {
+    alignItems: "center",
+    flexDirection: "row",
+    marginLeft: 5,
+  },
+  bodyBreadcrumbs: {
+    paddingHorizontal: 10,
+  },
+  bodyBottom: {
+    alignItems: "stretch",
+    flex: 1,
+    flexDirection: "row",
+    marginTop: 5,
+  },
+  gridContainer: {
+    flex: 1,
+  },
+  sideControls: {
+    alignItems: "flex-end",
+    flexWrap: "wrap",
+    justifyContent: "flex-end",
+    marginLeft: 5,
+  },
+});
