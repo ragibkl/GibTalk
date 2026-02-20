@@ -6,13 +6,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useKeepAwake } from "expo-keep-awake";
 import { StatusBar } from "expo-status-bar";
-import { useEffect } from "react";
+
 import { LogBox, StyleSheet } from "react-native";
 import { MenuProvider } from "react-native-popup-menu";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { AppStateProvider } from "./src/appState";
-import { speakInit } from "./src/service/speech";
+
 import { Word } from "./src/service/words";
 
 import CreateWordScreen from "./src/screens/editWord/CreateWordScreen";
@@ -80,10 +80,6 @@ function HomeTabs() {
 
 export default function App() {
   useKeepAwake();
-
-  useEffect(() => {
-    speakInit();
-  }, []);
 
   return (
     <MenuProvider>
