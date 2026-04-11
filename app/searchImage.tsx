@@ -30,11 +30,11 @@ export default function SearchImageRoute() {
     setIsFetching(true);
     try {
       const results = await getSearchSymbols(searchTerm);
-      setIsFetching(false);
       setImageResults(results || []);
     } catch (error) {
-      setIsFetching(false);
       setImageResults([]);
+    } finally {
+      setIsFetching(false);
     }
   };
 

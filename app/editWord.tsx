@@ -1,48 +1,28 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useState } from "react";
 
 import WordDetailForm from "../src/components/WordDetailForm";
 import { useAppState } from "../src/appState";
-import { DEFAULT_LANG, Language } from "../src/service/speech";
-import { Word, useWords } from "../src/service/words";
+import {
+  Word,
+  findWordById,
+  useWordFormState,
+  useWords,
+} from "../src/service/words";
 
-function findWordById(words: Word[], id: string): Word | undefined {
-  for (const word of words) {
-    if (word.id === id) return word;
-    if (word.children) {
-      const found = findWordById(word.children, id);
-      if (found) return found;
-    }
-  }
-  return undefined;
-}
-
-export default function EditWordRoute() {
-  const { id } = useLocalSearchParams<{ id: string }>();
-  const { appState } = useAppState();
+function EditWordForm({ prevWord }: { prevWord: Word }) {
   const { updateWord } = useWords();
   const router = useRouter();
-
-  const prevWord = findWordById(appState.words, id);
-
-  const [label, setLabel] = useState(prevWord?.label ?? "");
-  const [language, setLanguage] = useState<Language>(
-    prevWord?.language ?? DEFAULT_LANG,
-  );
-  const [uri, setUri] = useState(prevWord?.uri ?? "");
-  const [isCategory, setIsCategory] = useState(!!prevWord?.children);
-
-  if (!prevWord) return null;
+  const form = useWordFormState(prevWord);
 
   const onPressSave = () => {
     const word: Word = {
       id: prevWord.id,
-      label: label.trim(),
-      language,
-      uri,
+      label: form.label.trim(),
+      language: form.language,
+      uri: form.uri,
     };
 
-    if (isCategory) {
+    if (form.isCategory) {
       word.children = prevWord.children || [];
     }
 
@@ -50,17 +30,15 @@ export default function EditWordRoute() {
     router.back();
   };
 
-  return (
-    <WordDetailForm
-      label={label}
-      language={language}
-      isCategory={isCategory}
-      uri={uri}
-      onUpdateLabel={setLabel}
-      onUpdateLanguage={setLanguage}
-      onUpdateIsCategory={setIsCategory}
-      onUpdateUri={setUri}
-      onPressSave={onPressSave}
-    />
-  );
+  return <WordDetailForm {...form} onPressSave={onPressSave} />;
+}
+
+export default function EditWordRoute() {
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const { appState } = useAppState();
+
+  const prevWord = findWordById(appState.words, id);
+  if (!prevWord) return null;
+
+  return <EditWordForm key={prevWord.id} prevWord={prevWord} />;
 }

@@ -1,7 +1,8 @@
+import { useState } from "react";
 import uuid from "react-native-uuid";
 
 import { base64Image } from "./image";
-import { Language } from "./speech";
+import { DEFAULT_LANG, Language } from "./speech";
 import { useAppState } from "../appState";
 
 export type Word = {
@@ -18,6 +19,37 @@ export type CreateWord = {
   language: Language;
   children?: [];
 };
+
+export function findWordById(words: Word[], id: string): Word | undefined {
+  for (const word of words) {
+    if (word.id === id) return word;
+    if (word.children) {
+      const found = findWordById(word.children, id);
+      if (found) return found;
+    }
+  }
+  return undefined;
+}
+
+export function useWordFormState(initial?: Word) {
+  const [label, setLabel] = useState(initial?.label ?? "");
+  const [language, setLanguage] = useState<Language>(
+    initial?.language ?? DEFAULT_LANG,
+  );
+  const [uri, setUri] = useState(initial?.uri ?? "");
+  const [isCategory, setIsCategory] = useState(!!initial?.children);
+
+  return {
+    label,
+    language,
+    uri,
+    isCategory,
+    onUpdateLabel: setLabel,
+    onUpdateLanguage: setLanguage,
+    onUpdateUri: setUri,
+    onUpdateIsCategory: setIsCategory,
+  };
+}
 
 export async function wordImagesBase64(words: Word[]): Promise<Word[]> {
   return Promise.all(

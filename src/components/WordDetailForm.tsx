@@ -80,10 +80,6 @@ export default function WordDetailForm(props: Props) {
   const [_cameraPermission, requestCameraPermission] =
     ImagePicker.useCameraPermissions();
 
-  const onLanguageValueChange = (value: Language) => {
-    onUpdateLanguage(value);
-  };
-
   const onPressSelectImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
@@ -150,7 +146,7 @@ export default function WordDetailForm(props: Props) {
 
           <LanguagePicker
             language={language}
-            onChangeLanguage={onLanguageValueChange}
+            onChangeLanguage={onUpdateLanguage}
           />
           <View style={styles.rowInput} />
 
