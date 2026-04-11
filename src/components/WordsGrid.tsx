@@ -1,7 +1,7 @@
 import { ScrollView, StyleSheet } from "react-native";
 
-import WordItem from "../../components/WordItem";
-import { Word, useWords } from "../../service/words";
+import WordItem from "./WordItem";
+import { Word, useWords } from "../service/words";
 
 type Props = {
   editWord: (word: Word) => void;

@@ -9,15 +9,14 @@ import { speakWords, stopSpeech } from "../../src/service/speech";
 import { useWordPath } from "../../src/service/wordPath";
 import { Word, useWords } from "../../src/service/words";
 
+import BreadCrumbs from "../../src/components/BreadCrumbs";
 import IconButton from "../../src/components/IconButton";
+import PasscodeModal from "../../src/components/PasscodeModal";
 import { ProgressIcon } from "../../src/components/ProgressIcon";
 import SafeAreaView from "../../src/components/SafeAreaView";
-
-import BreadCrumbs from "../../src/screens/main/BreadCrumbs";
-import PasscodeModal from "../../src/screens/main/PasscodeModal";
-import WordsEmptyGrid from "../../src/screens/main/WordsEmptyGrid";
-import WordsGrid from "../../src/screens/main/WordsGrid";
-import WordsHistoryList from "../../src/screens/main/WordsHistoryList";
+import WordsEmptyGrid from "../../src/components/WordsEmptyGrid";
+import WordsGrid from "../../src/components/WordsGrid";
+import WordsHistoryList from "../../src/components/WordsHistoryList";
 
 export default function MainScreen() {
   const [isEditing, setIsEditing] = useState(false);

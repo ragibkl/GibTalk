@@ -1,7 +1,7 @@
 import { ScrollView, StyleSheet } from "react-native";
 
-import HistoryItem from "../../components/HistoryItem";
-import { Word } from "../../service/words";
+import HistoryItem from "./HistoryItem";
+import { Word } from "../service/words";
 
 type Props = {
   words: Word[];

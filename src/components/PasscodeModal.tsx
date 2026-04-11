@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput } from "react-native";
 
-import ModalOpacity from "../../components/ModalOpacity";
+import ModalOpacity from "./ModalOpacity";
 
 type Props = {
   onOk: () => void;

@@ -4,7 +4,7 @@ import { useRouter } from "expo-router";
 import { CreateWord, useWords } from "../src/service/words";
 import { DEFAULT_LANG, Language } from "../src/service/speech";
 
-import CommonWordDetailScreen from "../src/screens/editWord/CommonWordDetailScreen";
+import WordDetailForm from "../src/components/WordDetailForm";
 
 export default function CreateWordScreen() {
   const { addWord } = useWords();
@@ -31,7 +31,7 @@ export default function CreateWordScreen() {
   };
 
   return (
-    <CommonWordDetailScreen
+    <WordDetailForm
       label={label}
       language={language}
       isCategory={isCategory}

@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import { Word } from "../../service/words";
-import { useWordPath } from "../../service/wordPath";
+import { Word } from "../service/words";
+import { useWordPath } from "../service/wordPath";
 
-import PressableOpacity from "../../components/PressableOpacity";
+import PressableOpacity from "./PressableOpacity";
 
 export default function BreadCrumbs() {
   const { wordPath, popToTop, popToWord } = useWordPath();

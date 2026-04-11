@@ -13,12 +13,12 @@ import {
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 
-import { useImagePickerContext } from "../../context/imagePicker";
-import { LANGUAGE_OPTIONS, Language, speak } from "../../service/speech";
+import { useImagePickerContext } from "../context/imagePicker";
+import { LANGUAGE_OPTIONS, Language, speak } from "../service/speech";
 import { useState } from "react";
-import SafeAreaView from "../../components/SafeAreaView";
+import SafeAreaView from "./SafeAreaView";
 
-const placeholderImage = require("../../../assets/placeholder.png");
+const placeholderImage = require("../../assets/placeholder.png");
 
 const LANGUAGE_ITEMS = LANGUAGE_OPTIONS.map(({ label, language }) => ({
   label,
@@ -62,7 +62,7 @@ type Props = {
   onPressSave: () => void;
 };
 
-export default function CommonWordDetailScreen(props: Props) {
+export default function WordDetailForm(props: Props) {
   const {
     label,
     language,
