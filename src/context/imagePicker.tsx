@@ -1,8 +1,10 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
+
+type Callback = (uri: string) => void;
 
 type ImagePickerContextType = {
-  pendingCallback: ((uri: string) => void) | null;
-  setPendingCallback: (cb: ((uri: string) => void) | null) => void;
+  pendingCallback: Callback | null;
+  setPendingCallback: (cb: Callback | null) => void;
 };
 
 const ImagePickerContext = createContext<ImagePickerContextType>({
@@ -15,9 +17,15 @@ export function ImagePickerProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [pendingCallback, setPendingCallback] = useState<
-    ((uri: string) => void) | null
-  >(null);
+  const [pendingCallback, setPendingCallbackState] = useState<Callback | null>(
+    null,
+  );
+
+  // Wrap the raw useState setter so callers can pass a function directly
+  // without worrying about React's functional-updater footgun.
+  const setPendingCallback = useCallback((cb: Callback | null) => {
+    setPendingCallbackState(() => cb);
+  }, []);
 
   return (
     <ImagePickerContext.Provider value={{ pendingCallback, setPendingCallback }}>
