@@ -1,7 +1,7 @@
 import uuid from "react-native-uuid";
 
 import { base64Image } from "./image";
-import { Language } from "./speech";
+import { Language, normalizeLanguage } from "./speech";
 import { useAppState } from "../appState";
 
 export type Word = {
@@ -18,6 +18,14 @@ export type CreateWord = {
   language: Language;
   children?: [];
 };
+
+export function normalizeWordLanguages(words: Word[]): Word[] {
+  return words.map((word) => ({
+    ...word,
+    language: normalizeLanguage(word.language),
+    children: word.children ? normalizeWordLanguages(word.children) : undefined,
+  }));
+}
 
 export async function wordImagesBase64(words: Word[]): Promise<Word[]> {
   return Promise.all(

@@ -6,7 +6,7 @@ import {
   useContext,
 } from "react";
 
-import { Word } from "../service/words";
+import { Word, normalizeWordLanguages } from "../service/words";
 
 import { Action } from "./actions";
 import { DEFAULT_APP_STATE, AppState } from "./schema";
@@ -24,7 +24,7 @@ export function AppStateProvider(props: AppStateProps) {
   const [appState, dispatch] = useReducer(appStateReducer, DEFAULT_APP_STATE);
 
   const setWords = (words: Word[]) => {
-    dispatch({ type: "set-words", words });
+    dispatch({ type: "set-words", words: normalizeWordLanguages(words) });
   };
 
   const isLoadingWords = useStorage("words-key", appState.words, setWords);

@@ -2,7 +2,7 @@ import * as Speech from "expo-speech";
 
 import { Word } from "./words";
 
-export type Language = "en" | "ms" | "id" | "zh" | "ta" | "tu";
+export type Language = "en" | "ms" | "id" | "zh" | "ta" | "te";
 export type LanguageOption = {
   label: string;
   language: Language;
@@ -16,8 +16,13 @@ export const LANGUAGE_OPTIONS: LanguageOption[] = [
   { label: "Bahasa Indonesia", language: "id" },
   { label: "Chinese", language: "zh" },
   { label: "Tamil", language: "ta" },
-  { label: "Telugu", language: "tu" },
+  { label: "Telugu", language: "te" },
 ];
+
+// Older versions saved Telugu as "tu"; the standard code is "te".
+export function normalizeLanguage(language: string): Language {
+  return language === "tu" ? "te" : (language as Language);
+}
 
 export function speak(label: string, language: Language) {
   Speech.speak(label, { language });
