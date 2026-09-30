@@ -2,6 +2,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useState } from "react";
 import {
   ActivityIndicator,
+  Linking,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -19,6 +20,7 @@ import ImageRetry from "../../components/ImageRetry";
 import SafeAreaView from "../../components/SafeAreaView";
 
 const IMAGE_SIZE = 100;
+const CREDITS_URL = "https://gibtalk.ragib.dev/symbols/#credits";
 
 type ImageSearchNavigationProps = NavigationProp<
   RootStackParamList,
@@ -94,6 +96,18 @@ export default function ImageSearchScreen(props: ImageSearchScreenProps) {
         <ScrollView contentContainerStyle={styles.symbolGrid}>
           {imageResults.map(renderSymbol)}
         </ScrollView>
+
+        <Text style={styles.credits}>
+          Symbols: ARASAAC by Sergio Palao, property of the Government of Aragon
+          (CC BY-NC-SA 4.0); Mulberry Symbols by Garry Paxton and Steve Lee (CC
+          BY-SA 2.0 UK); Tawasol Symbols by Mada (CC BY-SA 4.0).{" "}
+          <Text
+            style={styles.creditsLink}
+            onPress={() => Linking.openURL(CREDITS_URL)}
+          >
+            Licences and credits
+          </Text>
+        </Text>
       </View>
     </SafeAreaView>
   );
@@ -157,5 +171,14 @@ const styles = StyleSheet.create({
   symbolImage: {
     height: IMAGE_SIZE,
     width: IMAGE_SIZE,
+  },
+  credits: {
+    fontSize: 12,
+    color: "#555",
+    marginTop: 10,
+    marginHorizontal: 15,
+  },
+  creditsLink: {
+    textDecorationLine: "underline",
   },
 });
