@@ -6,7 +6,7 @@ import uuid from "react-native-uuid";
 import YAML from "yaml";
 
 import { Word, useWords } from "./words";
-import { Language } from "./speech";
+import { Language, normalizeLanguage } from "./speech";
 
 type WordBak = {
   label: string;
@@ -29,7 +29,7 @@ function wordsBakToWords(wordsBak: WordBak[]): Word[] {
     id: uuid.v4().toString(),
     label: wordBak.label,
     uri: wordBak.uri,
-    language: wordBak.language,
+    language: normalizeLanguage(wordBak.language),
     children: wordBak.children ? wordsBakToWords(wordBak.children) : undefined,
   }));
 }
