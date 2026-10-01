@@ -1,4 +1,6 @@
 # Privacy Policy
 
-Our privacy policy is really simple: we don’t collect or store any of your data, or track your usage in any way.
-We don't even use cookies or unique identifiers in the app.
+GibTalk's privacy policy is at **[gibtalk.com/privacy](https://gibtalk.com/privacy/)**.
+
+In short: GibTalk works offline, has no account, no ads and no analytics, and
+collects no data. Your words and pictures stay on your device.
