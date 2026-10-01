@@ -20,7 +20,15 @@
       "ios": {
         "appleId": "ragib.badaruddin@gmail.com",
         "ascAppId": "6504814985",
-        "appleTeamId": "48472MD9XW"
+        "appleTeamId": "48472MD9XW",
+        "ascApiKeyPath": "$ASC_API_KEY_PATH",
+        "ascApiKeyId": "$ASC_API_KEY_ID",
+        "ascApiKeyIssuerId": "$ASC_API_KEY_ISSUER_ID"
+      },
+      "android": {
+        "serviceAccountKeyPath": "$GOOGLE_SERVICE_ACCOUNT_KEY_PATH",
+        "track": "production",
+        "releaseStatus": "draft"
       }
     }
   }
