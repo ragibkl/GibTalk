@@ -20,7 +20,7 @@ import ImageRetry from "../../components/ImageRetry";
 import SafeAreaView from "../../components/SafeAreaView";
 
 const IMAGE_SIZE = 100;
-const CREDITS_URL = "https://gibtalk.ragib.dev/symbols/#credits";
+const CREDITS_URL = "https://gibtalk.com/symbols/#credits";
 
 type ImageSearchNavigationProps = NavigationProp<
   RootStackParamList,
