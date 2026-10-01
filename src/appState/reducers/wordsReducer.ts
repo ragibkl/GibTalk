@@ -7,24 +7,28 @@ export function computeWordsState(
   action: Action,
   wordPathIds: string[],
 ): Word[] {
+  // Restore and templates replace the whole list, wherever the user is.
+  if (action.type === "set-words") {
+    return action.words;
+  }
+
   if (wordPathIds && wordPathIds.length) {
     const [p, ...wp] = wordPathIds;
     const i = words.findIndex((w) => w.id === p);
+    if (i === -1) {
+      return words;
+    }
 
     const newWords = words.slice();
-    newWords[i].children = computeWordsState(
-      words[i].children || [],
-      action,
-      wp,
-    );
+    newWords[i] = {
+      ...words[i],
+      children: computeWordsState(words[i].children || [], action, wp),
+    };
 
     return newWords;
   }
 
   switch (action.type) {
-    case "set-words": {
-      return action.words;
-    }
     case "add-word": {
       return [...words, action.word];
     }
