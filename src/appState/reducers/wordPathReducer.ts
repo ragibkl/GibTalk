@@ -17,6 +17,7 @@ export function wordPathReducer(
       const i = wordPath.findIndex((w) => w.id === action.word.id);
       return wordPath.slice(0, i + 1);
     }
+    case "set-words":
     case "clear-word-path": {
       return [];
     }
