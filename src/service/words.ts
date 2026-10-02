@@ -102,12 +102,8 @@ export function useWords() {
     dispatch({ type: "remove-word", wordId });
   };
 
-  const moveWordLeft = (wordId: string) => {
-    dispatch({ type: "move-word-left", wordId });
-  };
-
-  const moveWordRight = (wordId: string) => {
-    dispatch({ type: "move-word-right", wordId });
+  const moveWord = (wordId: string, toIndex: number) => {
+    dispatch({ type: "move-word", wordId, toIndex });
   };
 
   return {
@@ -118,7 +114,6 @@ export function useWords() {
     addWord,
     updateWord,
     removeWord,
-    moveWordLeft,
-    moveWordRight,
+    moveWord,
   };
 }

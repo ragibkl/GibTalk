@@ -1,4 +1,5 @@
 import "react-native-gesture-handler";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import MaterialCommunityIcons from "@expo/vector-icons/build/MaterialCommunityIcons";
 import { NavigationContainer } from "@react-navigation/native";
@@ -85,45 +86,47 @@ export default function App() {
   useKeepAwake();
 
   return (
-    <MenuProvider>
-      <AppStateProvider>
-        <LanguagesProvider>
-          <SafeAreaProvider>
-            <NavigationContainer>
-              <Stack.Navigator screenOptions={screenOptions}>
-                <Stack.Screen
-                  name="Home"
-                  component={HomeTabs}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="createWord"
-                  component={CreateWordScreen}
-                  options={{ title: "Add New Word" }}
-                />
-                <Stack.Screen
-                  name="editWord"
-                  component={EditWordScreen}
-                  options={{ title: "Edit Word" }}
-                />
-                <Stack.Screen
-                  name="searchImage"
-                  component={ImageSearchScreen}
-                  options={{ title: "Search Symbol" }}
-                />
-                <Stack.Screen
-                  name="searchTemplate"
-                  component={TemplateSearchScreen}
-                  options={{ title: "Import a Template" }}
-                />
-              </Stack.Navigator>
-            </NavigationContainer>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <MenuProvider>
+        <AppStateProvider>
+          <LanguagesProvider>
+            <SafeAreaProvider>
+              <NavigationContainer>
+                <Stack.Navigator screenOptions={screenOptions}>
+                  <Stack.Screen
+                    name="Home"
+                    component={HomeTabs}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="createWord"
+                    component={CreateWordScreen}
+                    options={{ title: "Add New Word" }}
+                  />
+                  <Stack.Screen
+                    name="editWord"
+                    component={EditWordScreen}
+                    options={{ title: "Edit Word" }}
+                  />
+                  <Stack.Screen
+                    name="searchImage"
+                    component={ImageSearchScreen}
+                    options={{ title: "Search Symbol" }}
+                  />
+                  <Stack.Screen
+                    name="searchTemplate"
+                    component={TemplateSearchScreen}
+                    options={{ title: "Import a Template" }}
+                  />
+                </Stack.Navigator>
+              </NavigationContainer>
 
-            <StatusBar style="auto" />
-          </SafeAreaProvider>
-        </LanguagesProvider>
-      </AppStateProvider>
-    </MenuProvider>
+              <StatusBar style="auto" />
+            </SafeAreaProvider>
+          </LanguagesProvider>
+        </AppStateProvider>
+      </MenuProvider>
+    </GestureHandlerRootView>
   );
 }
 

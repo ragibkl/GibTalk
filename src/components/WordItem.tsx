@@ -1,4 +1,4 @@
-import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import { StyleSheet, Text, View, Image } from "react-native";
 
 import PressableOpacity from "./PressableOpacity";
@@ -15,7 +15,7 @@ type Props = {
 };
 
 export default function WordItem({ word, editWord, isEditing }: Props) {
-  const { removeWord, moveWordLeft, moveWordRight } = useWords();
+  const { removeWord } = useWords();
   const { addWordToPath } = useWordPath();
   const { addWordToHistory } = useHistory();
   const { copyWord } = useClipboard();
@@ -39,14 +39,6 @@ export default function WordItem({ word, editWord, isEditing }: Props) {
 
   const onPressRemove = () => {
     removeWord(word.id);
-  };
-
-  const onPressMoveLeft = () => {
-    moveWordLeft(word.id);
-  };
-
-  const onPressMoveRight = () => {
-    moveWordRight(word.id);
   };
 
   return (
@@ -76,25 +68,6 @@ export default function WordItem({ word, editWord, isEditing }: Props) {
             </PressableOpacity>
           </View>
 
-          <View style={[styles.moveLeftContainer, styles.moveContainer]}>
-            <PressableOpacity onPress={onPressMoveLeft}>
-              <MaterialIcons
-                style={styles.moveIcon}
-                size={20}
-                name="arrow-left"
-              />
-            </PressableOpacity>
-          </View>
-
-          <View style={[styles.moveRightContainer, styles.moveContainer]}>
-            <PressableOpacity onPress={onPressMoveRight}>
-              <MaterialIcons
-                style={styles.moveIcon}
-                size={20}
-                name="arrow-right"
-              />
-            </PressableOpacity>
-          </View>
         </>
       )}
     </PressableOpacity>
@@ -172,26 +145,6 @@ const styles = StyleSheet.create({
     width: 30,
   },
   deleteIcon: {
-    color: "black",
-  },
-  moveContainer: {
-    alignItems: "center",
-    backgroundColor: "white",
-    borderColor: "black",
-    borderWidth: 2,
-    height: 25,
-    justifyContent: "center",
-    position: "absolute",
-    top: 60,
-    width: 25,
-  },
-  moveLeftContainer: {
-    left: 10,
-  },
-  moveRightContainer: {
-    right: 10,
-  },
-  moveIcon: {
     color: "black",
   },
 });

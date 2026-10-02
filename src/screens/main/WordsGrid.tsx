@@ -1,4 +1,6 @@
 import { ScrollView, StyleSheet } from "react-native";
+import Animated, { useAnimatedRef } from "react-native-reanimated";
+import Sortable, { SortableFlexDragEndParams } from "react-native-sortables";
 
 import WordItem from "../../components/WordItem";
 import { Word, useWords } from "../../service/words";
@@ -9,7 +11,8 @@ type Props = {
 };
 
 export default function WordsGrid(props: Props) {
-  const { wordsInPath } = useWords();
+  const { wordsInPath, moveWord } = useWords();
+  const scrollableRef = useAnimatedRef<Animated.ScrollView>();
 
   const renderWordItem = (word: Word) => {
     return (
@@ -21,6 +24,32 @@ export default function WordsGrid(props: Props) {
       />
     );
   };
+
+  // In edit mode, press and hold a word to drag it to a new place.
+  if (props.isEditing) {
+    const onDragEnd = ({
+      key,
+      fromIndex,
+      toIndex,
+    }: SortableFlexDragEndParams) => {
+      if (fromIndex !== toIndex) {
+        moveWord(key, toIndex);
+      }
+    };
+
+    return (
+      <Animated.ScrollView ref={scrollableRef}>
+        <Sortable.Flex
+          flexDirection="row"
+          flexWrap="wrap"
+          scrollableRef={scrollableRef}
+          onDragEnd={onDragEnd}
+        >
+          {wordsInPath.map(renderWordItem)}
+        </Sortable.Flex>
+      </Animated.ScrollView>
+    );
+  }
 
   return (
     <ScrollView contentContainerStyle={styles.content}>

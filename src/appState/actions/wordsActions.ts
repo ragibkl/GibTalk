@@ -25,14 +25,10 @@ type RemoveWordAction = {
   wordId: string;
 };
 
-type MoveWordLeft = {
-  type: "move-word-left";
+type MoveWordAction = {
+  type: "move-word";
   wordId: string;
-};
-
-type MoveWordRight = {
-  type: "move-word-right";
-  wordId: string;
+  toIndex: number;
 };
 
 export type WordsAction =
@@ -41,5 +37,4 @@ export type WordsAction =
   | AddWordsAction
   | UpdateWordAction
   | RemoveWordAction
-  | MoveWordLeft
-  | MoveWordRight;
+  | MoveWordAction;
