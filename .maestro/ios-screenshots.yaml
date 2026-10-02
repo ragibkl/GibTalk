@@ -11,8 +11,15 @@ appId: com.ragibkl.GibTalk
     timeout: 30000
 
 # Edit mode: type the number the app shows.
-- tapOn: ".*, Edit"
-- copyTextFrom: "Please input \\d{4} to continue"
+# No automatic re-tap: a second tap would land on the dialog's backdrop
+# and close it.
+- tapOn:
+    text: ".*, Edit"
+    retryTapIfNoChange: false
+- extendedWaitUntil:
+    visible: "Please input \\d{4} to continue.*"
+    timeout: 10000
+- copyTextFrom: "Please input \\d{4} to continue.*"
 - evalScript: ${output.code = maestro.copiedText.match(/\d{4}/)[0]}
 - tapOn:
     id: "passcode-input"
@@ -71,8 +78,15 @@ appId: com.ragibkl.GibTalk
 - tapOn: "Home, tab.*"
 
 # The language list comes from the device's voices (native module).
-- tapOn: ".*, Edit"
-- copyTextFrom: "Please input \\d{4} to continue"
+# No automatic re-tap: a second tap would land on the dialog's backdrop
+# and close it.
+- tapOn:
+    text: ".*, Edit"
+    retryTapIfNoChange: false
+- extendedWaitUntil:
+    visible: "Please input \\d{4} to continue.*"
+    timeout: 10000
+- copyTextFrom: "Please input \\d{4} to continue.*"
 - evalScript: ${output.code = maestro.copiedText.match(/\d{4}/)[0]}
 - tapOn:
     id: "passcode-input"
