@@ -47,6 +47,7 @@ export default function KeyboardScreen(props: KeyboardScreenProps) {
         <View style={styles.bodyRow}>
           <View style={styles.textInputContainer}>
             <TextInput
+              testID="keyboard-input"
               style={styles.textInput}
               onChangeText={setTextInput}
               value={textInput}

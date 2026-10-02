@@ -38,6 +38,7 @@ export default function PasscodeModal(props: Props) {
     >
       <Text style={styles.text}>Please input {answer} to continue</Text>
       <TextInput
+        testID="passcode-input"
         style={styles.textInput}
         value={input}
         onChangeText={setInput}

@@ -58,6 +58,13 @@ jobs:
             xcrun simctl io "$udid" screenshot "screenshots/$name/99-last-screen.png" || true
             xcrun simctl shutdown "$udid"
           done
+          # GibTalk is landscape, but the simulator saves portrait framebuffers
+          # with the app turned sideways: turn those upright.
+          find screenshots ~/.maestro/tests -name '*.png' | while read f; do
+            w=$(sips -g pixelWidth "$f" | awk '/pixelWidth/{print $2}')
+            h=$(sips -g pixelHeight "$f" | awk '/pixelHeight/{print $2}')
+            if [ "$h" -gt "$w" ]; then sips -r 270 "$f" >/dev/null; fi
+          done
           ls -R screenshots
 
       - uses: actions/upload-artifact@v4

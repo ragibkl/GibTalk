@@ -1,26 +1,26 @@
 # Runs on the iOS simulator in CI (.github/workflows/ios-simulator.yml):
 # fills the board from templates, opens the main screens and the language
 # list, and saves screenshots for the App Store and for checking.
+# Icon buttons are named "<icon glyph>, <label>" on iOS, hence ".*, Edit".
 appId: com.ragibkl.GibTalk
 ---
 - launchApp:
     clearState: true
 - extendedWaitUntil:
-    visible: "Edit"
+    visible: ".*, Edit"
     timeout: 30000
 
 # Edit mode: type the number the app shows.
-- tapOn: "Edit"
+- tapOn: ".*, Edit"
 - copyTextFrom: "Please input \\d{4} to continue"
 - evalScript: ${output.code = maestro.copiedText.match(/\d{4}/)[0]}
 - tapOn:
-    point: "50%,47%"
+    id: "passcode-input"
 - inputText: ${output.code}
-- hideKeyboard
 - tapOn: "Ok"
 
 # Templates screen, then add a few templates.
-- tapOn: "Templates"
+- tapOn: ".*, Templates"
 - extendedWaitUntil:
     visible: "Import from file"
     timeout: 30000
@@ -30,7 +30,7 @@ appId: com.ragibkl.GibTalk
 - extendedWaitUntil:
     visible: "Greetings"
     timeout: 30000
-- tapOn: "Templates"
+- tapOn: ".*, Templates"
 - extendedWaitUntil:
     visible: "Import from file"
     timeout: 30000
@@ -39,7 +39,7 @@ appId: com.ragibkl.GibTalk
 - extendedWaitUntil:
     visible: "Mealtime"
     timeout: 30000
-- tapOn: "Templates"
+- tapOn: ".*, Templates"
 - extendedWaitUntil:
     visible: "Import from file"
     timeout: 30000
@@ -48,17 +48,10 @@ appId: com.ragibkl.GibTalk
 - extendedWaitUntil:
     visible: "Outdoor Gym"
     timeout: 30000
-
-# The language list comes from the device's voices (native module).
-- tapOn: "Add"
-- tapOn: "English"
-- takeScreenshot: ${OUT}/05-language-list
-- tapOn: "English"
-- tapOn: "Home, back"
-- tapOn: "Done"
+- tapOn: ".*, Done"
 - takeScreenshot: ${OUT}/01-board
 
-# Inside a folder, and speaking a sentence.
+# Inside a folder, building a sentence.
 - tapOn: "Greetings"
 - extendedWaitUntil:
     visible: "Hi"
@@ -66,10 +59,25 @@ appId: com.ragibkl.GibTalk
 - tapOn: "Hi"
 - tapOn: "Good Morning"
 - takeScreenshot: ${OUT}/02-folder
-- tapOn: "Home"
-- tapOn: "Keyboard"
+- tapOn: ".*, Home"
+
+# Keyboard screen.
+- tapOn: "Keyboard, tab.*"
 - tapOn:
-    point: "30%,20%"
+    id: "keyboard-input"
 - inputText: "I want to play outside"
 - hideKeyboard
 - takeScreenshot: ${OUT}/03-keyboard
+- tapOn: "Home, tab.*"
+
+# The language list comes from the device's voices (native module).
+- tapOn: ".*, Edit"
+- copyTextFrom: "Please input \\d{4} to continue"
+- evalScript: ${output.code = maestro.copiedText.match(/\d{4}/)[0]}
+- tapOn:
+    id: "passcode-input"
+- inputText: ${output.code}
+- tapOn: "Ok"
+- tapOn: ".*, Add"
+- tapOn: "English"
+- takeScreenshot: ${OUT}/05-language-list
