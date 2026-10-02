@@ -3,7 +3,13 @@ import { LayoutChangeEvent, ScrollView, StyleSheet, View } from "react-native";
 import Animated, { useAnimatedRef } from "react-native-reanimated";
 import Sortable, { SortableFlexDragEndParams } from "react-native-sortables";
 
-import WordItem, { TILE_HEIGHT } from "../../components/WordItem";
+import WordItem, {
+  TILE_HEIGHT,
+  TILE_MARGIN,
+  TILE_WIDTH,
+} from "../../components/WordItem";
+
+const tileWidth = (scale: number) => TILE_WIDTH * scale + TILE_MARGIN;
 import { Word, useWords } from "../../service/words";
 
 type Props = {
@@ -14,16 +20,25 @@ type Props = {
 export default function WordsGrid(props: Props) {
   const { wordsInPath, moveWord } = useWords();
   const scrollableRef = useAnimatedRef<Animated.ScrollView>();
-  const [height, setHeight] = useState(0);
+  const [size, setSize] = useState({ width: 0, height: 0 });
 
-  // Shrink tiles so at least two rows fit (phones in landscape). Tablets keep
-  // full size. Edit mode stays bigger so the buttons on each tile are easy to tap.
-  const minScale = props.isEditing ? 0.8 : 0.6;
-  const fit = height ? height / (2 * TILE_HEIGHT) : 1;
-  const scale = Math.min(1, Math.max(minScale, fit));
+  // Shrink tiles so at least two rows fit (phones in landscape); tablets keep
+  // about full size. Then size them so each row fills the width exactly.
+  // Edit mode stays bigger so the buttons on each tile are easy to tap.
+  const minScale = props.isEditing ? 0.75 : 0.6;
+  const fit = size.height ? size.height / (2 * TILE_HEIGHT) : 1;
+  const maxScale = Math.min(1, Math.max(minScale, fit));
+  let scale = maxScale;
+  if (size.width) {
+    const columns = Math.ceil(size.width / tileWidth(maxScale));
+    // 1 point spare, so rounding never pushes the last tile onto a new row.
+    const filled = ((size.width - 1) / columns - TILE_MARGIN) / TILE_WIDTH;
+    scale = filled >= minScale ? filled : maxScale;
+  }
 
   const onLayout = (e: LayoutChangeEvent) => {
-    setHeight(e.nativeEvent.layout.height);
+    const { width, height } = e.nativeEvent.layout;
+    setSize({ width, height });
   };
 
   const renderWordItem = (word: Word) => {

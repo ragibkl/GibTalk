@@ -10,6 +10,9 @@ import { useClipboard } from "../service/clipboard";
 
 // Full-size tile height including margins (label on one line).
 export const TILE_HEIGHT = 160;
+// Full-size tile width, and the margin around it (5 on each side).
+export const TILE_WIDTH = 150;
+export const TILE_MARGIN = 10;
 
 type Props = {
   word: Word;
@@ -26,7 +29,7 @@ export default function WordItem({
   scale = 1,
 }: Props) {
   const sized = {
-    container: { width: 150 * scale },
+    container: { width: TILE_WIDTH * scale },
     image: {
       width: 100 * scale,
       height: 100 * scale,
