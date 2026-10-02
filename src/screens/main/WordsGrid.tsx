@@ -27,13 +27,11 @@ export default function WordsGrid(props: Props) {
 
   // In edit mode, press and hold a word to drag it to a new place.
   if (props.isEditing) {
-    const onDragEnd = ({
-      key,
-      fromIndex,
-      toIndex,
-    }: SortableFlexDragEndParams) => {
-      if (fromIndex !== toIndex) {
-        moveWord(key, toIndex);
+    // Use the indexes: the library prefixes the React keys it reports.
+    const onDragEnd = ({ fromIndex, toIndex }: SortableFlexDragEndParams) => {
+      const word = wordsInPath[fromIndex];
+      if (word && fromIndex !== toIndex) {
+        moveWord(word.id, toIndex);
       }
     };
 
