@@ -17,6 +17,7 @@ import { LANGUAGE_OPTIONS, Language, speak } from "../../service/speech";
 import { RootStackParamList } from "../../../App";
 import { useState } from "react";
 import SafeAreaView from "../../components/SafeAreaView";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const placeholderImage = require("../../../assets/placeholder.png");
 
@@ -35,6 +36,7 @@ type LanguagePickerProps = {
 function LanguagePicker(props: LanguagePickerProps) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState<Language>(props.language);
+  const insets = useSafeAreaInsets();
 
   const onChangeValue = (value: Language | null) => {
     props.onChangeLanguage(value || props.language);
@@ -52,6 +54,13 @@ function LanguagePicker(props: LanguagePickerProps) {
       // status bar and hid the first languages.
       listMode="MODAL"
       modalTitle="Language"
+      // The app draws edge to edge, so keep the list clear of the system bars.
+      modalContentContainerStyle={{
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
+        paddingLeft: insets.left,
+        paddingRight: insets.right,
+      }}
     />
   );
 }
