@@ -1,7 +1,9 @@
 # Runs on the iOS simulator in CI (.github/workflows/ios-simulator.yml):
 # fills the board from templates, opens the main screens and the language
 # list, and saves screenshots for the App Store and for checking.
-# Icon buttons are named "<icon glyph>, <label>" on iOS, hence ".*, Edit".
+# On iOS a tappable element is named after everything in it: icon buttons
+# are "<icon glyph>, Edit", templates "Greetings, Basic Greetings…", so
+# most matches are patterns.
 appId: com.ragibkl.GibTalk
 ---
 - launchApp:
@@ -29,42 +31,42 @@ appId: com.ragibkl.GibTalk
 # Templates screen, then add a few templates.
 - tapOn: ".*, Templates"
 - extendedWaitUntil:
-    visible: "Import from file"
+    visible: ".*Import from file.*"
     timeout: 30000
 - takeScreenshot: ${OUT}/04-templates
-- tapOn: "Greetings"
+- tapOn: "Greetings, .*"
 - tapOn: "Ok"
 - extendedWaitUntil:
-    visible: "Greetings"
+    visible: ".*Greetings.*"
     timeout: 30000
 - tapOn: ".*, Templates"
 - extendedWaitUntil:
-    visible: "Import from file"
+    visible: ".*Import from file.*"
     timeout: 30000
-- tapOn: "Mealtime"
+- tapOn: "Mealtime, .*"
 - tapOn: "Ok"
 - extendedWaitUntil:
-    visible: "Mealtime"
+    visible: ".*Mealtime.*"
     timeout: 30000
 - tapOn: ".*, Templates"
 - extendedWaitUntil:
-    visible: "Import from file"
+    visible: ".*Import from file.*"
     timeout: 30000
-- tapOn: "Outdoor Gym"
+- tapOn: "Outdoor Gym, .*"
 - tapOn: "Ok"
 - extendedWaitUntil:
-    visible: "Outdoor Gym"
+    visible: ".*Outdoor Gym.*"
     timeout: 30000
 - tapOn: ".*, Done"
 - takeScreenshot: ${OUT}/01-board
 
 # Inside a folder, building a sentence.
-- tapOn: "Greetings"
+- tapOn: ".*Greetings.*"
 - extendedWaitUntil:
-    visible: "Hi"
+    visible: ".*\\bHi\\b.*"
     timeout: 30000
-- tapOn: "Hi"
-- tapOn: "Good Morning"
+- tapOn: ".*\\bHi\\b.*"
+- tapOn: ".*Good Morning.*"
 - takeScreenshot: ${OUT}/02-folder
 - tapOn: ".*, Home"
 
