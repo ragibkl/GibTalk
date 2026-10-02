@@ -38,6 +38,10 @@ jobs:
           echo "$HOME/.maestro/bin" >> "$GITHUB_PATH"
 
       - name: Run on iPhone and iPad
+        env:
+          # Maestro's XCTest driver can be slow to start on shared runners.
+          MAESTRO_DRIVER_STARTUP_TIMEOUT: "180000"
+          MAESTRO_CLI_NO_ANALYTICS: "1"
         run: |
           set -x
           runtime=$(xcrun simctl list runtimes -j | python3 -c 'import json,sys; r=[x for x in json.load(sys.stdin)["runtimes"] if x["platform"]=="iOS" and x["isAvailable"]]; print(r[-1]["identifier"])')
@@ -53,8 +57,10 @@ jobs:
               --batteryState charged --batteryLevel 100
             xcrun simctl install "$udid" "$app"
             mkdir -p "screenshots/$name"
-            maestro --device "$udid" test -e OUT="$PWD/screenshots/$name" \
-              .maestro/ios-screenshots.yaml || echo "maestro failed on $name" >> screenshots/failures.txt
+            # One retry: the first start of the driver sometimes times out.
+            maestro --device "$udid" test -e OUT="$PWD/screenshots/$name" .maestro/ios-screenshots.yaml \
+              || maestro --device "$udid" test -e OUT="$PWD/screenshots/$name" .maestro/ios-screenshots.yaml \
+              || echo "maestro failed on $name" >> screenshots/failures.txt
             xcrun simctl io "$udid" screenshot "screenshots/$name/99-last-screen.png" || true
             xcrun simctl shutdown "$udid"
           done
