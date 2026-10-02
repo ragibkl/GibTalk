@@ -120,21 +120,6 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        <View style={styles.titleSection}>
-          <Text style={styles.title}>Available Templates:</Text>
-          <Pressable
-            style={styles.refreshButton}
-            onPress={onPressRefresh}
-            disabled={isFetching}
-          >
-            {isFetching ? (
-              <ActivityIndicator size="small" />
-            ) : (
-              <FontAwesome name="refresh" size={20} />
-            )}
-          </Pressable>
-        </View>
-
         <PressableOpacity
           style={styles.importButton}
           onPress={onPressImportFile}
@@ -152,6 +137,21 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
             </Text>
           </View>
         </PressableOpacity>
+
+        <View style={styles.titleSection}>
+          <Text style={styles.title}>Available Templates:</Text>
+          <Pressable
+            style={styles.refreshButton}
+            onPress={onPressRefresh}
+            disabled={isFetching}
+          >
+            {isFetching ? (
+              <ActivityIndicator size="small" />
+            ) : (
+              <FontAwesome name="refresh" size={20} />
+            )}
+          </Pressable>
+        </View>
 
         <ScrollView style={styles.templateSection}>
           {isFetching ? (
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     padding: 10,
-    marginTop: 10,
+    marginBottom: 15,
     borderWidth: 2,
     borderRadius: 2,
     backgroundColor: "#f2f2f2",
