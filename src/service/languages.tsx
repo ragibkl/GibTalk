@@ -95,10 +95,14 @@ export const FALLBACK_NAMES: Record<string, string> = {
   te: "తెలుగు",
 };
 
+// The language's own name, plus the device's name for it when different,
+// e.g. "తెలుగు (Telugu)", so a parent recognises it.
 export async function languageName(code: string): Promise<string> {
   try {
-    const { name } = await getLanguageName(code);
-    if (name && name !== code) return name;
+    const { name, localName } = await getLanguageName(code);
+    if (name && name !== code) {
+      return localName && localName !== name ? `${name} (${localName})` : name;
+    }
   } catch {}
   return FALLBACK_NAMES[code] ?? code;
 }
