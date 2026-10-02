@@ -50,7 +50,7 @@ export default function WordItem({ word, editWord, isEditing }: Props) {
   };
 
   return (
-    <PressableOpacity onPress={onPressWord}>
+    <PressableOpacity onPress={onPressWord} testID={`word-${word.label}`}>
       <View style={[styles.container, !!word.children && styles.category]}>
         <Image style={styles.image} source={{ uri: word.uri }} />
         <Text style={styles.labelText}>{word.label}</Text>

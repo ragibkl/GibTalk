@@ -109,6 +109,7 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
         key={i}
         style={styles.template}
         onPress={onPressTemplate}
+        testID={`template-${item.name}`}
       >
         <Text style={styles.templateName}>{item.name}</Text>
         <Text style={styles.templateDescription}>{item.description}</Text>
@@ -123,6 +124,7 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
         <PressableOpacity
           style={styles.importButton}
           onPress={onPressImportFile}
+          testID="import-from-file"
         >
           {isImporting ? (
             <ActivityIndicator size="small" />
@@ -187,6 +189,7 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
             <PressableOpacity
               style={[styles.modalButton, styles.okButton]}
               onPress={onModalPressOk}
+              testID="template-ok"
             >
               {isLoading ? <ActivityIndicator size="small" /> : <Text>Ok</Text>}
             </PressableOpacity>

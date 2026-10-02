@@ -21,7 +21,7 @@ export default function IconButton({
   alert = false,
 }: IconButtonProps) {
   return (
-    <PressableOpacity onPress={onPress}>
+    <PressableOpacity onPress={onPress} testID={`button-${label}`}>
       <View style={[style, styles.container]}>
         <FontAwesome name={icon} size={18} color="#25292e" />
         <Text style={styles.buttonLabel}>{label}</Text>
@@ -45,7 +45,7 @@ export function MaterialIconButton({
   onPress = () => {},
 }: MaterialIconButtonProps) {
   return (
-    <PressableOpacity onPress={onPress}>
+    <PressableOpacity onPress={onPress} testID={`button-${label}`}>
       <View style={[style, styles.container]}>
         <MaterialIcons name={icon} size={18} color="#25292e" />
         <Text style={styles.buttonLabel}>{label}</Text>
