@@ -1,0 +1,75 @@
+# Runs on the iOS simulator in CI (.github/workflows/ios-simulator.yml):
+# fills the board from templates, opens the main screens and the language
+# list, and saves screenshots for the App Store and for checking.
+appId: com.ragibkl.GibTalk
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible: "Edit"
+    timeout: 30000
+
+# Edit mode: type the number the app shows.
+- tapOn: "Edit"
+- copyTextFrom: "Please input \\d{4} to continue"
+- evalScript: ${output.code = maestro.copiedText.match(/\d{4}/)[0]}
+- tapOn:
+    point: "50%,47%"
+- inputText: ${output.code}
+- hideKeyboard
+- tapOn: "Ok"
+
+# Templates screen, then add a few templates.
+- tapOn: "Templates"
+- extendedWaitUntil:
+    visible: "Import from file"
+    timeout: 30000
+- takeScreenshot: ${OUT}/04-templates
+- tapOn: "Greetings"
+- tapOn: "Ok"
+- extendedWaitUntil:
+    visible: "Greetings"
+    timeout: 30000
+- tapOn: "Templates"
+- extendedWaitUntil:
+    visible: "Import from file"
+    timeout: 30000
+- tapOn: "Mealtime"
+- tapOn: "Ok"
+- extendedWaitUntil:
+    visible: "Mealtime"
+    timeout: 30000
+- tapOn: "Templates"
+- extendedWaitUntil:
+    visible: "Import from file"
+    timeout: 30000
+- tapOn: "Outdoor Gym"
+- tapOn: "Ok"
+- extendedWaitUntil:
+    visible: "Outdoor Gym"
+    timeout: 30000
+
+# The language list comes from the device's voices (native module).
+- tapOn: "Add"
+- tapOn: "English"
+- takeScreenshot: ${OUT}/05-language-list
+- tapOn: "English"
+- tapOn: "Home, back"
+- tapOn: "Done"
+- takeScreenshot: ${OUT}/01-board
+
+# Inside a folder, and speaking a sentence.
+- tapOn: "Greetings"
+- extendedWaitUntil:
+    visible: "Hi"
+    timeout: 30000
+- tapOn: "Hi"
+- tapOn: "Good Morning"
+- takeScreenshot: ${OUT}/02-folder
+- tapOn: "Home"
+- tapOn: "Keyboard"
+- tapOn:
+    point: "30%,20%"
+- inputText: "I want to play outside"
+- hideKeyboard
+- takeScreenshot: ${OUT}/03-keyboard
