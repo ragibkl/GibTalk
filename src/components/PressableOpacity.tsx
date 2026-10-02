@@ -13,6 +13,8 @@ type Props = {
   style?: StyleProp<ViewStyle>;
   onPress?: (event: GestureResponderEvent) => void;
   onLongPress?: (event: GestureResponderEvent) => void;
+  // For automated tests (Android resource-id, iOS accessibilityIdentifier).
+  testID?: string;
 };
 
 export default function PressableOpacity({
@@ -20,6 +22,7 @@ export default function PressableOpacity({
   style,
   onPress,
   onLongPress,
+  testID,
 }: Props) {
   const styleCallback = (state: PressableStateCallbackType) => {
     return [state.pressed ? styles.isPressed : styles.default, style];
@@ -30,6 +33,7 @@ export default function PressableOpacity({
       style={styleCallback}
       onPress={onPress}
       onLongPress={onLongPress}
+      testID={testID}
     >
       {children}
     </Pressable>

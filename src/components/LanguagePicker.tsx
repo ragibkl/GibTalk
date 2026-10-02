@@ -38,6 +38,7 @@ export default function LanguagePicker(props: Props) {
       ? installed.map((l) => ({
           label: l.name === l.localName ? l.name : `${l.name} (${l.localName})`,
           value: l.code,
+          testID: `language-${l.code}`,
         }))
       : FALLBACK.map((code) => ({ label: FALLBACK_NAMES[code], value: code }));
 
@@ -46,7 +47,7 @@ export default function LanguagePicker(props: Props) {
         ? [{ label: `${currentName}: no voice on this device`, value }]
         : []),
       ...languages,
-      { label: "Add a language…", value: ADD_LANGUAGE },
+      { label: "Add a language…", value: ADD_LANGUAGE, testID: "language-add" },
     ];
   }, [installed, isInstalled, currentName, value]);
 
@@ -67,6 +68,7 @@ export default function LanguagePicker(props: Props) {
       setOpen={setOpen}
       setValue={setValue}
       onChangeValue={onChangeValue}
+      testID="language-picker"
       // A full-screen list: in landscape the dropdown opened under the
       // status bar and hid the first languages.
       listMode="MODAL"

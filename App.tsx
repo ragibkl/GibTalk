@@ -51,6 +51,7 @@ function HomeTabs() {
 
   const homeTabOptions = {
     title: "Home",
+    tabBarTestID: "tab-Home",
     tabBarIcon: ({ color, size }: { color: string; size: number }) => (
       <MaterialCommunityIcons name="home" color={color} size={size} />
     ),
@@ -58,6 +59,7 @@ function HomeTabs() {
 
   const keyboardTabOptions = {
     title: "Keyboard",
+    tabBarTestID: "tab-Keyboard",
     tabBarIcon: ({ color, size }: { color: string; size: number }) => (
       <MaterialCommunityIcons name="keyboard" color={color} size={size} />
     ),

@@ -45,7 +45,7 @@ export default function PasscodeModal(props: Props) {
         keyboardType="numeric"
       />
 
-      <Pressable style={styles.button} onPress={onPressOk}>
+      <Pressable style={styles.button} onPress={onPressOk} testID="passcode-ok">
         <Text>Ok</Text>
       </Pressable>
     </ModalOpacity>
