@@ -1,6 +1,6 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import { BackHandler, StyleSheet, Text, View } from "react-native";
 import {
   Menu,
   MenuOption,
@@ -38,6 +38,19 @@ export default function MainScreen() {
   const [isEditing, setIsEditing] = useState(false);
   const [showPasscodeModal, setPasscodeModal] = useState(false);
   const [showMore, setShowMore] = useState(false);
+
+  // Android Back closes the More menu instead of leaving the app.
+  useEffect(() => {
+    if (!showMore) {
+      return;
+    }
+
+    const sub = BackHandler.addEventListener("hardwareBackPress", () => {
+      setShowMore(false);
+      return true;
+    });
+    return () => sub.remove();
+  }, [showMore]);
 
   const navigation = useNavigation<HomeScreenNavigationProps>();
   const { createBackup, restoreBackup } = useBackup();
