@@ -28,8 +28,16 @@ export default function ModalOpacity(props: Props) {
       supportedOrientations={["landscape", "portrait"]}
     >
       <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-        <Pressable style={styles.pressable} onPress={onDismiss}>
-          <Pressable style={props.style}>{props.children}</Pressable>
+        {/* Not accessible themselves: otherwise iOS merges everything in the
+            dialog (text, input, buttons) into one element. */}
+        <Pressable
+          style={styles.pressable}
+          onPress={onDismiss}
+          accessible={false}
+        >
+          <Pressable style={props.style} accessible={false}>
+            {props.children}
+          </Pressable>
         </Pressable>
       </KeyboardAvoidingView>
     </Modal>
