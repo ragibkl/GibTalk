@@ -4,6 +4,7 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
+  Alert,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -30,7 +31,25 @@ type TemplatesScreenProps = StackScreenProps<
 
 export default function TemplateSearchScreen(props: TemplatesScreenProps) {
   const navigation = useNavigation<TemplatesScreenProps["navigation"]>();
-  const { mergeTemplateContents } = useBackup();
+  const { mergeTemplateContents, importFromFile } = useBackup();
+  const [isImporting, setIsImporting] = useState(false);
+
+  const onPressImportFile = async () => {
+    if (isImporting) {
+      return;
+    }
+    setIsImporting(true);
+    try {
+      if (await importFromFile()) {
+        navigation.pop();
+      }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      Alert.alert("Couldn't import the file", message);
+    } finally {
+      setIsImporting(false);
+    }
+  };
 
   const [templates, setTemplates] = useState<TemplateItem[]>([]);
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateItem | null>(
@@ -116,6 +135,24 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
           </Pressable>
         </View>
 
+        <PressableOpacity
+          style={styles.importButton}
+          onPress={onPressImportFile}
+        >
+          {isImporting ? (
+            <ActivityIndicator size="small" />
+          ) : (
+            <FontAwesome name="file-o" size={18} />
+          )}
+          <View style={styles.importText}>
+            <Text style={styles.templateName}>Import from file</Text>
+            <Text style={styles.templateDescription}>
+              Add words from a file made with Backup or the template builder at
+              gibtalk.com. Your current words stay.
+            </Text>
+          </View>
+        </PressableOpacity>
+
         <ScrollView style={styles.templateSection}>
           {isFetching ? (
             <ActivityIndicator size="large" />
@@ -193,6 +230,19 @@ const styles = StyleSheet.create({
   },
   templateSection: {
     marginTop: 10,
+  },
+  importButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+    marginTop: 10,
+    borderWidth: 2,
+    borderRadius: 2,
+    backgroundColor: "#f2f2f2",
+  },
+  importText: {
+    marginLeft: 10,
+    flex: 1,
   },
   template: {
     padding: 10,
