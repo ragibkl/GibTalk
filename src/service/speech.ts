@@ -2,26 +2,15 @@ import * as Speech from "expo-speech";
 
 import { Word } from "./words";
 
-export type Language = "en" | "ms" | "id" | "zh" | "ta" | "te";
-export type LanguageOption = {
-  label: string;
-  language: Language;
-};
+// A language code such as "en", "ms" or "ar". Which ones work depends on the
+// voices installed on the device (see service/languages).
+export type Language = string;
 
 export const DEFAULT_LANG = "en";
 
-export const LANGUAGE_OPTIONS: LanguageOption[] = [
-  { label: "English", language: "en" },
-  { label: "Bahasa Malaysia", language: "ms" },
-  { label: "Bahasa Indonesia", language: "id" },
-  { label: "Chinese", language: "zh" },
-  { label: "Tamil", language: "ta" },
-  { label: "Telugu", language: "te" },
-];
-
 // Older versions saved Telugu as "tu"; the standard code is "te".
 export function normalizeLanguage(language: string): Language {
-  return language === "tu" ? "te" : (language as Language);
+  return language === "tu" ? "te" : language;
 }
 
 export function speak(label: string, language: Language) {

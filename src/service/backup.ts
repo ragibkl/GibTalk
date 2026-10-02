@@ -6,6 +6,11 @@ import uuid from "react-native-uuid";
 import YAML from "yaml";
 
 import { Word, useWords } from "./words";
+import {
+  missingLanguages,
+  promptMissingVoices,
+  useDeviceLanguages,
+} from "./languages";
 import { Language, normalizeLanguage } from "./speech";
 
 type WordBak = {
@@ -79,6 +84,12 @@ function wordsBakToWords(wordsBak: WordBak[]): Word[] {
 
 export function useBackup() {
   const { words, setWords } = useWords();
+  const { installed } = useDeviceLanguages();
+
+  // After words arrive from a file or template, offer to install any voice
+  // they need that the device doesn't have.
+  const checkVoices = (added: Word[]) =>
+    promptMissingVoices(missingLanguages(added, installed));
 
   const createBackup = async () => {
     const contents = YAML.stringify(wordsToWordsBak(words));
@@ -109,13 +120,16 @@ export function useBackup() {
     }
 
     const wordsBak = YAML.parse(contents) as WordBak[];
-    await setWords(wordsBakToWords(wordsBak));
+    const restored = wordsBakToWords(wordsBak);
+    await setWords(restored);
+    checkVoices(restored);
   };
 
   const mergeTemplateContents = async (contents: string) => {
     const wordsBak = YAML.parse(contents) as WordBak[];
     let template = wordsBakToWords(wordsBak);
     await setWords([...words, ...template]);
+    checkVoices(template);
   };
 
   // Adds the words from a file to the board, like a template. Returns false
@@ -128,6 +142,7 @@ export function useBackup() {
 
     const template = wordsBakToWords(parseWordFile(contents));
     await setWords([...words, ...template]);
+    checkVoices(template);
     return true;
   };
 

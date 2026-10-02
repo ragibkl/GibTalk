@@ -12,6 +12,7 @@ import { MenuProvider } from "react-native-popup-menu";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { AppStateProvider } from "./src/appState";
+import { LanguagesProvider } from "./src/service/languages";
 
 import { Word } from "./src/service/words";
 
@@ -84,39 +85,41 @@ export default function App() {
   return (
     <MenuProvider>
       <AppStateProvider>
-        <SafeAreaProvider>
-          <NavigationContainer>
-            <Stack.Navigator screenOptions={screenOptions}>
-              <Stack.Screen
-                name="Home"
-                component={HomeTabs}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="createWord"
-                component={CreateWordScreen}
-                options={{ title: "Add New Word" }}
-              />
-              <Stack.Screen
-                name="editWord"
-                component={EditWordScreen}
-                options={{ title: "Edit Word" }}
-              />
-              <Stack.Screen
-                name="searchImage"
-                component={ImageSearchScreen}
-                options={{ title: "Search Symbol" }}
-              />
-              <Stack.Screen
-                name="searchTemplate"
-                component={TemplateSearchScreen}
-                options={{ title: "Import a Template" }}
-              />
-            </Stack.Navigator>
-          </NavigationContainer>
+        <LanguagesProvider>
+          <SafeAreaProvider>
+            <NavigationContainer>
+              <Stack.Navigator screenOptions={screenOptions}>
+                <Stack.Screen
+                  name="Home"
+                  component={HomeTabs}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="createWord"
+                  component={CreateWordScreen}
+                  options={{ title: "Add New Word" }}
+                />
+                <Stack.Screen
+                  name="editWord"
+                  component={EditWordScreen}
+                  options={{ title: "Edit Word" }}
+                />
+                <Stack.Screen
+                  name="searchImage"
+                  component={ImageSearchScreen}
+                  options={{ title: "Search Symbol" }}
+                />
+                <Stack.Screen
+                  name="searchTemplate"
+                  component={TemplateSearchScreen}
+                  options={{ title: "Import a Template" }}
+                />
+              </Stack.Navigator>
+            </NavigationContainer>
 
-          <StatusBar style="auto" />
-        </SafeAreaProvider>
+            <StatusBar style="auto" />
+          </SafeAreaProvider>
+        </LanguagesProvider>
       </AppStateProvider>
     </MenuProvider>
   );

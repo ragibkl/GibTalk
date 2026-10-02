@@ -9,7 +9,12 @@ import {
 } from "react-native-popup-menu";
 
 import { HomeTabsParamList } from "../../../App";
-import { LANGUAGE_OPTIONS, Language, speak } from "../../service/speech";
+import { Language, speak } from "../../service/speech";
+import {
+  FALLBACK_NAMES,
+  openAddVoice,
+  useDeviceLanguages,
+} from "../../service/languages";
 
 import IconButton from "../../components/IconButton";
 import SafeAreaView from "../../components/SafeAreaView";
@@ -19,6 +24,10 @@ type KeyboardScreenProps = StackScreenProps<HomeTabsParamList, "TabKeyboard">;
 export default function KeyboardScreen(props: KeyboardScreenProps) {
   const [textInput, setTextInput] = useState("");
   const [language, setLanguage] = useState<Language>("en");
+  const { installed } = useDeviceLanguages();
+  const options = installed.length
+    ? installed.map((l) => ({ code: l.code, name: l.name }))
+    : Object.entries(FALLBACK_NAMES).map(([code, name]) => ({ code, name }));
 
   const onPressPlay = () => {
     speak(textInput, language);
@@ -50,17 +59,20 @@ export default function KeyboardScreen(props: KeyboardScreenProps) {
                 </View>
               </MenuTrigger>
               <MenuOptions>
-                {LANGUAGE_OPTIONS.map(({ language: lang, label }) => (
+                {options.map(({ code, name }) => (
                   <MenuOption
-                    key={lang}
-                    value={lang}
-                    onSelect={() => onLanguageSelect(lang)}
+                    key={code}
+                    value={code}
+                    onSelect={() => onLanguageSelect(code)}
                   >
                     <Text style={styles.languageOption}>
-                      {`${lang} - ${label}`}
+                      {`${code} - ${name}`}
                     </Text>
                   </MenuOption>
                 ))}
+                <MenuOption onSelect={() => openAddVoice()}>
+                  <Text style={styles.languageOption}>Add a language…</Text>
+                </MenuOption>
               </MenuOptions>
             </Menu>
           </View>

@@ -9,6 +9,8 @@ type IconButtonProps = {
   icon: keyof typeof FontAwesome.glyphMap;
   style?: StyleProp<ViewStyle>;
   onPress: () => void;
+  // A red dot: something needs a parent's attention.
+  alert?: boolean;
 };
 
 export default function IconButton({
@@ -16,12 +18,14 @@ export default function IconButton({
   icon,
   style = {},
   onPress = () => {},
+  alert = false,
 }: IconButtonProps) {
   return (
     <PressableOpacity onPress={onPress}>
       <View style={[style, styles.container]}>
         <FontAwesome name={icon} size={18} color="#25292e" />
         <Text style={styles.buttonLabel}>{label}</Text>
+        {alert && <View style={styles.alertDot} />}
       </View>
     </PressableOpacity>
   );
@@ -65,5 +69,16 @@ const styles = StyleSheet.create({
   buttonLabel: {
     color: "black",
     fontSize: 10,
+  },
+  alertDot: {
+    position: "absolute",
+    top: 2,
+    right: 2,
+    width: 14,
+    height: 14,
+    borderRadius: 7,
+    backgroundColor: "#d32f2f",
+    borderColor: "white",
+    borderWidth: 2,
   },
 });
