@@ -20,9 +20,14 @@ export function useHistory() {
     dispatch({ type: "clear-word-history" });
   };
 
+  const removeLastWord = () => {
+    dispatch({ type: "remove-last-word-history" });
+  };
+
   return {
     history: wordHistory,
     addWordToHistory,
     clearHistory,
+    removeLastWord,
   };
 }

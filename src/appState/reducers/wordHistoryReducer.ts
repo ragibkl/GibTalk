@@ -10,6 +10,9 @@ export function wordHistoryReducer(
     case "add-word-history": {
       return [...wordHistory, action.word];
     }
+    case "remove-last-word-history": {
+      return wordHistory.slice(0, -1);
+    }
     case "clear-word-history": {
       return [];
     }

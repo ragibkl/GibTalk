@@ -9,4 +9,11 @@ type ClearWordHistoryAction = {
   type: "clear-word-history";
 };
 
-export type WordHistoryAction = AddWordHistoryAction | ClearWordHistoryAction;
+type RemoveLastWordHistoryAction = {
+  type: "remove-last-word-history";
+};
+
+export type WordHistoryAction =
+  | AddWordHistoryAction
+  | ClearWordHistoryAction
+  | RemoveLastWordHistoryAction;

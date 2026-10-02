@@ -1,3 +1,4 @@
+import { MaterialIcons } from "@expo/vector-icons";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { BackHandler, StyleSheet, Text, View } from "react-native";
@@ -56,7 +57,7 @@ export default function MainScreen() {
   const { createBackup, restoreBackup } = useBackup();
   const { popToTop, pop } = useWordPath();
   const { words, isFetching } = useWords();
-  const { history, clearHistory } = useHistory();
+  const { history, clearHistory, removeLastWord } = useHistory();
   const { clipboard, clearClipboard, pasteWords } = useClipboard();
   const missing = useMissingLanguages(words);
   const missingNames = useLanguageNames(missing);
@@ -110,6 +111,14 @@ export default function MainScreen() {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <View style={styles.bodyTop}>
+          <IconButton label="Back" icon="arrow-left" onPress={pop} />
+          <IconButton
+            style={styles.button}
+            label="Home"
+            icon="home"
+            onPress={popToTop}
+          />
+
           <View style={styles.historyContainer}>
             {isEditing ? (
               <>
@@ -123,116 +132,27 @@ export default function MainScreen() {
                 {!history.length && (
                   <Text style={styles.currentText}>Words history</Text>
                 )}
-                <WordsHistoryList words={history} />
+                <View style={styles.historyList}>
+                  <WordsHistoryList words={history} />
+                </View>
+                {!!history.length && (
+                  // Tap: remove the last word. Hold: clear all.
+                  <PressableOpacity
+                    style={styles.deleteLast}
+                    onPress={removeLastWord}
+                    onLongPress={onPressClear}
+                    testID="button-Delete"
+                  >
+                    <MaterialIcons name="backspace" size={26} color="#25292e" />
+                  </PressableOpacity>
+                )}
               </>
             )}
           </View>
 
-          <View style={styles.controls}>
-            {isEditing ? (
-              <>
-                {!!clipboard.length && (
-                  <>
-                    <IconButton
-                      style={styles.button}
-                      label="Paste"
-                      icon="paste"
-                      onPress={pasteWords}
-                    />
-                    <IconButton
-                      style={styles.button}
-                      label="Clear All"
-                      icon="trash"
-                      onPress={clearClipboard}
-                    />
-                  </>
-                )}
-              </>
-            ) : (
-              <>
-                <IconButton
-                  style={styles.button}
-                  label="Play"
-                  icon="play"
-                  onPress={onPressPlay}
-                />
-                <IconButton
-                  style={styles.button}
-                  label="Clear All"
-                  icon="trash"
-                  onPress={onPressClear}
-                />
-              </>
-            )}
-            <IconButton
-              style={styles.button}
-              label="Home"
-              icon="home"
-              onPress={popToTop}
-            />
-            <IconButton
-              style={styles.button}
-              label="Back"
-              icon="arrow-left"
-              onPress={pop}
-            />
-            {isEditing ? (
-              <>
-                <IconButton
-                  style={styles.button}
-                  label="Add"
-                  icon="plus"
-                  onPress={onPressAdd}
-                />
-                <Menu
-                  opened={showMore}
-                  onBackdropPress={() => setShowMore(false)}
-                >
-                  <MenuTrigger disabled>
-                    <IconButton
-                      style={styles.button}
-                      label="More"
-                      icon="ellipsis-h"
-                      onPress={() => setShowMore(true)}
-                    />
-                  </MenuTrigger>
-                  <MenuOptions>
-                    <MenuOption onSelect={() => onMoreSelect(onPressTemplates)}>
-                      <Text style={styles.menuOption}>Templates</Text>
-                    </MenuOption>
-                    <MenuOption onSelect={() => onMoreSelect(createBackup)}>
-                      <Text style={styles.menuOption}>Backup</Text>
-                    </MenuOption>
-                    <MenuOption onSelect={() => onMoreSelect(restoreBackup)}>
-                      <Text style={styles.menuOption}>Restore</Text>
-                    </MenuOption>
-                  </MenuOptions>
-                </Menu>
-                <IconButton
-                  style={styles.button}
-                  label="Done"
-                  icon="check"
-                  onPress={onPressDone}
-                />
-              </>
-            ) : (
-              <>
-                <IconButton
-                  style={styles.button}
-                  label="Keyboard"
-                  icon="keyboard-o"
-                  onPress={onPressKeyboard}
-                />
-                <IconButton
-                  style={styles.button}
-                  label="Edit"
-                  icon="edit"
-                  onPress={onPressEdit}
-                  alert={!!missing.length}
-                />
-              </>
-            )}
-          </View>
+          {!isEditing && (
+            <IconButton label="Play" icon="play" onPress={onPressPlay} />
+          )}
         </View>
 
         <View style={styles.bodyBreadcrumbs}>
@@ -256,13 +176,87 @@ export default function MainScreen() {
         )}
 
         <View style={styles.bodyBottom}>
-          {!!isFetching ? (
-            <ProgressIcon />
-          ) : !!words.length ? (
-            <WordsGrid editWord={editWord} isEditing={isEditing} />
-          ) : (
-            <WordsEmptyGrid />
-          )}
+          <View style={styles.gridContainer}>
+            {!!isFetching ? (
+              <ProgressIcon />
+            ) : !!words.length ? (
+              <WordsGrid editWord={editWord} isEditing={isEditing} />
+            ) : (
+              <WordsEmptyGrid />
+            )}
+          </View>
+
+          <View style={styles.sideControls}>
+            {isEditing ? (
+              <>
+                <IconButton label="Add" icon="plus" onPress={onPressAdd} />
+                <Menu
+                  opened={showMore}
+                  onBackdropPress={() => setShowMore(false)}
+                >
+                  <MenuTrigger disabled>
+                    <IconButton
+                      style={styles.sideButton}
+                      label="More"
+                      icon="ellipsis-h"
+                      onPress={() => setShowMore(true)}
+                    />
+                  </MenuTrigger>
+                  <MenuOptions>
+                    <MenuOption onSelect={() => onMoreSelect(onPressTemplates)}>
+                      <Text style={styles.menuOption}>Templates</Text>
+                    </MenuOption>
+                    <MenuOption onSelect={() => onMoreSelect(createBackup)}>
+                      <Text style={styles.menuOption}>Backup</Text>
+                    </MenuOption>
+                    <MenuOption onSelect={() => onMoreSelect(restoreBackup)}>
+                      <Text style={styles.menuOption}>Restore</Text>
+                    </MenuOption>
+                    {!!clipboard.length && (
+                      <MenuOption onSelect={() => onMoreSelect(clearClipboard)}>
+                        <Text style={styles.menuOption}>Clear clipboard</Text>
+                      </MenuOption>
+                    )}
+                  </MenuOptions>
+                </Menu>
+                {!!clipboard.length && (
+                  <IconButton
+                    style={styles.sideButton}
+                    label="Paste"
+                    icon="paste"
+                    onPress={pasteWords}
+                  />
+                )}
+                <IconButton
+                  style={styles.sideButton}
+                  label="Done"
+                  icon="check"
+                  onPress={onPressDone}
+                />
+              </>
+            ) : (
+              <>
+                <IconButton
+                  label="Keyboard"
+                  icon="keyboard-o"
+                  onPress={onPressKeyboard}
+                />
+                <IconButton
+                  style={styles.sideButton}
+                  label="Clear All"
+                  icon="trash"
+                  onPress={onPressClear}
+                />
+                <IconButton
+                  style={styles.sideButton}
+                  label="Edit"
+                  icon="edit"
+                  onPress={onPressEdit}
+                  alert={!!missing.length}
+                />
+              </>
+            )}
+          </View>
         </View>
 
         <PasscodeModal
@@ -287,24 +281,37 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   bodyTop: {
+    alignItems: "center",
     flexDirection: "row",
     height: 66,
   },
   historyContainer: {
+    alignItems: "center",
+    alignSelf: "stretch",
+    flex: 1,
+    flexDirection: "row",
+    marginHorizontal: 5,
+  },
+  historyList: {
     flex: 1,
   },
-  currentText: {
-    alignSelf: "center",
-    marginTop: 22,
-    position: "absolute",
-  },
-  controls: {
+  deleteLast: {
     alignItems: "center",
-    flexDirection: "row",
-    marginLeft: 5,
+    height: 60,
+    justifyContent: "center",
+    width: 50,
+  },
+  currentText: {
+    left: 0,
+    position: "absolute",
+    right: 0,
+    textAlign: "center",
   },
   button: {
     marginLeft: 5,
+  },
+  sideButton: {
+    marginTop: 4,
   },
   menuOption: {
     fontSize: 18,
@@ -336,6 +343,17 @@ const styles = StyleSheet.create({
   },
   bodyBottom: {
     flex: 1,
+    flexDirection: "row",
     marginTop: 5,
+  },
+  gridContainer: {
+    flex: 1,
+  },
+  // Wraps into a second column if a phone is too short for all buttons.
+  sideControls: {
+    alignContent: "flex-end",
+    flexWrap: "wrap",
+    justifyContent: "flex-end",
+    marginLeft: 5,
   },
 });
