@@ -1,0 +1,13 @@
+{
+  "name": "gibtalk-e2e",
+  "private": true,
+  "description": "Mobilewright UI test and screenshot script for GibTalk (work in progress)",
+  "type": "module",
+  "engines": { "node": ">=22.12" },
+  "scripts": {
+    "screenshots": "node screenshots.mjs"
+  },
+  "dependencies": {
+    "mobilewright": "0.0.63"
+  }
+}
