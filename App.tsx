@@ -43,7 +43,8 @@ export default function App() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <MenuProvider>
+      {/* backHandler: Android Back closes an open menu first. */}
+      <MenuProvider backHandler>
         <AppStateProvider>
           <LanguagesProvider>
             <SafeAreaProvider>
