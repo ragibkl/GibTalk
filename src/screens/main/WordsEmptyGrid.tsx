@@ -9,12 +9,12 @@ export default function WordsEmptyGrid() {
       <Text></Text>
       <Text>
         If you have a backup of words saved previously, you can restore that via
-        Edit - Restore feature.
+        Edit → More → Restore.
       </Text>
       <Text></Text>
       <Text>
         Alternatively, you can also download a pre-configured word config set
-        via Edit - Templates feature.
+        via Edit → More → Templates.
       </Text>
       <View style={{ flex: 1 }} />
     </View>

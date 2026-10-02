@@ -1,6 +1,12 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import {
+  Menu,
+  MenuOption,
+  MenuOptions,
+  MenuTrigger,
+} from "react-native-popup-menu";
 
 import { useBackup } from "../../service/backup";
 import {
@@ -31,6 +37,7 @@ type HomeScreenNavigationProps = NavigationProp<RootStackParamList, "Home">;
 export default function MainScreen() {
   const [isEditing, setIsEditing] = useState(false);
   const [showPasscodeModal, setPasscodeModal] = useState(false);
+  const [showMore, setShowMore] = useState(false);
 
   const navigation = useNavigation<HomeScreenNavigationProps>();
   const { createBackup, restoreBackup } = useBackup();
@@ -72,6 +79,15 @@ export default function MainScreen() {
     navigation.navigate("createWord");
   };
 
+  const onPressKeyboard = () => {
+    navigation.navigate("keyboard");
+  };
+
+  const onMoreSelect = (action: () => void) => {
+    setShowMore(false);
+    action();
+  };
+
   const onPressDone = () => {
     setIsEditing(false);
     clearClipboard();
@@ -84,12 +100,16 @@ export default function MainScreen() {
           <View style={styles.historyContainer}>
             {isEditing ? (
               <>
-                <Text style={styles.currentText}>Clipboard</Text>
+                {!clipboard.length && (
+                  <Text style={styles.currentText}>Clipboard</Text>
+                )}
                 <WordsHistoryList words={clipboard} />
               </>
             ) : (
               <>
-                <Text style={styles.currentText}>Words history</Text>
+                {!history.length && (
+                  <Text style={styles.currentText}>Words history</Text>
+                )}
                 <WordsHistoryList words={history} />
               </>
             )}
@@ -98,19 +118,33 @@ export default function MainScreen() {
           <View style={styles.controls}>
             {isEditing ? (
               <>
-                <IconButton label="Paste" icon="paste" onPress={pasteWords} />
-                <IconButton
-                  style={{ marginLeft: 5 }}
-                  label="Clear All"
-                  icon="trash"
-                  onPress={clearClipboard}
-                />
+                {!!clipboard.length && (
+                  <>
+                    <IconButton
+                      style={styles.button}
+                      label="Paste"
+                      icon="paste"
+                      onPress={pasteWords}
+                    />
+                    <IconButton
+                      style={styles.button}
+                      label="Clear All"
+                      icon="trash"
+                      onPress={clearClipboard}
+                    />
+                  </>
+                )}
               </>
             ) : (
               <>
-                <IconButton label="Play" icon="play" onPress={onPressPlay} />
                 <IconButton
-                  style={{ marginLeft: 5 }}
+                  style={styles.button}
+                  label="Play"
+                  icon="play"
+                  onPress={onPressPlay}
+                />
+                <IconButton
+                  style={styles.button}
                   label="Clear All"
                   icon="trash"
                   onPress={onPressClear}
@@ -118,17 +152,73 @@ export default function MainScreen() {
               </>
             )}
             <IconButton
-              style={{ marginLeft: 5 }}
+              style={styles.button}
               label="Home"
               icon="home"
               onPress={popToTop}
             />
             <IconButton
-              style={{ marginLeft: 5 }}
+              style={styles.button}
               label="Back"
               icon="arrow-left"
               onPress={pop}
             />
+            {isEditing ? (
+              <>
+                <IconButton
+                  style={styles.button}
+                  label="Add"
+                  icon="plus"
+                  onPress={onPressAdd}
+                />
+                <Menu
+                  opened={showMore}
+                  onBackdropPress={() => setShowMore(false)}
+                >
+                  <MenuTrigger disabled>
+                    <IconButton
+                      style={styles.button}
+                      label="More"
+                      icon="ellipsis-h"
+                      onPress={() => setShowMore(true)}
+                    />
+                  </MenuTrigger>
+                  <MenuOptions>
+                    <MenuOption onSelect={() => onMoreSelect(onPressTemplates)}>
+                      <Text style={styles.menuOption}>Templates</Text>
+                    </MenuOption>
+                    <MenuOption onSelect={() => onMoreSelect(createBackup)}>
+                      <Text style={styles.menuOption}>Backup</Text>
+                    </MenuOption>
+                    <MenuOption onSelect={() => onMoreSelect(restoreBackup)}>
+                      <Text style={styles.menuOption}>Restore</Text>
+                    </MenuOption>
+                  </MenuOptions>
+                </Menu>
+                <IconButton
+                  style={styles.button}
+                  label="Done"
+                  icon="check"
+                  onPress={onPressDone}
+                />
+              </>
+            ) : (
+              <>
+                <IconButton
+                  style={styles.button}
+                  label="Keyboard"
+                  icon="keyboard-o"
+                  onPress={onPressKeyboard}
+                />
+                <IconButton
+                  style={styles.button}
+                  label="Edit"
+                  icon="edit"
+                  onPress={onPressEdit}
+                  alert={!!missing.length}
+                />
+              </>
+            )}
           </View>
         </View>
 
@@ -153,47 +243,13 @@ export default function MainScreen() {
         )}
 
         <View style={styles.bodyBottom}>
-          <View style={styles.gridContainer}>
-            {!!isFetching ? (
-              <ProgressIcon />
-            ) : !!words.length ? (
-              <WordsGrid editWord={editWord} isEditing={isEditing} />
-            ) : (
-              <WordsEmptyGrid />
-            )}
-          </View>
-
-          <View style={styles.sideControls}>
-            <View style={{ flex: 1 }} />
-            {isEditing ? (
-              <>
-                <IconButton
-                  label="Backup"
-                  icon="download"
-                  onPress={createBackup}
-                />
-                <IconButton
-                  label="Restore"
-                  icon="upload"
-                  onPress={restoreBackup}
-                />
-                <IconButton
-                  label="Templates"
-                  icon="book"
-                  onPress={onPressTemplates}
-                />
-                <IconButton label="Add" icon="plus" onPress={onPressAdd} />
-                <IconButton label="Done" icon="check" onPress={onPressDone} />
-              </>
-            ) : (
-              <IconButton
-                label="Edit"
-                icon="edit"
-                onPress={onPressEdit}
-                alert={!!missing.length}
-              />
-            )}
-          </View>
+          {!!isFetching ? (
+            <ProgressIcon />
+          ) : !!words.length ? (
+            <WordsGrid editWord={editWord} isEditing={isEditing} />
+          ) : (
+            <WordsEmptyGrid />
+          )}
         </View>
 
         <PasscodeModal
@@ -219,20 +275,27 @@ const styles = StyleSheet.create({
   },
   bodyTop: {
     flexDirection: "row",
-    height: 75,
+    height: 66,
   },
   historyContainer: {
     flex: 1,
   },
   currentText: {
     alignSelf: "center",
-    marginTop: 25,
+    marginTop: 22,
     position: "absolute",
   },
   controls: {
     alignItems: "center",
     flexDirection: "row",
     marginLeft: 5,
+  },
+  button: {
+    marginLeft: 5,
+  },
+  menuOption: {
+    fontSize: 18,
+    padding: 5,
   },
   voiceNotice: {
     flexDirection: "row",
@@ -259,18 +322,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   bodyBottom: {
-    alignItems: "stretch",
     flex: 1,
-    flexDirection: "row",
     marginTop: 5,
-  },
-  gridContainer: {
-    flex: 1,
-  },
-  sideControls: {
-    alignItems: "flex-end",
-    flexWrap: "wrap",
-    justifyContent: "flex-end",
-    marginLeft: 5,
   },
 });

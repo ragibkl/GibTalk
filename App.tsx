@@ -1,10 +1,8 @@
 import "react-native-gesture-handler";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-import MaterialCommunityIcons from "@expo/vector-icons/build/MaterialCommunityIcons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useKeepAwake } from "expo-keep-awake";
 import { StatusBar } from "expo-status-bar";
 
@@ -35,52 +33,10 @@ export type RootStackParamList = {
   editWord: { word: Word };
   searchImage: { onUpdateUri: (uri: string) => void };
   searchTemplate: undefined;
+  keyboard: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
-
-export type HomeTabsParamList = {
-  TabHome: undefined;
-  TabKeyboard: undefined;
-};
-const Tab = createBottomTabNavigator<HomeTabsParamList>();
-
-function HomeTabs() {
-  const screenOptions = {
-    headerShown: false,
-  };
-
-  const homeTabOptions = {
-    title: "Home",
-    tabBarTestID: "tab-Home",
-    tabBarIcon: ({ color, size }: { color: string; size: number }) => (
-      <MaterialCommunityIcons name="home" color={color} size={size} />
-    ),
-  };
-
-  const keyboardTabOptions = {
-    title: "Keyboard",
-    tabBarTestID: "tab-Keyboard",
-    tabBarIcon: ({ color, size }: { color: string; size: number }) => (
-      <MaterialCommunityIcons name="keyboard" color={color} size={size} />
-    ),
-  };
-
-  return (
-    <Tab.Navigator screenOptions={screenOptions}>
-      <Tab.Screen
-        name="TabHome"
-        component={MainScreen}
-        options={homeTabOptions}
-      />
-      <Tab.Screen
-        name="TabKeyboard"
-        component={KeyboardScreen}
-        options={keyboardTabOptions}
-      />
-    </Tab.Navigator>
-  );
-}
 
 export default function App() {
   useKeepAwake();
@@ -95,7 +51,12 @@ export default function App() {
                 <Stack.Navigator screenOptions={screenOptions}>
                   <Stack.Screen
                     name="Home"
-                    component={HomeTabs}
+                    component={MainScreen}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="keyboard"
+                    component={KeyboardScreen}
                     options={{ headerShown: false }}
                   />
                   <Stack.Screen
@@ -121,7 +82,8 @@ export default function App() {
                 </Stack.Navigator>
               </NavigationContainer>
 
-              <StatusBar style="auto" />
+              {/* Full screen: more room for words, especially on phones. */}
+              <StatusBar hidden />
             </SafeAreaProvider>
           </LanguagesProvider>
         </AppStateProvider>
