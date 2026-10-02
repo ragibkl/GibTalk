@@ -11,59 +11,16 @@ import {
   TextInput,
   View,
 } from "react-native";
-import DropDownPicker from "react-native-dropdown-picker";
 
-import { LANGUAGE_OPTIONS, Language, speak } from "../../service/speech";
+import { Language, speak } from "../../service/speech";
+import LanguagePicker from "../../components/LanguagePicker";
 import { RootStackParamList } from "../../../App";
 import { useState } from "react";
 import SafeAreaView from "../../components/SafeAreaView";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const placeholderImage = require("../../../assets/placeholder.png");
 
-const LANGUAGE_ITEMS = LANGUAGE_OPTIONS.map(({ label, language }) => ({
-  label,
-  value: language,
-}));
-
 type EditWordNavigationProps = NavigationProp<RootStackParamList, "editWord">;
-
-type LanguagePickerProps = {
-  language: Language;
-  onChangeLanguage(language: Language): void;
-};
-
-function LanguagePicker(props: LanguagePickerProps) {
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState<Language>(props.language);
-  const insets = useSafeAreaInsets();
-
-  const onChangeValue = (value: Language | null) => {
-    props.onChangeLanguage(value || props.language);
-  };
-
-  return (
-    <DropDownPicker
-      items={LANGUAGE_ITEMS}
-      open={open}
-      value={value}
-      setOpen={setOpen}
-      setValue={setValue}
-      onChangeValue={onChangeValue}
-      // A full-screen list: in landscape the dropdown opened under the
-      // status bar and hid the first languages.
-      listMode="MODAL"
-      modalTitle="Language"
-      // The app draws edge to edge, so keep the list clear of the system bars.
-      modalContentContainerStyle={{
-        paddingTop: insets.top,
-        paddingBottom: insets.bottom,
-        paddingLeft: insets.left,
-        paddingRight: insets.right,
-      }}
-    />
-  );
-}
 
 type Props = {
   label: string;

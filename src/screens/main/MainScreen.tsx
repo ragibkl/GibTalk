@@ -3,6 +3,11 @@ import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import { useBackup } from "../../service/backup";
+import {
+  openAddVoice,
+  useLanguageNames,
+  useMissingLanguages,
+} from "../../service/languages";
 import { useClipboard } from "../../service/clipboard";
 import { useHistory } from "../../service/history";
 import { speakWords, stopSpeech } from "../../service/speech";
@@ -11,6 +16,7 @@ import { Word, useWords } from "../../service/words";
 
 import { RootStackParamList } from "../../../App";
 import IconButton from "../../components/IconButton";
+import PressableOpacity from "../../components/PressableOpacity";
 import { ProgressIcon } from "../../components/ProgressIcon";
 import SafeAreaView from "../../components/SafeAreaView";
 
@@ -32,6 +38,8 @@ export default function MainScreen() {
   const { words, isFetching } = useWords();
   const { history, clearHistory } = useHistory();
   const { clipboard, clearClipboard, pasteWords } = useClipboard();
+  const missing = useMissingLanguages(words);
+  const missingNames = useLanguageNames(missing);
 
   const onPressClear = () => {
     clearHistory();
@@ -128,6 +136,22 @@ export default function MainScreen() {
           <BreadCrumbs />
         </View>
 
+        {isEditing && !!missing.length && (
+          <View style={styles.voiceNotice}>
+            <Text style={styles.voiceNoticeText}>
+              No voice on this device for {missingNames.join(", ")}. Words in{" "}
+              {missing.length > 1 ? "these languages" : "this language"} are
+              read in another language.
+            </Text>
+            <PressableOpacity
+              style={styles.voiceNoticeButton}
+              onPress={() => openAddVoice()}
+            >
+              <Text>Install voice</Text>
+            </PressableOpacity>
+          </View>
+        )}
+
         <View style={styles.bodyBottom}>
           <View style={styles.gridContainer}>
             {!!isFetching ? (
@@ -162,7 +186,12 @@ export default function MainScreen() {
                 <IconButton label="Done" icon="check" onPress={onPressDone} />
               </>
             ) : (
-              <IconButton label="Edit" icon="edit" onPress={onPressEdit} />
+              <IconButton
+                label="Edit"
+                icon="edit"
+                onPress={onPressEdit}
+                alert={!!missing.length}
+              />
             )}
           </View>
         </View>
@@ -204,6 +233,27 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     marginLeft: 5,
+  },
+  voiceNotice: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 5,
+    padding: 8,
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: "#d32f2f",
+    backgroundColor: "#fdecea",
+  },
+  voiceNoticeText: {
+    flex: 1,
+    marginRight: 10,
+  },
+  voiceNoticeButton: {
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderWidth: 2,
+    borderRadius: 5,
+    backgroundColor: "white",
   },
   bodyBreadcrumbs: {
     paddingHorizontal: 10,

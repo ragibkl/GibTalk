@@ -1,0 +1,9 @@
+{
+  "platforms": ["apple", "android"],
+  "apple": {
+    "modules": ["GibtalkVoicesModule"]
+  },
+  "android": {
+    "modules": ["expo.modules.gibtalkvoices.GibtalkVoicesModule"]
+  }
+}
