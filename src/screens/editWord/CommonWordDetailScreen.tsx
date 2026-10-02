@@ -48,6 +48,10 @@ function LanguagePicker(props: LanguagePickerProps) {
       setOpen={setOpen}
       setValue={setValue}
       onChangeValue={onChangeValue}
+      // A full-screen list: in landscape the dropdown opened under the
+      // status bar and hid the first languages.
+      listMode="MODAL"
+      modalTitle="Language"
     />
   );
 }
