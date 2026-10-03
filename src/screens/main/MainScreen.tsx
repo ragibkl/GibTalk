@@ -1,6 +1,13 @@
+import { MaterialIcons } from "@expo/vector-icons";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import { BackHandler, StyleSheet, Text, View } from "react-native";
+import {
+  Menu,
+  MenuOption,
+  MenuOptions,
+  MenuTrigger,
+} from "react-native-popup-menu";
 
 import { useBackup } from "../../service/backup";
 import {
@@ -31,12 +38,26 @@ type HomeScreenNavigationProps = NavigationProp<RootStackParamList, "Home">;
 export default function MainScreen() {
   const [isEditing, setIsEditing] = useState(false);
   const [showPasscodeModal, setPasscodeModal] = useState(false);
+  const [showMore, setShowMore] = useState(false);
+
+  // Android Back closes the More menu instead of leaving the app.
+  useEffect(() => {
+    if (!showMore) {
+      return;
+    }
+
+    const sub = BackHandler.addEventListener("hardwareBackPress", () => {
+      setShowMore(false);
+      return true;
+    });
+    return () => sub.remove();
+  }, [showMore]);
 
   const navigation = useNavigation<HomeScreenNavigationProps>();
   const { createBackup, restoreBackup } = useBackup();
   const { popToTop, pop } = useWordPath();
   const { words, isFetching } = useWords();
-  const { history, clearHistory } = useHistory();
+  const { history, clearHistory, removeLastWord } = useHistory();
   const { clipboard, clearClipboard, pasteWords } = useClipboard();
   const missing = useMissingLanguages(words);
   const missingNames = useLanguageNames(missing);
@@ -72,6 +93,15 @@ export default function MainScreen() {
     navigation.navigate("createWord");
   };
 
+  const onPressKeyboard = () => {
+    navigation.navigate("keyboard");
+  };
+
+  const onMoreSelect = (action: () => void) => {
+    setShowMore(false);
+    action();
+  };
+
   const onPressDone = () => {
     setIsEditing(false);
     clearClipboard();
@@ -81,55 +111,48 @@ export default function MainScreen() {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <View style={styles.bodyTop}>
+          <IconButton label="Back" icon="arrow-left" onPress={pop} />
+          <IconButton
+            style={styles.button}
+            label="Home"
+            icon="home"
+            onPress={popToTop}
+          />
+
           <View style={styles.historyContainer}>
             {isEditing ? (
               <>
-                <Text style={styles.currentText}>Clipboard</Text>
+                {!clipboard.length && (
+                  <Text style={styles.currentText}>Clipboard</Text>
+                )}
                 <WordsHistoryList words={clipboard} />
               </>
             ) : (
               <>
-                <Text style={styles.currentText}>Words history</Text>
-                <WordsHistoryList words={history} />
+                {!history.length && (
+                  <Text style={styles.currentText}>Words history</Text>
+                )}
+                <View style={styles.historyList}>
+                  <WordsHistoryList words={history} />
+                </View>
+                {!!history.length && (
+                  // Tap: remove the last word. Hold: clear all.
+                  <PressableOpacity
+                    style={styles.deleteLast}
+                    onPress={removeLastWord}
+                    onLongPress={onPressClear}
+                    testID="button-Delete"
+                  >
+                    <MaterialIcons name="backspace" size={26} color="#25292e" />
+                  </PressableOpacity>
+                )}
               </>
             )}
           </View>
 
-          <View style={styles.controls}>
-            {isEditing ? (
-              <>
-                <IconButton label="Paste" icon="paste" onPress={pasteWords} />
-                <IconButton
-                  style={{ marginLeft: 5 }}
-                  label="Clear All"
-                  icon="trash"
-                  onPress={clearClipboard}
-                />
-              </>
-            ) : (
-              <>
-                <IconButton label="Play" icon="play" onPress={onPressPlay} />
-                <IconButton
-                  style={{ marginLeft: 5 }}
-                  label="Clear All"
-                  icon="trash"
-                  onPress={onPressClear}
-                />
-              </>
-            )}
-            <IconButton
-              style={{ marginLeft: 5 }}
-              label="Home"
-              icon="home"
-              onPress={popToTop}
-            />
-            <IconButton
-              style={{ marginLeft: 5 }}
-              label="Back"
-              icon="arrow-left"
-              onPress={pop}
-            />
-          </View>
+          {!isEditing && (
+            <IconButton label="Play" icon="play" onPress={onPressPlay} />
+          )}
         </View>
 
         <View style={styles.bodyBreadcrumbs}>
@@ -164,34 +187,75 @@ export default function MainScreen() {
           </View>
 
           <View style={styles.sideControls}>
-            <View style={{ flex: 1 }} />
             {isEditing ? (
               <>
-                <IconButton
-                  label="Backup"
-                  icon="download"
-                  onPress={createBackup}
-                />
-                <IconButton
-                  label="Restore"
-                  icon="upload"
-                  onPress={restoreBackup}
-                />
-                <IconButton
-                  label="Templates"
-                  icon="book"
-                  onPress={onPressTemplates}
-                />
                 <IconButton label="Add" icon="plus" onPress={onPressAdd} />
-                <IconButton label="Done" icon="check" onPress={onPressDone} />
+                <Menu
+                  opened={showMore}
+                  onBackdropPress={() => setShowMore(false)}
+                >
+                  <MenuTrigger disabled>
+                    <IconButton
+                      style={styles.sideButton}
+                      label="More"
+                      icon="ellipsis-h"
+                      onPress={() => setShowMore(true)}
+                    />
+                  </MenuTrigger>
+                  <MenuOptions>
+                    <MenuOption onSelect={() => onMoreSelect(onPressTemplates)}>
+                      <Text style={styles.menuOption}>Templates</Text>
+                    </MenuOption>
+                    <MenuOption onSelect={() => onMoreSelect(createBackup)}>
+                      <Text style={styles.menuOption}>Backup</Text>
+                    </MenuOption>
+                    <MenuOption onSelect={() => onMoreSelect(restoreBackup)}>
+                      <Text style={styles.menuOption}>Restore</Text>
+                    </MenuOption>
+                    {!!clipboard.length && (
+                      <MenuOption onSelect={() => onMoreSelect(clearClipboard)}>
+                        <Text style={styles.menuOption}>Clear clipboard</Text>
+                      </MenuOption>
+                    )}
+                  </MenuOptions>
+                </Menu>
+                {!!clipboard.length && (
+                  <IconButton
+                    style={styles.sideButton}
+                    label="Paste"
+                    icon="paste"
+                    onPress={pasteWords}
+                  />
+                )}
+                <IconButton
+                  style={styles.sideButton}
+                  label="Done"
+                  icon="check"
+                  onPress={onPressDone}
+                />
               </>
             ) : (
-              <IconButton
-                label="Edit"
-                icon="edit"
-                onPress={onPressEdit}
-                alert={!!missing.length}
-              />
+              <>
+                <IconButton
+                  label="Clear All"
+                  icon="trash"
+                  onPress={onPressClear}
+                />
+                <IconButton
+                  style={styles.sideButton}
+                  label="Edit"
+                  icon="edit"
+                  onPress={onPressEdit}
+                  alert={!!missing.length}
+                />
+                {/* Same spot as Words on the keyboard screen, to switch back and forth. */}
+                <IconButton
+                  style={styles.sideButton}
+                  label="Keyboard"
+                  icon="keyboard-o"
+                  onPress={onPressKeyboard}
+                />
+              </>
             )}
           </View>
         </View>
@@ -218,21 +282,41 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   bodyTop: {
-    flexDirection: "row",
-    height: 75,
-  },
-  historyContainer: {
-    flex: 1,
-  },
-  currentText: {
-    alignSelf: "center",
-    marginTop: 25,
-    position: "absolute",
-  },
-  controls: {
     alignItems: "center",
     flexDirection: "row",
+    height: 66,
+  },
+  historyContainer: {
+    alignItems: "center",
+    alignSelf: "stretch",
+    flex: 1,
+    flexDirection: "row",
+    marginHorizontal: 5,
+  },
+  historyList: {
+    flex: 1,
+  },
+  deleteLast: {
+    alignItems: "center",
+    height: 60,
+    justifyContent: "center",
+    width: 50,
+  },
+  currentText: {
+    left: 0,
+    position: "absolute",
+    right: 0,
+    textAlign: "center",
+  },
+  button: {
     marginLeft: 5,
+  },
+  sideButton: {
+    marginTop: 4,
+  },
+  menuOption: {
+    fontSize: 18,
+    padding: 5,
   },
   voiceNotice: {
     flexDirection: "row",
@@ -259,7 +343,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   bodyBottom: {
-    alignItems: "stretch",
     flex: 1,
     flexDirection: "row",
     marginTop: 5,
@@ -267,8 +350,9 @@ const styles = StyleSheet.create({
   gridContainer: {
     flex: 1,
   },
+  // Wraps into a second column if a phone is too short for all buttons.
   sideControls: {
-    alignItems: "flex-end",
+    alignContent: "flex-end",
     flexWrap: "wrap",
     justifyContent: "flex-end",
     marginLeft: 5,

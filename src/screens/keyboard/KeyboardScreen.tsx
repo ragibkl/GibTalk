@@ -8,7 +8,7 @@ import {
   MenuOption,
 } from "react-native-popup-menu";
 
-import { HomeTabsParamList } from "../../../App";
+import { RootStackParamList } from "../../../App";
 import { Language, speak } from "../../service/speech";
 import {
   FALLBACK_NAMES,
@@ -19,7 +19,7 @@ import {
 import IconButton from "../../components/IconButton";
 import SafeAreaView from "../../components/SafeAreaView";
 
-type KeyboardScreenProps = StackScreenProps<HomeTabsParamList, "TabKeyboard">;
+type KeyboardScreenProps = StackScreenProps<RootStackParamList, "keyboard">;
 
 export default function KeyboardScreen(props: KeyboardScreenProps) {
   const [textInput, setTextInput] = useState("");
@@ -88,6 +88,15 @@ export default function KeyboardScreen(props: KeyboardScreenProps) {
             />
           </View>
         </View>
+
+        {/* Bottom right, where the Keyboard button is on the words screen. */}
+        <View style={styles.bottomRight}>
+          <IconButton
+            label="Words"
+            icon="th-large"
+            onPress={() => props.navigation.goBack()}
+          />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -117,13 +126,15 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     height: 60,
-    padding: 10,
+    paddingHorizontal: 10,
     paddingLeft: 15,
   },
   textInput: {
     alignSelf: "stretch",
     flex: 1,
     fontSize: 30,
+    // Android adds its own vertical padding, which cut off the text.
+    paddingVertical: 0,
   },
   languageInputContainer: {
     alignItems: "center",
@@ -141,6 +152,11 @@ const styles = StyleSheet.create({
   },
   languageOption: {
     fontSize: 18,
+  },
+  bottomRight: {
+    alignItems: "flex-end",
+    flex: 1,
+    justifyContent: "flex-end",
   },
   controls: {
     alignItems: "center",

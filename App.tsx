@@ -1,9 +1,8 @@
 import "react-native-gesture-handler";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-import MaterialCommunityIcons from "@expo/vector-icons/build/MaterialCommunityIcons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useKeepAwake } from "expo-keep-awake";
 import { StatusBar } from "expo-status-bar";
 
@@ -34,96 +33,63 @@ export type RootStackParamList = {
   editWord: { word: Word };
   searchImage: { onUpdateUri: (uri: string) => void };
   searchTemplate: undefined;
+  keyboard: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
-
-export type HomeTabsParamList = {
-  TabHome: undefined;
-  TabKeyboard: undefined;
-};
-const Tab = createBottomTabNavigator<HomeTabsParamList>();
-
-function HomeTabs() {
-  const screenOptions = {
-    headerShown: false,
-  };
-
-  const homeTabOptions = {
-    title: "Home",
-    tabBarTestID: "tab-Home",
-    tabBarIcon: ({ color, size }: { color: string; size: number }) => (
-      <MaterialCommunityIcons name="home" color={color} size={size} />
-    ),
-  };
-
-  const keyboardTabOptions = {
-    title: "Keyboard",
-    tabBarTestID: "tab-Keyboard",
-    tabBarIcon: ({ color, size }: { color: string; size: number }) => (
-      <MaterialCommunityIcons name="keyboard" color={color} size={size} />
-    ),
-  };
-
-  return (
-    <Tab.Navigator screenOptions={screenOptions}>
-      <Tab.Screen
-        name="TabHome"
-        component={MainScreen}
-        options={homeTabOptions}
-      />
-      <Tab.Screen
-        name="TabKeyboard"
-        component={KeyboardScreen}
-        options={keyboardTabOptions}
-      />
-    </Tab.Navigator>
-  );
-}
 
 export default function App() {
   useKeepAwake();
 
   return (
-    <MenuProvider>
-      <AppStateProvider>
-        <LanguagesProvider>
-          <SafeAreaProvider>
-            <NavigationContainer>
-              <Stack.Navigator screenOptions={screenOptions}>
-                <Stack.Screen
-                  name="Home"
-                  component={HomeTabs}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="createWord"
-                  component={CreateWordScreen}
-                  options={{ title: "Add New Word" }}
-                />
-                <Stack.Screen
-                  name="editWord"
-                  component={EditWordScreen}
-                  options={{ title: "Edit Word" }}
-                />
-                <Stack.Screen
-                  name="searchImage"
-                  component={ImageSearchScreen}
-                  options={{ title: "Search Symbol" }}
-                />
-                <Stack.Screen
-                  name="searchTemplate"
-                  component={TemplateSearchScreen}
-                  options={{ title: "Import a Template" }}
-                />
-              </Stack.Navigator>
-            </NavigationContainer>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      {/* backHandler: Android Back closes an open menu first. */}
+      <MenuProvider backHandler>
+        <AppStateProvider>
+          <LanguagesProvider>
+            <SafeAreaProvider>
+              <NavigationContainer>
+                <Stack.Navigator screenOptions={screenOptions}>
+                  <Stack.Screen
+                    name="Home"
+                    component={MainScreen}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="keyboard"
+                    component={KeyboardScreen}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="createWord"
+                    component={CreateWordScreen}
+                    options={{ title: "Add New Word" }}
+                  />
+                  <Stack.Screen
+                    name="editWord"
+                    component={EditWordScreen}
+                    options={{ title: "Edit Word" }}
+                  />
+                  <Stack.Screen
+                    name="searchImage"
+                    component={ImageSearchScreen}
+                    options={{ title: "Search Symbol" }}
+                  />
+                  <Stack.Screen
+                    name="searchTemplate"
+                    component={TemplateSearchScreen}
+                    options={{ title: "Import a Template" }}
+                  />
+                </Stack.Navigator>
+              </NavigationContainer>
 
-            <StatusBar style="auto" />
-          </SafeAreaProvider>
-        </LanguagesProvider>
-      </AppStateProvider>
-    </MenuProvider>
+              {/* Full screen: more room for words, especially on phones. */}
+              <StatusBar hidden />
+            </SafeAreaProvider>
+          </LanguagesProvider>
+        </AppStateProvider>
+      </MenuProvider>
+    </GestureHandlerRootView>
   );
 }
 

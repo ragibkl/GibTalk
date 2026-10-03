@@ -44,33 +44,15 @@ export function computeWordsState(
     case "remove-word": {
       return words.filter((w) => w.id !== action.wordId);
     }
-    case "move-word-left": {
+    case "move-word": {
       const i = words.findIndex((w) => w.id === action.wordId);
-      if (i === 0 || i === -1) {
+      if (i === -1) {
         return words;
       }
 
-      const target = words[i];
-      const left = words[i - 1];
-
       const newWords = words.slice();
-      newWords[i - 1] = target;
-      newWords[i] = left;
-      return newWords;
-    }
-    case "move-word-right": {
-      const i = words.findIndex((w) => w.id === action.wordId);
-      if (i === words.length - 1) {
-        return words;
-      }
-
-      const target = words[i];
-      const right = words[i + 1];
-
-      const newWords = words.slice();
-      newWords[i + 1] = target;
-      newWords[i] = right;
-
+      const [word] = newWords.splice(i, 1);
+      newWords.splice(action.toIndex, 0, word);
       return newWords;
     }
     default: {
