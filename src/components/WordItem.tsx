@@ -28,12 +28,14 @@ export default function WordItem({
   isEditing,
   scale = 1,
 }: Props) {
+  // Whole points: Android cut the last letter off labels ("yes" showed as
+  // "ye") when the tile width had a fraction.
   const sized = {
-    container: { width: TILE_WIDTH * scale },
+    container: { width: Math.floor(TILE_WIDTH * scale) },
     image: {
-      width: 100 * scale,
-      height: 100 * scale,
-      marginTop: 15 * scale,
+      width: Math.round(100 * scale),
+      height: Math.round(100 * scale),
+      marginTop: Math.round(15 * scale),
     },
     label: { fontSize: Math.max(12, Math.round(14 * scale)) },
   };
@@ -74,7 +76,11 @@ export default function WordItem({
         ]}
       >
         <Image style={[styles.image, sized.image]} source={{ uri: word.uri }} />
-        <Text style={[styles.labelText, sized.label]} numberOfLines={2}>
+        <Text
+          style={[styles.labelText, sized.label]}
+          numberOfLines={2}
+          textBreakStrategy="simple"
+        >
           {word.label}
         </Text>
       </View>
