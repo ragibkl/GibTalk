@@ -86,13 +86,16 @@ export default function KeyboardScreen(props: KeyboardScreenProps) {
               icon="trash"
               onPress={onPressClear}
             />
-            <IconButton
-              style={{ marginLeft: 5 }}
-              label="Words"
-              icon="th-large"
-              onPress={() => props.navigation.goBack()}
-            />
           </View>
+        </View>
+
+        {/* Bottom right, where the Keyboard button is on the words screen. */}
+        <View style={styles.bottomRight}>
+          <IconButton
+            label="Words"
+            icon="th-large"
+            onPress={() => props.navigation.goBack()}
+          />
         </View>
       </View>
     </SafeAreaView>
@@ -149,6 +152,11 @@ const styles = StyleSheet.create({
   },
   languageOption: {
     fontSize: 18,
+  },
+  bottomRight: {
+    alignItems: "flex-end",
+    flex: 1,
+    justifyContent: "flex-end",
   },
   controls: {
     alignItems: "center",

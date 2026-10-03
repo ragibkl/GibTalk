@@ -237,12 +237,6 @@ export default function MainScreen() {
             ) : (
               <>
                 <IconButton
-                  label="Keyboard"
-                  icon="keyboard-o"
-                  onPress={onPressKeyboard}
-                />
-                <IconButton
-                  style={styles.sideButton}
                   label="Clear All"
                   icon="trash"
                   onPress={onPressClear}
@@ -253,6 +247,13 @@ export default function MainScreen() {
                   icon="edit"
                   onPress={onPressEdit}
                   alert={!!missing.length}
+                />
+                {/* Same spot as Words on the keyboard screen, to switch back and forth. */}
+                <IconButton
+                  style={styles.sideButton}
+                  label="Keyboard"
+                  icon="keyboard-o"
+                  onPress={onPressKeyboard}
                 />
               </>
             )}
