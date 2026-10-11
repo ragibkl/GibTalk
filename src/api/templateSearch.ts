@@ -1,28 +1,24 @@
-import YAML from "yaml";
-
+// Templates come from the GibTalk symbols API, which fills in full picture URLs.
+// (App versions up to 1.0.20 read templates/ in the GitHub repo instead.)
 export type TemplateItem = {
+  id: string;
   name: string;
   description: string;
   author: string;
-  uri: string;
+  language: string;
+  words: number;
+  url: string;
 };
 
-const BASE_URL = "https://github.com/ragibkl/GibTalk/raw/master/templates";
+const TEMPLATES_URL = "https://api.gibtalk.com/api/templates";
 
 export async function getTemplates(): Promise<TemplateItem[]> {
   const doFetch = async () => {
-    const res = await fetch(`${BASE_URL}/index.yaml`);
-    const text = await res.text();
-    const data = YAML.parse(text) as TemplateItem[];
-
-    for (let i = 0; i < data.length; i++) {
-      const item = data[i];
-      if (item.uri.startsWith("./")) {
-        item.uri = item.uri.replace("./", `${BASE_URL}/`);
-      }
+    const res = await fetch(TEMPLATES_URL);
+    if (!res.ok) {
+      throw new Error(`templates: HTTP ${res.status}`);
     }
-
-    return data;
+    return (await res.json()) as TemplateItem[];
   };
 
   for (let i = 0; i < 5; i++) {
@@ -37,12 +33,16 @@ export async function getTemplates(): Promise<TemplateItem[]> {
   return [];
 }
 
+// Returns the template's words as a word file (JSON, which the YAML word file
+// parser reads too), ready for mergeTemplateContents.
 export async function fetchTemplate(item: TemplateItem): Promise<string> {
   const doFetch = async () => {
-    const res = await fetch(item.uri);
-    const text = await res.text();
-
-    return text;
+    const res = await fetch(item.url);
+    if (!res.ok) {
+      throw new Error(`template ${item.id}: HTTP ${res.status}`);
+    }
+    const data = (await res.json()) as { words: unknown[] };
+    return JSON.stringify(data.words);
   };
 
   for (let i = 0; i < 5; i++) {
