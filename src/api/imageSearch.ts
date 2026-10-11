@@ -7,7 +7,7 @@ export async function getSearchSymbols(
 ): Promise<ImageResult[]> {
   const doFetch = async () => {
     const q = searchTerm.trim();
-    const url = `https://api-gibtalk.apps.bancuh.net/api/symbols/search/?q=${q}`;
+    const url = `https://api.gibtalk.com/api/symbols/search/?q=${q}`;
     const res = await fetch(url);
     const data = (await res.json()) as ImageResult[];
 
