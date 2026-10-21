@@ -7,9 +7,11 @@ import PressableOpacity from "./PressableOpacity";
 
 type Props = {
   word: Word;
+  // Tablets: bigger pictures and text, up to two lines.
+  large?: boolean;
 };
 
-export default function HistoryItem({ word }: Props) {
+export default function HistoryItem({ word, large = false }: Props) {
   const onPress = () => {
     speakWord(word);
   };
@@ -18,9 +20,17 @@ export default function HistoryItem({ word }: Props) {
 
   return (
     <PressableOpacity onPress={onPress}>
-      <View style={styles.container}>
-        <Image style={styles.image} source={{ uri }} />
-        <Text style={styles.text}>{label}</Text>
+      <View style={[styles.container, large && styles.containerLarge]}>
+        <Image
+          style={[styles.image, large && styles.imageLarge]}
+          source={{ uri }}
+        />
+        <Text
+          style={[styles.text, large && styles.textLarge]}
+          numberOfLines={large ? 2 : undefined}
+        >
+          {label}
+        </Text>
       </View>
     </PressableOpacity>
   );
@@ -49,5 +59,18 @@ const styles = StyleSheet.create({
     margin: 2,
     fontWeight: "bold",
     fontSize: 10,
+  },
+  // Same height whether the label takes one line or two, so the row lines up.
+  containerLarge: {
+    height: 100,
+    width: 96,
+  },
+  imageLarge: {
+    height: 56,
+    width: 56,
+  },
+  textLarge: {
+    fontSize: 13,
+    textAlign: "center",
   },
 });

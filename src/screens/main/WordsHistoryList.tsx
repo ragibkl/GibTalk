@@ -6,13 +6,14 @@ import { Word } from "../../service/words";
 
 type Props = {
   words: Word[];
+  large?: boolean;
 };
 
 export default function WordsHistoryList(props: Props) {
   const scrollRef = useRef<ScrollView>(null);
 
   const renderHistoryItem = (word: Word, i: number) => {
-    return <HistoryItem key={i} word={word} />;
+    return <HistoryItem key={i} word={word} large={props.large} />;
   };
 
   // Keep the newest word in view; older words scroll off to the left.
