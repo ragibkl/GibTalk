@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
     height: 66,
   },
   bodyTopLarge: {
-    height: 104,
+    height: 108,
   },
   historyContainer: {
     alignItems: "center",

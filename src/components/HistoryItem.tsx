@@ -60,8 +60,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 10,
   },
+  // Same height whether the label takes one line or two, so the row lines up.
   containerLarge: {
-    width: 88,
+    height: 100,
+    width: 96,
   },
   imageLarge: {
     height: 56,
