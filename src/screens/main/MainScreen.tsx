@@ -1,7 +1,13 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { BackHandler, StyleSheet, Text, View } from "react-native";
+import {
+  BackHandler,
+  StyleSheet,
+  Text,
+  View,
+  useWindowDimensions,
+} from "react-native";
 import {
   Menu,
   MenuOption,
@@ -52,6 +58,11 @@ export default function MainScreen() {
     });
     return () => sub.remove();
   }, [showMore]);
+
+  // Tablets get a taller sentence bar with bigger words: the phone size was
+  // too small to read on an iPad.
+  const { width, height } = useWindowDimensions();
+  const isTablet = Math.min(width, height) >= 600;
 
   const navigation = useNavigation<HomeScreenNavigationProps>();
   const { createBackup, restoreBackup } = useBackup();
@@ -110,7 +121,7 @@ export default function MainScreen() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        <View style={styles.bodyTop}>
+        <View style={[styles.bodyTop, isTablet && styles.bodyTopLarge]}>
           <IconButton label="Back" icon="arrow-left" onPress={pop} />
           <IconButton
             style={styles.button}
@@ -125,7 +136,7 @@ export default function MainScreen() {
                 {!clipboard.length && (
                   <Text style={styles.currentText}>Clipboard</Text>
                 )}
-                <WordsHistoryList words={clipboard} />
+                <WordsHistoryList words={clipboard} large={isTablet} />
               </>
             ) : (
               <>
@@ -133,7 +144,7 @@ export default function MainScreen() {
                   <Text style={styles.currentText}>Words history</Text>
                 )}
                 <View style={styles.historyList}>
-                  <WordsHistoryList words={history} />
+                  <WordsHistoryList words={history} large={isTablet} />
                 </View>
                 {!!history.length && (
                   // Tap: remove the last word. Hold: clear all.
@@ -285,6 +296,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     height: 66,
+  },
+  bodyTopLarge: {
+    height: 104,
   },
   historyContainer: {
     alignItems: "center",
