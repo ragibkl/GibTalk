@@ -17,6 +17,7 @@ import {
   TemplateItem,
   fetchTemplate,
   getTemplates,
+  isCoreTemplate,
 } from "../../api/templateSearch";
 import { useBackup } from "../../service/backup";
 
@@ -31,7 +32,8 @@ type TemplatesScreenProps = StackScreenProps<
 
 export default function TemplateSearchScreen(props: TemplatesScreenProps) {
   const navigation = useNavigation<TemplatesScreenProps["navigation"]>();
-  const { mergeTemplateContents, importFromFile } = useBackup();
+  const { mergeTemplateContents, addTemplateToHome, importFromFile } =
+    useBackup();
   const [isImporting, setIsImporting] = useState(false);
 
   const onPressImportFile = async () => {
@@ -92,11 +94,23 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
     }
 
     setIsLoading(true);
-    const content = await fetchTemplate(selectedTemplate);
-    await mergeTemplateContents(content);
-    setSelectedTemplate(null);
-    setIsLoading(false);
-    navigation.pop();
+    try {
+      const content = await fetchTemplate(selectedTemplate);
+      if (isCoreTemplate(selectedTemplate.id)) {
+        await addTemplateToHome(content);
+      } else {
+        await mergeTemplateContents(content);
+      }
+      setSelectedTemplate(null);
+      navigation.pop();
+    } catch {
+      Alert.alert(
+        "Couldn't add the template",
+        "Check the internet connection and try again.",
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const renderTemplateItem = (item: TemplateItem, i: number) => {
@@ -175,7 +189,9 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
             Import template into current board?
           </Text>
           <Text style={styles.modalText}>
-            Words in this template will be combined with your current board.
+            {selectedTemplate && isCoreTemplate(selectedTemplate.id)
+              ? "These words are added straight onto Home, after the words already there."
+              : "Words in this template will be combined with your current board."}
           </Text>
 
           <View style={styles.modalButtonRow}>

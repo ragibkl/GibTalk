@@ -132,6 +132,21 @@ export function useBackup() {
     checkVoices(template);
   };
 
+  // Adds a template's words straight onto Home: the words inside its folder,
+  // not the folder itself. Throws if the download came back empty.
+  const addTemplateToHome = async (contents: string) => {
+    if (!contents) {
+      throw new Error("No words downloaded");
+    }
+    const template = wordsBakToWords(YAML.parse(contents) as WordBak[]);
+    const loose =
+      template.length === 1 && template[0].children?.length
+        ? template[0].children
+        : template;
+    await setWords([...words, ...loose]);
+    checkVoices(loose);
+  };
+
   // Adds the words from a file to the board, like a template. Returns false
   // if no file was picked; throws if the file isn't a word file.
   const importFromFile = async (): Promise<boolean> => {
@@ -146,5 +161,11 @@ export function useBackup() {
     return true;
   };
 
-  return { createBackup, restoreBackup, mergeTemplateContents, importFromFile };
+  return {
+    createBackup,
+    restoreBackup,
+    mergeTemplateContents,
+    addTemplateToHome,
+    importFromFile,
+  };
 }

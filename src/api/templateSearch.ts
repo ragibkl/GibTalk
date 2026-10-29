@@ -56,3 +56,22 @@ export async function fetchTemplate(item: TemplateItem): Promise<string> {
 
   return "";
 }
+
+// Core words templates (core-en, core-ms): added straight onto Home rather
+// than as a folder.
+export function isCoreTemplate(id: string): boolean {
+  return id.startsWith("core-");
+}
+
+export function fetchCoreWords(language: "en" | "ms"): Promise<string> {
+  const id = `core-${language}`;
+  return fetchTemplate({
+    id,
+    name: id,
+    description: "",
+    author: "",
+    language,
+    words: 0,
+    url: `${TEMPLATES_URL}/${id}`,
+  });
+}
