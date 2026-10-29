@@ -34,7 +34,6 @@ import { ProgressIcon } from "../../components/ProgressIcon";
 import SafeAreaView from "../../components/SafeAreaView";
 
 import BreadCrumbs from "./BreadCrumbs";
-import PasscodeModal from "./PasscodeModal";
 import WordsEmptyGrid from "./WordsEmptyGrid";
 import WordsGrid from "./WordsGrid";
 import WordsHistoryList from "./WordsHistoryList";
@@ -43,7 +42,6 @@ type HomeScreenNavigationProps = NavigationProp<RootStackParamList, "Home">;
 
 export default function MainScreen() {
   const [isEditing, setIsEditing] = useState(false);
-  const [showPasscodeModal, setPasscodeModal] = useState(false);
   const [showMore, setShowMore] = useState(false);
 
   // Android Back closes the More menu instead of leaving the app.
@@ -83,11 +81,6 @@ export default function MainScreen() {
   };
 
   const onPressEdit = () => {
-    setPasscodeModal(true);
-  };
-
-  const onPasscodeModalOk = () => {
-    setPasscodeModal(false);
     setIsEditing(true);
     clearHistory();
   };
@@ -270,12 +263,6 @@ export default function MainScreen() {
             )}
           </View>
         </View>
-
-        <PasscodeModal
-          visible={showPasscodeModal}
-          setVisible={setPasscodeModal}
-          onOk={onPasscodeModalOk}
-        />
       </View>
     </SafeAreaView>
   );
