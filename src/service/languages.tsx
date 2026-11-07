@@ -7,31 +7,43 @@ import {
   useMemo,
   useState,
 } from "react";
-import { Alert, AppState, Platform } from "react-native";
+import { Alert, AppState, Linking, Platform } from "react-native";
 
 import {
   DeviceLanguage,
+  SpeechStatus,
   getInstalledLanguages,
   getLanguageName,
+  getSpeechStatus,
   openVoiceSettings,
 } from "../../modules/gibtalk-voices";
+import { onSpeechFailed } from "./speech";
 import { Word } from "./words";
 
 type LanguagesState = {
   // Languages the device has an offline voice for.
   installed: DeviceLanguage[];
+  // Whether the device can speak at all.
+  speech: SpeechStatus;
   refresh(): Promise<void>;
 };
 
 const LanguagesContext = createContext<LanguagesState>({
   installed: [],
+  speech: "ready",
   refresh: async () => {},
 });
 
 export function LanguagesProvider(props: { children: ReactNode }) {
   const [installed, setInstalled] = useState<DeviceLanguage[]>([]);
+  const [speech, setSpeech] = useState<SpeechStatus>("ready");
 
   const refresh = useCallback(async () => {
+    try {
+      setSpeech(await getSpeechStatus());
+    } catch {
+      setSpeech("ready");
+    }
     try {
       setInstalled(await getInstalledLanguages());
     } catch {
@@ -39,17 +51,22 @@ export function LanguagesProvider(props: { children: ReactNode }) {
     }
   }, []);
 
-  // Check again when coming back, e.g. after installing a voice.
+  // Check again when coming back, e.g. after installing a voice, and when a
+  // word couldn't be spoken.
   useEffect(() => {
     refresh();
     const sub = AppState.addEventListener("change", (state) => {
       if (state === "active") refresh();
     });
-    return () => sub.remove();
+    const unsubscribe = onSpeechFailed(() => refresh());
+    return () => {
+      sub.remove();
+      unsubscribe();
+    };
   }, [refresh]);
 
   return (
-    <LanguagesContext.Provider value={{ installed, refresh }}>
+    <LanguagesContext.Provider value={{ installed, speech, refresh }}>
       {props.children}
     </LanguagesContext.Provider>
   );
@@ -127,6 +144,26 @@ function showVoiceSteps() {
       ? "Open Settings → Accessibility → Spoken Content → Voices, choose the language and download a voice. Then come back to GibTalk."
       : 'Open Settings, search for "Text-to-speech output", open the settings of the preferred engine and install the voice data for the language. Then come back to GibTalk.',
   );
+}
+
+const GOOGLE_SPEECH = "com.google.android.tts";
+
+// For a device that can't speak: an Android phone without a working engine
+// gets Speech Services by Google from the Play Store; otherwise the voice
+// download screen.
+export async function fixSpeech(speech: SpeechStatus) {
+  if (Platform.OS === "android" && speech === "no-engine") {
+    const opened = await Linking.openURL(`market://details?id=${GOOGLE_SPEECH}`)
+      .then(() => true)
+      .catch(() => false);
+    if (opened) return;
+    Alert.alert(
+      "Install a text-to-speech app",
+      'Install "Speech Services by Google" from your app store, then open Settings, search for "Text-to-speech output" and choose it. Then come back to GibTalk.',
+    );
+    return;
+  }
+  await openAddVoice();
 }
 
 // Opens the voice download screen, or explains where to find it.

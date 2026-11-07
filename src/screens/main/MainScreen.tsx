@@ -17,7 +17,9 @@ import {
 
 import { useBackup } from "../../service/backup";
 import {
+  fixSpeech,
   openAddVoice,
+  useDeviceLanguages,
   useLanguageNames,
   useMissingLanguages,
 } from "../../service/languages";
@@ -69,6 +71,7 @@ export default function MainScreen() {
   const { history, clearHistory, removeLastWord } = useHistory();
   const { clipboard, clearClipboard, pasteWords } = useClipboard();
   const missing = useMissingLanguages(words);
+  const { speech } = useDeviceLanguages();
   const missingNames = useLanguageNames(missing);
 
   const onPressClear = () => {
@@ -163,7 +166,25 @@ export default function MainScreen() {
           <BreadCrumbs />
         </View>
 
-        {isEditing && !!missing.length && (
+        {speech !== "ready" && (
+          <View style={styles.voiceNotice} testID="speech-notice">
+            <Text style={styles.voiceNoticeText}>
+              {speech === "no-engine"
+                ? "This device can't speak yet: it has no working text-to-speech app."
+                : "This device can't speak yet: it has no text-to-speech voice."}
+            </Text>
+            <PressableOpacity
+              style={styles.voiceNoticeButton}
+              onPress={() => fixSpeech(speech)}
+            >
+              <Text>
+                {speech === "no-engine" ? "Get speech app" : "Install voice"}
+              </Text>
+            </PressableOpacity>
+          </View>
+        )}
+
+        {speech === "ready" && isEditing && !!missing.length && (
           <View style={styles.voiceNotice}>
             <Text style={styles.voiceNoticeText}>
               No voice on this device for {missingNames.join(", ")}. Words in{" "}

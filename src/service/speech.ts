@@ -1,5 +1,7 @@
 import * as Speech from "expo-speech";
+import { Platform } from "react-native";
 
+import * as Voices from "../../modules/gibtalk-voices";
 import { Word } from "./words";
 
 // A language code such as "en", "ms" or "ar". Which ones work depends on the
@@ -13,12 +15,35 @@ export function normalizeLanguage(language: string): Language {
   return language === "tu" ? "te" : language;
 }
 
+// Android speaks through our own module, which reconnects to the engine if
+// it was stopped while the app was open; expo-speech stayed silent until the
+// app was restarted. iOS keeps expo-speech.
+const useOwnSpeech = Platform.OS === "android" && Voices.canSpeak;
+
+const failureListeners = new Set<() => void>();
+
+// Called when a word couldn't be spoken even after reconnecting.
+export function onSpeechFailed(listener: () => void): () => void {
+  failureListeners.add(listener);
+  return () => failureListeners.delete(listener);
+}
+
+// Resolves once the words are queued (not spoken).
+async function say(text: string, language: Language) {
+  if (!useOwnSpeech) {
+    Speech.speak(text, { language });
+    return;
+  }
+  const spoken = await Voices.speak(text, language).catch(() => false);
+  if (!spoken) failureListeners.forEach((listener) => listener());
+}
+
 export function speak(label: string, language: Language) {
-  Speech.speak(label, { language });
+  say(label, language);
 }
 
 export function speakWord(word: Word) {
-  Speech.speak(word.label, { language: word.language });
+  say(word.label, word.language);
 }
 
 export function speakWords(words: Word[]) {
@@ -53,13 +78,18 @@ export function speakWords(words: Word[]) {
   }
   chunks.push(chunk);
 
-  for (let i = 0; i < chunks.length; i++) {
-    const chunk = chunks[i];
-    const text = chunk.labels.join(" ");
-    Speech.speak(text, { language: chunk.language });
-  }
+  // One at a time, so mixed-language sentences keep their order.
+  chunks.reduce(
+    (queued, chunk) =>
+      queued.then(() => say(chunk.labels.join(" "), chunk.language)),
+    Promise.resolve(),
+  );
 }
 
 export function stopSpeech() {
-  Speech.stop();
+  if (useOwnSpeech) {
+    Voices.stop().catch(() => {});
+  } else {
+    Speech.stop();
+  }
 }
