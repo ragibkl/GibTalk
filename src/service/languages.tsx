@@ -17,7 +17,7 @@ import {
   getSpeechStatus,
   openVoiceSettings,
 } from "../../modules/gibtalk-voices";
-import { onSpeechFailed } from "./speech";
+import { onSpeechResult } from "./speech";
 import { Word } from "./words";
 
 type LanguagesState = {
@@ -52,13 +52,15 @@ export function LanguagesProvider(props: { children: ReactNode }) {
   }, []);
 
   // Check again when coming back, e.g. after installing a voice, and when a
-  // word couldn't be spoken.
+  // word couldn't be spoken. A word that was spoken clears the notice.
   useEffect(() => {
     refresh();
     const sub = AppState.addEventListener("change", (state) => {
       if (state === "active") refresh();
     });
-    const unsubscribe = onSpeechFailed(() => refresh());
+    const unsubscribe = onSpeechResult((spoken) =>
+      spoken ? setSpeech("ready") : refresh(),
+    );
     return () => {
       sub.remove();
       unsubscribe();

@@ -20,12 +20,15 @@ export function normalizeLanguage(language: string): Language {
 // app was restarted. iOS keeps expo-speech.
 const useOwnSpeech = Platform.OS === "android" && Voices.canSpeak;
 
-const failureListeners = new Set<() => void>();
+const resultListeners = new Set<(spoken: boolean) => void>();
 
-// Called when a word couldn't be spoken even after reconnecting.
-export function onSpeechFailed(listener: () => void): () => void {
-  failureListeners.add(listener);
-  return () => failureListeners.delete(listener);
+// Called after each word: false when it couldn't be spoken even after
+// reconnecting, true when it was.
+export function onSpeechResult(
+  listener: (spoken: boolean) => void,
+): () => void {
+  resultListeners.add(listener);
+  return () => resultListeners.delete(listener);
 }
 
 // Resolves once the words are queued (not spoken).
@@ -35,7 +38,7 @@ async function say(text: string, language: Language) {
     return;
   }
   const spoken = await Voices.speak(text, language).catch(() => false);
-  if (!spoken) failureListeners.forEach((listener) => listener());
+  resultListeners.forEach((listener) => listener(spoken));
 }
 
 export function speak(label: string, language: Language) {
