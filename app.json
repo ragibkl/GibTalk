@@ -19,10 +19,17 @@
         "expo-image-picker",
         {
           "photosPermission": "The app accesses your photos to let you pick an image when editing a word.",
-          "cameraPermission": "The app accesses your camera to let you take a photo when editing a word."
+          "cameraPermission": "GibTalk uses the camera to take a photo for a word, and to scan the QR code of a shared word set."
         }
       ],
-      "expo-font"
+      "expo-font",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "GibTalk uses the camera to take a photo for a word, and to scan the QR code of a shared word set.",
+          "recordAudioAndroid": false
+        }
+      ]
     ],
     "ios": {
       "supportsTablet": true,

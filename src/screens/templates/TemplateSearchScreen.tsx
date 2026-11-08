@@ -154,6 +154,20 @@ export default function TemplateSearchScreen(props: TemplatesScreenProps) {
           </View>
         </PressableOpacity>
 
+        <PressableOpacity
+          style={styles.importButton}
+          onPress={() => navigation.navigate("openSharedSet")}
+          testID="open-shared-set"
+        >
+          <FontAwesome name="qrcode" size={20} />
+          <View style={styles.importText}>
+            <Text style={styles.templateName}>Open a shared set</Text>
+            <Text style={styles.templateDescription}>
+              Scan the QR code or paste the link from app.gibtalk.com.
+            </Text>
+          </View>
+        </PressableOpacity>
+
         <View style={styles.titleSection}>
           <Text style={styles.title}>Available Templates:</Text>
           <Pressable

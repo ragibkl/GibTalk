@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import {
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
 
 import { RootStackParamList } from "../../../App";
 import { CreateWord, useWords } from "../../service/words";
@@ -16,7 +21,9 @@ export default function CreateWordScreen() {
   const [label, setLabel] = useState("");
   const [language, setLanguage] = useState<Language>(DEFAULT_LANG);
   const [uri, setUri] = useState<string>("");
-  const [isCategory, setIsCategory] = useState(false);
+  // "+ Add folder" opens this screen with the folder switch already on.
+  const route = useRoute<RouteProp<RootStackParamList, "createWord">>();
+  const [isCategory, setIsCategory] = useState(!!route.params?.folder);
 
   const onPressSave = () => {
     const word: CreateWord = {
