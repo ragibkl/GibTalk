@@ -19,8 +19,22 @@ public class GibtalkVoicesModule: Module {
   public func definition() -> ModuleDefinition {
     Name("GibtalkVoices")
 
+    // Speak even when the ring/silent switch is on silent: these words are
+    // the child's voice, not an app sound. Mixes with other audio rather
+    // than stopping it.
+    OnCreate {
+      let session = AVAudioSession.sharedInstance()
+      try? session.setCategory(.playback, mode: .default, options: [.mixWithOthers])
+      try? session.setActive(true)
+    }
+
     AsyncFunction("getInstalledLanguages") { () -> [[String: String]] in
       return installedCodes().sorted().map { nameOf($0) }
+    }
+
+    // expo-speech speaks on iOS; this only reports whether any voice exists.
+    AsyncFunction("getSpeechStatus") { () -> String in
+      return AVSpeechSynthesisVoice.speechVoices().isEmpty ? "no-voices" : "ready"
     }
 
     AsyncFunction("getLanguageStatus") { (code: String) -> String in
