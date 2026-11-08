@@ -20,6 +20,7 @@ import { RootStackParamList } from "../../../App";
 import PressableOpacity from "../../components/PressableOpacity";
 import SafeAreaView from "../../components/SafeAreaView";
 import { useBackup } from "../../service/backup";
+import { useWords } from "../../service/words";
 import {
   SharedSet,
   countWords,
@@ -33,6 +34,7 @@ type Props = StackScreenProps<RootStackParamList, "openSharedSet">;
 export default function OpenSharedSetScreen(_props: Props) {
   const navigation = useNavigation<Props["navigation"]>();
   const { addSharedSet } = useBackup();
+  const { words } = useWords();
   const [permission, requestPermission] = useCameraPermissions();
   const [scanning, setScanning] = useState(false);
   const [link, setLink] = useState("");
@@ -124,6 +126,11 @@ export default function OpenSharedSetScreen(_props: Props) {
   }
 
   const total = set ? countWords(set.words) : 0;
+  // Same rule as addSharedSet: onto an empty Home, or a set that's one folder.
+  const asFolder =
+    !!set &&
+    words.length > 0 &&
+    !(set.words.length === 1 && !!set.words[0].children);
   const shown = set ? countWords(withPictures(set.words)) : 0;
 
   return (
@@ -150,7 +157,14 @@ export default function OpenSharedSetScreen(_props: Props) {
             value={link}
             onChangeText={(text) => {
               setLink(text);
-              if (isShareLink(text)) open(text);
+              setError("");
+              // Open a whole pasted link straight away; a link that's still
+              // being typed only shows a problem when Open is pressed.
+              try {
+                setSet(readShareLink(text));
+              } catch {
+                setSet(null);
+              }
             }}
             placeholder="https://app.gibtalk.com/s#…"
             autoCapitalize="none"
@@ -169,7 +183,20 @@ export default function OpenSharedSetScreen(_props: Props) {
 
         {set && (
           <View style={styles.preview} testID="shared-set">
-            <Text style={styles.setName}>{set.name}</Text>
+            <View style={styles.previewHead}>
+              <Text style={styles.setName}>{set.name}</Text>
+              <PressableOpacity
+                style={[styles.button, styles.addButton]}
+                onPress={() => !adding && shown > 0 && onAdd()}
+                testID="add-shared-set"
+              >
+                {adding ? (
+                  <ActivityIndicator size="small" />
+                ) : (
+                  <Text style={styles.addText}>Add to GibTalk</Text>
+                )}
+              </PressableOpacity>
+            </View>
             <Text>
               {shown} word{shown === 1 ? "" : "s"}
               {shown < total
@@ -189,20 +216,11 @@ export default function OpenSharedSetScreen(_props: Props) {
                 ))}
             </View>
             <Text style={styles.note}>
-              The words are added after the ones you already have. You can
-              change or remove them later.
+              {asFolder
+                ? `The words arrive as a new folder, "${set.name}", after the words you already have.`
+                : "The words are added to Home."}{" "}
+              You can change or remove them later.
             </Text>
-            <PressableOpacity
-              style={[styles.button, styles.addButton]}
-              onPress={() => !adding && shown > 0 && onAdd()}
-              testID="add-shared-set"
-            >
-              {adding ? (
-                <ActivityIndicator size="small" />
-              ) : (
-                <Text style={styles.addText}>Add to GibTalk</Text>
-              )}
-            </PressableOpacity>
           </View>
         )}
       </ScrollView>
@@ -245,7 +263,14 @@ const styles = StyleSheet.create({
   },
   error: { color: "#b00020", marginTop: 12, fontSize: 15 },
   preview: { marginTop: 24, padding: 12, borderWidth: 2, borderRadius: 10 },
-  setName: { fontSize: 20, fontWeight: "bold", marginBottom: 4 },
+  previewHead: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 12,
+    marginBottom: 4,
+  },
+  setName: { fontSize: 20, fontWeight: "bold", flexShrink: 1 },
   pictures: { flexDirection: "row", flexWrap: "wrap", gap: 8, marginTop: 10 },
   tile: {
     width: 76,
@@ -258,11 +283,7 @@ const styles = StyleSheet.create({
   picture: { width: 60, height: 60, backgroundColor: "white" },
   tileLabel: { fontSize: 12, fontWeight: "bold" },
   note: { marginTop: 12, color: "#555" },
-  addButton: {
-    marginTop: 12,
-    backgroundColor: "lightgreen",
-    alignSelf: "flex-end",
-  },
+  addButton: { backgroundColor: "lightgreen" },
   addText: { fontWeight: "bold" },
   camera: { flex: 1 },
   scanBar: {
