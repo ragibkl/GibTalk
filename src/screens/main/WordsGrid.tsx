@@ -1,8 +1,11 @@
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { useState } from "react";
 import { LayoutChangeEvent, ScrollView, StyleSheet, View } from "react-native";
 import Animated, { useAnimatedRef } from "react-native-reanimated";
 import Sortable, { SortableFlexDragEndParams } from "react-native-sortables";
 
+import { RootStackParamList } from "../../../App";
+import AddTile from "../../components/AddTile";
 import WordItem, {
   TILE_HEIGHT,
   TILE_MARGIN,
@@ -19,6 +22,7 @@ type Props = {
 
 export default function WordsGrid(props: Props) {
   const { wordsInPath, moveWord } = useWords();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const scrollableRef = useAnimatedRef<Animated.ScrollView>();
   const [size, setSize] = useState({ width: 0, height: 0 });
 
@@ -74,6 +78,21 @@ export default function WordsGrid(props: Props) {
           >
             {wordsInPath.map(renderWordItem)}
           </Sortable.Flex>
+          {/* Outside the sortable list, so they can't be dragged. */}
+          <View style={styles.content}>
+            <AddTile
+              folder={false}
+              scale={scale}
+              onPress={() => navigation.navigate("createWord")}
+            />
+            <AddTile
+              folder
+              scale={scale}
+              onPress={() =>
+                navigation.navigate("createWord", { folder: true })
+              }
+            />
+          </View>
         </Animated.ScrollView>
       </View>
     );

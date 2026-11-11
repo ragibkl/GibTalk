@@ -21,6 +21,7 @@ import MainScreen from "./src/screens/main/MainScreen";
 import ImageSearchScreen from "./src/screens/imageSearch/ImageSearchScreen";
 import KeyboardScreen from "./src/screens/keyboard/KeyboardScreen";
 import TemplateSearchScreen from "./src/screens/templates/TemplateSearchScreen";
+import OpenSharedSetScreen from "./src/screens/templates/OpenSharedSetScreen";
 
 // https://reactnavigation.org/docs/troubleshooting/#i-get-the-warning-non-serializable-values-were-found-in-the-navigation-state
 LogBox.ignoreLogs([
@@ -29,10 +30,11 @@ LogBox.ignoreLogs([
 
 export type RootStackParamList = {
   Home: undefined;
-  createWord: undefined;
+  createWord: { folder?: boolean } | undefined;
   editWord: { word: Word };
   searchImage: { onUpdateUri: (uri: string) => void };
   searchTemplate: undefined;
+  openSharedSet: undefined;
   keyboard: undefined;
 };
 
@@ -79,6 +81,11 @@ export default function App() {
                     name="searchTemplate"
                     component={TemplateSearchScreen}
                     options={{ title: "Import a Template" }}
+                  />
+                  <Stack.Screen
+                    name="openSharedSet"
+                    component={OpenSharedSetScreen}
+                    options={{ title: "Open a Shared Set" }}
                   />
                 </Stack.Navigator>
               </NavigationContainer>

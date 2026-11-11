@@ -12,6 +12,7 @@ import {
   useDeviceLanguages,
 } from "./languages";
 import { Language, normalizeLanguage } from "./speech";
+import { SharedSet, withPictures } from "./shareLink";
 
 type WordBak = {
   label: string;
@@ -161,7 +162,33 @@ export function useBackup() {
     return true;
   };
 
+  // Adds a set shared from app.gibtalk.com. Onto an empty Home its words go
+  // straight on; otherwise they arrive as one folder named after the set, so
+  // the words already on Home don't move.
+  const addSharedSet = async (set: SharedSet) => {
+    const shared = wordsBakToWords(withPictures(set.words));
+    if (!shared.length) {
+      throw new Error("This set has no words with pictures.");
+    }
+    const asFolder =
+      words.length > 0 && !(shared.length === 1 && shared[0].children);
+    const added: Word[] = asFolder
+      ? [
+          {
+            id: uuid.v4().toString(),
+            label: set.name,
+            uri: shared[0].uri,
+            language: shared[0].language,
+            children: shared,
+          },
+        ]
+      : shared;
+    await setWords([...words, ...added]);
+    checkVoices(added);
+  };
+
   return {
+    addSharedSet,
     createBackup,
     restoreBackup,
     mergeTemplateContents,
