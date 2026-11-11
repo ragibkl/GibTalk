@@ -2,7 +2,7 @@
   "expo": {
     "name": "GibTalk",
     "slug": "GibTalk",
-    "version": "1.0.25",
+    "version": "1.0.26",
     "orientation": "landscape",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
