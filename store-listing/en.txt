@@ -1,0 +1,55 @@
+GibTalk: talk with pictures
+
+GibTalk is a free AAC (Augmentative and Alternative Communication) app. Tap pictures to say words and sentences out loud. It's for children and adults who can't speak, or can't speak clearly: autism, apraxia, cerebral palsy, stroke, and more.
+
+- Every word and feature is free: no locked words, no premium, no subscriptions
+- No ads, ever
+- No account and no data collected
+- Speaks any language your device has a voice for, word by word
+- Works offline (only picture search and templates need the internet)
+- Open source
+
+FEATURES
+
+Talk with pictures
+Tap words to build a sentence, then play it. Big buttons, folders for topics, and a sentence bar that shows what you've said.
+
+Core words from the start
+A new board can start with core words such as I, want, more, stop, help and finished, in English or Malay.
+
+Your own words and photos
+Add words and folders, take a photo of your child's own cup, bag or teacher, and drag words to rearrange them.
+
+Many languages, word by word
+Give each word its own language: Malay, English, Chinese, Tamil, or any voice installed on your device. Perfect for families who mix languages. If a voice is missing, GibTalk helps you install it.
+
+Ready-made boards
+Templates for greetings, mealtime, feelings, feeling sick, play, the playground, school, the canteen, festivals and more, in English and Malay, plus Tamil greetings. Many were made with teachers from Permata Kurnia, Malaysia.
+
+About 16,800 free picture symbols
+Search pictures from ARASAAC, Mulberry and Tawasol in English, Malay or Spanish ("makan" finds eat), or use your own photos.
+
+For teachers and therapists
+Build boards on a laptop at app.gibtalk.com: no account, nothing to install. Show a board on a projector, print it as a board or a book, and send it to a child's tablet with a link or a QR code (Templates → Open a shared set). The words arrive as a new folder, so the child's own words stay as they are.
+
+Backup and restore
+Save all your words and pictures as a file and restore them on any phone or tablet, Android or iPhone/iPad.
+
+Keyboard
+Type anything and hear it spoken.
+
+PRIVACY
+
+- No account, no ads, no tracking
+- Your words and photos stay on your device
+- Only picture search and templates use the internet
+- Open source: https://github.com/ragibkl/GibTalk
+
+Website and manual: https://gibtalk.com
+Support: https://gibtalk.com/support/
+Email: ragib.badaruddin@gmail.com
+
+FAQ
+
+A word speaks in the wrong language. What do I do?
+Your device probably has no voice for that language yet. GibTalk shows a red dot on the Edit button; in edit mode, tap "Install voice". You can also install voices yourself: on Android, Settings → Text-to-speech output → your engine's settings → Install voice data; on iPhone and iPad, Settings → Accessibility → Spoken Content → Voices.

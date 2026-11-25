@@ -1,0 +1,55 @@
+GibTalk: bercakap guna gambar
+
+GibTalk ialah aplikasi AAC (Komunikasi Augmentatif dan Alternatif) percuma. Tekan gambar untuk menyebut perkataan dan ayat dengan kuat. Untuk kanak-kanak dan orang dewasa yang tidak boleh bercakap, atau sukar bercakap dengan jelas: autisme, apraksia, cerebral palsy, strok dan lain-lain.
+
+- Semua perkataan dan ciri percuma: tiada perkataan berkunci, tiada premium, tiada langganan
+- Tiada iklan
+- Tiada akaun dan tiada data dikumpul
+- Bercakap dalam apa-apa bahasa yang ada suara pada peranti anda, satu perkataan demi satu perkataan
+- Boleh digunakan tanpa internet (hanya carian gambar dan templat perlukan internet)
+- Sumber terbuka
+
+CIRI-CIRI
+
+Bercakap guna gambar
+Tekan perkataan untuk membina ayat, kemudian mainkannya. Butang besar, folder mengikut topik, dan bar ayat yang menunjukkan apa yang telah disebut.
+
+Kata teras dari awal
+Papan baharu boleh bermula dengan kata teras seperti saya, nak, lagi, berhenti, tolong dan habis, dalam Bahasa Melayu atau English.
+
+Perkataan dan gambar sendiri
+Tambah perkataan dan folder, ambil gambar cawan, beg atau cikgu anak anda sendiri, dan susun semula perkataan dengan menyeretnya.
+
+Pelbagai bahasa, satu perkataan demi satu perkataan
+Setiap perkataan boleh ada bahasanya sendiri: Bahasa Melayu, English, Cina, Tamil, atau apa-apa suara yang dipasang pada peranti anda. Sesuai untuk keluarga yang mencampurkan bahasa. Jika suara tiada, GibTalk membantu anda memasangnya.
+
+Papan sedia ada
+Templat untuk ucapan, waktu makan, perasaan, sakit, bermain, taman permainan, sekolah, kantin, perayaan dan lain-lain, dalam Bahasa Melayu dan English, serta ucapan dalam Tamil. Banyak templat dibuat bersama guru-guru Permata Kurnia, Malaysia.
+
+Kira-kira 16,800 simbol gambar percuma
+Cari gambar daripada ARASAAC, Mulberry dan Tawasol dalam Bahasa Melayu, English atau Sepanyol ("makan" menjumpai gambar makan), atau guna gambar anda sendiri.
+
+Untuk guru dan terapis
+Bina papan di komputer riba di app.gibtalk.com: tiada akaun, tiada apa-apa untuk dipasang. Tunjukkan papan di projektor, cetak sebagai papan atau buku, dan hantar ke tablet murid dengan pautan atau kod QR (Templates → Open a shared set). Perkataan masuk sebagai folder baharu, jadi perkataan murid sendiri tidak berubah.
+
+Sandaran dan pemulihan
+Simpan semua perkataan dan gambar sebagai fail dan pulihkannya pada mana-mana telefon atau tablet, Android atau iPhone/iPad.
+
+Papan kekunci
+Taip apa sahaja dan dengar ia disebut.
+
+PRIVASI
+
+- Tiada akaun, tiada iklan, tiada penjejakan
+- Perkataan dan gambar anda kekal pada peranti anda
+- Hanya carian gambar dan templat menggunakan internet
+- Sumber terbuka: https://github.com/ragibkl/GibTalk
+
+Laman web dan manual (English): https://gibtalk.com
+Sokongan: https://gibtalk.com/support/
+E-mel: ragib.badaruddin@gmail.com
+
+SOALAN LAZIM
+
+Perkataan disebut dalam bahasa yang salah. Apa perlu saya buat?
+Peranti anda mungkin belum ada suara untuk bahasa itu. GibTalk menunjukkan titik merah pada butang Edit; dalam mod edit, tekan "Install voice". Anda juga boleh memasang suara sendiri: pada Android, Tetapan → Output teks ke pertuturan → tetapan enjin anda → Pasang data suara; pada iPhone dan iPad, Settings → Accessibility → Spoken Content → Voices.
